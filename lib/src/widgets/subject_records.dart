@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:grasp_app/src/routes/route_screens.dart';
 
 class WidgetSubjectRecords extends StatelessWidget {
   const WidgetSubjectRecords({
@@ -30,6 +31,7 @@ class WidgetSubjectRecords extends StatelessWidget {
           ],
         ),
         child: ListTile(
+          onTap: () => Navigator.pushNamed(context, RouteScreens.routeSubjectFiles),
           minVerticalPadding: 20,
           iconColor: const Color.fromARGB(255, 0, 171, 193),
           leading: const Padding(

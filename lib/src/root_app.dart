@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grasp_app/src/routes/route_screens.dart';
 
 // ignore: unused_import
 import 'package:grasp_app/src/screens/screen_sign_up.dart';
@@ -14,9 +15,15 @@ class RootApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  const MaterialApp(
+    return   MaterialApp(
       title: 'Grasp',
-      home: ScreenSubjectFiles(),
+      // home: ScreenSubjects(),
+      initialRoute: RouteScreens.routeInit,
+      routes: {
+        RouteScreens.routeInit: (context) => const ScreenSubjects(),
+        RouteScreens.routeSubjects: (context) => const ScreenSubjects(),
+        RouteScreens.routeSubjectFiles: (context) => const ScreenSubjectFiles(),
+      },
     );
   }
 }
