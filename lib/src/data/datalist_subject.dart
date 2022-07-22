@@ -1,4 +1,4 @@
-const subjectDataList = [
+const datalistSubject = [
   {"subject_id": "1", "subject_name": "Mobile Application", "subject_items_number": 5},
   {"subject_id": "2", "subject_name": "Programming Fund", "subject_items_number": 4},
   {"subject_id": "3", "subject_name": "Database Management", "subject_items_number": 12},
