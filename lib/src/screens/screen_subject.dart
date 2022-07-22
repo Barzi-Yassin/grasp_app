@@ -26,14 +26,25 @@ class ScreenSubjects extends StatelessWidget {
           itemCount: datalistSubject.length,
           itemBuilder: (context, theRecord) {
             return WidgetSubjectRecords(
-              subjectRecordName: datalistSubject[theRecord]["subject_name"].toString(),
-              subjectRecordItemsNumber: int.parse(
-                  datalistSubject[theRecord]["subject_items_number"].toString()),
+              subjectRecordName:
+                  datalistSubject[theRecord]["subject_name"].toString(),
+              subjectRecordItemsNumber: int.parse(datalistSubject[theRecord]
+                      ["subject_items_number"]
+                  .toString()),
             );
           },
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Colors.cyan.shade400,
+        elevation: 10,
+        child: const Icon(
+          Icons.create_new_folder,
+          color: Colors.white,
+          size: 29,
+        ),
+      ),
     );
   }
-
 }

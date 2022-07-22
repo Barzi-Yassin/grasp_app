@@ -2,7 +2,7 @@ const datalistSubjectFiles = [
   {
     "Subject_file_id": "1",
     "subject_file_name": "Variable types",
-    "subject_file_time": "5:44",
+    "subject_file_time": "5:44 PM",
     "subject_file_date": "Jun. 6, 2022",
   },
   {
@@ -32,7 +32,7 @@ const datalistSubjectFiles = [
   {
     "Subject_file_id": "6",
     "subject_file_name": "oop",
-    "subject_file_time": "5:44",
+    "subject_file_time": "5:44 PM",
     "subject_file_date": "Jun. 6, 2022",
   },
   {
@@ -50,7 +50,7 @@ const datalistSubjectFiles = [
   {
     "Subject_file_id": "9",
     "subject_file_name": "Array 1d",
-    "subject_file_time": "5:44",
+    "subject_file_time": "5:44 PM",
     "subject_file_date": "Jun. 6, 2022",
   },
   {
@@ -68,7 +68,7 @@ const datalistSubjectFiles = [
   {
     "Subject_file_id": "12",
     "subject_file_name": "Control statements",
-    "subject_file_time": "5:44",
+    "subject_file_time": "5:44 PM",
     "subject_file_date": "Jun. 6, 2022",
   },
   {
@@ -134,7 +134,7 @@ const datalistSubjectFiles = [
   {
     "Subject_file_id": "23",
     "subject_file_name": "Escape sequence",
-    "subject_file_time": "5:44",
+    "subject_file_time": "5:44 PM",
     "subject_file_date": "Jun. 6, 2022",
   },
   {
@@ -146,7 +146,7 @@ const datalistSubjectFiles = [
   {
     "Subject_file_id": "25",
     "subject_file_name": "loops",
-    "subject_file_time": "5:44",
+    "subject_file_time": "5:44 PM",
     "subject_file_date": "Jun. 6, 2022",
   },
   {
@@ -176,7 +176,7 @@ const datalistSubjectFiles = [
   {
     "Subject_file_id": "30",
     "subject_file_name": "Dynamic array",
-    "subject_file_time": "5:44",
     "subject_file_date": "Jun. 6, 2022",
+    "subject_file_time": "5:44 PM",
   },
 ];

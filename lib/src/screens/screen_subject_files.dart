@@ -34,67 +34,21 @@ class ScreenSubjectFiles extends StatelessWidget {
               subjectFileRecordName: datalistSubjectFiles[theRecord]["subject_file_name"].toString(),
               subjectFileRecordTime: datalistSubjectFiles[theRecord]["subject_file_time"].toString(),
               subjectFileRecordDate: datalistSubjectFiles[theRecord]["subject_file_date"].toString(),
-              // subjectRecordFileItemsNumber: int.parse(
-              //     datalistSubjectFiles[theRecord]["subject_items_number"].toString()),
             );
           },
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Colors.cyan.shade400,
+        elevation: 10,
+        child: const FaIcon(
+          FontAwesomeIcons.fileCirclePlus,
+          color: Colors.white,
+          size: 25,
         ),
       ),
     );
   }
 }
-
-/*
-ClipRRect(
-      // borderRadius: BorderRadius.circular(20.0),
-      child: Container(
-        height: 55.0,
-        margin: const EdgeInsets.only(bottom: 10.0, left: 6.0, right: 6.0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(13.0),
-          color: Colors.white,
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.grey,
-              offset: Offset(0.0, 1.0), //(x,y)
-              blurRadius: 06.0,
-            ),
-          ],
-        ),
-        child: ListTile(
-          minVerticalPadding: 20,
-          iconColor: const Color.fromARGB(255, 0, 171, 193),
-          leading: const Padding(
-            padding: EdgeInsets.only(left: 8.0),
-            child: FaIcon(
-              FontAwesomeIcons.solidFolderOpen,
-              size: 20,
-            ),
-          ),
-          title: Text(
-            subjectRecordName,
-            style: const TextStyle(fontSize: 15),
-            maxLines: 1,
-          ),
-          trailing: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisAlignment: MainAxisAlignment.end,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                '$subjectRecordItemsNumber',
-                style: const TextStyle(fontSize: 14, letterSpacing: 0.5),
-              ),
-              const Text(
-                ' items',
-                style: TextStyle(
-                  fontSize: 12,
-                  letterSpacing: 0.87,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    )
- */
+ 
