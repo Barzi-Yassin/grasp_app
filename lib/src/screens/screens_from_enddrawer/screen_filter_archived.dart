@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ScreenMyProfile extends StatelessWidget {
-  const ScreenMyProfile({Key? key}) : super(key: key);
+class ScreenFilterArchived extends StatelessWidget {
+  const ScreenFilterArchived({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

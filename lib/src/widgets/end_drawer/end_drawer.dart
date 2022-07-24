@@ -6,10 +6,13 @@ class EndDrawer extends StatelessWidget {
     Key? key,
     required this.enddrawerRecordId,
     required this.enddrawerRecordTitle,
+    required this.enddrawerRecordRoutePath,
   }) : super(key: key);
 
   final int enddrawerRecordId;
   final String enddrawerRecordTitle;
+  final String enddrawerRecordRoutePath;
+
   final IconData iconProfile = FontAwesomeIcons.userLarge;
   final IconData iconStars = FontAwesomeIcons.solidStar;
   final IconData iconFavorites = FontAwesomeIcons.solidHeart;
@@ -39,7 +42,7 @@ class EndDrawer extends StatelessWidget {
             ],
           ),
           child: ListTile(
-            // onTap: () => Navigator.pushNamed(context, RouteScreens.routeSubjectFiles),
+            onTap: () => Navigator.pushNamed(context, enddrawerRecordRoutePath),
             // minVerticalPadding: 20,
             iconColor: Colors.cyan.shade600,
             title: Text(

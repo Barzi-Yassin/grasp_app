@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:grasp_app/src/data/datalist_subject.dart';
 import 'package:grasp_app/src/methods/functions.dart';
+import 'package:grasp_app/src/routes/route_screens.dart';
+import 'package:grasp_app/src/widgets/end_drawer/end_drawer.dart';
 import 'package:grasp_app/src/widgets/subject_records.dart';
 
 class ScreenSubjects extends StatelessWidget {
   const ScreenSubjects({Key? key}) : super(key: key);
+
+  final Color _enddrawerHeaderStuffLineColor = Colors.teal;
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +36,8 @@ class ScreenSubjects extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.only(left: 20, top: 8, bottom: 2),
                   decoration: const BoxDecoration(
-                    // color: Colors.white12,
-                    color: Colors.teal,
+                    color: Colors.white,
+                    // color: Colors.blue.shade300,
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(20),
                       // bottomRight: Radius.circular(20),
@@ -56,21 +59,21 @@ class ScreenSubjects extends StatelessWidget {
                                 alignment: Alignment.topLeft,
                                 padding:
                                     const EdgeInsets.only(left: 10, bottom: 2),
-                                child: const Text(
+                                child: Text(
                                   'Barzy Yasin',
                                   textAlign: TextAlign.left,
                                   maxLines: 1,
                                   style: TextStyle(
                                     fontSize: 20,
-                                    color: Colors.white,
+                                    color: _enddrawerHeaderStuffLineColor,
                                     fontWeight: FontWeight.w500,
                                     letterSpacing: 0.5,
                                   ),
                                 ),
                               ),
-                              const Divider(
-                                color: Colors.white,
-                                thickness: 1.0,
+                              Divider(
+                                color: _enddrawerHeaderStuffLineColor,
+                                thickness: 1.9,
                               ),
                             ],
                           ),
@@ -83,18 +86,49 @@ class ScreenSubjects extends StatelessWidget {
                           height: 50,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            border: Border.all(color: Colors.white, width: 1.5),
+                            border:
+                                Border.all(color: _enddrawerHeaderStuffLineColor, width: 2.5),
                           ),
                           alignment: Alignment.center,
                           child: const CircleAvatar(
                             backgroundImage: AssetImage('assets/images/3.jpeg'),
-                            radius: 30,
+                            radius: 26,
                           ),
                         ),
                       ),
                     ],
                   ),
                 ),
+                Expanded(
+                  child: Container(
+                    // color: Colors.yellow,
+                    padding: const EdgeInsets.only(
+                        left: 15, top: 20, right: 35, bottom: 5),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Column(
+                          children: const [
+                            EndDrawer(enddrawerRecordId: 1, enddrawerRecordTitle: "My profile", enddrawerRecordRoutePath: RouteScreens.routeMyProfile ),
+                            SizedBox(height: 18),
+                            EndDrawer(enddrawerRecordId: 2, enddrawerRecordTitle: "Stars", enddrawerRecordRoutePath: RouteScreens.routeFilterStars ),
+                            EndDrawer(enddrawerRecordId: 3, enddrawerRecordTitle: "Favorites", enddrawerRecordRoutePath: RouteScreens.routeFilterFavorites ),
+                            EndDrawer(enddrawerRecordId: 4, enddrawerRecordTitle: "Importants", enddrawerRecordRoutePath: RouteScreens.routeFilterImportants ),
+                            EndDrawer(enddrawerRecordId: 5, enddrawerRecordTitle: "Archived Grasps", enddrawerRecordRoutePath: RouteScreens.routeFilterArchived ),
+                          ],
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            EndDrawer(enddrawerRecordId: 6, enddrawerRecordTitle: "Grasp guidance", enddrawerRecordRoutePath: RouteScreens.routeGraspGuidance ),
+                            EndDrawer(enddrawerRecordId: 7, enddrawerRecordTitle: "Exit", enddrawerRecordRoutePath: RouteScreens.routeInit ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                )
               ],
             ),
           ),
