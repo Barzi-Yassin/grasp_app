@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:grasp_app/src/data/datalist_subject.dart';
 import 'package:grasp_app/src/methods/functions.dart';
 import 'package:grasp_app/src/widgets/subject_records.dart';
@@ -28,11 +29,21 @@ class ScreenSubjects extends StatelessWidget {
             ),
             child: Column(
               children: [
+                // end-drawer header
                 Container(
-                  color: Colors.white12,
                   padding: const EdgeInsets.only(left: 20, top: 8, bottom: 2),
+                  decoration: const BoxDecoration(
+                    // color: Colors.white12,
+                    color: Colors.teal,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(20),
+                      // bottomRight: Radius.circular(20),
+                    ),
+                  ),
+                  // end-drawer all items in a row
                   child: Row(
                     children: [
+                      // end-drawer (text + divider)
                       Expanded(
                         flex: 5,
                         child: SizedBox(
@@ -65,6 +76,7 @@ class ScreenSubjects extends StatelessWidget {
                           ),
                         ),
                       ),
+                      // end-drawer (image)
                       Expanded(
                         flex: 2,
                         child: Container(
