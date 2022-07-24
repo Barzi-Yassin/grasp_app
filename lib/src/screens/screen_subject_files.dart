@@ -23,17 +23,23 @@ class ScreenSubjectFiles extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 9.0),
         height: double.infinity,
         width: double.infinity,
-        decoration: cyanBackgroundGradient(),
+        decoration: backgroundGradientCyan(),
         child: ListView.builder(
           padding: const EdgeInsets.symmetric(vertical: 20.0),
           scrollDirection: Axis.vertical,
           itemCount: datalistSubjectFiles.length,
           itemBuilder: (context, theRecord) {
             return WidgetSubjectFileRecords(
-              subjectFileRecordId: "${theRecord+1}",
-              subjectFileRecordName: datalistSubjectFiles[theRecord]["subject_file_name"].toString(),
-              subjectFileRecordTime: datalistSubjectFiles[theRecord]["subject_file_time"].toString(),
-              subjectFileRecordDate: datalistSubjectFiles[theRecord]["subject_file_date"].toString(),
+              subjectFileRecordId: "${theRecord + 1}",
+              subjectFileRecordName: datalistSubjectFiles[theRecord]
+                      ["subject_file_name"]
+                  .toString(),
+              subjectFileRecordTime: datalistSubjectFiles[theRecord]
+                      ["subject_file_time"]
+                  .toString(),
+              subjectFileRecordDate: datalistSubjectFiles[theRecord]
+                      ["subject_file_date"]
+                  .toString(),
             );
           },
         ),
@@ -51,4 +57,3 @@ class ScreenSubjectFiles extends StatelessWidget {
     );
   }
 }
- 
