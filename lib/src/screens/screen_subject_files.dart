@@ -1,12 +1,9 @@
-// ignore_for_file: unused_import
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:grasp_app/src/data/datalist_subject.dart';
 import 'package:grasp_app/src/data/datalist_subject_files.dart';
-import 'package:grasp_app/src/methods/functions.dart';
+import 'package:grasp_app/src/functions/functions.dart';
+import 'package:grasp_app/src/widgets/end_drawer/end_drawer.dart';
 import 'package:grasp_app/src/widgets/subject_file_records.dart';
-import 'package:grasp_app/src/widgets/subject_records.dart';
 
 class ScreenSubjectFiles extends StatelessWidget {
   const ScreenSubjectFiles({Key? key}) : super(key: key);
@@ -14,10 +11,19 @@ class ScreenSubjectFiles extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      endDrawer: const SafeArea(
+        child: EndDrawer(),
+      ),
       appBar: AppBar(
         backgroundColor: Colors.cyan.shade700,
         centerTitle: true,
+        leading: functionArrowbackIconButton(context),
         title: const Text('Programming Fund'),
+        // actions: [IconButton(onPressed: () {
+        //   // Navigator.pop(context);
+        //   // return EndDrawer();
+        //   // Navigator.pushNamed(context, RouteScreens.routeEndDrawer);
+        // }, icon: Icon(Icons.help_outline))],
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 9.0),
@@ -56,4 +62,6 @@ class ScreenSubjectFiles extends StatelessWidget {
       ),
     );
   }
+
+  
 }

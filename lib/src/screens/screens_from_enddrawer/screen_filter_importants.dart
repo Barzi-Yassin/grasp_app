@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:grasp_app/src/functions/functions.dart';
+import 'package:grasp_app/src/widgets/end_drawer/end_drawer.dart';
 
 class ScreenFilterImportants extends StatelessWidget {
   const ScreenFilterImportants({Key? key}) : super(key: key);
@@ -6,7 +8,11 @@ class ScreenFilterImportants extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      endDrawer: const SafeArea(
+        child: EndDrawer(),
+      ),
       appBar: AppBar(
+        leading: functionArrowbackIconButton(context),
         title: const Text('Importants'),
       ),
     );

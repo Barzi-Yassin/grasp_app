@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grasp_app/src/functions/functions.dart';
 
 class ScreenFilterArchived extends StatelessWidget {
   const ScreenFilterArchived({Key? key}) : super(key: key);
@@ -7,7 +8,8 @@ class ScreenFilterArchived extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Profile'),
+        leading: functionArrowbackIconButton(context),
+        title: const Text('Archived Grasps'),
       ),
     );
   }
