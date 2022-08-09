@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class EndDrawer extends StatelessWidget {
-  const EndDrawer({
+class WidgetEndDrawerRecords extends StatelessWidget {
+  const WidgetEndDrawerRecords({
     Key? key,
     required this.enddrawerRecordId,
     required this.enddrawerRecordTitle,
@@ -12,6 +12,9 @@ class EndDrawer extends StatelessWidget {
   final int enddrawerRecordId;
   final String enddrawerRecordTitle;
   final String enddrawerRecordRoutePath;
+
+// final List<IconData> _iconsList = [];
+
 
   final IconData iconProfile = FontAwesomeIcons.userLarge;
   final IconData iconStars = FontAwesomeIcons.solidStar;
@@ -58,7 +61,7 @@ class EndDrawer extends StatelessWidget {
       ),
     );
   }
-
+// this function returns a widgets "Icon() or FaIcon()" 
   Widget _enddrawerRecordsWidgetDetector(IconData iconName) {
     if (enddrawerRecordId <= 3 || enddrawerRecordId == 6) {
       return Icon(iconName);

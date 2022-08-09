@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class WidgetSubjectFileRecords extends StatelessWidget {
   const WidgetSubjectFileRecords({
     Key? key,
+    // required this.subjectRecordName,
     required this.subjectFileRecordId,
     required this.subjectFileRecordName,
     required this.subjectFileRecordTime,
@@ -12,6 +13,7 @@ class WidgetSubjectFileRecords extends StatelessWidget {
     // required this.subjectRecordFileItemsNumber,
   }) : super(key: key);
 
+  // final String subjectRecordName;
   final String subjectFileRecordId;
   final String subjectFileRecordName;
   final String subjectFileRecordTime;
