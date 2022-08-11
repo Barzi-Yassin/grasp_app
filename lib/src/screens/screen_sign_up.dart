@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:grasp_app/src/functions/functions.dart';
 
-class ScreenSignUp extends StatefulWidget {
-  const ScreenSignUp({Key? key}) : super(key: key);
+class ScreenSignUp extends StatelessWidget {
+  ScreenSignUp({Key? key}) : super(key: key);
 
-  @override
-  State<ScreenSignUp> createState() => _ScreenSignUpState();
-}
+  final TextEditingController controllerEmail = TextEditingController();
+  final TextEditingController controllerPassword = TextEditingController();
 
-class _ScreenSignUpState extends State<ScreenSignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.cyan.shade800,
       appBar: AppBar(
-        backgroundColor: Colors.black87,
+        // elevation: 4,
+        backgroundColor: Colors.cyan,
         centerTitle: true,
-        leading: const Icon(Icons.exit_to_app_rounded),
         title: const Text(
           'Sign Up',
           style: TextStyle(
@@ -22,7 +22,44 @@ class _ScreenSignUpState extends State<ScreenSignUp> {
           ),
         ),
       ),
-      
+      body: Container(
+        decoration: backgroundGradientCyan(),
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Form(
+              child: Column(
+                children: [
+                  TextFormField(
+                    controller: controllerEmail,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Email',
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  TextFormField(
+                    focusNode: FocusNode(),
+                    controller: controllerPassword,
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Password',
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                ],
+              ),
+            ),
+            ElevatedButton(onPressed: () {
+              debugPrint('controllerEmail= <${controllerEmail.text}>');
+              debugPrint('controllerPassword= <${controllerPassword.text}>');
+            }, child: const Text('Login'))
+          ],
+        ),
+      ),
     );
   }
 }
