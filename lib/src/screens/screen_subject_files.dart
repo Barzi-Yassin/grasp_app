@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:grasp_app/src/data/datalist_subject.dart';
 import 'package:grasp_app/src/data/datalist_subject_files.dart';
@@ -51,7 +52,9 @@ class ScreenSubjectFiles extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 20.0),
           scrollDirection: Axis.vertical,
           // itemCount: datalistSubjectFiles.length,
-          itemCount: int.parse(datalistSubject[theRecordFromSubject]["subject_items_number"].toString()),
+          itemCount: int.parse(datalistSubject[theRecordFromSubject]
+                  ["subject_items_number"]
+              .toString()),
           itemBuilder: (context, theRecord) {
             return WidgetSubjectFileRecords(
               subjectFileRecordId: "${theRecord + 1}",
@@ -69,7 +72,27 @@ class ScreenSubjectFiles extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          showAnimatedDialog(
+            context: context,
+            barrierDismissible: true,
+            builder: (BuildContext context) {
+              return ClassicGeneralDialogWidget(
+                titleText: 'Title',
+                contentText: 'content',
+                onPositiveClick: () {
+                  Navigator.of(context).pop();
+                },
+                onNegativeClick: () {
+                  Navigator.of(context).pop();
+                },
+              );
+            },
+            animationType: DialogTransitionType.sizeFade,
+            curve: Curves.fastOutSlowIn,
+            duration:  const Duration(milliseconds: 1000),
+          );
+        },
         backgroundColor: Colors.cyan.shade400,
         elevation: 10,
         child: const FaIcon(
