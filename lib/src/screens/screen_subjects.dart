@@ -49,7 +49,26 @@ class ScreenSubjects extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          actionsAlignment: MainAxisAlignment.center,
+          title: const Text('Adding Subject'),
+          content: TextFormField(),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'Cancel'),
+              child: const Text('Cancle'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'Create'),
+              child: const Text('Create'),
+            ),
+          ],
+        ),
+      );
+        },
         backgroundColor: Colors.cyan.shade700,
         elevation: 10,
         child: const Icon(
