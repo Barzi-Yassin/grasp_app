@@ -74,23 +74,61 @@ class ScreenSubjectFiles extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showAnimatedDialog(
+            barrierColor: Colors.cyan.withOpacity(0.3),
             context: context,
             barrierDismissible: true,
             builder: (BuildContext context) {
-              return ClassicGeneralDialogWidget(
-                titleText: 'Title',
-                contentText: 'content',
-                onPositiveClick: () {
-                  Navigator.of(context).pop();
-                },
-                onNegativeClick: () {
-                  Navigator.of(context).pop();
-                },
+              return AlertDialog(
+                // alignment: ,
+                actionsAlignment: MainAxisAlignment.spaceEvenly,
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    Expanded(
+                      child: Divider(
+                        thickness: 1,
+                        endIndent: 10,
+                      ),
+                    ),
+                    Text('Adding Grasp'),
+                    Expanded(
+                      child: Divider(
+                        thickness: 1,
+                        indent: 10,
+                      ),
+                    ),
+                  ],
+                ),
+                content: TextFormField(
+                  decoration: const InputDecoration(
+                    // alignLabelWithHint: true,
+                    floatingLabelAlignment: FloatingLabelAlignment.center,
+                    border: OutlineInputBorder(),
+                    labelText: 'Grasp name',
+                  ),
+                ),
+                actions: <Widget>[
+                  ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.grey)),
+                    onPressed: () => Navigator.pop(context, 'Cancel'),
+                    child: const Text('Cancle'),
+                  ),
+                  ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.cyan)),
+                    onPressed: () => Navigator.pop(context, 'Create'),
+                    child: const Text('Create'),
+                  ),
+                ],
               );
             },
             animationType: DialogTransitionType.sizeFade,
-            curve: Curves.fastOutSlowIn,
-            duration:  const Duration(milliseconds: 1000),
+            curve: Curves.easeOut,
+            alignment: Alignment.topCenter,
+            duration: const Duration(milliseconds: 800),
           );
         },
         backgroundColor: Colors.cyan.shade400,

@@ -58,11 +58,21 @@ class WidgetSubjectFileRecords extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.end,
             mainAxisSize: MainAxisSize.min,
-            children: const <Widget>[
-              Icon(Icons.archive_outlined),
-              SizedBox(width: 10),
-              FaIcon(FontAwesomeIcons.trashCan, color: Colors.cyan, size: 21),
-              SizedBox(width: 5),
+            children: <Widget>[
+              IconButton(
+                  onPressed: () {
+                    debugPrint('archive clicked');
+                  },
+                  icon: const Icon(Icons.archive_outlined)),
+              // const SizedBox(width: 10),
+              IconButton(
+                onPressed: () {
+                  debugPrint('trash clicked');
+                },
+                icon: const FaIcon(FontAwesomeIcons.trashCan),
+                color: Colors.cyan,
+              ),
+              // const SizedBox(width: 5),
             ],
           ),
         ),
