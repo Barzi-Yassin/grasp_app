@@ -79,7 +79,15 @@ class ScreenSubjectFiles extends StatelessWidget {
             barrierDismissible: true,
             builder: (BuildContext context) {
               return AlertDialog(
-                // alignment: ,
+                elevation: 5,
+                actionsOverflowButtonSpacing: 0,
+                // shape: ShapeBorder.lerp(ShapeBorder, b, t),
+                shape: const RoundedRectangleBorder(
+                  side: BorderSide(color: Colors.black, width: 2.5),
+                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                ),
+                // backgroundColor: Colors.white,
+                // backgroundColor: Color.lerp(Colors.white, Colors.black, 0.1),
                 actionsAlignment: MainAxisAlignment.spaceEvenly,
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -90,7 +98,7 @@ class ScreenSubjectFiles extends StatelessWidget {
                         endIndent: 10,
                       ),
                     ),
-                    Text('Adding Grasp'),
+                    Text('New Grasp'),
                     Expanded(
                       child: Divider(
                         thickness: 1,
@@ -111,7 +119,7 @@ class ScreenSubjectFiles extends StatelessWidget {
                   ElevatedButton(
                     style: ButtonStyle(
                         backgroundColor:
-                            MaterialStateProperty.all(Colors.grey)),
+                            MaterialStateProperty.all(Color.lerp(Colors.grey, Colors.red, 0.2))),
                     onPressed: () => Navigator.pop(context, 'Cancel'),
                     child: const Text('Cancle'),
                   ),
