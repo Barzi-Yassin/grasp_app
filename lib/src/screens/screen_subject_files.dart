@@ -75,53 +75,77 @@ class ScreenSubjectFiles extends StatelessWidget {
         onPressed: () {
           showAnimatedDialog(
             barrierColor: Colors.cyan.withOpacity(0.3),
-            context: context,
             barrierDismissible: true,
+            context: context,
             builder: (BuildContext context) {
               return AlertDialog(
+                // insetPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+                insetPadding: EdgeInsets.zero,
+                titlePadding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+                // titlePadding: const EdgeInsets.fromLTRB(12.0, 24.0, 12.0, 0.0),
+                contentPadding:
+                    const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 8.0),
+                actionsPadding: const EdgeInsets.symmetric(horizontal: 8.0),
                 elevation: 5,
                 actionsOverflowButtonSpacing: 0,
-                // shape: ShapeBorder.lerp(ShapeBorder, b, t),
-                shape: const RoundedRectangleBorder(
-                  side: BorderSide(color: Colors.black, width: 2.5),
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                shape: RoundedRectangleBorder(
+                  // side: BorderSide(
+                  //   color: Colors.lightBlue.shade200,
+                  //   width: 5,
+                  // ),
+                  borderRadius: BorderRadius.all(Radius.circular(15.0)),
                 ),
-                // backgroundColor: Colors.white,
-                // backgroundColor: Color.lerp(Colors.white, Colors.black, 0.1),
+                backgroundColor: Colors.white,
                 actionsAlignment: MainAxisAlignment.spaceEvenly,
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Expanded(
-                      child: Divider(
-                        thickness: 1,
-                        endIndent: 10,
+                title: Container(
+                  padding: const EdgeInsets.fromLTRB(12.0, 20.0, 12.0, 15.0),
+                  decoration: backgroundGradientCyan(),  // TODO: fix border radius, widget only return gradient not the entire boxdecoration.
+                  
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Expanded(
+                        child: Divider(
+                          thickness: 1,
+                          endIndent: 10,
+                        ),
                       ),
-                    ),
-                    Text('New Grasp'),
-                    Expanded(
-                      child: Divider(
-                        thickness: 1,
-                        indent: 10,
+                      Text('New Grasp'),
+                      Expanded(
+                        child: Divider(
+                          thickness: 1,
+                          indent: 10,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 content: TextFormField(
+                  textAlign: TextAlign.center,
                   decoration: const InputDecoration(
-                    // alignLabelWithHint: true,
-                    floatingLabelAlignment: FloatingLabelAlignment.center,
-                    border: OutlineInputBorder(),
-                    labelText: 'Grasp name',
-                  ),
+                      // alignLabelWithHint: true,
+                      floatingLabelAlignment: FloatingLabelAlignment.center,
+                      prefixIcon: Icon(Icons.close),
+                      border: OutlineInputBorder(),
+                      hintText: 'Grasp name',
+                      // labelText: 'Grasp name2',
+                      alignLabelWithHint: true),
                 ),
                 actions: <Widget>[
                   ElevatedButton(
                     style: ButtonStyle(
+                        // backgroundColor: MaterialStateProperty.all(
+                        //   Color.lerp(Colors.grey, Colors.red, 0.2),
+                        // ),
                         backgroundColor:
-                            MaterialStateProperty.all(Color.lerp(Colors.grey, Colors.red, 0.2))),
+                            MaterialStateProperty.all(Colors.white),
+                        side: MaterialStateProperty.all(
+                            BorderSide(color: Colors.cyan))),
                     onPressed: () => Navigator.pop(context, 'Cancel'),
-                    child: const Text('Cancle'),
+                    child: const Text(
+                      'Cancle',
+                      style: TextStyle(color: Colors.cyan),
+                    ),
                   ),
                   ElevatedButton(
                     style: ButtonStyle(
