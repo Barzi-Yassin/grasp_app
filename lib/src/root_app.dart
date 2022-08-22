@@ -25,22 +25,22 @@ class RootApp extends StatelessWidget {
       //   primaryColor: Colors.cyan,
       // ),
       title: 'Grasp',
-      home: ScreenSignUp(),
+      // home: ScreenSignUp(),
       // home: ScreenSubjects(),
-      // initialRoute: RouteScreens.routeInit,
-      // routes: {
-      //   RouteScreens.routeInit: (context) => const ScreenSubjects(),
-      //   RouteScreens.routeSubjects: (context) => const ScreenSubjects(),
-      //   // RouteScreens.routeSubjectFiles: (context) =>  const ScreenSubjectFiles(),
+      initialRoute: RouteScreens.routeInit,
+      routes: {
+        RouteScreens.routeInit: (context) => const ScreenSubjects(),
+        RouteScreens.routeSubjects: (context) => const ScreenSubjects(),
+        // RouteScreens.routeSubjectFiles: (context) =>  const ScreenSubjectFiles(),
 
-      //   RouteScreens.routeMyProfile: (context) => const ScreenMyProfile(),
-      //   RouteScreens.routeGraspGuidance: (context) => const ScreenGraspGuidance(),
+        RouteScreens.routeMyProfile: (context) => const ScreenMyProfile(),
+        RouteScreens.routeGraspGuidance: (context) => const ScreenGraspGuidance(),
 
-      //   RouteScreens.routeFilterStars: (context) => const ScreenFilterStars(),
-      //   RouteScreens.routeFilterFavorites: (context) => const ScreenFilterFavorites(),
-      //   RouteScreens.routeFilterImportants: (context) => const ScreenFilterImportants(),
-      //   RouteScreens.routeFilterArchived: (context) => const ScreenFilterArchived(),
-      // },
+        RouteScreens.routeFilterStars: (context) => const ScreenFilterStars(),
+        RouteScreens.routeFilterFavorites: (context) => const ScreenFilterFavorites(),
+        RouteScreens.routeFilterImportants: (context) => const ScreenFilterImportants(),
+        RouteScreens.routeFilterArchived: (context) => const ScreenFilterArchived(),
+      },
     );
   }
 }
