@@ -88,7 +88,7 @@ class ScreenSubjectFiles extends StatelessWidget {
                 actionsPadding: const EdgeInsets.symmetric(horizontal: 8.0),
                 elevation: 5,
                 actionsOverflowButtonSpacing: 0,
-                shape: RoundedRectangleBorder(
+                shape: const RoundedRectangleBorder(
                   // side: BorderSide(
                   //   color: Colors.lightBlue.shade200,
                   //   width: 5,
@@ -140,7 +140,7 @@ class ScreenSubjectFiles extends StatelessWidget {
                         backgroundColor:
                             MaterialStateProperty.all(Colors.white),
                         side: MaterialStateProperty.all(
-                            BorderSide(color: Colors.cyan))),
+                            const BorderSide(color: Colors.cyan))),
                     onPressed: () => Navigator.pop(context, 'Cancel'),
                     child: const Text(
                       'Cancle',
@@ -159,7 +159,7 @@ class ScreenSubjectFiles extends StatelessWidget {
             },
             animationType: DialogTransitionType.sizeFade,
             curve: Curves.easeOut,
-            alignment: Alignment.topCenter,
+            alignment: Alignment.bottomCenter,
             duration: const Duration(milliseconds: 800),
           );
         },
