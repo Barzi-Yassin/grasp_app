@@ -74,7 +74,7 @@ class ScreenSubjectFiles extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showAnimatedDialog(
-            barrierColor: Colors.cyan.withOpacity(0.3),
+            barrierColor: Colors.black38,
             barrierDismissible: true,
             context: context,
             builder: (BuildContext context) {
@@ -89,18 +89,24 @@ class ScreenSubjectFiles extends StatelessWidget {
                 elevation: 5,
                 actionsOverflowButtonSpacing: 0,
                 shape: const RoundedRectangleBorder(
-                  // side: BorderSide(
-                  //   color: Colors.lightBlue.shade200,
-                  //   width: 5,
-                  // ),
+                  side: BorderSide(
+                    // color: Colors.lightBlue.shade200,
+                    color: Colors.cyan,
+                    width: 1,
+                  ),
                   borderRadius: BorderRadius.all(Radius.circular(15.0)),
                 ),
                 backgroundColor: Colors.white,
                 actionsAlignment: MainAxisAlignment.spaceEvenly,
                 title: Container(
                   padding: const EdgeInsets.fromLTRB(12.0, 20.0, 12.0, 15.0),
-                  decoration: backgroundGradientCyan(),  // TODO: fix border radius, widget only return gradient not the entire boxdecoration.
-                  
+                  decoration: BoxDecoration(
+                      gradient: dialogHeaderGradient(),
+                      
+                      borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(15),
+                          topRight: Radius.circular(15))), //
+
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
