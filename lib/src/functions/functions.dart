@@ -32,8 +32,9 @@ LinearGradient dialogHeaderGradient() {
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
     colors: [
-      Colors.cyan.shade300,
-      Colors.white,
+      Colors.cyan.shade700,
+      Colors.cyan.shade100,
+      // Colors.white,
     ],
   );
 }

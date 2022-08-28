@@ -8,12 +8,13 @@ import 'package:grasp_app/src/widgets/end_drawer/widget_end_drawer.dart';
 import 'package:grasp_app/src/widgets/widget_subject_file_records.dart';
 
 class ScreenSubjectFiles extends StatelessWidget {
-  const ScreenSubjectFiles({
+  ScreenSubjectFiles({
     Key? key,
     required this.theRecordFromSubject,
   }) : super(key: key);
 
   final int theRecordFromSubject;
+  TextEditingController controllerAddGraspFile = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +93,7 @@ class ScreenSubjectFiles extends StatelessWidget {
                   side: BorderSide(
                     // color: Colors.lightBlue.shade200,
                     color: Colors.cyan,
-                    width: 1,
+                    width: 1.5,
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(15.0)),
                 ),
@@ -101,11 +102,9 @@ class ScreenSubjectFiles extends StatelessWidget {
                 title: Container(
                   padding: const EdgeInsets.fromLTRB(12.0, 20.0, 12.0, 15.0),
                   decoration: BoxDecoration(
-                      gradient: dialogHeaderGradient(),
-                      
-                      borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(15),
-                          topRight: Radius.circular(15))), //
+                    gradient: dialogHeaderGradient(),
+                    borderRadius:   BorderRadius.circular(15)
+                  ), //
 
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -116,7 +115,11 @@ class ScreenSubjectFiles extends StatelessWidget {
                           endIndent: 10,
                         ),
                       ),
-                      Text('New Grasp'),
+                      Text(
+                        'New Grasp',
+                        style:
+                            TextStyle(color: Color.fromARGB(255, 126, 50, 50)),
+                      ),
                       Expanded(
                         child: Divider(
                           thickness: 1,
@@ -127,12 +130,20 @@ class ScreenSubjectFiles extends StatelessWidget {
                   ),
                 ),
                 content: TextFormField(
+                  controller: controllerAddGraspFile,
                   textAlign: TextAlign.center,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
+
                       // alignLabelWithHint: true,
                       floatingLabelAlignment: FloatingLabelAlignment.center,
-                      prefixIcon: Icon(Icons.close),
-                      border: OutlineInputBorder(),
+                      // prefixIcon: Icon(Icons.close),
+                      suffixIcon: IconButton(
+                          onPressed: () => controllerAddGraspFile.clear(),
+                          icon: const Icon(
+                            Icons.close,
+                            color: Color.fromARGB(255, 126, 50, 50),
+                          )),
+                      border: const UnderlineInputBorder(),
                       hintText: 'Grasp name',
                       // labelText: 'Grasp name2',
                       alignLabelWithHint: true),
