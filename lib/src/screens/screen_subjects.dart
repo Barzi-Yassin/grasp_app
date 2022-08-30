@@ -5,12 +5,16 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:grasp_app/src/data/datalist_subject.dart';
 import 'package:grasp_app/src/functions/functions.dart';
 import 'package:grasp_app/src/screens/screen_subject_files.dart';
+import 'package:grasp_app/src/widgets/dialogs/dialog_add.dart';
 import 'package:grasp_app/src/widgets/end_drawer/widget_end_drawer.dart';
 import 'package:grasp_app/src/widgets/widget_subject_records.dart';
 // import 'package:grasp_app/src/widgets/widget_subject_records.dart';
 
 class ScreenSubjects extends StatelessWidget {
-  const ScreenSubjects({Key? key}) : super(key: key);
+  ScreenSubjects({Key? key}) : super(key: key);
+
+  final TextEditingController controllerAddGraspSubject =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -49,26 +53,11 @@ class ScreenSubjects extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showDialog<String>(
-            context: context,
-            builder: (BuildContext context) => AlertDialog(
-              actionsAlignment: MainAxisAlignment.center,
-              title: const Text('Adding Subject'),
-              content: TextFormField(),
-              actions: <Widget>[
-                TextButton(
-                  onPressed: () => Navigator.pop(context, 'Cancel'),
-                  child: const Text('Cancle'),
-                ),
-                TextButton(
-                  onPressed: () => Navigator.pop(context, 'Create'),
-                  child: const Text('Create'),
-                ),
-              ],
-            ),
-          );
-        },
+        onPressed: () => dialogAdd(
+          context: context,
+          title: 'Subject',
+          controller: controllerAddGraspSubject,
+        ),
         backgroundColor: Colors.cyan.shade700,
         elevation: 10,
         child: const Icon(

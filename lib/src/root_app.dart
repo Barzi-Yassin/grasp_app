@@ -29,8 +29,8 @@ class RootApp extends StatelessWidget {
       // home: ScreenSubjects(),
       initialRoute: RouteScreens.routeInit,
       routes: {
-        RouteScreens.routeInit: (context) => const ScreenSubjects(),
-        RouteScreens.routeSubjects: (context) => const ScreenSubjects(),
+        RouteScreens.routeInit: (context) => ScreenSubjects(),
+        RouteScreens.routeSubjects: (context) => ScreenSubjects(),
         // RouteScreens.routeSubjectFiles: (context) =>  const ScreenSubjectFiles(),
 
         RouteScreens.routeMyProfile: (context) => const ScreenMyProfile(),
