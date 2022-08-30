@@ -39,16 +39,16 @@ Future<Object?> dialogAdd({
 
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children:  [
+            children: [
               const Expanded(
-                child: const Divider(
+                child: Divider(
                   thickness: 1,
                   endIndent: 10,
                 ),
               ),
               Text(
                 'New $title',
-                style: const TextStyle(color: const Color.fromARGB(255, 126, 50, 50)),
+                style: const TextStyle(color: Color.fromARGB(255, 126, 50, 50)),
               ),
               const Expanded(
                 child: Divider(

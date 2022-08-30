@@ -7,13 +7,19 @@ import 'package:grasp_app/src/widgets/dialogs/dialog_add.dart';
 import 'package:grasp_app/src/widgets/end_drawer/widget_end_drawer.dart';
 import 'package:grasp_app/src/widgets/widget_subject_file_records.dart';
 
-class ScreenSubjectFiles extends StatelessWidget {
-  ScreenSubjectFiles({
+class ScreenSubjectFiles extends StatefulWidget {
+  const ScreenSubjectFiles({
     Key? key,
     required this.theRecordFromSubject,
   }) : super(key: key);
 
   final int theRecordFromSubject;
+
+  @override
+  State<ScreenSubjectFiles> createState() => _ScreenSubjectFilesState();
+}
+
+class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
   TextEditingController controllerAddGraspFile = TextEditingController();
 
   @override
@@ -35,7 +41,7 @@ class ScreenSubjectFiles extends StatelessWidget {
               size: 20,
             ),
             // Text('  $subjectRecordNamenn'),
-            Text('  ${datalistSubject[theRecordFromSubject]["subject_name"]}'),
+            Text('  ${datalistSubject[widget.theRecordFromSubject]["subject_name"]}'),
           ],
         ),
         // actions: [IconButton(onPressed: () {
@@ -53,7 +59,7 @@ class ScreenSubjectFiles extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 20.0),
           scrollDirection: Axis.vertical,
           // itemCount: datalistSubjectFiles.length,
-          itemCount: int.parse(datalistSubject[theRecordFromSubject]
+          itemCount: int.parse(datalistSubject[widget.theRecordFromSubject]
                   ["subject_items_number"]
               .toString()),
           itemBuilder: (context, theRecord) {
