@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:grasp_app/src/functions/functions.dart';
 
-class ScreenSignUp extends StatelessWidget {
-  ScreenSignUp({Key? key}) : super(key: key);
+class ScreenSignup extends StatelessWidget {
+  ScreenSignup({Key? key}) : super(key: key);
 
   final TextEditingController controllerEmail = TextEditingController();
   final TextEditingController controllerPassword = TextEditingController();
@@ -11,17 +11,6 @@ class ScreenSignUp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.cyan.shade800,
-      appBar: AppBar(
-        // elevation: 4,
-        backgroundColor: Colors.cyan,
-        centerTitle: true,
-        title: const Text(
-          'Sign Up',
-          style: TextStyle(
-            fontSize: 20,
-          ),
-        ),
-      ),
       body: Container(
         decoration: backgroundGradientCyan(),
         padding: const EdgeInsets.all(20.0),
@@ -56,7 +45,7 @@ class ScreenSignUp extends StatelessWidget {
             ElevatedButton(onPressed: () {
               debugPrint('controllerEmail= <${controllerEmail.text}>');
               debugPrint('controllerPassword= <${controllerPassword.text}>');
-            }, child: const Text('Login'))
+            }, child: const Text('Sign Up'))
           ],
         ),
       ),
