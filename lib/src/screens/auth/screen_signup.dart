@@ -48,7 +48,7 @@ class ScreenSignup extends StatelessWidget {
                   const SizedBox(height: 20),
 
                   // password
-                  inputPassword(thePassword: controllerPassword),
+                  InputPassword(theControllerPassword: controllerPassword),
 
                   
 
