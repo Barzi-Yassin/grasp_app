@@ -43,7 +43,7 @@ class ScreenSignup extends StatelessWidget {
                   // ),
 
                   // email
-                  inputEmail(theEmail: controllerEmail),
+                  InputEmail(theControllerEmail: controllerEmail),
 
                   const SizedBox(height: 20),
 
