@@ -23,6 +23,7 @@ class RootApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // change to GetMaterialApp to use the get package
     return   GetMaterialApp(
+      debugShowCheckedModeBanner: true,
       // theme: ThemeData(
       //   primaryColor: Colors.cyan,
       // ),

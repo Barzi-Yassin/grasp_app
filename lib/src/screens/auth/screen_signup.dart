@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grasp_app/src/functions/auth_functions.dart';
 import 'package:grasp_app/src/functions/functions.dart';
 
 class ScreenSignup extends StatelessWidget {
@@ -10,7 +11,7 @@ class ScreenSignup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.cyan.shade800,
+      backgroundColor: Colors.grey.shade400,
       body: Container(
         decoration: backgroundGradientCyan(),
         padding: const EdgeInsets.all(20.0),
@@ -21,31 +22,64 @@ class ScreenSignup extends StatelessWidget {
             Form(
               child: Column(
                 children: [
-                  TextFormField(
-                    controller: controllerEmail,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Email',
-                    ),
-                  ),
+                  // TextFormField(
+                  //   // controller: controller,
+                  //   textAlign: TextAlign.center,
+                  //   decoration: InputDecoration(
+
+                  //       // alignLabelWithHint: true,
+                  //       floatingLabelAlignment: FloatingLabelAlignment.center,
+                  //       // prefixIcon: Icon(Icons.close),
+                  //       suffixIcon: IconButton(
+                  //           onPressed: () {},
+                  //           icon: const Icon(
+                  //             Icons.close,
+                  //             color: Color.fromARGB(255, 126, 50, 50),
+                  //           )),
+                  //       border: const UnderlineInputBorder(),
+                  //       hintText: 'name',
+                  //       // labelText: 'Grasp name2',
+                  //       alignLabelWithHint: true),
+                  // ),
+
+                  // email
+                  inputEmail(theEmail: controllerEmail),
+
                   const SizedBox(height: 20),
-                  TextFormField(
-                    focusNode: FocusNode(),
-                    controller: controllerPassword,
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Password',
-                    ),
-                  ),
+
+                  // password
+                  inputPassword(thePassword: controllerPassword),
+
+                  
+
+                  // TextFormField(
+                  //   controller: controllerEmail,
+                  //   decoration: const InputDecoration(
+                  //     border: OutlineInputBorder(),
+                  //     labelText: 'Email',
+                  //   ),
+                  // ),
+                  // const SizedBox(height: 20),
+                  // TextFormField(
+                  //   focusNode: FocusNode(),
+                  //   controller: controllerPassword,
+                  //   obscureText: true,
+                  //   decoration: const InputDecoration(
+                  //     border: OutlineInputBorder(),
+                  //     labelText: 'Password',
+                  //   ),
+                  // ),
                   const SizedBox(height: 20),
                 ],
               ),
             ),
-            ElevatedButton(onPressed: () {
-              debugPrint('controllerEmail= <${controllerEmail.text}>');
-              debugPrint('controllerPassword= <${controllerPassword.text}>');
-            }, child: const Text('Sign Up'))
+            ElevatedButton(
+                onPressed: () {
+                  debugPrint('controllerEmail= <${controllerEmail.text}>');
+                  debugPrint(
+                      'controllerPassword= <${controllerPassword.text}>');
+                },
+                child: const Text('Sign Up'))
           ],
         ),
       ),
