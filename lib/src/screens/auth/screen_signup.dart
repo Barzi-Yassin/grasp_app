@@ -18,42 +18,53 @@ class ScreenSignup extends StatelessWidget {
       body: Container(
         decoration: backgroundGradientCyan(),
         padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Form(
-              child: Column(
-                children: [
-                  // email
-                  InputEmail(theControllerEmail: controllerSignupEmail),
+        child: SingleChildScrollView(
+          clipBehavior: Clip.hardEdge,
+          scrollDirection: Axis.vertical,
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.manual,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(height: 100),
+              customeTextAuthHeader(theData: '• sign up •'),
+              const SizedBox(height: 100),
+              Form(
+                child: Column(
+                  children: [
+                    // email
+                    InputEmail(theControllerEmail: controllerSignupEmail),
 
-                  const SizedBox(height: 20),
+                    const SizedBox(height: 20),
 
-                  // password
-                  InputPassword(
-                      theControllerPassword: controllerSignupPassword),
+                    // password
+                    InputPassword(
+                        theControllerPassword: controllerSignupPassword),
 
-                  const SizedBox(height: 20),
-                ],
+                    const SizedBox(height: 20),
+                  ],
+                ),
               ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                debugPrint(
-                    'controllerSignupEmail= <${controllerSignupEmail.text}>');
-                debugPrint(
-                    'controllerSignupPassword= <${controllerSignupPassword.text}>');
-              },
-              child: const Text('Sign Up'),
-            ),
-            TextButton(
-              onPressed: () {
-                Get.to(() => ScreenSignin());
-              },
-              child: const Text('Already Have an Account? Sign in here'),
-            )
-          ],
+              ElevatedButton(
+                onPressed: () {
+                  debugPrint(
+                      'controllerSignupEmail= <${controllerSignupEmail.text}>');
+                  debugPrint(
+                      'controllerSignupPassword= <${controllerSignupPassword.text}>');
+                },
+                child: const Text('Sign Up'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Get.to(() => ScreenSignin());
+                },
+                child: customeText(
+                  theData: '\nAlready Have an Account? \nSign in here',
+                  theTextAlign: TextAlign.center
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

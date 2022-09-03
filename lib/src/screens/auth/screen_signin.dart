@@ -8,7 +8,8 @@ class ScreenSignin extends StatelessWidget {
   ScreenSignin({Key? key}) : super(key: key);
 
   final TextEditingController controllerSigninEmail = TextEditingController();
-  final TextEditingController controllerSigninPassword = TextEditingController();
+  final TextEditingController controllerSigninPassword =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -17,39 +18,53 @@ class ScreenSignin extends StatelessWidget {
       body: Container(
         decoration: backgroundGradientCyan(),
         padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Form(
-              child: Column(
-                children: [
-                  // email
-                  InputEmail(theControllerEmail: controllerSigninEmail),
+        child: SingleChildScrollView(
+          clipBehavior: Clip.hardEdge,
+          scrollDirection: Axis.vertical,
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.manual,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(height: 100),
+              customeTextAuthHeader(theData: '• sign in •'),
+              const SizedBox(height: 100),
+              Form(
+                child: Column(
+                  children: [
+                    // email
+                    InputEmail(theControllerEmail: controllerSigninEmail),
 
-                  const SizedBox(height: 20),
+                    const SizedBox(height: 20),
 
-                  // password
-                  InputPassword(theControllerPassword: controllerSigninPassword),
+                    // password
+                    InputPassword(
+                        theControllerPassword: controllerSigninPassword),
 
-                  const SizedBox(height: 20),
-                ],
+                    const SizedBox(height: 20),
+                  ],
+                ),
               ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                debugPrint('controllerSigninEmail= <${controllerSigninEmail.text}>');
-                debugPrint('controllerSigninPassword= <${controllerSigninPassword.text}>');
-              },
-              child: const Text('Sign In'),
-            ),
-            TextButton(
-              onPressed: () {
-                Get.to(() => ScreenSignup());
-              },
-              child: const Text('Don\'t Have an Account? Register'),
-            )
-          ],
+              ElevatedButton(
+                onPressed: () {
+                  debugPrint(
+                      'controllerSigninEmail= <${controllerSigninEmail.text}>');
+                  debugPrint(
+                      'controllerSigninPassword= <${controllerSigninPassword.text}>');
+                },
+                child: const Text('Sign In'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Get.to(() => ScreenSignup());
+                },
+                child: customeText(
+                  theData: '\nDon\'t Have Account? \nSign up here',
+                  theTextAlign: TextAlign.center,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

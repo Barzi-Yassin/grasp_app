@@ -67,12 +67,13 @@ Padding customePaddingAll(
 }
 
 Padding customePaddingSymmetric(
-    { double? thePaddingHorizantal,
-     double? thePaddingVertical,
+    {double? thePaddingHorizantal,
+    double? thePaddingVertical,
     required Widget theChild}) {
   return Padding(
     padding: EdgeInsets.symmetric(
-        horizontal: thePaddingHorizantal ?? 0, vertical: thePaddingVertical ?? 0),
+        horizontal: thePaddingHorizantal ?? 0,
+        vertical: thePaddingVertical ?? 0),
     child: theChild,
   );
 }
@@ -96,13 +97,20 @@ Padding customePaddingLTBR({
 }
 
 Padding customePaddingOnly(
-    {double? thePaddingLeft, double? thePaddingTop, double? thePaddingRight, double? thePaddingBottom, required Widget theChild}) {
+    {double? thePaddingLeft,
+    double? thePaddingTop,
+    double? thePaddingRight,
+    double? thePaddingBottom,
+    required Widget theChild}) {
   return Padding(
-    padding: EdgeInsets.only(left: thePaddingLeft ?? 0, top: thePaddingTop ?? 0, right: thePaddingRight ?? 0, bottom: thePaddingBottom ?? 0),
+    padding: EdgeInsets.only(
+        left: thePaddingLeft ?? 0,
+        top: thePaddingTop ?? 0,
+        right: thePaddingRight ?? 0,
+        bottom: thePaddingBottom ?? 0),
     child: theChild,
   );
 }
-
 
 ShaderMask customeIconShaderMask(
     {required IconData theIcon, required double theSize}) {
@@ -117,6 +125,57 @@ ShaderMask customeIconShaderMask(
       theIcon,
       size: theSize,
       color: Colors.white,
+    ),
+  );
+}
+
+Text customeTextAuthHeader({
+  required String theData,
+  Color? theColor,
+  int? theMaxLines,
+  double? theFontSize,
+}) {
+  return Text(
+    theData.toUpperCase(),
+    maxLines: theMaxLines,
+    style: TextStyle(
+      color: theColor,
+      fontWeight: FontWeight.w800,
+      fontFamily: 'Caveat',
+      fontSize: 40,
+      letterSpacing: 3,
+      foreground: Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth =1.0
+        ..color = Colors.brown
+        // ..invertColors = true
+    ),
+  );
+}
+
+
+Text customeText({
+  required String theData,
+  Color? theColor,
+  TextAlign? theTextAlign,
+  FontWeight? theFontWeight,
+  String? theFontFamily,
+  double? theFontSize,
+  double? theWordSpacing,
+  double? theLetterSpacing,
+  int? theMaxLines,
+}) {
+  return Text(
+    theData,
+    maxLines: theMaxLines,
+    textAlign: theTextAlign,
+    style: TextStyle(
+      color: theColor,
+      fontWeight: theFontWeight,
+      fontFamily: theFontFamily,
+      fontSize: theFontSize,
+      wordSpacing: theWordSpacing,
+      letterSpacing: theLetterSpacing,
     ),
   );
 }
