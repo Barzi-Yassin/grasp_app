@@ -49,7 +49,7 @@ IconButton customeIconButton(
       ));
 }
 
-Widget customeIcon(
+Icon customeIcon(
     {required IconData theIcon, double? theSize, Color? theColor}) {
   return Icon(
     theIcon,
@@ -58,7 +58,7 @@ Widget customeIcon(
   );
 }
 
-Widget customePaddingAll(
+Padding customePaddingAll(
     {required double thePaddingAll, required Widget theChild}) {
   return Padding(
     padding: EdgeInsets.all(thePaddingAll),
@@ -66,7 +66,7 @@ Widget customePaddingAll(
   );
 }
 
-Widget customePaddingSymmetric(
+Padding customePaddingSymmetric(
     { double? thePaddingHorizantal,
      double? thePaddingVertical,
     required Widget theChild}) {
@@ -77,7 +77,7 @@ Widget customePaddingSymmetric(
   );
 }
 
-Widget customePaddingLTBR({
+Padding customePaddingLTBR({
   required double thePaddingLeft,
   required double thePaddingTop,
   required double thePaddingRight,
@@ -95,7 +95,7 @@ Widget customePaddingLTBR({
   );
 }
 
-Widget customePaddingOnly(
+Padding customePaddingOnly(
     {double? thePaddingLeft, double? thePaddingTop, double? thePaddingRight, double? thePaddingBottom, required Widget theChild}) {
   return Padding(
     padding: EdgeInsets.only(left: thePaddingLeft ?? 0, top: thePaddingTop ?? 0, right: thePaddingRight ?? 0, bottom: thePaddingBottom ?? 0),
