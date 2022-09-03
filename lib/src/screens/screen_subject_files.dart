@@ -5,7 +5,7 @@ import 'package:grasp_app/src/data/datalist_subject_files.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/dialogs/dialog_add.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/end_drawer/widget_end_drawer.dart';
-import 'package:grasp_app/src/reusable_codes/widgets/widget_subject_file_records.dart';
+import 'package:grasp_app/src/reusable_codes/widgets/subject_files/widget_subject_file_records.dart';
 
 class ScreenSubjectFiles extends StatefulWidget {
   const ScreenSubjectFiles({
