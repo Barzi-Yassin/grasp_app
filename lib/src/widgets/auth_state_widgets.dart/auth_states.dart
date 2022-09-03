@@ -23,10 +23,17 @@ class InputEmail extends StatelessWidget {
         hintText: "Your email",
         prefixIcon: customePaddingOnly(
           thePaddingLeft: 10,
-          theChild: customeIcon(
-              theIcon: Icons.person,
-              theColor: Colors.pink.shade900,
-              theSize: 27),
+          theChild: const RadiantGradientMask(
+            child: Icon(
+              Icons.person,
+              size: 20,
+              color: Colors.white,
+            ),
+          ),
+          // theChild: customeIcon(
+          //     theIcon: Icons.person_outline,
+          //     // theColor: Color.lerp(Colors.pink, b, t),
+          //     theSize: 25),
         ),
         suffixIcon: customePaddingOnly(
           thePaddingRight: 10,
@@ -34,7 +41,7 @@ class InputEmail extends StatelessWidget {
             theOnPressed: () => theControllerEmail.clear(),
             theIcon: Icons.close,
             theSize: 25,
-            theColor: Colors.pink.shade700,
+            // theColor: Colors.pink.shade700,
           ),
         ),
         border: const OutlineInputBorder(
@@ -57,7 +64,7 @@ class InputPassword extends StatefulWidget {
 class _InputPasswordState extends State<InputPassword> {
   IconData passwordHideShowIconHandler = Icons.visibility_off;
   bool hidePassword = true;
-  
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -87,20 +94,38 @@ class _InputPasswordState extends State<InputPassword> {
               hidePassword = !hidePassword;
               debugPrint(hidePassword.toString());
               if (hidePassword) {
-  passwordHideShowIconHandler = Icons.visibility_off;
-} else {
-  passwordHideShowIconHandler = Icons.visibility_sharp;
-}
+                passwordHideShowIconHandler = Icons.visibility_off;
+              } else {
+                passwordHideShowIconHandler = Icons.visibility_sharp;
+              }
             }),
             theIcon: passwordHideShowIconHandler,
             theSize: 25,
-            theColor: Colors.pink.shade700,
+            // theColor: Colors.pink.shade700,
           ),
         ),
         border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(40)),
             borderSide: BorderSide.none),
       ),
+    );
+  }
+}
+
+class RadiantGradientMask extends StatelessWidget {
+  const RadiantGradientMask({Key? key, required this.child}) : super(key: key);
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return ShaderMask(
+      shaderCallback: (bounds) =>   RadialGradient(
+        center: Alignment.center,
+        radius: 0.24,
+        colors: [Colors.pink.shade200, Colors.cyan.shade200],
+        tileMode: TileMode.decal,
+      ).createShader(bounds),
+      child: child,
     );
   }
 }

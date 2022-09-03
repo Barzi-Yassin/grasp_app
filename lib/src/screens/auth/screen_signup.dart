@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grasp_app/src/functions/auth_functions.dart';
+import 'package:grasp_app/src/widgets/auth_state_widgets.dart/auth_states.dart';
 import 'package:grasp_app/src/functions/functions.dart';
 
 class ScreenSignup extends StatelessWidget {

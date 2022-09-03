@@ -13,18 +13,6 @@ BoxDecoration backgroundGradientCyan() {
     ),
   );
 }
-// BoxDecoration ebackgroundGradientCyan() {
-//   return BoxDecoration(
-//     gradient: LinearGradient(
-//       begin: Alignment.topCenter,
-//       end: Alignment.bottomCenter,
-//       colors: [
-//         Colors.cyan.shade300,
-//         Colors.grey.shade400,
-//       ],
-//     ),
-//   );
-// }
 
 // dialog header gradient
 LinearGradient dialogHeaderGradient() {
@@ -47,7 +35,7 @@ IconButton functionArrowbackIconButton(BuildContext context) {
   );
 }
 
-Widget customeIconButton(
+IconButton customeIconButton(
     {required theOnPressed,
     required IconData theIcon,
     double? theSize,
