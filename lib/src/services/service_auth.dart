@@ -2,8 +2,10 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ServiceAuth {
+
   //  methods to authenticate user using firebase auth
 
   // sign up method
@@ -17,9 +19,14 @@ class ServiceAuth {
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        debugPrint('The password provided is too weak.');
+        Get.snackbar('error', 'The password provided is too weak.');
+        debugPrint('error :: The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
-        debugPrint('The account already exists for that email.');
+        Get.snackbar('error', 'The account already exists for that email.');
+        debugPrint('error :: The account already exists for that email.');
+      } else {
+        Get.snackbar('error', e.message.toString());
+        debugPrint('error :: ${e.message}');
       }
     } catch (e) {
       debugPrint(e.toString());
@@ -35,9 +42,14 @@ class ServiceAuth {
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
+        Get.snackbar('error', 'No user found for that email.');
         debugPrint('No user found for that email.');
       } else if (e.code == 'wrong-password') {
+        Get.snackbar('error', 'Wrong password provided for that user.');
         debugPrint('Wrong password provided for that user.');
+      } else {
+        Get.snackbar('error', e.message.toString());
+        debugPrint('error :: ${e.message}');
       }
     }
   }
