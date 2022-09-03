@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:grasp_app/src/data/datalist_subject.dart';
 import 'package:grasp_app/src/data/datalist_subject_files.dart';
-import 'package:grasp_app/src/functions/functions.dart';
-import 'package:grasp_app/src/widgets/dialogs/dialog_add.dart';
-import 'package:grasp_app/src/widgets/end_drawer/widget_end_drawer.dart';
-import 'package:grasp_app/src/widgets/widget_subject_file_records.dart';
+import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
+import 'package:grasp_app/src/reusable_codes/widgets/dialogs/dialog_add.dart';
+import 'package:grasp_app/src/reusable_codes/widgets/end_drawer/widget_end_drawer.dart';
+import 'package:grasp_app/src/reusable_codes/widgets/widget_subject_file_records.dart';
 
 class ScreenSubjectFiles extends StatefulWidget {
   const ScreenSubjectFiles({

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grasp_app/src/routes/route_screens.dart';
-import 'package:grasp_app/src/widgets/end_drawer/widget_end_drawer_records.dart';
+import 'package:grasp_app/src/reusable_codes/widgets/end_drawer/widget_end_drawer_records.dart';
 
 class EndDrawer extends StatelessWidget {
   const EndDrawer({Key? key}) : super(key: key);

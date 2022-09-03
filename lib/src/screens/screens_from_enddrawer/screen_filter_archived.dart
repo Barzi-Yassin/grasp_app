@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grasp_app/src/functions/functions.dart';
+import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 
 class ScreenFilterArchived extends StatelessWidget {
   const ScreenFilterArchived({Key? key}) : super(key: key);

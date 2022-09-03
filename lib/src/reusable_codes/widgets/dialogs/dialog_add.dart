@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
-import 'package:grasp_app/src/functions/functions.dart';
+import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 
 Future<Object?> dialogAdd({
   required BuildContext context,
