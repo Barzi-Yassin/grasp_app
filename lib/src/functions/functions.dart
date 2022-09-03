@@ -102,3 +102,21 @@ Widget customePaddingOnly(
     child: theChild,
   );
 }
+
+
+ShaderMask customeIconShaderMask(
+    {required IconData theIcon, required double theSize}) {
+  return ShaderMask(
+    shaderCallback: (bounds) => RadialGradient(
+      center: Alignment.center,
+      radius: 0.325,
+      colors: [Colors.pink.shade200, Colors.cyan.shade200],
+      tileMode: TileMode.decal,
+    ).createShader(bounds),
+    child: Icon(
+      theIcon,
+      size: theSize,
+      color: Colors.white,
+    ),
+  );
+}

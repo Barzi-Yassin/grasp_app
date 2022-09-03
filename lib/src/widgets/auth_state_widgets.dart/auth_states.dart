@@ -23,25 +23,18 @@ class InputEmail extends StatelessWidget {
         hintText: "Your email",
         prefixIcon: customePaddingOnly(
           thePaddingLeft: 10,
-          theChild: const RadiantGradientMask(
-            child: Icon(
-              Icons.person,
-              size: 20,
-              color: Colors.white,
-            ),
+          theChild: customeIconShaderMask(
+            theIcon: Icons.person_outline,
+            theSize: 28,
           ),
-          // theChild: customeIcon(
-          //     theIcon: Icons.person_outline,
-          //     // theColor: Color.lerp(Colors.pink, b, t),
-          //     theSize: 25),
         ),
         suffixIcon: customePaddingOnly(
           thePaddingRight: 10,
           theChild: customeIconButton(
             theOnPressed: () => theControllerEmail.clear(),
             theIcon: Icons.close,
-            theSize: 25,
-            // theColor: Colors.pink.shade700,
+            theSize: 22,
+            theColor: Colors.grey.shade400,
           ),
         ),
         border: const OutlineInputBorder(
@@ -70,7 +63,7 @@ class _InputPasswordState extends State<InputPassword> {
     return TextFormField(
       obscureText: hidePassword,
       textAlign: TextAlign.center,
-      // keyboardType: TextInputType.visiblePassword,
+      keyboardType: TextInputType.visiblePassword,
       textInputAction: TextInputAction.done,
       cursorColor: Colors.cyan,
       onSaved: (password) {},
@@ -78,13 +71,12 @@ class _InputPasswordState extends State<InputPassword> {
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.white70,
-        hintText: "Your h password",
+        hintText: "Password",
         prefixIcon: customePaddingOnly(
           thePaddingLeft: 10,
-          theChild: customeIcon(
-            theIcon: Icons.lock,
-            theColor: Colors.pink.shade900,
-            theSize: 26,
+          theChild: customeIconShaderMask(
+            theIcon: Icons.lock_outline,
+            theSize: 27,
           ),
         ),
         suffixIcon: customePaddingOnly(
@@ -100,8 +92,8 @@ class _InputPasswordState extends State<InputPassword> {
               }
             }),
             theIcon: passwordHideShowIconHandler,
-            theSize: 25,
-            // theColor: Colors.pink.shade700,
+            theSize: 21,
+            theColor: Colors.grey.shade400,
           ),
         ),
         border: const OutlineInputBorder(
@@ -112,20 +104,3 @@ class _InputPasswordState extends State<InputPassword> {
   }
 }
 
-class RadiantGradientMask extends StatelessWidget {
-  const RadiantGradientMask({Key? key, required this.child}) : super(key: key);
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return ShaderMask(
-      shaderCallback: (bounds) =>   RadialGradient(
-        center: Alignment.center,
-        radius: 0.24,
-        colors: [Colors.pink.shade200, Colors.cyan.shade200],
-        tileMode: TileMode.decal,
-      ).createShader(bounds),
-      child: child,
-    );
-  }
-}
