@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/auth_state_widgets.dart/auth_states.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
+import 'package:grasp_app/src/screens/auth/screen_signin.dart';
 
 class ScreenSignup extends StatelessWidget {
   ScreenSignup({Key? key}) : super(key: key);
 
-  final TextEditingController controllerEmail = TextEditingController();
-  final TextEditingController controllerPassword = TextEditingController();
+  final TextEditingController controllerSignupEmail = TextEditingController();
+  final TextEditingController controllerSignupPassword =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -22,64 +25,34 @@ class ScreenSignup extends StatelessWidget {
             Form(
               child: Column(
                 children: [
-                  // TextFormField(
-                  //   // controller: controller,
-                  //   textAlign: TextAlign.center,
-                  //   decoration: InputDecoration(
-
-                  //       // alignLabelWithHint: true,
-                  //       floatingLabelAlignment: FloatingLabelAlignment.center,
-                  //       // prefixIcon: Icon(Icons.close),
-                  //       suffixIcon: IconButton(
-                  //           onPressed: () {},
-                  //           icon: const Icon(
-                  //             Icons.close,
-                  //             color: Color.fromARGB(255, 126, 50, 50),
-                  //           )),
-                  //       border: const UnderlineInputBorder(),
-                  //       hintText: 'name',
-                  //       // labelText: 'Grasp name2',
-                  //       alignLabelWithHint: true),
-                  // ),
-
                   // email
-                  InputEmail(theControllerEmail: controllerEmail),
+                  InputEmail(theControllerEmail: controllerSignupEmail),
 
                   const SizedBox(height: 20),
 
                   // password
-                  InputPassword(theControllerPassword: controllerPassword),
+                  InputPassword(
+                      theControllerPassword: controllerSignupPassword),
 
-                  
-
-                  // TextFormField(
-                  //   controller: controllerEmail,
-                  //   decoration: const InputDecoration(
-                  //     border: OutlineInputBorder(),
-                  //     labelText: 'Email',
-                  //   ),
-                  // ),
-                  // const SizedBox(height: 20),
-                  // TextFormField(
-                  //   focusNode: FocusNode(),
-                  //   controller: controllerPassword,
-                  //   obscureText: true,
-                  //   decoration: const InputDecoration(
-                  //     border: OutlineInputBorder(),
-                  //     labelText: 'Password',
-                  //   ),
-                  // ),
                   const SizedBox(height: 20),
                 ],
               ),
             ),
             ElevatedButton(
-                onPressed: () {
-                  debugPrint('controllerEmail= <${controllerEmail.text}>');
-                  debugPrint(
-                      'controllerPassword= <${controllerPassword.text}>');
-                },
-                child: const Text('Sign Up'))
+              onPressed: () {
+                debugPrint(
+                    'controllerSignupEmail= <${controllerSignupEmail.text}>');
+                debugPrint(
+                    'controllerSignupPassword= <${controllerSignupPassword.text}>');
+              },
+              child: const Text('Sign Up'),
+            ),
+            TextButton(
+              onPressed: () {
+                Get.to(() => ScreenSignin());
+              },
+              child: const Text('Already Have an Account? Sign in here'),
+            )
           ],
         ),
       ),
