@@ -6,14 +6,14 @@ class GraspUser {
   String uid;
   String email;
   String? name;
-  String? imgUrl;
+  String? imageUrl;
   DateTime createdAt;
   GraspUser({
     required this.userInAppId,
     required this.uid,
     required this.email,
     this.name,
-    this.imgUrl,
+    this.imageUrl,
     required this.createdAt,
   });
 
@@ -22,7 +22,7 @@ class GraspUser {
     String? uid,
     String? email,
     String? name,
-    String? imgUrl,
+    String? imageUrl,
     DateTime? createdAt,
   }) {
     return GraspUser(
@@ -30,7 +30,7 @@ class GraspUser {
       uid: uid ?? this.uid,
       email: email ?? this.email,
       name: name ?? this.name,
-      imgUrl: imgUrl ?? this.imgUrl,
+      imageUrl: imageUrl ?? this.imageUrl,
       createdAt: createdAt ?? this.createdAt,
     );
   }
@@ -41,7 +41,7 @@ class GraspUser {
       'uid': uid,
       'email': email,
       'name': name,
-      'imgUrl': imgUrl,
+      'imageUrl': imageUrl,
       'createdAt': createdAt.millisecondsSinceEpoch,
     };
   }
@@ -52,7 +52,7 @@ class GraspUser {
       uid: map['uid'] as String,
       email: map['email'] as String,
       name: map['name'] != null ? map['name'] as String : null,
-      imgUrl: map['imgUrl'] != null ? map['imgUrl'] as String : null,
+      imageUrl: map['imageUrl'] != null ? map['imageUrl'] as String : null,
       createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt'] as int),
     );
   }
@@ -63,7 +63,7 @@ class GraspUser {
 
   @override
   String toString() {
-    return 'GraspUser(userInAppId: $userInAppId, uid: $uid, email: $email, name: $name, imgUrl: $imgUrl, createdAt: $createdAt)';
+    return 'GraspUser(userInAppId: $userInAppId, uid: $uid, email: $email, name: $name, imageUrl: $imageUrl, createdAt: $createdAt)';
   }
 
   @override
@@ -75,7 +75,7 @@ class GraspUser {
       other.uid == uid &&
       other.email == email &&
       other.name == name &&
-      other.imgUrl == imgUrl &&
+      other.imageUrl == imageUrl &&
       other.createdAt == createdAt;
   }
 
@@ -85,7 +85,7 @@ class GraspUser {
       uid.hashCode ^
       email.hashCode ^
       name.hashCode ^
-      imgUrl.hashCode ^
+      imageUrl.hashCode ^
       createdAt.hashCode;
   }
 }
