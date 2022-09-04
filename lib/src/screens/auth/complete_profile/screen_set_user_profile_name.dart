@@ -16,8 +16,11 @@ class ScreenSetUserProfileName extends StatelessWidget {
         decoration: backgroundGradientCyan(),
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            // mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const SizedBox(height: 100),
+              customeTextAuthHeader(theData: '• Username •'),
+              const SizedBox(height: 100),
               Form(
                 child: TextFormField(
                   controller: ontrollerUsername,
@@ -54,7 +57,7 @@ class ScreenSetUserProfileName extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 25),
               ElevatedButton(
                 onPressed: () {
                   Get.to(ScreenSetUserprofileImage());
