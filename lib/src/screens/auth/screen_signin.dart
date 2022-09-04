@@ -3,13 +3,22 @@ import 'package:get/get.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/auth_state_widgets.dart/auth_states.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/screens/auth/screen_signup.dart';
+import 'package:grasp_app/src/services/service_auth.dart';
 
-class ScreenSignin extends StatelessWidget {
-  ScreenSignin({Key? key}) : super(key: key);
+class ScreenSignin extends StatefulWidget {
+  const ScreenSignin({Key? key}) : super(key: key);
 
+  @override
+  State<ScreenSignin> createState() => _ScreenSigninState();
+}
+
+class _ScreenSigninState extends State<ScreenSignin> {
   final TextEditingController controllerSigninEmail = TextEditingController();
+
   final TextEditingController controllerSigninPassword =
       TextEditingController();
+
+  ServiceAuth serviceAuth = ServiceAuth();
 
   @override
   Widget build(BuildContext context) {
@@ -46,17 +55,22 @@ class ScreenSignin extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   debugPrint(
                       'controllerSigninEmail= <${controllerSigninEmail.text}>');
                   debugPrint(
                       'controllerSigninPassword= <${controllerSigninPassword.text}>');
+                  await serviceAuth.signInUserWithEmailAndPassword(
+                    signInemail: controllerSigninEmail.text.trim(),
+                    signInpass: controllerSigninPassword.text,
+                  ).then((value) => debugPrint(
+                      'controllerSigninEmail= <${controllerSigninEmail.text}>'));
                 },
                 child: const Text('Sign In'),
               ),
               TextButton(
                 onPressed: () {
-                  Get.to(() => ScreenSignup());
+                  Get.to(() => const ScreenSignup());
                 },
                 child: customeText(
                   theData: '\nDon\'t Have Account? \nSign up here',

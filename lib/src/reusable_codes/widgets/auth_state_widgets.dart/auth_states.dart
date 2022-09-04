@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 
@@ -61,6 +63,7 @@ class _InputPasswordState extends State<InputPassword> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: widget.theControllerPassword,
       obscureText: hidePassword,
       textAlign: TextAlign.center,
       keyboardType: TextInputType.visiblePassword,

@@ -1,5 +1,7 @@
 // ignore_for_file: unused_local_variable
 
+// import 'dart:html';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,10 +11,11 @@ class ServiceAuth {
   //  methods to authenticate user using firebase auth
 
   // sign up method
-  Future<void> signUpUserWithEmailAndPassword(
+  Future<UserCredential?> signUpUserWithEmailAndPassword(
       {required String signUpemail, required String signUppass}) async {
+        UserCredential? credential;
     try {
-      final credential =
+       credential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: signUpemail,
         password: signUppass,
@@ -29,14 +32,18 @@ class ServiceAuth {
         debugPrint('error :: ${e.message}');
       }
     } catch (e) {
+      Get.snackbar('error', e.toString());
       debugPrint(e.toString());
     }
+    return credential;
   }
 
-  Future<void> signInUserWithEmailAndPassword(
+  Future<UserCredential?> signInUserWithEmailAndPassword(
       {required String signInemail, required String signInpass}) async {
+                UserCredential? credential;
+
     try {
-      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+       credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: signInemail,
         password: signInpass,
       );
@@ -52,5 +59,7 @@ class ServiceAuth {
         debugPrint('error :: ${e.message}');
       }
     }
+        return credential;
+
   }
 }
