@@ -70,7 +70,7 @@ class ScreenSetUserProfileName extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () => Get.to(ScreenSetUserprofileImage(theControllerUsername: 'batala!', theUser: theUser)),
                     child: customeText(theData: 'SKIP'),
                   ),
                   const SizedBox(width: 50),
