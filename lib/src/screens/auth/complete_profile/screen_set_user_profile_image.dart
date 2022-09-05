@@ -1,13 +1,50 @@
-import 'package:badges/badges.dart';
-import 'package:flutter/material.dart';
-import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
+import 'dart:io';
 
-class ScreenSetUserprofileImage extends StatelessWidget {
-  const ScreenSetUserprofileImage(
-      {Key? key, required this.theControllerUsername})
-      : super(key: key);
+import 'package:badges/badges.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
+import 'package:grasp_app/src/services/firebase/service_storage.dart';
+import 'package:image_picker/image_picker.dart';
+
+class ScreenSetUserprofileImage extends StatefulWidget {
+  const ScreenSetUserprofileImage({
+    Key? key,
+    required this.theControllerUsername,
+    required this.theUser,
+  }) : super(key: key);
 
   final String theControllerUsername;
+  final User theUser;
+
+  @override
+  State<ScreenSetUserprofileImage> createState() =>
+      _ScreenSetUserprofileImageState();
+}
+
+class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
+// final ServiceAuth serviceAuth = ServiceAuth();
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+
+  // image picker
+  File? imageSelected;
+
+  Future pickImage() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (image == null) return;
+
+      final imageTemp = File(image.path);
+      setState(() => imageSelected = imageTemp);
+    } on PlatformException catch (e) {
+      // this exception occur when user has denied the app to access gallery
+      debugPrint('failed to pick image: $e');
+    }
+  }
+  // end of image picker
+
+  ServiceStorage serviceStorage = ServiceStorage();
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +62,7 @@ class ScreenSetUserprofileImage extends StatelessWidget {
               height: 210,
               width: 210,
               child: InkWell(
-                onTap: () {},
+                onTap: () async => await pickImage(),
                 child: Badge(
                   padding: const EdgeInsets.all(10),
                   gradient: LinearGradient(
@@ -65,8 +102,13 @@ class ScreenSetUserprofileImage extends StatelessWidget {
                       border: Border.all(color: Colors.white60, width: 2.0),
                     ),
                     alignment: Alignment.center,
-                    child: const CircleAvatar(
-                      backgroundImage: AssetImage('assets/images/3.jpeg'),
+                    child: CircleAvatar(
+                      backgroundImage: imageSelected != null
+                          ? FileImage(imageSelected!) as ImageProvider
+                          : const AssetImage("assets/images/person.jpg"),
+                      // backgroundImage: isImagePicked == !true
+                      //     ? const AssetImage("assets/images/person.jpg")
+                      //     : const AssetImage('assets/images/3.jpeg'),
                       radius: 100,
                     ),
                   ),
@@ -84,11 +126,14 @@ class ScreenSetUserprofileImage extends StatelessWidget {
                 ),
                 const SizedBox(width: 50),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    serviceStorage.uploadImage(imageSelected!,
+                        theUser: widget.theUser);
+                  },
                   child: customeText(theData: 'SAVE'),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

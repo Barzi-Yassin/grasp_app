@@ -1,11 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/screens/auth/complete_profile/screen_set_user_profile_image.dart';
 
 class ScreenSetUserProfileName extends StatelessWidget {
-  ScreenSetUserProfileName({Key? key}) : super(key: key);
-
+  ScreenSetUserProfileName({
+    Key? key,
+    required this.theUser,
+  }) : super(key: key);
+  final User theUser;
   final TextEditingController controllerUsername = TextEditingController();
 
   @override
@@ -20,6 +24,9 @@ class ScreenSetUserProfileName extends StatelessWidget {
             children: [
               const SizedBox(height: 100),
               customeTextAuthHeader(theData: '• Username •'),
+              const SizedBox(height: 100),
+              customeText(theData: theUser.uid.toString()),
+              customeText(theData: theUser.email.toString()),
               const SizedBox(height: 100),
               Form(
                 child: TextFormField(
@@ -70,6 +77,7 @@ class ScreenSetUserProfileName extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () => Get.to(ScreenSetUserprofileImage(
                       theControllerUsername: controllerUsername.text.toString(),
+                      theUser: theUser,
                     )),
                     child: customeText(theData: 'Next'),
                   )

@@ -80,11 +80,17 @@ class _ScreenSignupState extends State<ScreenSignup> {
                           signUpemail: controllerSignupEmail.text,
                           signUppass: controllerSignupPassword.text,
                         )
-                            .then((value) {
-                          debugPrint(
-                              'user created DONE');
-                          setState(() => isLoading = false);
-                        });
+                            .then(
+                          (credential) {
+                            debugPrint('user created DONE');
+                            setState(() => isLoading = false);
+                            Get.to(
+                              ScreenSetUserProfileName(
+                                theUser: credential!.user!,
+                              ),
+                            );
+                          },
+                        );
                       },
                       child: const Text('Sign Up'),
                     ),
