@@ -24,15 +24,15 @@ class ScreenSetUserprofileImage extends StatefulWidget {
 }
 
 class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
-// final ServiceAuth serviceAuth = ServiceAuth();
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  String? imageDownloadLink;
 
   // image picker
   File? imageSelected;
 
-  Future pickImage() async {
+  Future pickImage({required ImageSource theImageSource}) async {
     try {
-      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      final image = await ImagePicker().pickImage(source: theImageSource);
       if (image == null) return;
 
       final imageTemp = File(image.path);
@@ -57,13 +57,16 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
           children: [
             const SizedBox(height: 100),
             customeTextAuthHeader(theData: '• profile •'),
-            const SizedBox(height: 100),
+            customeText(theData: widget.theControllerUsername), //  TODO: temporary
             const SizedBox(height: 100),
             SizedBox(
               height: 210,
               width: 210,
               child: InkWell(
-                onTap: () async => await pickImage(),
+                onTap: () async =>
+                    await pickImage(theImageSource: ImageSource.gallery),
+                onLongPress: () async =>
+                    await pickImage(theImageSource: ImageSource.camera),
                 child: Badge(
                   padding: const EdgeInsets.all(10),
                   gradient: LinearGradient(
@@ -127,17 +130,21 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
                 ),
                 const SizedBox(width: 50),
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (imageSelected != null) {
-                      serviceStorage.uploadImage(
-                        imageSelected!,
-                        theUser: widget.theUser,
-                      );
+                      await serviceStorage
+                          .uploadImage(
+                            imageSelected!,
+                            theUser: widget.theUser,
+                          )
+                          .then((imgDlRef) =>
+                              debugPrint('this the download link:: $imgDlRef'));
                       debugPrint('no image selected');
                     }
                   },
                   child: customeText(theData: 'SAVE'),
                 ),
+                // customeText(theData: theData)
               ],
             ),
           ],
