@@ -112,14 +112,23 @@ Padding customePaddingOnly(
   );
 }
 
-ShaderMask customeIconShaderMask(
-    {required IconData theIcon, required double theSize}) {
+ShaderMask customeIconShaderMask({
+  required IconData theIcon,
+  required double theSize,
+  double? theRadius,
+  Color? theColor1,
+  Color? theColor2,
+  TileMode? theTileMode,
+}) {
   return ShaderMask(
     shaderCallback: (bounds) => RadialGradient(
       center: Alignment.center,
-      radius: 0.325,
-      colors: [Colors.pink.shade200, Colors.cyan.shade200],
-      tileMode: TileMode.decal,
+      radius: theRadius ?? 0.325,
+      colors: [
+        theColor1 ?? Colors.pink.shade200,
+        theColor2 ?? Colors.cyan.shade200,
+      ],
+      tileMode: theTileMode ?? TileMode.decal,
     ).createShader(bounds),
     child: Icon(
       theIcon,
@@ -139,20 +148,19 @@ Text customeTextAuthHeader({
     theData.toUpperCase(),
     maxLines: theMaxLines,
     style: TextStyle(
-      color: theColor,
-      fontWeight: FontWeight.w800,
-      fontFamily: 'Caveat',
-      fontSize: 40,
-      letterSpacing: 3,
-      foreground: Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeWidth =1.0
-        ..color = Colors.brown
+        color: theColor,
+        fontWeight: FontWeight.w800,
+        fontFamily: 'Caveat',
+        fontSize: 40,
+        letterSpacing: 3,
+        foreground: Paint()
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 1.0
+          ..color = Colors.brown
         // ..invertColors = true
-    ),
+        ),
   );
 }
-
 
 Text customeText({
   required String theData,
