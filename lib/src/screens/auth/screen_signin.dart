@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/auth_state_widgets.dart/auth_states.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/screens/auth/screen_signup.dart';
-import 'package:grasp_app/src/services/service_auth.dart';
+import 'package:grasp_app/src/services/firebase/service_auth.dart';
 
 class ScreenSignin extends StatefulWidget {
   const ScreenSignin({Key? key}) : super(key: key);
