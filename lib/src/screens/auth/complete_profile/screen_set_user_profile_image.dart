@@ -58,6 +58,7 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
             const SizedBox(height: 100),
             customeTextAuthHeader(theData: '• profile •'),
             const SizedBox(height: 100),
+            const SizedBox(height: 100),
             SizedBox(
               height: 210,
               width: 210,
@@ -127,8 +128,13 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
                 const SizedBox(width: 50),
                 ElevatedButton(
                   onPressed: () {
-                    serviceStorage.uploadImage(imageSelected!,
-                        theUser: widget.theUser);
+                    if (imageSelected != null) {
+                      serviceStorage.uploadImage(
+                        imageSelected!,
+                        theUser: widget.theUser,
+                      );
+                      debugPrint('no image selected');
+                    }
                   },
                   child: customeText(theData: 'SAVE'),
                 ),
