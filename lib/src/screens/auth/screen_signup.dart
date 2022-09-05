@@ -69,28 +69,33 @@ class _ScreenSignupState extends State<ScreenSignup> {
                     ),
                     ElevatedButton(
                       onPressed: () async {
-                        setState(() => isLoading = true);
+                        if (controllerSignupEmail.text.isNotEmpty &&
+                            controllerSignupPassword.text.isNotEmpty) {
                         debugPrint(
                             'controllerSignupEmail= <${controllerSignupEmail.text}>');
                         debugPrint(
                             'controllerSignupPassword= <${controllerSignupPassword.text}>');
 
-                        await serviceAuth
-                            .signUpUserWithEmailAndPassword(
-                          signUpemail: controllerSignupEmail.text,
-                          signUppass: controllerSignupPassword.text,
-                        )
-                            .then(
-                          (credential) {
-                            debugPrint('user created DONE');
-                            setState(() => isLoading = false);
-                            Get.to(
-                              ScreenSetUserProfileName(
-                                theUser: credential!.user!,
-                              ),
-                            );
-                          },
-                        );
+                          setState(() => isLoading = true);
+                          await serviceAuth
+                              .signUpUserWithEmailAndPassword(
+                            signUpemail: controllerSignupEmail.text,
+                            signUppass: controllerSignupPassword.text,
+                          )
+                              .then(
+                            (credential) {
+                              debugPrint('user created DONE');
+                              setState(() => isLoading = false);
+                              Get.to(
+                                ScreenSetUserProfileName(
+                                  theUser: credential!.user!,
+                                ),
+                              );
+                            },
+                          );
+                        } else {
+                          debugPrint('one controller or more might be empty !');
+                        }
                       },
                       child: const Text('Sign Up'),
                     ),
