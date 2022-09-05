@@ -6,7 +6,7 @@ import 'package:grasp_app/src/screens/auth/complete_profile/screen_set_user_prof
 class ScreenSetUserProfileName extends StatelessWidget {
   ScreenSetUserProfileName({Key? key}) : super(key: key);
 
-  final TextEditingController ontrollerUsername = TextEditingController();
+  final TextEditingController controllerUsername = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class ScreenSetUserProfileName extends StatelessWidget {
               const SizedBox(height: 100),
               Form(
                 child: TextFormField(
-                  controller: ontrollerUsername,
+                  controller: controllerUsername,
                   textAlign: TextAlign.center,
                   keyboardType: TextInputType.name,
                   textInputAction: TextInputAction.done,
@@ -45,7 +45,7 @@ class ScreenSetUserProfileName extends StatelessWidget {
                     suffixIcon: customePaddingOnly(
                       thePaddingRight: 10,
                       theChild: customeIconButton(
-                        theOnPressed: () => ontrollerUsername.clear(),
+                        theOnPressed: () => controllerUsername.clear(),
                         theIcon: Icons.close,
                         theSize: 22,
                         theColor: Colors.grey.shade400,
@@ -58,12 +58,23 @@ class ScreenSetUserProfileName extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 25),
-              ElevatedButton(
-                onPressed: () {
-                  Get.to(ScreenSetUserprofileImage());
-                },
-                child: customeText(theData: 'Next'),
-              )
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: customeText(theData: 'SKIP'),
+                  ),
+                  const SizedBox(width: 50),
+                  ElevatedButton(
+                    onPressed: () => Get.to(ScreenSetUserprofileImage(
+                      theControllerUsername: controllerUsername.text.toString(),
+                    )),
+                    child: customeText(theData: 'Next'),
+                  )
+                ],
+              ),
             ],
           ),
         ),
