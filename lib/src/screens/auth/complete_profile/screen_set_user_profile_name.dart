@@ -4,12 +4,19 @@ import 'package:get/get.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/screens/auth/complete_profile/screen_set_user_profile_image.dart';
 
-class ScreenSetUserProfileName extends StatelessWidget {
-  ScreenSetUserProfileName({
+class ScreenSetUserProfileName extends StatefulWidget {
+  const ScreenSetUserProfileName({
     Key? key,
     required this.theUser,
   }) : super(key: key);
   final User theUser;
+
+  @override
+  State<ScreenSetUserProfileName> createState() =>
+      _ScreenSetUserProfileNameState();
+}
+
+class _ScreenSetUserProfileNameState extends State<ScreenSetUserProfileName> {
   final TextEditingController controllerUsername = TextEditingController();
 
   @override
@@ -25,8 +32,8 @@ class ScreenSetUserProfileName extends StatelessWidget {
               const SizedBox(height: 100),
               customeTextAuthHeader(theData: '• Username •'),
               const SizedBox(height: 100),
-              customeText(theData: theUser.uid.toString()),
-              customeText(theData: theUser.email.toString()),
+              customeText(theData: widget.theUser.uid.toString()),//  TODO: temporary
+              customeText(theData: widget.theUser.email.toString()),//  TODO: temporary
               const SizedBox(height: 100),
               Form(
                 child: TextFormField(
@@ -70,14 +77,20 @@ class ScreenSetUserProfileName extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   ElevatedButton(
-                    onPressed: () => Get.to(ScreenSetUserprofileImage(theControllerUsername: 'batala!', theUser: theUser)),
+                    onPressed: () {
+                      setState(() => controllerUsername.clear());
+                      Get.to(ScreenSetUserprofileImage(
+                        theControllerUsername: controllerUsername.text.toString(),
+                        theUser: widget.theUser,
+                      ));
+                    },
                     child: customeText(theData: 'SKIP'),
                   ),
                   const SizedBox(width: 50),
                   ElevatedButton(
                     onPressed: () => Get.to(ScreenSetUserprofileImage(
                       theControllerUsername: controllerUsername.text.toString(),
-                      theUser: theUser,
+                      theUser: widget.theUser,
                     )),
                     child: customeText(theData: 'Next'),
                   )
