@@ -122,13 +122,24 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
                       ElevatedButton(
                         onPressed: () {
                           setState(() => isLoading = true);
-                          serviceFirestore
-                              .addUserInfoAfterAuthToDB(user: widget.theUser)
-                              .then((_) => setState(() => isLoading = false));
+                          if (widget.theControllerUsername.isNotEmpty) {
+                            serviceFirestore
+                                .addUserInfoAfterAuthToDB(
+                                  user: widget.theUser,
+                                  theName: widget.theControllerUsername,
+                                )
+                                .then((_) => setState(() => isLoading = false));
+                          } else {
+                            serviceFirestore
+                                .addUserInfoAfterAuthToDB(user: widget.theUser)
+                                .then((_) => setState(() => isLoading = false));
+                          }
                         },
                         child: customeText(theData: 'SKIP'),
                       ),
+
                       const SizedBox(width: 50),
+
                       ElevatedButton(
                         onPressed: () async {
                           if (imageSelected != null) {
