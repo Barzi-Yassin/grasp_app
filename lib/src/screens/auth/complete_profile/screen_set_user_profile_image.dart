@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/loadings/loading_indicator.dart';
 import 'package:grasp_app/src/services/firebase/service_firestore.dart';
@@ -137,9 +138,7 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
                         },
                         child: customeText(theData: 'SKIP'),
                       ),
-
                       const SizedBox(width: 50),
-
                       ElevatedButton(
                         onPressed: () async {
                           if (imageSelected != null) {
@@ -157,11 +156,12 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
                                 .then((_) => setState(() => isLoading = false));
                           } else {
                             debugPrint('no image selected');
+                            Get.snackbar('No image selected yet!',
+                                'Select an image to save, or skip it for now.');
                           }
                         },
                         child: customeText(theData: 'SAVE'),
                       ),
-                      // customeText(theData: theData)
                     ],
                   ),
                 ],
