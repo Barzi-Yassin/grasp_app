@@ -42,7 +42,7 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
         child: isLoading == true
             ? loadingIndicator()
             : Column(
-                // mainAxisAlignment: MainAxisAlignment.center,
+                //  TODO: it causse render flex error while no loading
                 children: [
                   const SizedBox(height: 100),
                   customeTextAuthHeader(theData: '• profile •'),
@@ -52,9 +52,6 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
                           : 'nulllll',
                       theColor: Colors.green,
                       theFontSize: 20), //  TODO: temporary
-                  customeText(
-                      theData:
-                          imageDownloadLink.toString()), //  TODO: temporary
                   customeText(
                       theData:
                           widget.theUser.email.toString()), //  TODO: temporary
@@ -88,17 +85,12 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
                         badgeContent: const Icon(
                           Icons.add_a_photo_outlined,
                           size: 25.0,
-                          color: Colors.white70,
-                          // shadows: [
-                          //   BoxShadow(blurRadius: 10.0, color: Colors.cyan),
-                          //   // BoxShadow(blurRadius: 10.0, color: Colors.grey),
-                          //   // BoxShadow(blurRadius: 10.0, color: Colors.cyan),
-                          //   BoxShadow(blurRadius: 10.0, color: Colors.grey),
-                          //   BoxShadow(blurRadius: 10.0, color: Colors.grey),
-                          //   BoxShadow(blurRadius: 10.0, color: Colors.grey),
-                          //   BoxShadow(blurRadius: 10.0, color: Colors.grey),
-                          //   // BoxShadow(blurRadius: 10.0, color: Colors.cyan),
-                          // ],
+                          color: Colors.black,
+                          shadows: [
+                            BoxShadow(blurRadius: 8.0, color: Colors.white),
+                            BoxShadow(blurRadius: 8.0, color: Colors.grey),
+                            BoxShadow(blurRadius: 1.0, color: Colors.red),
+                          ],
                         ),
                         showBadge: true,
                         child: Container(
@@ -128,7 +120,12 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() => isLoading = true);
+                          serviceFirestore
+                              .addUserInfoAfterAuthToDB(user: widget.theUser)
+                              .then((_) => setState(() => isLoading = false));
+                        },
                         child: customeText(theData: 'SKIP'),
                       ),
                       const SizedBox(width: 50),
@@ -140,8 +137,13 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
                               imageSelected!,
                               theUser: widget.theUser,
                             )
-                            // .then((_) => setState(() => isLoading = true))
-                            ;
+                                .then((_) =>
+                                    serviceFirestore.addUserInfoAfterAuthToDB(
+                                      user: widget.theUser,
+                                      theName: widget.theControllerUsername,
+                                      theImageUrl: imageDownloadLink,
+                                    ))
+                                .then((_) => setState(() => isLoading = false));
                           } else {
                             debugPrint('no image selected');
                           }
@@ -186,28 +188,28 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
     imagesRef.putFile(file).snapshotEvents.listen((taskSnapshot) async {
       switch (taskSnapshot.state) {
         case TaskState.running:
-          setState(() => isLoading = true);
+          // setState(() => isLoading = true);
           debugPrint('TaskState:: is <running>');
           break;
         case TaskState.paused:
           debugPrint('TaskState:: is <paused>');
-          setState(() => isLoading = false);
+          // setState(() => isLoading = false);
           break;
         case TaskState.success:
           imgDlRef = await imagesRef.getDownloadURL();
           setState(() {
             imageDownloadLink = imgDlRef;
-            isLoading = false;
+            // isLoading = false;
           });
           debugPrint('TaskState:: is <success> || download url: $imgDlRef');
           break;
         case TaskState.canceled:
           debugPrint('TaskState:: is <canceled>');
-          setState(() => isLoading = false);
+          // setState(() => isLoading = false);
           break;
         case TaskState.error:
           debugPrint('TaskState:: is <error> ${TaskState.error}');
-          setState(() => isLoading = false);
+          // setState(() => isLoading = false);
           break;
       }
     });
