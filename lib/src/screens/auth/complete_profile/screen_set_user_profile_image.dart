@@ -6,6 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
+import 'package:grasp_app/src/reusable_codes/functions/loadings/loading_indicator.dart';
 import 'package:grasp_app/src/services/firebase/service_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -30,8 +31,7 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
 
   File? imageSelected;
   String? imageDownloadLink;
-
-  // ServiceStorage serviceStorage = ServiceStorage();
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -39,116 +39,120 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
       body: Container(
         width: double.infinity,
         decoration: backgroundGradientCyan(),
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(height: 100),
-            customeTextAuthHeader(theData: '• profile •'),
-            customeText(
-                theData: widget.theControllerUsername.isNotEmpty
-                    ? widget.theControllerUsername
-                    : 'nulllll',
-                theColor: Colors.green,
-                theFontSize: 20), //  TODO: temporary
-            customeText(
-                theData: imageDownloadLink.toString()), //  TODO: temporary
-            customeText(
-                theData: widget.theUser.email.toString()), //  TODO: temporary
+        child: isLoading == true
+            ? loadingIndicator()
+            : Column(
+                // mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 100),
+                  customeTextAuthHeader(theData: '• profile •'),
+                  customeText(
+                      theData: widget.theControllerUsername.isNotEmpty
+                          ? widget.theControllerUsername
+                          : 'nulllll',
+                      theColor: Colors.green,
+                      theFontSize: 20), //  TODO: temporary
+                  customeText(
+                      theData:
+                          imageDownloadLink.toString()), //  TODO: temporary
+                  customeText(
+                      theData:
+                          widget.theUser.email.toString()), //  TODO: temporary
 
-            Column(
-              children: [
-                const SizedBox(height: 100),
-                SizedBox(
-                  height: 210,
-                  width: 210,
-                  child: InkWell(
-                    onTap: () async =>
-                        await pickImage(theImageSource: ImageSource.gallery),
-                    onLongPress: () async =>
-                        await pickImage(theImageSource: ImageSource.camera),
-                    child: Badge(
-                      padding: const EdgeInsets.all(10),
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          Colors.grey.shade400,
-                          Colors.cyan.shade200,
-                          // Colors.white,
-                          // Colors.white,
-                        ],
-                      ),
-                      borderSide: const BorderSide(color: Colors.white60, width: 1),
-                      elevation: 0,
-                      position: BadgePosition.topStart(start: 10, top: 12),
-                      badgeColor: Colors.cyan.shade200,
-                      badgeContent: const Icon(
-                        Icons.add_a_photo_outlined,
-                        size: 25.0,
-                        color: Colors.white70,
-                        // shadows: [
-                        //   BoxShadow(blurRadius: 10.0, color: Colors.cyan),
-                        //   // BoxShadow(blurRadius: 10.0, color: Colors.grey),
-                        //   // BoxShadow(blurRadius: 10.0, color: Colors.cyan),
-                        //   BoxShadow(blurRadius: 10.0, color: Colors.grey),
-                        //   BoxShadow(blurRadius: 10.0, color: Colors.grey),
-                        //   BoxShadow(blurRadius: 10.0, color: Colors.grey),
-                        //   BoxShadow(blurRadius: 10.0, color: Colors.grey),
-                        //   // BoxShadow(blurRadius: 10.0, color: Colors.cyan),
-                        // ],
-                      ),
-                      showBadge: true,
-                      child: Container(
-                        height: 200,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Colors.white60, width: 2.0),
+                  const SizedBox(height: 100),
+                  SizedBox(
+                    height: 210,
+                    width: 210,
+                    child: InkWell(
+                      onTap: () async =>
+                          await pickImage(theImageSource: ImageSource.gallery),
+                      onLongPress: () async =>
+                          await pickImage(theImageSource: ImageSource.camera),
+                      child: Badge(
+                        padding: const EdgeInsets.all(10),
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            Colors.grey.shade400,
+                            Colors.cyan.shade200,
+                            // Colors.white,
+                            // Colors.white,
+                          ],
                         ),
-                        alignment: Alignment.center,
-                        child: CircleAvatar(
-                          backgroundImage: imageSelected != null
-                              ? FileImage(imageSelected!) as ImageProvider
-                              : const AssetImage("assets/images/person.jpg"),
-                          // backgroundImage: isImagePicked == !true
-                          //     ? const AssetImage("assets/images/person.jpg")
-                          //     : const AssetImage('assets/images/3.jpeg'),
-                          radius: 100,
+                        borderSide:
+                            const BorderSide(color: Colors.white60, width: 1),
+                        elevation: 0,
+                        position: BadgePosition.topStart(start: 10, top: 12),
+                        badgeColor: Colors.cyan.shade200,
+                        badgeContent: const Icon(
+                          Icons.add_a_photo_outlined,
+                          size: 25.0,
+                          color: Colors.white70,
+                          // shadows: [
+                          //   BoxShadow(blurRadius: 10.0, color: Colors.cyan),
+                          //   // BoxShadow(blurRadius: 10.0, color: Colors.grey),
+                          //   // BoxShadow(blurRadius: 10.0, color: Colors.cyan),
+                          //   BoxShadow(blurRadius: 10.0, color: Colors.grey),
+                          //   BoxShadow(blurRadius: 10.0, color: Colors.grey),
+                          //   BoxShadow(blurRadius: 10.0, color: Colors.grey),
+                          //   BoxShadow(blurRadius: 10.0, color: Colors.grey),
+                          //   // BoxShadow(blurRadius: 10.0, color: Colors.cyan),
+                          // ],
+                        ),
+                        showBadge: true,
+                        child: Container(
+                          height: 200,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border:
+                                Border.all(color: Colors.white60, width: 2.0),
+                          ),
+                          alignment: Alignment.center,
+                          child: CircleAvatar(
+                            backgroundImage: imageSelected != null
+                                ? FileImage(imageSelected!) as ImageProvider
+                                : const AssetImage("assets/images/person.jpg"),
+                            // backgroundImage: isImagePicked == !true
+                            //     ? const AssetImage("assets/images/person.jpg")
+                            //     : const AssetImage('assets/images/3.jpeg'),
+                            radius: 100,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 25),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: customeText(theData: 'SKIP'),
-                    ),
-                    const SizedBox(width: 50),
-                    ElevatedButton(
-                      onPressed: () async {
-                        if (imageSelected != null) {
-                          await uploadImage(
-                            imageSelected!,
-                            theUser: widget.theUser,
-                          );
-                        } else {
-                          debugPrint('no image selected');
-                        }
-                      },
-                      child: customeText(theData: 'SAVE'),
-                    ),
-                    // customeText(theData: theData)
-                  ],
-                ),
-              ],
-            ),
-          
-          ],
-        ),
+                  const SizedBox(height: 25),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {},
+                        child: customeText(theData: 'SKIP'),
+                      ),
+                      const SizedBox(width: 50),
+                      ElevatedButton(
+                        onPressed: () async {
+                          if (imageSelected != null) {
+                            setState(() => isLoading = true);
+                            await uploadImage(
+                              imageSelected!,
+                              theUser: widget.theUser,
+                            )
+                            // .then((_) => setState(() => isLoading = true))
+                            ;
+                          } else {
+                            debugPrint('no image selected');
+                          }
+                        },
+                        child: customeText(theData: 'SAVE'),
+                      ),
+                      // customeText(theData: theData)
+                    ],
+                  ),
+                ],
+              ),
       ),
     );
   }
@@ -182,27 +186,28 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
     imagesRef.putFile(file).snapshotEvents.listen((taskSnapshot) async {
       switch (taskSnapshot.state) {
         case TaskState.running:
-          // setState(() => isLoading = false);
+          setState(() => isLoading = true);
           debugPrint('TaskState:: is <running>');
           break;
         case TaskState.paused:
           debugPrint('TaskState:: is <paused>');
-          // setState(() => isLoading = false);
+          setState(() => isLoading = false);
           break;
         case TaskState.success:
           imgDlRef = await imagesRef.getDownloadURL();
           setState(() {
             imageDownloadLink = imgDlRef;
+            isLoading = false;
           });
           debugPrint('TaskState:: is <success> || download url: $imgDlRef');
           break;
         case TaskState.canceled:
           debugPrint('TaskState:: is <canceled>');
-          // setState(() => isLoading = false);
+          setState(() => isLoading = false);
           break;
         case TaskState.error:
-          debugPrint('TaskState:: is <error>');
-          // setState(() => isLoading = false);
+          debugPrint('TaskState:: is <error> ${TaskState.error}');
+          setState(() => isLoading = false);
           break;
       }
     });
