@@ -23,7 +23,7 @@ class _ScreenSignupState extends State<ScreenSignup> {
   IconData passwordHideShowIconHandler = Icons.visibility_off;
   bool hidePassword = true;
 
-  ServiceAuth serviceAuth = ServiceAuth();
+  final ServiceAuth serviceAuth = ServiceAuth();
 
   bool isLoading = false;
 
@@ -71,10 +71,10 @@ class _ScreenSignupState extends State<ScreenSignup> {
                       onPressed: () async {
                         if (controllerSignupEmail.text.isNotEmpty &&
                             controllerSignupPassword.text.isNotEmpty) {
-                        debugPrint(
-                            'controllerSignupEmail= <${controllerSignupEmail.text}>'); //  TODO: temporary
-                        debugPrint(
-                            'controllerSignupPassword= <${controllerSignupPassword.text}>'); //  TODO: temporary
+                          debugPrint(
+                              'controllerSignupEmail= <${controllerSignupEmail.text}>'); //  TODO: temporary
+                          debugPrint(
+                              'controllerSignupPassword= <${controllerSignupPassword.text}>'); //  TODO: temporary
 
                           setState(() => isLoading = true);
                           await serviceAuth
@@ -84,13 +84,16 @@ class _ScreenSignupState extends State<ScreenSignup> {
                           )
                               .then(
                             (credential) {
-                              debugPrint('user created DONE');
+                              if (credential != null) {
+                                debugPrint('user created DONE');
+                                setState(() => isLoading = false);
+                                Get.offAll(
+                                  ScreenSetUserProfileName(
+                                    theUser: credential.user!,
+                                  ),
+                                );
+                              }
                               setState(() => isLoading = false);
-                              Get.offAll(
-                                ScreenSetUserProfileName(
-                                  theUser: credential!.user!,
-                                ),
-                              );
                             },
                           );
                         } else {
