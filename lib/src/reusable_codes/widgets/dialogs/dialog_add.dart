@@ -6,6 +6,7 @@ Future<Object?> dialogAdd({
   required BuildContext context,
   required String title,
   required TextEditingController controller,
+  required theOnPressed,
 }) {
   return showAnimatedDialog(
     barrierColor: Colors.black38,
@@ -96,7 +97,10 @@ Future<Object?> dialogAdd({
           ElevatedButton(
             style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.cyan)),
-            onPressed: () => Navigator.pop(context, 'Create'),
+            onPressed: () {
+              theOnPressed;
+              Navigator.pop(context, 'Create');
+            },
             child: const Text('Create'),
           ),
         ],

@@ -1,5 +1,6 @@
 // ignore_for_file: unused_import
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -10,11 +11,14 @@ import 'package:grasp_app/src/reusable_codes/widgets/dialogs/dialog_add.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/end_drawer/widget_end_drawer.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/subjects/widget_subject_records.dart';
 import 'package:grasp_app/src/screens/screen_subject_files.dart';
+import 'package:grasp_app/src/services/firebase/service_firestore.dart';
 
 class ScreenSubjects extends StatelessWidget {
   ScreenSubjects({Key? key, required this.theUser}) : super(key: key);
 
   final User theUser;
+
+  final ServiceFirestore serviceFirestore = ServiceFirestore();
 
   final TextEditingController controllerAddGraspSubject =
       TextEditingController();
@@ -41,30 +45,52 @@ class ScreenSubjects extends StatelessWidget {
         decoration: backgroundGradientCyan(),
         child: Column(
           children: [
-            Container(
-              // alignment: Alignment.bottomCenter,
+            SizedBox(
               height: 60,
               child: customeText(
                   theData: '${theUser.uid}\n${theUser.email}',
                   theFontSize: 20), //  TODO: temporary
             ),
             Expanded(
-              child: ListView.builder(
-                // clipBehavior: Clip.hardEdge,
-                padding: const EdgeInsets.symmetric(vertical: 20.0),
-                scrollDirection: Axis.vertical,
-                itemCount: datalistSubject.length,
-                itemBuilder: (context, theRecord) {
-                  return WidgetSubjectRecords(
-                      subjectRecordName:
-                          datalistSubject[theRecord]["subject_name"].toString(),
-                      subjectRecordItemsNumber: int.parse(
-                        datalistSubject[theRecord]["subject_items_number"]
-                            .toString(),
-                      ),
-                      theRecord: theRecord);
-                },
-              ),
+              child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                  stream: FirebaseFirestore.instance
+                      .collection("subjects")
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const CircularProgressIndicator();
+                    } else if (snapshot.hasError) {
+                      return Text("err ${snapshot.error}");
+                    } else if (snapshot.data == null || !snapshot.hasData) {
+                      return const Text('snapshot is empty(StreamBuilder)');
+                    }
+
+                    // snapshot.data!.docs.first;
+                    print('22222');
+                    print(snapshot.data!.docs.length.toString());
+                    print(snapshot.data);
+
+                    snapshot.data?.docs;
+
+                    return ListView.builder(
+                      // clipBehavior: Clip.hardEdge,
+                      padding: const EdgeInsets.symmetric(vertical: 20.0),
+                      scrollDirection: Axis.vertical,
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (context, theRecord) {
+                        return WidgetSubjectRecords(
+                            // subjectRecordName: datalistSubject[theRecord]
+                            //         ["subject_name"]
+                            //     .toString(),
+                            subjectRecordName: snapshot.data!.docs[theRecord].data()["subjectName"],
+                            subjectRecordItemsNumber: int.parse(
+                              datalistSubject[theRecord]["subject_items_number"]
+                                  .toString(),
+                            ),
+                            theRecord: theRecord);
+                      },
+                    );
+                  }),
             ),
           ],
         ),
@@ -74,6 +100,12 @@ class ScreenSubjects extends StatelessWidget {
           context: context,
           title: 'Subject',
           controller: controllerAddGraspSubject,
+          theOnPressed: serviceFirestore.createSubject(
+            user: theUser,
+            theSubjectName: controllerAddGraspSubject.text,
+            theSubjectItemsNumber: 1,
+            theSubjectId: 1,
+          ),
         ),
         backgroundColor: Colors.cyan.shade700,
         elevation: 10,

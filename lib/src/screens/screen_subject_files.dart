@@ -83,7 +83,7 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
           dialogAdd(
             context: context,
             title: 'Grasp',
-            controller: controllerAddGraspFile,
+            controller: controllerAddGraspFile, theOnPressed: null,
           );
         },
         backgroundColor: Colors.cyan.shade400,
