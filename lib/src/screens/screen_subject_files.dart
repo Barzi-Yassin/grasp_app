@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:grasp_app/src/data/datalist_subject.dart';
 import 'package:grasp_app/src/data/datalist_subject_files.dart';
@@ -6,6 +7,7 @@ import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/dialogs/dialog_add.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/end_drawer/widget_end_drawer.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/subject_files/widget_subject_file_records.dart';
+import 'package:grasp_app/src/services/firebase/service_firestore.dart';
 
 class ScreenSubjectFiles extends StatefulWidget {
   const ScreenSubjectFiles({
@@ -20,12 +22,13 @@ class ScreenSubjectFiles extends StatefulWidget {
 }
 
 class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
-  TextEditingController controllerAddGraspFile = TextEditingController();
+  final TextEditingController controllerAddGraspFile = TextEditingController();
+  final ServiceFirestore serviceFirestore = ServiceFirestore();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer:  SafeArea(
+      endDrawer: SafeArea(
         child: EndDrawer(),
       ),
       appBar: AppBar(
@@ -41,7 +44,8 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
               size: 20,
             ),
             // Text('  $subjectRecordNamenn'),
-            Text('  ${datalistSubject[widget.theRecordFromSubject]["subject_name"]}'),
+            Text(
+                '  ${datalistSubject[widget.theRecordFromSubject]["subject_name"]}'),
           ],
         ),
         // actions: [IconButton(onPressed: () {
@@ -79,13 +83,20 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          dialogAdd(
-            context: context,
+        onPressed: () => showAnimatedDialog(
+          barrierColor: Colors.black38,
+          barrierDismissible: true,
+          context: context,
+          builder: (_) => DialogAdd(
+            controller: controllerAddGraspFile,
             title: 'Grasp',
-            controller: controllerAddGraspFile, theOnPressed: null,
-          );
-        },
+            theOnPressed: () {},
+          ),
+          animationType: DialogTransitionType.sizeFade,
+          curve: Curves.easeOut,
+          alignment: Alignment.bottomCenter,
+          duration: const Duration(milliseconds: 800),
+        ),
         backgroundColor: Colors.cyan.shade400,
         elevation: 10,
         child: const FaIcon(

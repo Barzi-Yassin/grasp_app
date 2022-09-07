@@ -29,6 +29,7 @@ class ServiceFirestore {
     return graspUserModel;
   }
 
+  // create subject 
   Future<GraspSubjectModel> createSubject({
     required User user,
     required String theSubjectName,
@@ -44,8 +45,10 @@ class ServiceFirestore {
     );
 
     await firestoreInstance
-        .collection("subjects")
+        .collection("users")
         .doc(user.uid)
+        .collection('subjects')
+        .doc('$theSubjectId-$theSubjectName')
         .set(graspSubjectModel.toMap());
     return graspSubjectModel;
   }

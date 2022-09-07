@@ -1,9 +1,11 @@
 // ignore_for_file: unused_import
 
+import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:grasp_app/src/data/datalist_subject.dart';
 import 'package:grasp_app/src/models/grasp_user_model.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
@@ -13,15 +15,22 @@ import 'package:grasp_app/src/reusable_codes/widgets/subjects/widget_subject_rec
 import 'package:grasp_app/src/screens/screen_subject_files.dart';
 import 'package:grasp_app/src/services/firebase/service_firestore.dart';
 
-class ScreenSubjects extends StatelessWidget {
-  ScreenSubjects({Key? key, required this.theUser}) : super(key: key);
+class ScreenSubjects extends StatefulWidget {
+  const ScreenSubjects({Key? key, required this.theUser}) : super(key: key);
 
   final User theUser;
 
+  @override
+  State<ScreenSubjects> createState() => _ScreenSubjectsState();
+}
+
+class _ScreenSubjectsState extends State<ScreenSubjects> {
   final ServiceFirestore serviceFirestore = ServiceFirestore();
 
   final TextEditingController controllerAddGraspSubject =
       TextEditingController();
+
+  int subjectidLocal = 1000;
 
   @override
   Widget build(BuildContext context) {
@@ -48,13 +57,16 @@ class ScreenSubjects extends StatelessWidget {
             SizedBox(
               height: 60,
               child: customeText(
-                  theData: '${theUser.uid}\n${theUser.email}',
+                  theData: '${widget.theUser.uid}\n${widget.theUser.email}',
                   theFontSize: 20), //  TODO: temporary
             ),
             Expanded(
               child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                  // collection("users").doc('subjects').collection(theSubjectId.toString()).doc(user.uid)
                   stream: FirebaseFirestore.instance
-                      .collection("subjects")
+                      .collection("users")
+                      .doc(widget.theUser.uid)
+                      .collection('subjects')
                       .snapshots(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
@@ -82,7 +94,8 @@ class ScreenSubjects extends StatelessWidget {
                             // subjectRecordName: datalistSubject[theRecord]
                             //         ["subject_name"]
                             //     .toString(),
-                            subjectRecordName: snapshot.data!.docs[theRecord].data()["subjectName"],
+                            subjectRecordName: snapshot.data!.docs[theRecord]
+                                .data()["subjectName"],
                             subjectRecordItemsNumber: int.parse(
                               datalistSubject[theRecord]["subject_items_number"]
                                   .toString(),
@@ -96,25 +109,45 @@ class ScreenSubjects extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => dialogAdd(
+        onPressed: () => showAnimatedDialog(
+          barrierColor: Colors.black38,
+          barrierDismissible: true,
           context: context,
-          title: 'Subject',
-          controller: controllerAddGraspSubject,
-          theOnPressed: serviceFirestore.createSubject(
-            user: theUser,
-            theSubjectName: controllerAddGraspSubject.text,
-            theSubjectItemsNumber: 1,
-            theSubjectId: 1,
+          builder: (_) => DialogAdd(
+            controller: controllerAddGraspSubject,
+            title: 'Subject',
+            theOnPressed: () async {
+              if (controllerAddGraspSubject.text.isNotEmpty) {
+                await serviceFirestore
+                    .createSubject(
+                      user: widget.theUser,
+                      theSubjectName: controllerAddGraspSubject.text, // TODO: dispose it 
+                      theSubjectItemsNumber: 1,
+                      theSubjectId: subjectidLocal++,
+                    )
+                    .then(
+                      (_) => Get.back(),
+                    );
+              } else {
+                Get.back();
+                Get.snackbar('error', 'Give a name to the new subjects!');
+              }
+            },
           ),
+          animationType: DialogTransitionType.sizeFade,
+          curve: Curves.easeOut,
+          alignment: Alignment.bottomCenter,
+          duration: const Duration(milliseconds: 800),
         ),
         backgroundColor: Colors.cyan.shade700,
         elevation: 10,
-        child: const Icon(
-          Icons.create_new_folder,
-          color: Colors.white,
-          size: 29,
+        child: customeIcon(
+          theIcon: Icons.create_new_folder,
+          theColor: Colors.white,
+          theSize: 031,
         ),
       ),
     );
   }
 }
+
