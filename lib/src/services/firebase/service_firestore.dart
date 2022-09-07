@@ -7,13 +7,12 @@ import 'package:grasp_app/src/models/grasp_user_model.dart';
 class ServiceFirestore {
   final FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
 
-  Future<GraspUser> addUserInfoAfterAuthToDB({
+  Future<GraspUserModel> addUserInfoAfterAuthToDB({
     required User user,
     String? theName,
     String? theImageUrl,
   }) async {
-    // ignore: unused_local_variable
-    GraspUser graspUser = GraspUser(
+    GraspUserModel graspUserModel = GraspUserModel(
       userInAppId: 1,
       uid: user.uid,
       email: user.email!,
@@ -22,7 +21,7 @@ class ServiceFirestore {
       imageUrl: theImageUrl ?? "not inputed yet!",
     );
 
-    await firestoreInstance.collection("users").doc(user.uid).set(graspUser.toMap());
-    return graspUser;
+    await firestoreInstance.collection("users").doc(user.uid).set(graspUserModel.toMap());
+    return graspUserModel;
   }
 }

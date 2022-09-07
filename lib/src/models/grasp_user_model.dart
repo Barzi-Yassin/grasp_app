@@ -1,14 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-class GraspUser {
+class GraspUserModel {
   int userInAppId;
   String uid;
   String email;
   String? name;
   String? imageUrl;
   DateTime createdAt;
-  GraspUser({
+  GraspUserModel({
     required this.userInAppId,
     required this.uid,
     required this.email,
@@ -17,7 +17,7 @@ class GraspUser {
     required this.createdAt,
   });
 
-  GraspUser copyWith({
+  GraspUserModel copyWith({
     int? userInAppId,
     String? uid,
     String? email,
@@ -25,7 +25,7 @@ class GraspUser {
     String? imageUrl,
     DateTime? createdAt,
   }) {
-    return GraspUser(
+    return GraspUserModel(
       userInAppId: userInAppId ?? this.userInAppId,
       uid: uid ?? this.uid,
       email: email ?? this.email,
@@ -46,8 +46,8 @@ class GraspUser {
     };
   }
 
-  factory GraspUser.fromMap(Map<String, dynamic> map) {
-    return GraspUser(
+  factory GraspUserModel.fromMap(Map<String, dynamic> map) {
+    return GraspUserModel(
       userInAppId: map['userInAppId'] as int,
       uid: map['uid'] as String,
       email: map['email'] as String,
@@ -59,15 +59,15 @@ class GraspUser {
 
   String toJson() => json.encode(toMap());
 
-  factory GraspUser.fromJson(String source) => GraspUser.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory GraspUserModel.fromJson(String source) => GraspUserModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
-    return 'GraspUser(userInAppId: $userInAppId, uid: $uid, email: $email, name: $name, imageUrl: $imageUrl, createdAt: $createdAt)';
+    return 'GraspUserModel(userInAppId: $userInAppId, uid: $uid, email: $email, name: $name, imageUrl: $imageUrl, createdAt: $createdAt)';
   }
 
   @override
-  bool operator ==(covariant GraspUser other) {
+  bool operator ==(covariant GraspUserModel other) {
     if (identical(this, other)) return true;
   
     return 

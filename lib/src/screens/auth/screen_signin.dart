@@ -64,10 +64,10 @@ class _ScreenSigninState extends State<ScreenSignin> {
                   await serviceAuth.signInUserWithEmailAndPassword(
                     signInemail: controllerSigninEmail.text.trim(),
                     signInpass: controllerSigninPassword.text,
-                  ).then((_) {
+                  ).then((credential) {
                     debugPrint(
                       'controllerSigninEmail= <${controllerSigninEmail.text}>');
-                      Get.offAll(ScreenSubjects());
+                      Get.offAll(ScreenSubjects(theUser: credential!.user!));
                   });
                 },
                 child: const Text('Sign In'),

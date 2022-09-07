@@ -132,14 +132,15 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
                                 )
                                 .then((_) => setState(() {
                                       isLoading = false;
-                                      Get.to(ScreenSubjects());
+                                      Get.to(ScreenSubjects(
+                                          theUser: widget.theUser));
                                     }));
                           } else {
                             serviceFirestore
                                 .addUserInfoAfterAuthToDB(user: widget.theUser)
                                 .then((_) => setState(() {
                                       isLoading = false;
-                                      Get.offAll(ScreenSubjects());
+                                      Get.offAll(ScreenSubjects(theUser: widget.theUser));
                                     }));
                           }
                         },
@@ -162,7 +163,7 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
                                     ))
                                 .then((_) => setState(() {
                                       isLoading = false;
-                                      Get.offAll(ScreenSubjects());
+                                      Get.offAll(ScreenSubjects(theUser: widget.theUser));
                                     }));
                           } else {
                             debugPrint('no image selected');
