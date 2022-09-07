@@ -66,9 +66,9 @@ class ScreenSubjects extends StatelessWidget {
                     }
 
                     // snapshot.data!.docs.first;
-                    print('22222');
-                    print(snapshot.data!.docs.length.toString());
-                    print(snapshot.data);
+                    debugPrint('22222');
+                    debugPrint(snapshot.data!.docs.length.toString());
+                    debugPrint(snapshot.data.toString());
 
                     snapshot.data?.docs;
 
