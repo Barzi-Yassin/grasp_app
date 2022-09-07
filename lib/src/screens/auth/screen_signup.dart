@@ -79,7 +79,7 @@ class _ScreenSignupState extends State<ScreenSignup> {
                           setState(() => isLoading = true);
                           await serviceAuth
                               .signUpUserWithEmailAndPassword(
-                            signUpemail: controllerSignupEmail.text,
+                            signUpemail: controllerSignupEmail.text.trim(),
                             signUppass: controllerSignupPassword.text,
                           )
                               .then(
