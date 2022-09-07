@@ -22,18 +22,24 @@ class _ScreenSetUserProfileNameState extends State<ScreenSetUserProfileName> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade400,
       body: Container(
+        height: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 20),
         decoration: backgroundGradientCyan(),
-        child: Center(
+        child: SingleChildScrollView(
+          clipBehavior: Clip.hardEdge,
+          scrollDirection: Axis.vertical,
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.manual, // TODO: check i guess it causes bad UX
           child: Column(
-            // mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(height: 100),
               customeTextAuthHeader(theData: '• Username •'),
               const SizedBox(height: 100),
-              customeText(theData: widget.theUser.uid.toString()),//  TODO: temporary
-              customeText(theData: widget.theUser.email.toString()),//  TODO: temporary
+              customeText(
+                  theData: widget.theUser.uid.toString()), //  TODO: temporary
+              customeText(
+                  theData: widget.theUser.email.toString()), //  TODO: temporary
               const SizedBox(height: 100),
               Form(
                 child: TextFormField(
@@ -80,7 +86,8 @@ class _ScreenSetUserProfileNameState extends State<ScreenSetUserProfileName> {
                     onPressed: () {
                       setState(() => controllerUsername.clear());
                       Get.to(ScreenSetUserprofileImage(
-                        theControllerUsername: controllerUsername.text.toString(),
+                        theControllerUsername:
+                            controllerUsername.text.toString(),
                         theUser: widget.theUser,
                       ));
                     },

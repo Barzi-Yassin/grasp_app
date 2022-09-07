@@ -38,144 +38,156 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade400,
       body: Container(
         width: double.infinity,
+        height: double.infinity,
         decoration: backgroundGradientCyan(),
         child: isLoading == true
             ? loadingIndicator()
-            : Column(
-                //  TODO: it causse render flex error while no loading
-                children: [
-                  const SizedBox(height: 100),
-                  customeTextAuthHeader(theData: '• profile •'),
-                  customeText(
-                      theData: widget.theControllerUsername.isNotEmpty
-                          ? widget.theControllerUsername
-                          : 'nulllll',
-                      theColor: Colors.green,
-                      theFontSize: 20), //  TODO: temporary
-                  customeText(
-                      theData:
-                          widget.theUser.email.toString()), //  TODO: temporary
+            : SingleChildScrollView(
+                clipBehavior: Clip.hardEdge,
+                scrollDirection: Axis.vertical,
+                keyboardDismissBehavior:
+                    ScrollViewKeyboardDismissBehavior.manual,
+                child: Column(
+                  //  TODO: it causse render flex error while no loading
+                  children: [
+                    const SizedBox(height: 100),
+                    customeTextAuthHeader(theData: '• profile •'),
+                    customeText(
+                        theData: widget.theControllerUsername.isNotEmpty
+                            ? widget.theControllerUsername
+                            : 'nulllll',
+                        theColor: Colors.green,
+                        theFontSize: 20), //  TODO: temporary
+                    customeText(
+                        theData: widget.theUser.email
+                          .toString()), //  TODO: temporary
 
-                  const SizedBox(height: 100),
-                  SizedBox(
-                    height: 210,
-                    width: 210,
-                    child: InkWell(
-                      onTap: () async =>
-                          await pickImage(theImageSource: ImageSource.gallery),
-                      onLongPress: () async =>
-                          await pickImage(theImageSource: ImageSource.camera),
-                      child: Badge(
-                        padding: const EdgeInsets.all(10),
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            Colors.grey.shade400,
-                            Colors.cyan.shade200,
-                            // Colors.white,
-                            // Colors.white,
-                          ],
-                        ),
-                        borderSide:
-                            const BorderSide(color: Colors.white60, width: 1),
-                        elevation: 0,
-                        position: BadgePosition.topStart(start: 10, top: 12),
-                        badgeColor: Colors.cyan.shade200,
-                        badgeContent: const Icon(
-                          Icons.add_a_photo_outlined,
-                          size: 25.0,
-                          color: Colors.black,
-                          shadows: [
-                            BoxShadow(blurRadius: 8.0, color: Colors.white),
-                            BoxShadow(blurRadius: 8.0, color: Colors.grey),
-                            BoxShadow(blurRadius: 1.0, color: Colors.red),
-                          ],
-                        ),
-                        showBadge: true,
-                        child: Container(
-                          height: 200,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border:
-                                Border.all(color: Colors.white60, width: 2.0),
+                    const SizedBox(height: 100),
+                    SizedBox(
+                      height: 210,
+                      width: 210,
+                      child: InkWell(
+                        onTap: () async => await pickImage(
+                            theImageSource: ImageSource.gallery),
+                        onLongPress: () async =>
+                            await pickImage(theImageSource: ImageSource.camera),
+                        child: Badge(
+                          padding: const EdgeInsets.all(10),
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Colors.grey.shade400,
+                              Colors.cyan.shade200,
+                              // Colors.white,
+                              // Colors.white,
+                            ],
                           ),
-                          alignment: Alignment.center,
-                          child: CircleAvatar(
-                            backgroundImage: imageSelected != null
-                                ? FileImage(imageSelected!) as ImageProvider
-                                : const AssetImage("assets/images/person.jpg"),
-                            // backgroundImage: isImagePicked == !true
-                            //     ? const AssetImage("assets/images/person.jpg")
-                            //     : const AssetImage('assets/images/3.jpeg'),
-                            radius: 100,
+                          borderSide:
+                              const BorderSide(color: Colors.white60, width: 1),
+                          elevation: 0,
+                          position: BadgePosition.topStart(start: 10, top: 12),
+                          badgeColor: Colors.cyan.shade200,
+                          badgeContent: const Icon(
+                            Icons.add_a_photo_outlined,
+                            size: 25.0,
+                            color: Colors.black,
+                            shadows: [
+                              BoxShadow(blurRadius: 8.0, color: Colors.white),
+                              BoxShadow(blurRadius: 8.0, color: Colors.grey),
+                              BoxShadow(blurRadius: 1.0, color: Colors.red),
+                            ],
+                          ),
+                          showBadge: true,
+                          child: Container(
+                            height: 200,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border:
+                                  Border.all(color: Colors.white60, width: 2.0),
+                            ),
+                            alignment: Alignment.center,
+                            child: CircleAvatar(
+                              backgroundImage: imageSelected != null
+                                  ? FileImage(imageSelected!) as ImageProvider
+                                  : const AssetImage(
+                                      "assets/images/person.jpg"),
+                              // backgroundImage: isImagePicked == !true
+                              //     ? const AssetImage("assets/images/person.jpg")
+                              //     : const AssetImage('assets/images/3.jpeg'),
+                              radius: 100,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 25),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          setState(() => isLoading = true);
-                          if (widget.theControllerUsername.isNotEmpty) {
-                            serviceFirestore
-                                .addUserInfoAfterAuthToDB(
-                                  user: widget.theUser,
-                                  theName: widget.theControllerUsername,
-                                )
-                                .then((_) => setState(() {
-                                      isLoading = false;
-                                      Get.to(ScreenSubjects(
-                                          theUser: widget.theUser));
-                                    }));
-                          } else {
-                            serviceFirestore
-                                .addUserInfoAfterAuthToDB(user: widget.theUser)
-                                .then((_) => setState(() {
-                                      isLoading = false;
-                                      Get.offAll(ScreenSubjects(theUser: widget.theUser));
-                                    }));
-                          }
-                        },
-                        child: customeText(theData: 'SKIP'),
-                      ),
-                      const SizedBox(width: 50),
-                      ElevatedButton(
-                        onPressed: () async {
-                          if (imageSelected != null) {
+                    const SizedBox(height: 25),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
                             setState(() => isLoading = true);
-                            await uploadImage(
-                              imageSelected!,
-                              theUser: widget.theUser,
-                            )
-                                .then((_) =>
-                                    serviceFirestore.addUserInfoAfterAuthToDB(
-                                      user: widget.theUser,
-                                      theName: widget.theControllerUsername,
-                                      theImageUrl: imageDownloadLink,
-                                    ))
-                                .then((_) => setState(() {
-                                      isLoading = false;
-                                      Get.offAll(ScreenSubjects(theUser: widget.theUser));
-                                    }));
-                          } else {
-                            debugPrint('no image selected');
-                            Get.snackbar('No image selected yet!',
-                                'Select an image to save, or skip it for now.');
-                          }
-                        },
-                        child: customeText(theData: 'SAVE'),
-                      ),
-                    ],
-                  ),
-                ],
+                            if (widget.theControllerUsername.isNotEmpty) {
+                              serviceFirestore
+                                  .addUserInfoAfterAuthToDB(
+                                    user: widget.theUser,
+                                    theName: widget.theControllerUsername,
+                                  )
+                                  .then((_) => setState(() {
+                                        isLoading = false;
+                                        Get.to(ScreenSubjects(
+                                            theUser: widget.theUser));
+                                      }));
+                            } else {
+                              serviceFirestore
+                                  .addUserInfoAfterAuthToDB(
+                                      user: widget.theUser)
+                                  .then((_) => setState(() {
+                                        isLoading = false;
+                                        Get.offAll(ScreenSubjects(
+                                            theUser: widget.theUser));
+                                      }));
+                            }
+                          },
+                          child: customeText(theData: 'SKIP'),
+                        ),
+                        const SizedBox(width: 50),
+                        ElevatedButton(
+                          onPressed: () async {
+                            if (imageSelected != null) {
+                              setState(() => isLoading = true);
+                              await uploadImage(
+                                imageSelected!,
+                                theUser: widget.theUser,
+                              )
+                                  .then((_) =>
+                                      serviceFirestore.addUserInfoAfterAuthToDB(
+                                        user: widget.theUser,
+                                        theName: widget.theControllerUsername,
+                                        theImageUrl: imageDownloadLink,
+                                      ))
+                                  .then((_) => setState(() {
+                                        isLoading = false;
+                                        Get.offAll(ScreenSubjects(
+                                            theUser: widget.theUser));
+                                      }));
+                            } else {
+                              debugPrint('no image selected');
+                              Get.snackbar('No image selected yet!',
+                                  'Select an image to save, or skip it for now.');
+                            }
+                          },
+                          child: customeText(theData: 'SAVE'),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
       ),
     );
