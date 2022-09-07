@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:grasp_app/src/models/grasp_subject_model.dart';
 import 'package:grasp_app/src/models/grasp_user_model.dart';
 
 class ServiceFirestore {
@@ -21,7 +22,31 @@ class ServiceFirestore {
       imageUrl: theImageUrl ?? "not inputed yet!",
     );
 
-    await firestoreInstance.collection("users").doc(user.uid).set(graspUserModel.toMap());
+    await firestoreInstance
+        .collection("users")
+        .doc(user.uid)
+        .set(graspUserModel.toMap());
     return graspUserModel;
+  }
+
+  Future<GraspSubjectModel> createSubject({
+    required User user,
+    required String theSubjectName,
+    required theSubjectItemsNumber,
+    required int theSubjectId,
+  }) async {
+    GraspSubjectModel graspSubjectModel = GraspSubjectModel(
+      uid: user.uid,
+      subjectName: theSubjectName,
+      subjectId: theSubjectId,
+      subjectItemsNumber: theSubjectItemsNumber,
+      subjectCreatedAt: DateTime.now(),
+    );
+
+    await firestoreInstance
+        .collection("subjects")
+        .doc(user.uid)
+        .set(graspSubjectModel.toMap());
+    return graspSubjectModel;
   }
 }
