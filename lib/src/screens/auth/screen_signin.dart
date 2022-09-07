@@ -57,18 +57,35 @@ class _ScreenSigninState extends State<ScreenSignin> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  debugPrint(
-                      'controllerSigninEmail= <${controllerSigninEmail.text}>');
-                  debugPrint(
-                      'controllerSigninPassword= <${controllerSigninPassword.text}>');
-                  await serviceAuth.signInUserWithEmailAndPassword(
-                    signInemail: controllerSigninEmail.text.trim(),
-                    signInpass: controllerSigninPassword.text,
-                  ).then((credential) {
+                  if (controllerSigninEmail.text.isNotEmpty &&
+                      controllerSigninPassword.text.isNotEmpty) {
                     debugPrint(
-                      'controllerSigninEmail= <${controllerSigninEmail.text}>');
-                      Get.offAll(ScreenSubjects(theUser: credential!.user!));
-                  });
+                        'controllerSigninEmail= <${controllerSigninEmail.text}>');
+                    debugPrint(
+                        'controllerSigninPassword= <${controllerSigninPassword.text}>');
+                    await serviceAuth
+                        .signInUserWithEmailAndPassword(
+                      signInemail: controllerSigninEmail.text.trim(),
+                      signInpass: controllerSigninPassword.text,
+                    )
+                        .then(
+                      (credential) {
+                        if (credential != null) {
+                          debugPrint(
+                            'controllerSigninEmail= <${controllerSigninEmail.text}>',
+                          );
+                          Get.offAll(
+                            ScreenSubjects(
+                              theUser: credential.user!,
+                            ),
+                          );
+                        }
+                      },
+                    );
+                  } else {
+                    debugPrint('one field or more might be empty !');
+                    Get.snackbar('error', 'one field or more might be empty !');
+                  }
                 },
                 child: const Text('Sign In'),
               ),
