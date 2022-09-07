@@ -25,7 +25,7 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: const SafeArea(
+      endDrawer:  SafeArea(
         child: EndDrawer(),
       ),
       appBar: AppBar(

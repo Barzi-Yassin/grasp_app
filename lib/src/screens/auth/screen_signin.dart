@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/auth_state_widgets.dart/auth_states.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/screens/auth/screen_signup.dart';
+import 'package:grasp_app/src/screens/screen_subjects.dart';
 import 'package:grasp_app/src/services/firebase/service_auth.dart';
 
 class ScreenSignin extends StatefulWidget {
@@ -63,14 +64,17 @@ class _ScreenSigninState extends State<ScreenSignin> {
                   await serviceAuth.signInUserWithEmailAndPassword(
                     signInemail: controllerSigninEmail.text.trim(),
                     signInpass: controllerSigninPassword.text,
-                  ).then((value) => debugPrint(
-                      'controllerSigninEmail= <${controllerSigninEmail.text}>'));
+                  ).then((_) {
+                    debugPrint(
+                      'controllerSigninEmail= <${controllerSigninEmail.text}>');
+                      Get.offAll(ScreenSubjects());
+                  });
                 },
                 child: const Text('Sign In'),
               ),
               TextButton(
                 onPressed: () {
-                  Get.to(() => const ScreenSignup());
+                  Get.offAll(() => const ScreenSignup());
                 },
                 child: customeText(
                   theData: '\nDon\'t Have Account? \nSign up here',

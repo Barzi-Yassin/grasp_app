@@ -8,7 +8,7 @@ class ScreenFilterFavorites extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: const SafeArea(
+      endDrawer: SafeArea(
         child: EndDrawer(),
       ),
       appBar: AppBar(

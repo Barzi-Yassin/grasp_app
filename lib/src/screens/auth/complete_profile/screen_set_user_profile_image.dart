@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/loadings/loading_indicator.dart';
+import 'package:grasp_app/src/screens/screen_subjects.dart';
 import 'package:grasp_app/src/services/firebase/service_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -129,11 +130,17 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
                                   user: widget.theUser,
                                   theName: widget.theControllerUsername,
                                 )
-                                .then((_) => setState(() => isLoading = false));
+                                .then((_) => setState(() {
+                                      isLoading = false;
+                                      Get.to(ScreenSubjects());
+                                    }));
                           } else {
                             serviceFirestore
                                 .addUserInfoAfterAuthToDB(user: widget.theUser)
-                                .then((_) => setState(() => isLoading = false));
+                                .then((_) => setState(() {
+                                      isLoading = false;
+                                      Get.offAll(ScreenSubjects());
+                                    }));
                           }
                         },
                         child: customeText(theData: 'SKIP'),
@@ -153,7 +160,10 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
                                       theName: widget.theControllerUsername,
                                       theImageUrl: imageDownloadLink,
                                     ))
-                                .then((_) => setState(() => isLoading = false));
+                                .then((_) => setState(() {
+                                      isLoading = false;
+                                      Get.offAll(ScreenSubjects());
+                                    }));
                           } else {
                             debugPrint('no image selected');
                             Get.snackbar('No image selected yet!',

@@ -86,7 +86,7 @@ class _ScreenSignupState extends State<ScreenSignup> {
                             (credential) {
                               debugPrint('user created DONE');
                               setState(() => isLoading = false);
-                              Get.to(
+                              Get.offAll(
                                 ScreenSetUserProfileName(
                                   theUser: credential!.user!,
                                 ),

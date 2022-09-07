@@ -1,9 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/routes/route_screens.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/end_drawer/widget_end_drawer_records.dart';
+import 'package:grasp_app/src/screens/auth/screen_signin.dart';
 
 class EndDrawer extends StatelessWidget {
-  const EndDrawer({Key? key}) : super(key: key);
+  EndDrawer({Key? key}) : super(key: key);
+
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   final Color _enddrawerHeaderStuffLineColor = Colors.white;
   @override
@@ -177,16 +183,20 @@ class EndDrawer extends StatelessWidget {
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        WidgetEndDrawerRecords(
+                      children: [
+                        const WidgetEndDrawerRecords(
                             enddrawerRecordId: 6,
                             enddrawerRecordTitle: "Grasp guidance",
                             enddrawerRecordRoutePath:
                                 RouteScreens.routeGraspGuidance),
-                        WidgetEndDrawerRecords(
+                        const WidgetEndDrawerRecords(
                             enddrawerRecordId: 7,
                             enddrawerRecordTitle: "Exit",
                             enddrawerRecordRoutePath: RouteScreens.routeInit),
+                        customeIconButton(
+                            theOnPressed: (){
+                              firebaseAuth.signOut().then((_) => Get.offAll(const ScreenSignin()));
+                            }, theIcon: Icons.logout),
                       ],
                     ),
                   ],
