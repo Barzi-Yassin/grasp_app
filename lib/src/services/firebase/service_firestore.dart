@@ -8,6 +8,21 @@ import 'package:grasp_app/src/models/grasp_user_model.dart';
 class ServiceFirestore {
   final FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
 
+  Future<GraspUserModel> addUserToDB({required User user}) async {
+    GraspUserModel graspUserModel = GraspUserModel(
+      userInAppId: 1,
+      uid: user.uid,
+      email: user.email!,
+      accCreatedAt: DateTime.now(),
+    );
+
+    await firestoreInstance
+        .collection("users")
+        .doc(user.uid)
+        .set(graspUserModel.toMap());
+    return graspUserModel;
+  }
+
   Future<GraspUserModel> addUserInfoAfterAuthToDB({
     required User user,
     String? theName,
@@ -17,7 +32,7 @@ class ServiceFirestore {
       userInAppId: 1,
       uid: user.uid,
       email: user.email!,
-      createdAt: DateTime.now(),
+      infoUpdatedAt: DateTime.now(),
       name: theName ?? "not inputed yet!",
       imageUrl: theImageUrl ?? "not inputed yet!",
     );
@@ -29,7 +44,7 @@ class ServiceFirestore {
     return graspUserModel;
   }
 
-  // create subject 
+  // create subject
   Future<GraspSubjectModel> createSubject({
     required User user,
     required String theSubjectName,
