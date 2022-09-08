@@ -6,6 +6,7 @@ import 'package:grasp_app/src/reusable_codes/functions/loadings/loading_indicato
 import 'package:grasp_app/src/screens/auth/complete_profile/screen_set_user_profile_name.dart';
 import 'package:grasp_app/src/screens/auth/screen_signin.dart';
 import 'package:grasp_app/src/services/firebase/service_auth.dart';
+import 'package:grasp_app/src/services/firebase/service_firestore.dart';
 
 class ScreenSignup extends StatefulWidget {
   const ScreenSignup({Key? key}) : super(key: key);
@@ -15,15 +16,15 @@ class ScreenSignup extends StatefulWidget {
 }
 
 class _ScreenSignupState extends State<ScreenSignup> {
-  final TextEditingController controllerSignupEmail = TextEditingController();
+  final ServiceAuth serviceAuth = ServiceAuth();
+  final ServiceFirestore serviceFirestore = ServiceFirestore();
 
+  final TextEditingController controllerSignupEmail = TextEditingController();
   final TextEditingController controllerSignupPassword =
       TextEditingController();
 
   IconData passwordHideShowIconHandler = Icons.visibility_off;
   bool hidePassword = true;
-
-  final ServiceAuth serviceAuth = ServiceAuth();
 
   bool isLoading = false;
 
@@ -83,15 +84,19 @@ class _ScreenSignupState extends State<ScreenSignup> {
                             signUppass: controllerSignupPassword.text,
                           )
                               .then(
-                            (credential) {
+                            (credential) async {
                               if (credential != null) {
                                 debugPrint('user created DONE');
-                                setState(() => isLoading = false);
-                                Get.offAll(
-                                  ScreenSetUserProfileName(
-                                    theUser: credential.user!,
-                                  ),
-                                );
+                                await serviceFirestore
+                                    .addUserToDB(user: credential.user!)
+                                    .then((value) async {
+                                  setState(() => isLoading = false);
+                                  await Get.offAll(
+                                    ScreenSetUserProfileName(
+                                      theUser: credential.user!,
+                                    ),
+                                  );
+                                });
                               }
                               setState(() => isLoading = false);
                             },

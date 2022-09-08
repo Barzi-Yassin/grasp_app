@@ -13,7 +13,7 @@ class ServiceFirestore {
       userInAppId: 1,
       uid: user.uid,
       email: user.email!,
-      accCreatedAt: DateTime.now(),
+      createdAt: DateTime.now(),
     );
 
     await firestoreInstance
@@ -29,10 +29,10 @@ class ServiceFirestore {
     String? theImageUrl,
   }) async {
     GraspUserModel graspUserModel = GraspUserModel(
-      userInAppId: 1,
+      userInAppId: 2,
       uid: user.uid,
       email: user.email!,
-      infoUpdatedAt: DateTime.now(),
+      createdAt: DateTime.now(),
       name: theName ?? "not inputed yet!",
       imageUrl: theImageUrl ?? "not inputed yet!",
     );
