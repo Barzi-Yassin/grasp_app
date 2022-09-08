@@ -40,7 +40,7 @@ class ServiceFirestore {
     await firestoreInstance
         .collection("users")
         .doc(user.uid)
-        .set(graspUserModel.toMap());
+        .update(graspUserModel.toMap());
     return graspUserModel;
   }
 
