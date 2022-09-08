@@ -36,6 +36,13 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
   bool isLoading = false;
 
   @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade400,
@@ -63,7 +70,7 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
                         theFontSize: 20), //  TODO: temporary
                     customeText(
                         theData: widget.theUser.email
-                          .toString()), //  TODO: temporary
+                            .toString()), //  TODO: temporary
 
                     const SizedBox(height: 100),
                     SizedBox(
@@ -135,23 +142,22 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
                             if (widget.theControllerUsername.isNotEmpty) {
                               serviceFirestore
                                   .addUserInfoAfterAuthToDB(
-                                    user: widget.theUser,
-                                    theName: widget.theControllerUsername,
-                                  )
-                                  .then((_) => setState(() {
-                                        isLoading = false;
-                                        Get.to(ScreenSubjects(
-                                            theUser: widget.theUser));
-                                      }));
+                                user: widget.theUser,
+                                theName: widget.theControllerUsername,
+                              )
+                                  .then((_) {
+                                setState(() => isLoading = false);
+                                Get.to(ScreenSubjects(theUser: widget.theUser));
+                              });
                             } else {
                               serviceFirestore
                                   .addUserInfoAfterAuthToDB(
                                       user: widget.theUser)
-                                  .then((_) => setState(() {
-                                        isLoading = false;
-                                        Get.offAll(ScreenSubjects(
-                                            theUser: widget.theUser));
-                                      }));
+                                  .then((_) {
+                                setState(() => isLoading = false);
+                                Get.offAll(
+                                    ScreenSubjects(theUser: widget.theUser));
+                              });
                             }
                           },
                           child: customeText(theData: 'SKIP'),
@@ -165,19 +171,25 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
                                 imageSelected!,
                                 theUser: widget.theUser,
                               )
-                                  .then((_) =>
-                                      serviceFirestore.addUserInfoAfterAuthToDB(
+                                  .then((_) async => await serviceFirestore
+                                          .addUserInfoAfterAuthToDB(
                                         user: widget.theUser,
                                         theName: widget.theControllerUsername,
                                         theImageUrl: imageDownloadLink,
                                       ))
-                                  .then((_) => setState(() {
-                                        isLoading = false;
-                                        Get.offAll(ScreenSubjects(
-                                            theUser: widget.theUser));
-                                      }));
+                                  .then((_) async {
+                                if (mounted) {
+                                  setState(() => isLoading = false);
+                                }
+                                await Get.offAll(
+                                  ScreenSubjects(theUser: widget.theUser),
+                                );
+                              });
                             } else {
                               debugPrint('no image selected');
+                              if (mounted) {
+                                setState(() => isLoading = false);
+                              }
                               Get.snackbar('No image selected yet!',
                                   'Select an image to save, or skip it for now.');
                             }
