@@ -89,8 +89,6 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
                             colors: [
                               Colors.grey.shade400,
                               Colors.cyan.shade200,
-                              // Colors.white,
-                              // Colors.white,
                             ],
                           ),
                           borderSide:
@@ -122,9 +120,6 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
                                   ? FileImage(imageSelected!) as ImageProvider
                                   : const AssetImage(
                                       "assets/images/person.jpg"),
-                              // backgroundImage: isImagePicked == !true
-                              //     ? const AssetImage("assets/images/person.jpg")
-                              //     : const AssetImage('assets/images/3.jpeg'),
                               radius: 100,
                             ),
                           ),

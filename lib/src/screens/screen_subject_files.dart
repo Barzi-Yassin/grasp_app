@@ -39,7 +39,6 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
         backgroundColor: Colors.cyan.shade700,
         centerTitle: true,
         leading: functionArrowbackIconButton(context),
-        // title: const Text('Programming Fund'),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -52,11 +51,7 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                 size: 20,
               ),
             ),
-            // Text('  $subjectRecordNamenn'),
-            Text(widget.theFileSubjectName
-                // '  ${datalistSubject[widget.theRecordFromSubject]["subject_name"]}'
-                ),
-                
+            Text(widget.theFileSubjectName),
           ],
         ),
         // actions: [IconButton(onPressed: () {
@@ -71,14 +66,11 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
         width: double.infinity,
         decoration: backgroundGradientCyan(),
         child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-            // /users/jlMLgST8YtTHahuoRc5BKX1miaX2/subjects/subj1/files
-            // /users/jlMLgST8YtTHahuoRc5BKX1miaX2/subjects/subj1/files
             stream: serviceFirestore.firestoreInstance
                 .collection("users")
                 .doc(widget.theUser.uid)
                 .collection("subjects")
                 .doc(widget.theFileSubjectName)
-                // .doc("sub1")
                 .collection("files")
                 .snapshots(),
             builder: (context, snapshot) {
@@ -100,11 +92,7 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
               return ListView.builder(
                 padding: const EdgeInsets.symmetric(vertical: 20.0),
                 scrollDirection: Axis.vertical,
-                // itemCount: datalistSubjectFiles.length,
                 itemCount: snapshot.data!.docs.length,
-                // int.parse(datalistSubject[widget.theRecordFromSubject]
-                //         ["subject_items_number"]
-                //     .toString()),
                 itemBuilder: (context, theRecord) {
                   final QueryDocumentSnapshot<Map<String, dynamic>>
                       theRecordItem = snapshot.data!.docs[theRecord];
@@ -121,9 +109,6 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                         theRecordItem.data()["fileCreatedAt"].toString(),
                     subjectFileRecordDate:
                         theRecordItem.data()["fileCreatedAt"].toString(),
-                    // subjectFileRecordName: datalistSubjectFiles[theRecord]["subject_file_name"].toString(),
-                    // subjectFileRecordTime: datalistSubjectFiles[theRecord]["subject_file_time"].toString(),
-                    // subjectFileRecordDate: datalistSubjectFiles[theRecord]["subject_file_date"].toString(),
                   );
                 },
               );

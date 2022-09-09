@@ -93,20 +93,9 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                         final theRecordItem = snapshot.data!.docs[theRecord];
                         return WidgetSubjectRecords(
                           theUser: widget.theUser,
-                          theFileSubjectName: theRecordItem.data()['subjectName'],
+                          theFileSubjectName:
+                              theRecordItem.data()['subjectName'],
                         );
-
-                        // WidgetSubjectRecords(
-                        //     // subjectRecordName: datalistSubject[theRecord]
-                        //     //         ["subject_name"]
-                        //     //     .toString(),
-                        //     subjectFileRecordName: snapshot.data!.docs[theRecord]
-                        //         .data()["subjectName"],
-                        //     subjectRecordItemsNumber: int.parse(
-                        //       datalistSubject[theRecord]["subject_items_number"]
-                        //           .toString(),
-                        //     ),
-                        //     theRecord: theRecord);
                       },
                     );
                   }),

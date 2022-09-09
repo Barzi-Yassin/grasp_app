@@ -8,7 +8,6 @@ import 'package:grasp_app/src/data/datalist_subject.dart';
 import 'package:grasp_app/src/routes/route_screens.dart';
 import 'package:grasp_app/src/screens/screen_subjects.dart';
 import 'package:grasp_app/src/screens/screen_subject_files.dart';
-// import 'package:grasp_app/src/screens/screen_subject_files.dart'; // why ?
 
 class WidgetSubjectRecords extends StatelessWidget {
   const WidgetSubjectRecords({
@@ -39,27 +38,12 @@ class WidgetSubjectRecords extends StatelessWidget {
           ],
         ),
         child: ListTile(
-          // onTap: () => Navigator.pushNamed(
-          //   context,
-          //   RouteScreens.routeSubjectFiles,
-          //   // arguments:
-          // ),
           onTap: () => Get.to(
             ScreenSubjectFiles(
               theUser: theUser,
               theFileSubjectName: theFileSubjectName,
             ),
           ),
-
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: ((context) =>  ScreenSubjectFiles(
-          //       theRecordFromSubject: theRecord,
-          //     )),
-
-          //   ),
-          // ),
           minVerticalPadding: 20,
           iconColor: const Color.fromARGB(255, 0, 171, 193),
           leading: const Padding(

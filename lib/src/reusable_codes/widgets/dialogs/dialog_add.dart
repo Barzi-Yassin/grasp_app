@@ -10,15 +10,14 @@ class DialogAdd extends StatefulWidget {
   });
 
   final String title;
-  final TextEditingController controller; // TODO: dispose it 
-  final theOnPressed; // TODO: fix it's error 
+  final TextEditingController controller; // TODO: dispose it
+  final theOnPressed; // TODO: fix it's error
 
   @override
   State<DialogAdd> createState() => _DialogAddState();
 }
 
 class _DialogAddState extends State<DialogAdd> {
-
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -32,7 +31,6 @@ class _DialogAddState extends State<DialogAdd> {
       actionsOverflowButtonSpacing: 0,
       shape: const RoundedRectangleBorder(
         side: BorderSide(
-          // color: Colors.lightBlue.shade200,
           color: Colors.cyan,
           width: 1.5,
         ),
@@ -43,8 +41,9 @@ class _DialogAddState extends State<DialogAdd> {
       title: Container(
         padding: const EdgeInsets.fromLTRB(12.0, 20.0, 12.0, 15.0),
         decoration: BoxDecoration(
-            gradient: dialogHeaderGradient(),
-            borderRadius: BorderRadius.circular(15)), //
+          gradient: dialogHeaderGradient(),
+          borderRadius: BorderRadius.circular(15),
+        ), //
 
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
