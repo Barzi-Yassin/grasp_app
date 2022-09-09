@@ -1,20 +1,24 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:grasp_app/src/screens/auth/screen_signin.dart';
 
 class WidgetEndDrawerRecords extends StatelessWidget {
-  const WidgetEndDrawerRecords({
+  WidgetEndDrawerRecords({
     Key? key,
     required this.enddrawerRecordId,
     required this.enddrawerRecordTitle,
     required this.enddrawerRecordRoutePath,
+    required this.isSignOut,
   }) : super(key: key);
 
   final int enddrawerRecordId;
   final String enddrawerRecordTitle;
   final String enddrawerRecordRoutePath;
+  final bool isSignOut;
 
-// final List<IconData> _iconsList = [];
-
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   final IconData iconProfile = FontAwesomeIcons.userLarge;
   final IconData iconStars = FontAwesomeIcons.solidStar;
@@ -22,7 +26,7 @@ class WidgetEndDrawerRecords extends StatelessWidget {
   final IconData iconImportants = Icons.label_important;
   final IconData iconArchivedGrasps = Icons.archive;
   final IconData iconGraspGuidance = FontAwesomeIcons.circleInfo;
-  final IconData iconExit = Icons.exit_to_app;
+  final IconData iconExit = Icons.logout;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -45,7 +49,16 @@ class WidgetEndDrawerRecords extends StatelessWidget {
             ],
           ),
           child: ListTile(
-            onTap: () => Navigator.pushNamed(context, enddrawerRecordRoutePath),
+            onTap: () {
+              debugPrint(isSignOut.toString());
+              if (!isSignOut) {
+                Get.toNamed(enddrawerRecordRoutePath);
+              } else {
+                firebaseAuth
+                    .signOut()
+                    .then((_) => Get.offAll(const ScreenSignin()));
+              }
+            },
             // minVerticalPadding: 20,
             iconColor: Colors.cyan.shade600,
             title: Text(
@@ -61,9 +74,10 @@ class WidgetEndDrawerRecords extends StatelessWidget {
       ),
     );
   }
-// this function returns a widgets "Icon() or FaIcon()" 
+
+// this function returns a widgets "Icon() or FaIcon()"
   Widget _enddrawerRecordsWidgetDetector(IconData iconName) {
-    if (enddrawerRecordId <= 3 || enddrawerRecordId == 6) {
+    if (enddrawerRecordId <= 3 || enddrawerRecordId >= 6) {
       return Icon(iconName);
     } else {
       return FaIcon(iconName);

@@ -8,6 +8,13 @@ class RouteScreens {
   
   static const routeFilterStars = '/filter_stars';
   static const routeFilterFavorites = '/filter_favorites';
-  static const routeFilterImportants = '/filter_importants';
-  static const routeFilterArchived = '/filter_archived';
+  // static const routeFilterImportants = '/filter_importants';
+  // static const routeFilterArchived = '/filter_archived';
+
+  static const routeAuthSignin = '/auth_signin';
+  static const routeAuthSignup = '/auth_singup';
+  // static const routeAuth = '/auth_';
+  // static const routeAuth = '/auth_';
+
+
 }

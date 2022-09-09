@@ -1,10 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/routes/route_screens.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/end_drawer/widget_end_drawer_records.dart';
-import 'package:grasp_app/src/screens/auth/screen_signin.dart';
 
 class EndDrawer extends StatelessWidget {
   EndDrawer({Key? key}) : super(key: key);
@@ -17,6 +14,7 @@ class EndDrawer extends StatelessWidget {
     return Drawer(
       backgroundColor: Colors.transparent,
       child: Container(
+        padding: const EdgeInsets.only(bottom: 5),
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.only(
             bottomLeft: Radius.circular(20),
@@ -152,51 +150,56 @@ class EndDrawer extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
-                      children: const [
+                      children: [
                         WidgetEndDrawerRecords(
-                            enddrawerRecordId: 1,
-                            enddrawerRecordTitle: "My profile",
-                            enddrawerRecordRoutePath:
-                                RouteScreens.routeMyProfile),
+                          enddrawerRecordId: 1,
+                          enddrawerRecordTitle: "My profile",
+                          enddrawerRecordRoutePath: RouteScreens.routeMyProfile,
+                          isSignOut: false,
+                        ),
                         SizedBox(height: 18),
                         WidgetEndDrawerRecords(
-                            enddrawerRecordId: 2,
-                            enddrawerRecordTitle: "Stars",
-                            enddrawerRecordRoutePath:
-                                RouteScreens.routeFilterStars),
+                          enddrawerRecordId: 2,
+                          enddrawerRecordTitle: "Stars",
+                          enddrawerRecordRoutePath:
+                              RouteScreens.routeFilterStars,
+                          isSignOut: false,
+                        ),
                         WidgetEndDrawerRecords(
-                            enddrawerRecordId: 3,
-                            enddrawerRecordTitle: "Favorites",
-                            enddrawerRecordRoutePath:
-                                RouteScreens.routeFilterFavorites),
-                        WidgetEndDrawerRecords(
-                            enddrawerRecordId: 4,
-                            enddrawerRecordTitle: "Importants",
-                            enddrawerRecordRoutePath:
-                                RouteScreens.routeFilterImportants),
-                        WidgetEndDrawerRecords(
-                            enddrawerRecordId: 5,
-                            enddrawerRecordTitle: "Archived Grasps",
-                            enddrawerRecordRoutePath:
-                                RouteScreens.routeFilterArchived),
+                          enddrawerRecordId: 3,
+                          enddrawerRecordTitle: "Favorites",
+                          enddrawerRecordRoutePath:
+                              RouteScreens.routeFilterFavorites,
+                          isSignOut: false,
+                        ),
+                        // WidgetEndDrawerRecords(
+                        //     enddrawerRecordId: 4,
+                        //     enddrawerRecordTitle: "Importants",
+                        //     enddrawerRecordRoutePath:
+                        //         RouteScreens.routeFilterImportants, isSignOut: false,),
+                        // WidgetEndDrawerRecords(
+                        //     enddrawerRecordId: 5,
+                        //     enddrawerRecordTitle: "Archived Grasps",
+                        //     enddrawerRecordRoutePath:
+                        //         RouteScreens.routeFilterArchived, isSignOut: false,),
                       ],
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const WidgetEndDrawerRecords(
-                            enddrawerRecordId: 6,
-                            enddrawerRecordTitle: "Grasp guidance",
-                            enddrawerRecordRoutePath:
-                                RouteScreens.routeGraspGuidance),
-                        const WidgetEndDrawerRecords(
-                            enddrawerRecordId: 7,
-                            enddrawerRecordTitle: "Exit",
-                            enddrawerRecordRoutePath: RouteScreens.routeInit),
-                        customeIconButton(
-                            theOnPressed: (){
-                              firebaseAuth.signOut().then((_) => Get.offAll(const ScreenSignin()));
-                            }, theIcon: Icons.logout),
+                        WidgetEndDrawerRecords(
+                          enddrawerRecordId: 6,
+                          enddrawerRecordTitle: "Grasp guidance",
+                          enddrawerRecordRoutePath:
+                              RouteScreens.routeGraspGuidance,
+                          isSignOut: false,
+                        ),
+                        WidgetEndDrawerRecords(
+                          enddrawerRecordId: 7,
+                          enddrawerRecordTitle: "Exit",
+                          enddrawerRecordRoutePath: RouteScreens.routeInit,
+                          isSignOut: true,
+                        ),
                       ],
                     ),
                   ],
