@@ -73,29 +73,29 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                 .doc(widget.theFileSubjectName)
                 .collection("files")
                 .snapshots(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
+            builder: (context, snapshotFiles) {
+              if (snapshotFiles.connectionState == ConnectionState.waiting) {
                 return const CircularProgressIndicator();
-              } else if (snapshot.hasError) {
-                return Text("err ${snapshot.error}");
-              } else if (snapshot.data == null || !snapshot.hasData) {
-                return const Text('snapshot is empty(StreamBuilder)');
+              } else if (snapshotFiles.hasError) {
+                return Text("err ${snapshotFiles.error}");
+              } else if (snapshotFiles.data == null || !snapshotFiles.hasData) {
+                return const Text('snapshotFiles is empty(StreamBuilder)');
               }
 
-              // snapshot.data!.docs.first;
+              // snapshotFiles.data!.docs.first;
               debugPrint('44444');
-              debugPrint(snapshot.data!.docs.length.toString());
-              debugPrint(snapshot.data.toString());
+              debugPrint(snapshotFiles.data!.docs.length.toString());
+              debugPrint(snapshotFiles.data.toString());
 
-              snapshot.data?.docs;
+              snapshotFiles.data?.docs;
 
               return ListView.builder(
                 padding: const EdgeInsets.symmetric(vertical: 20.0),
                 scrollDirection: Axis.vertical,
-                itemCount: snapshot.data!.docs.length,
+                itemCount: snapshotFiles.data!.docs.length,
                 itemBuilder: (context, theRecord) {
                   final QueryDocumentSnapshot<Map<String, dynamic>>
-                      theRecordItem = snapshot.data!.docs[theRecord];
+                      theRecordItem = snapshotFiles.data!.docs[theRecord];
 
                   // final DateTime dateTime = DateTime.parse(theRecordItem
                   //     .data()["fileCreatedAt"]

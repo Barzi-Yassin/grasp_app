@@ -14,10 +14,12 @@ class WidgetSubjectRecords extends StatelessWidget {
     Key? key,
     required this.theUser,
     required this.theFileSubjectName,
+    required this.theGetSubjectItemsLength,
   }) : super(key: key);
 
   final User theUser;
   final String theFileSubjectName;
+  final String theGetSubjectItemsLength;
 
   @override
   Widget build(BuildContext context) {
@@ -63,12 +65,12 @@ class WidgetSubjectRecords extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.end,
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children:  [
               Text(
-                '88',
+                theGetSubjectItemsLength,
                 style: TextStyle(fontSize: 14, letterSpacing: 0.5),
               ),
-              Text(
+              const Text(
                 ' items',
                 style: TextStyle(
                   fontSize: 12,

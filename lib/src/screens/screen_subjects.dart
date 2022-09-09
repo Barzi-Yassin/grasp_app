@@ -68,36 +68,51 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                       .doc(widget.theUser.uid)
                       .collection('subjects')
                       .snapshots(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
+                  // initialData: FirebaseFirestore.instance.collection("users").doc(widget.theUser.uid).collection("subjects").doc("sub 1").collection("files").snapshots(),
+                  builder: (context, snapshotSubject) {
+                    if (snapshotSubject.connectionState ==
+                        ConnectionState.waiting) {
                       return const CircularProgressIndicator();
-                    } else if (snapshot.hasError) {
-                      return Text("err ${snapshot.error}");
-                    } else if (snapshot.data == null || !snapshot.hasData) {
-                      return const Text('snapshot is empty(StreamBuilder)');
+                    } else if (snapshotSubject.hasError) {
+                      return Text("err ${snapshotSubject.error}");
+                    } else if (snapshotSubject.data == null ||
+                        !snapshotSubject.hasData) {
+                      return const Text(
+                          'snapshotSubject is empty(StreamBuilder)');
                     }
 
-                    // snapshot.data!.docs.first;
+                    // snapshotSubject.data!.docs.first;
                     debugPrint('22222');
-                    debugPrint(snapshot.data!.docs.length.toString());
-                    debugPrint(snapshot.data.toString());
+                    debugPrint(snapshotSubject.data!.docs.length.toString());
+                    debugPrint(snapshotSubject.data.toString());
 
-                    snapshot.data?.docs;
+                    snapshotSubject.data?.docs;
 
-                    return ListView.builder(
-                      // clipBehavior: Clip.hardEdge,
-                      padding: const EdgeInsets.symmetric(vertical: 20.0),
-                      scrollDirection: Axis.vertical,
-                      itemCount: snapshot.data!.docs.length,
-                      itemBuilder: (context, theRecord) {
-                        final theRecordItem = snapshot.data!.docs[theRecord];
-                        return WidgetSubjectRecords(
-                          theUser: widget.theUser,
-                          theFileSubjectName:
-                              theRecordItem.data()['subjectName'],
-                        );
-                      },
-                    );
+                    final int subjectLength = snapshotSubject.data!.docs.length;
+
+                    if (subjectLength == 0) {
+                      return customeText(theData: 'No subject found!');
+                    } else {
+                      return ListView.builder(
+                        // clipBehavior: Clip.hardEdge,
+                        padding: const EdgeInsets.symmetric(vertical: 20.0),
+                        scrollDirection: Axis.vertical,
+                        itemCount: snapshotSubject.data!.docs.length,
+                        itemBuilder: (context, theRecord) {
+                          final theRecordItem =
+                              snapshotSubject.data!.docs[theRecord];
+                          final theRecordSubjectName =
+                              theRecordItem.data()["subjectName"];
+                          return WidgetSubjectRecords(
+                            theUser: widget.theUser,
+                            theFileSubjectName:
+                                theRecordItem.data()['subjectName'],
+                            theGetSubjectItemsLength:
+                                snapshotSubject.data!.docs.length.toString(),
+                          );
+                        },
+                      );
+                    }
                   }),
             ),
           ],
