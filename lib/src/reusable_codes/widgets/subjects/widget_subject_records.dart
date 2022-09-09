@@ -1,7 +1,9 @@
 // ignore_for_file: unused_import
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:grasp_app/src/data/datalist_subject.dart';
 import 'package:grasp_app/src/routes/route_screens.dart';
 import 'package:grasp_app/src/screens/screen_subjects.dart';
@@ -11,17 +13,13 @@ import 'package:grasp_app/src/screens/screen_subject_files.dart';
 class WidgetSubjectRecords extends StatelessWidget {
   const WidgetSubjectRecords({
     Key? key,
-    required this.subjectRecordName,
-    required this.subjectRecordItemsNumber,
-    required this.theRecord,
+    required this.theUser,
+    required this.theFileSubjectName,
   }) : super(key: key);
 
-  final String subjectRecordName;
-  final int subjectRecordItemsNumber;
-  // final String theName=subjectRecordName;
-  // final String theName='';
-  // theName = subjectRecordName;
-  final int theRecord;
+  final User theUser;
+  final String theFileSubjectName;
+
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -46,15 +44,22 @@ class WidgetSubjectRecords extends StatelessWidget {
           //   RouteScreens.routeSubjectFiles,
           //   // arguments:
           // ),
-          onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: ((context) =>  ScreenSubjectFiles(
-                theRecordFromSubject: theRecord, 
-              )),
-              
+          onTap: () => Get.to(
+            ScreenSubjectFiles(
+              theUser: theUser,
+              theFileSubjectName: theFileSubjectName,
             ),
           ),
+
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: ((context) =>  ScreenSubjectFiles(
+          //       theRecordFromSubject: theRecord,
+          //     )),
+
+          //   ),
+          // ),
           minVerticalPadding: 20,
           iconColor: const Color.fromARGB(255, 0, 171, 193),
           leading: const Padding(
@@ -66,7 +71,7 @@ class WidgetSubjectRecords extends StatelessWidget {
             ),
           ),
           title: Text(
-            subjectRecordName,
+            theFileSubjectName,
             style: const TextStyle(fontSize: 15),
             maxLines: 1,
           ),
@@ -74,12 +79,12 @@ class WidgetSubjectRecords extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.end,
             mainAxisSize: MainAxisSize.min,
-            children: [
+            children: const [
               Text(
-                '$subjectRecordItemsNumber',
-                style: const TextStyle(fontSize: 14, letterSpacing: 0.5),
+                '88',
+                style: TextStyle(fontSize: 14, letterSpacing: 0.5),
               ),
-              const Text(
+              Text(
                 ' items',
                 style: TextStyle(
                   fontSize: 12,

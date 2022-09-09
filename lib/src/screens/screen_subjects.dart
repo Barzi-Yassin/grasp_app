@@ -90,17 +90,23 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                       scrollDirection: Axis.vertical,
                       itemCount: snapshot.data!.docs.length,
                       itemBuilder: (context, theRecord) {
+                        final theRecordItem = snapshot.data!.docs[theRecord];
                         return WidgetSubjectRecords(
-                            // subjectRecordName: datalistSubject[theRecord]
-                            //         ["subject_name"]
-                            //     .toString(),
-                            subjectRecordName: snapshot.data!.docs[theRecord]
-                                .data()["subjectName"],
-                            subjectRecordItemsNumber: int.parse(
-                              datalistSubject[theRecord]["subject_items_number"]
-                                  .toString(),
-                            ),
-                            theRecord: theRecord);
+                          theUser: widget.theUser,
+                          theFileSubjectName: theRecordItem.data()['subjectName'],
+                        );
+
+                        // WidgetSubjectRecords(
+                        //     // subjectRecordName: datalistSubject[theRecord]
+                        //     //         ["subject_name"]
+                        //     //     .toString(),
+                        //     subjectFileRecordName: snapshot.data!.docs[theRecord]
+                        //         .data()["subjectName"],
+                        //     subjectRecordItemsNumber: int.parse(
+                        //       datalistSubject[theRecord]["subject_items_number"]
+                        //           .toString(),
+                        //     ),
+                        //     theRecord: theRecord);
                       },
                     );
                   }),
@@ -121,9 +127,11 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                 await serviceFirestore
                     .createSubject(
                       user: widget.theUser,
-                      theSubjectName: controllerAddGraspSubject.text, // TODO: dispose it 
+                      theSubjectName:
+                          controllerAddGraspSubject.text, // TODO: dispose it
                       theSubjectItemsNumber: 1,
-                      theSubjectId: subjectidLocal++,
+                      // theSubjectId: subjectidLocal++,
+                      theSubjectId: 0,
                     )
                     .then(
                       (_) => Get.back(),
@@ -150,4 +158,3 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
     );
   }
 }
-
