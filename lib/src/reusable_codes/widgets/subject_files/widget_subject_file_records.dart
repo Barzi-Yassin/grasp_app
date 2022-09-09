@@ -54,26 +54,12 @@ class WidgetSubjectFileRecords extends StatelessWidget {
             ),
           ),
           subtitle: Text('$subjectFileRecordTime am - $subjectFileRecordDate'),
-          trailing: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.end,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              IconButton(
-                  onPressed: () {
-                    debugPrint('archive clicked');
-                  },
-                  icon: const Icon(Icons.archive_outlined)),
-              // const SizedBox(width: 10),
-              IconButton(
-                onPressed: () {
-                  debugPrint('trash clicked');
-                },
-                icon: const FaIcon(FontAwesomeIcons.trashCan),
-                color: Colors.cyan,
-              ),
-              // const SizedBox(width: 5),
-            ],
+          trailing: IconButton(
+            onPressed: () {
+              debugPrint('trash clicked');
+            },
+            icon: const FaIcon(FontAwesomeIcons.trashCan),
+            color: Colors.cyan,
           ),
         ),
       ),
