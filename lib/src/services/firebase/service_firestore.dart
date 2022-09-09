@@ -2,12 +2,13 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:grasp_app/src/models/grasp_file_model.dart';
 import 'package:grasp_app/src/models/grasp_subject_model.dart';
 import 'package:grasp_app/src/models/grasp_user_model.dart';
 
 class ServiceFirestore {
   final FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
-
+  // add user credential to db
   Future<GraspUserModel> addUserToDB({required User user}) async {
     GraspUserModel graspUserModel = GraspUserModel(
       userInAppId: 1,
@@ -23,6 +24,7 @@ class ServiceFirestore {
     return graspUserModel;
   }
 
+  // add user info to db
   Future<GraspUserModel> addUserInfoAfterAuthToDB({
     required User user,
     String? theName,
@@ -63,8 +65,39 @@ class ServiceFirestore {
         .collection("users")
         .doc(user.uid)
         .collection('subjects')
-        .doc('$theSubjectId-$theSubjectName')
+        .doc(theSubjectName)
         .set(graspSubjectModel.toMap());
     return graspSubjectModel;
+  }
+// create file
+  Future<GraspFileModel> createFile({
+    required User user,
+    required String theFileSubjectName,
+    required String theFileName,
+    required String theFileId,
+    bool? theIsFileFaved,
+    bool? theIsFileStared,
+    bool? theIsFileUpdated,
+  }) async {
+    GraspFileModel graspFileModel = GraspFileModel(
+      uid: user.uid,
+      fileSubjectIdName: theFileSubjectName,
+      fileName: theFileName,
+      fileId: theFileId,
+      fileCreatedAt: DateTime.now(),
+      fileUpdatedAt: DateTime.now(),
+      isFileFaved: theIsFileFaved,
+      isFileStared: theIsFileStared,
+    );
+
+    await firestoreInstance
+        .collection("users")
+        .doc(user.uid)
+        .collection("subjects")
+        .doc(theFileSubjectName)
+        .collection("files")
+        .doc(theFileName)
+        .set(graspFileModel.toMap());
+    return graspFileModel;
   }
 }
