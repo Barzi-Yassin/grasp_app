@@ -68,7 +68,7 @@ class WidgetSubjectRecords extends StatelessWidget {
             children:  [
               Text(
                 theGetSubjectItemsLength,
-                style: TextStyle(fontSize: 14, letterSpacing: 0.5),
+                style: const TextStyle(fontSize: 14, letterSpacing: 0.5), // TODO: update it
               ),
               const Text(
                 ' items',

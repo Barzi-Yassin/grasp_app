@@ -105,10 +105,9 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                               theRecordItem.data()["subjectName"];
                           return WidgetSubjectRecords(
                             theUser: widget.theUser,
-                            theFileSubjectName:
-                                theRecordItem.data()['subjectName'],
-                            theGetSubjectItemsLength:
-                                snapshotSubject.data!.docs.length.toString(),
+                            theFileSubjectName: theRecordSubjectName,
+                            theGetSubjectItemsLength: subjectLength
+                                .toString(), // TODO: return files length using provider
                           );
                         },
                       );
