@@ -38,7 +38,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
 
   List<String> listOfCurrentSubjectNames() {
     int len = listOfCurrentSubjectsName.length;
-    debugPrint('There are ${len+1} elements in the listOfCurrentSubjectsName');
+    debugPrint('There are ${len+1} subjects(s) in the listOfCurrentSubjectsName');
     return listOfCurrentSubjectsName;
   }
   // end listOfCurrentSubjectsName of the current subject names
@@ -95,7 +95,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                     }
 
                     // snapshotSubject.data!.docs.first;
-                    debugPrint('22222');
+                    debugPrint('22222subjects');
                     debugPrint(snapshotSubject.data!.docs.length.toString());
                     debugPrint(snapshotSubject.data.toString());
 
@@ -145,8 +145,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
             controller: controllerAddGraspSubject,
             title: 'Subject',
             theOnPressed: () async {
-              // debugPrint(listOfCurrentSubjectsName.contains('sub1').toString());
-              debugPrint(listOfCurrentSubjectsName.contains('sub1').toString());
+              debugPrint(listOfCurrentSubjectsName.contains(controllerAddGraspSubject.text).toString());
 
               if (controllerAddGraspSubject.text.isNotEmpty) {
                 if (!listOfCurrentSubjectsName.contains(controllerAddGraspSubject.text)) {
