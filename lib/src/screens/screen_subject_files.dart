@@ -25,6 +25,23 @@ class ScreenSubjectFiles extends StatefulWidget {
 }
 
 class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
+  
+  // start listOfCurrentFilesName of the current subject names
+  List<String> listOfCurrentFilesName = [];
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    listOfCurrentFilesName = <String>[];
+  }
+
+  List<String> listOfCurrentSubjectNames() {
+    int len = listOfCurrentFilesName.length;
+    debugPrint('There are ${len + 1} file(s) in the listOfCurrentFilesName');
+    return listOfCurrentFilesName;
+  }
+  // end listOfCurrentFilesName of the current subject names
+
   final ServiceFirestore serviceFirestore = ServiceFirestore();
 
   final TextEditingController controllerAddGraspFile = TextEditingController();
@@ -42,16 +59,11 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            InkWell(
-              onTap: () {
-                debugPrint('theFileSubjectName::${widget.theFileSubjectName}');
-              },
-              child: const FaIcon(
-                FontAwesomeIcons.solidFolderOpen,
-                size: 20,
-              ),
+            const FaIcon(
+              FontAwesomeIcons.solidFolderOpen,
+              size: 20,
             ),
-            Text(widget.theFileSubjectName),
+            Text('  ${widget.theFileSubjectName}'),
           ],
         ),
         // actions: [IconButton(onPressed: () {
@@ -83,35 +95,46 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
               }
 
               // snapshotFiles.data!.docs.first;
-              debugPrint('44444');
+              debugPrint('44444files');
               debugPrint(snapshotFiles.data!.docs.length.toString());
               debugPrint(snapshotFiles.data.toString());
 
               snapshotFiles.data?.docs;
 
-              return ListView.builder(
-                padding: const EdgeInsets.symmetric(vertical: 20.0),
-                scrollDirection: Axis.vertical,
-                itemCount: snapshotFiles.data!.docs.length,
-                itemBuilder: (context, theRecord) {
-                  final QueryDocumentSnapshot<Map<String, dynamic>>
-                      theRecordItem = snapshotFiles.data!.docs[theRecord];
+              final int filesLength = snapshotFiles.data!.docs.length;
 
-                  // final DateTime dateTime = DateTime.parse(theRecordItem
-                  //     .data()["fileCreatedAt"]
-                  //     .toDate()
-                  //     .toString());
+              if (filesLength == 0) {
+                return customeText(theData: 'No files found!');
+              } else {
+                return ListView.builder(
+                  padding: const EdgeInsets.symmetric(vertical: 20.0),
+                  scrollDirection: Axis.vertical,
+                  itemCount: snapshotFiles.data!.docs.length,
+                  itemBuilder: (context, theRecord) {
+                    final QueryDocumentSnapshot<Map<String, dynamic>>
+                        theRecordItem = snapshotFiles.data!.docs[theRecord];
+                    final theRecordFileName = theRecordItem.data()["fileName"];
 
-                  return WidgetSubjectFileRecords(
-                    subjectFileRecordId: "${theRecord + 1}",
-                    subjectFileRecordName: theRecordItem.data()["fileName"],
-                    subjectFileRecordTime:
-                        theRecordItem.data()["fileCreatedAt"].toString(),
-                    subjectFileRecordDate:
-                        theRecordItem.data()["fileCreatedAt"].toString(),
-                  );
-                },
-              );
+                    if (!listOfCurrentFilesName.contains(theRecordFileName)) {
+                      listOfCurrentSubjectNames().add(theRecordFileName);
+                    }
+
+                    // final DateTime dateTime = DateTime.parse(theRecordItem
+                    //     .data()["fileCreatedAt"]
+                    //     .toDate()
+                    //     .toString());
+
+                    return WidgetSubjectFileRecords(
+                      subjectFileRecordId: "${theRecord + 1}",
+                      subjectFileRecordName: theRecordItem.data()["fileName"],
+                      subjectFileRecordTime:
+                          theRecordItem.data()["fileCreatedAt"].toString(),
+                      subjectFileRecordDate:
+                          theRecordItem.data()["fileCreatedAt"].toString(),
+                    );
+                  },
+                );
+              }
             }),
       ),
       floatingActionButton: FloatingActionButton(
@@ -122,19 +145,32 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
           builder: (_) => DialogAdd(
             controller: controllerAddGraspFile,
             title: 'Grasp',
-            theOnPressed: () {
+            theOnPressed: () async {
+              debugPrint(listOfCurrentFilesName
+                  .contains(controllerAddGraspFile.text)
+                  .toString());
+
               if (controllerAddGraspFile.text.isNotEmpty) {
-                serviceFirestore
-                    .createFile(
-                      user: widget.theUser,
-                      theFileSubjectName: widget.theFileSubjectName,
-                      theFileName: controllerAddGraspFile.text,
-                      theFileId: 1.toString(),
-                      theIsFileFaved: false,
-                      theIsFileStared: true,
-                      theIsFileUpdated: false,
-                    )
-                    .then((_) => Get.back());
+                if (!listOfCurrentFilesName
+                    .contains(controllerAddGraspFile.text)) {
+                  await serviceFirestore
+                      .createFile(
+                        user: widget.theUser,
+                        theFileSubjectName: widget.theFileSubjectName,
+                        theFileName: controllerAddGraspFile.text,
+                        theFileId: 1.toString(),
+                        theIsFileFaved: false,
+                        theIsFileStared: true,
+                        theIsFileUpdated: false,
+                      )
+                      .then(
+                        (_) => Get.back(),
+                      );
+                } else {
+                  debugPrint('the file name is already exist !!!');
+                  Get.snackbar(
+                      'error', 'the file name is already exist !!!');
+                }
               } else {
                 Get.back();
                 Get.snackbar('error', 'Give a name to the new grasps!');
