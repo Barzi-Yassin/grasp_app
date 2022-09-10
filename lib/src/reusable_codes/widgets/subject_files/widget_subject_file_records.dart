@@ -1,14 +1,22 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:grasp_app/src/screens/main_screens/screen_messages.dart';
 
 class WidgetSubjectFileRecords extends StatelessWidget {
   const WidgetSubjectFileRecords({
     Key? key,
+    required this.theUser,
+    required this.theFileName,
     required this.subjectFileRecordId,
     required this.subjectFileRecordName,
     required this.subjectFileRecordTime,
     required this.subjectFileRecordDate,
   }) : super(key: key);
+
+  final User theUser;
+  final String theFileName;
 
   final String subjectFileRecordId;
   final String subjectFileRecordName;
@@ -33,6 +41,10 @@ class WidgetSubjectFileRecords extends StatelessWidget {
           ],
         ),
         child: ListTile(
+          onTap: () => Get.to(() => ScreenMessages(
+                theUser: theUser,
+                theFileName: theFileName,
+              )),
           dense: true,
           iconColor: const Color.fromARGB(255, 0, 171, 193),
           leading: Padding(

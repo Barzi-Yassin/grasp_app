@@ -188,8 +188,10 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                     //     'e7m:: ${theRecordFileCreatedAtVarListBoilerPlate['date']}');
 
                     return WidgetSubjectFileRecords(
+                      theUser: widget.theUser,
+                      theFileName: theRecordFileName,
                       subjectFileRecordId: "${theRecord + 1}",
-                      subjectFileRecordName: theRecordItem.data()["fileName"],
+                      subjectFileRecordName: theRecordFileName,
                       subjectFileRecordTime:
                           theRecordFileCreatedAtVarListBoilerPlate['time']
                               .toString(),
@@ -256,7 +258,6 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
       ),
     );
   }
-
 }
 
 
