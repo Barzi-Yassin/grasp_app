@@ -8,8 +8,8 @@ import 'package:grasp_app/src/screens/auth/screen_signup.dart';
 
 // import 'package:grasp_app/src/screens/screen_subject_files.dart';
 
-import 'package:grasp_app/src/screens/screen_subjects.dart';
-import 'package:grasp_app/src/screens/screen_subject_files.dart';
+import 'package:grasp_app/src/screens/main_screens/screen_subjects.dart';
+import 'package:grasp_app/src/screens/main_screens/screen_subject_files.dart';
 import 'package:grasp_app/src/screens/screens_from_enddrawer/screen_filter_archived.dart';
 import 'package:grasp_app/src/screens/screens_from_enddrawer/screen_filter_favorites.dart';
 import 'package:grasp_app/src/screens/screens_from_enddrawer/screen_filter_importants.dart';

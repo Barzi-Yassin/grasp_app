@@ -13,7 +13,7 @@ import 'package:grasp_app/src/reusable_codes/functions/loadings/loading_indicato
 import 'package:grasp_app/src/reusable_codes/widgets/dialogs/dialog_add.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/end_drawer/widget_end_drawer.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/subjects/widget_subject_records.dart';
-import 'package:grasp_app/src/screens/screen_subject_files.dart';
+import 'package:grasp_app/src/screens/main_screens/screen_subject_files.dart';
 import 'package:grasp_app/src/services/firebase/service_firestore.dart';
 
 class ScreenSubjects extends StatefulWidget {

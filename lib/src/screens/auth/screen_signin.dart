@@ -4,7 +4,7 @@ import 'package:grasp_app/src/reusable_codes/functions/loadings/loading_indicato
 import 'package:grasp_app/src/reusable_codes/widgets/auth_state_widgets.dart/auth_states.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/screens/auth/screen_signup.dart';
-import 'package:grasp_app/src/screens/screen_subjects.dart';
+import 'package:grasp_app/src/screens/main_screens/screen_subjects.dart';
 import 'package:grasp_app/src/services/firebase/service_auth.dart';
 
 class ScreenSignin extends StatefulWidget {

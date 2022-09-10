@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/loadings/loading_indicator.dart';
-import 'package:grasp_app/src/screens/screen_subjects.dart';
+import 'package:grasp_app/src/screens/main_screens/screen_subjects.dart';
 import 'package:grasp_app/src/services/firebase/service_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 

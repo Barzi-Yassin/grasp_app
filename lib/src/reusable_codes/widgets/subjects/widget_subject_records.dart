@@ -6,8 +6,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:grasp_app/src/data/datalist_subject.dart';
 import 'package:grasp_app/src/routes/route_screens.dart';
-import 'package:grasp_app/src/screens/screen_subjects.dart';
-import 'package:grasp_app/src/screens/screen_subject_files.dart';
+import 'package:grasp_app/src/screens/main_screens/screen_subjects.dart';
+import 'package:grasp_app/src/screens/main_screens/screen_subject_files.dart';
 
 class WidgetSubjectRecords extends StatelessWidget {
   const WidgetSubjectRecords({
