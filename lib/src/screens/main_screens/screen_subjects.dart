@@ -78,7 +78,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
             Expanded(
               child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                   // collection("users").doc('subjects').collection(theSubjectId.toString()).doc(user.uid)
-                  stream: FirebaseFirestore.instance
+                  stream: serviceFirestore.firestoreInstance
                       .collection("users")
                       .doc(widget.theUser.uid)
                       .collection('subjects')
