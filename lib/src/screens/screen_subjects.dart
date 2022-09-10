@@ -27,23 +27,21 @@ class ScreenSubjects extends StatefulWidget {
 class _ScreenSubjectsState extends State<ScreenSubjects> {
   final ServiceFirestore serviceFirestore = ServiceFirestore();
 
-  // start list of the current subject names
-
-  //  TODO: the list values is duplicated many times
-  List<String> list = [];
+  // start listOfCurrentSubjectsName of the current subject names
+  List<String> listOfCurrentSubjectsName = [];
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    list = <String>[];
+    listOfCurrentSubjectsName = <String>[];
   }
 
   List<String> listOfCurrentSubjectNames() {
-    int len = list.length;
-    debugPrint('There are $len elements in the list');
-    return list;
+    int len = listOfCurrentSubjectsName.length;
+    debugPrint('There are $len elements in the listOfCurrentSubjectsName');
+    return listOfCurrentSubjectsName;
   }
-  // end list of the current subject names
+  // end listOfCurrentSubjectsName of the current subject names
 
   final TextEditingController controllerAddGraspSubject =
       TextEditingController();
@@ -121,7 +119,12 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                               snapshotSubject.data!.docs[theRecord];
                           final theRecordSubjectName =
                               theRecordItem.data()["subjectName"];
-                          listOfCurrentSubjectNames().add(theRecordSubjectName);
+
+                          if (!listOfCurrentSubjectsName.contains(theRecordSubjectName)) {
+                            listOfCurrentSubjectNames()
+                                .add(theRecordSubjectName);
+                          }
+
                           return WidgetSubjectRecords(
                             theUser: widget.theUser,
                             theFileSubjectName: theRecordSubjectName,
@@ -145,11 +148,11 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
             controller: controllerAddGraspSubject,
             title: 'Subject',
             theOnPressed: () async {
-              // debugPrint(list.contains('sub1').toString());
-              debugPrint(list.contains('sub1').toString());
+              // debugPrint(listOfCurrentSubjectsName.contains('sub1').toString());
+              debugPrint(listOfCurrentSubjectsName.contains('sub1').toString());
 
               if (controllerAddGraspSubject.text.isNotEmpty) {
-                if (!list.contains(controllerAddGraspSubject.text)) {
+                if (!listOfCurrentSubjectsName.contains(controllerAddGraspSubject.text)) {
                   await serviceFirestore
                       .createSubject(
                         user: widget.theUser,
