@@ -157,7 +157,7 @@ class EndDrawer extends StatelessWidget {
                           enddrawerRecordRoutePath: RouteScreens.routeMyProfile,
                           isSignOut: false,
                         ),
-                        SizedBox(height: 18),
+                        const SizedBox(height: 18),
                         WidgetEndDrawerRecords(
                           enddrawerRecordId: 2,
                           enddrawerRecordTitle: "Stars",

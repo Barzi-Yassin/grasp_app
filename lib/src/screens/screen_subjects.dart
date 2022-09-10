@@ -84,7 +84,6 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                       .doc(widget.theUser.uid)
                       .collection('subjects')
                       .snapshots(),
-                  // initialData: FirebaseFirestore.instance.collection("users").doc(widget.theUser.uid).collection("subjects").doc("sub 1").collection("files").snapshots(),
                   builder: (context, snapshotSubject) {
                     if (snapshotSubject.connectionState ==
                         ConnectionState.waiting) {
