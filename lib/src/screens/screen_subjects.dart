@@ -38,7 +38,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
 
   List<String> listOfCurrentSubjectNames() {
     int len = listOfCurrentSubjectsName.length;
-    debugPrint('There are $len elements in the listOfCurrentSubjectsName');
+    debugPrint('There are ${len+1} elements in the listOfCurrentSubjectsName');
     return listOfCurrentSubjectsName;
   }
   // end listOfCurrentSubjectsName of the current subject names
