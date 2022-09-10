@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:grasp_app/src/data/datalist_subject.dart';
 import 'package:grasp_app/src/models/grasp_user_model.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
+import 'package:grasp_app/src/reusable_codes/functions/loadings/loading_indicator.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/dialogs/dialog_add.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/end_drawer/widget_end_drawer.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/subjects/widget_subject_records.dart';
@@ -85,7 +86,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                   builder: (context, snapshotSubject) {
                     if (snapshotSubject.connectionState ==
                         ConnectionState.waiting) {
-                      return const CircularProgressIndicator();
+                      return loadingIndicator();
                     } else if (snapshotSubject.hasError) {
                       return Text("err ${snapshotSubject.error}");
                     } else if (snapshotSubject.data == null ||
