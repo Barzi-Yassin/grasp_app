@@ -5,6 +5,7 @@ import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
+import 'package:grasp_app/src/reusable_codes/functions/loadings/loading_indicator.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/dialogs/dialog_add.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/end_drawer/widget_end_drawer.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/subject_files/widget_subject_file_records.dart';
@@ -25,7 +26,6 @@ class ScreenSubjectFiles extends StatefulWidget {
 }
 
 class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
-  
   // start listOfCurrentFilesName of the current subject names
   List<String> listOfCurrentFilesName = [];
 
@@ -87,7 +87,7 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                 .snapshots(),
             builder: (context, snapshotFiles) {
               if (snapshotFiles.connectionState == ConnectionState.waiting) {
-                return const CircularProgressIndicator();
+                return loadingIndicator();
               } else if (snapshotFiles.hasError) {
                 return Text("err ${snapshotFiles.error}");
               } else if (snapshotFiles.data == null || !snapshotFiles.hasData) {
@@ -114,23 +114,79 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                     final QueryDocumentSnapshot<Map<String, dynamic>>
                         theRecordItem = snapshotFiles.data!.docs[theRecord];
                     final theRecordFileName = theRecordItem.data()["fileName"];
+                    final theRecordFileCreatedAt =
+                        theRecordItem.data()["fileCreatedAt"];
 
                     if (!listOfCurrentFilesName.contains(theRecordFileName)) {
                       listOfCurrentSubjectNames().add(theRecordFileName);
                     }
+                    final theRecordFileCreatedAtConverted =
+                        DateTime.fromMillisecondsSinceEpoch(
+                            theRecordFileCreatedAt);
 
-                    // final DateTime dateTime = DateTime.parse(theRecordItem
-                    //     .data()["fileCreatedAt"]
-                    //     .toDate()
-                    //     .toString());
+                    // var theRecordFileCreatedAtMap = {
+                    //   'year': theRecordFileCreatedAtConverted.year.toString(),
+                    //   'month': theRecordFileCreatedAtConverted.month.toString(),
+                    //   'day': theRecordFileCreatedAtConverted.day.toString(),
+                    //   'hour': theRecordFileCreatedAtConverted.hour.toString(),
+                    //   'minutes':
+                    //       theRecordFileCreatedAtConverted.minute.toString(),
+                    //   'seconds':
+                    //       theRecordFileCreatedAtConverted.second.toString(),
+                    //   'millisecond': theRecordFileCreatedAtConverted.millisecond
+                    //       .toString(),
+                    // };
+
+                    // debugPrint(
+                    //     'hello $theRecordFileName :: ${theRecordFileCreatedAtMap['year']}');
+                    // debugPrint(
+                    //     'hello $theRecordFileName :: ${theRecordFileCreatedAtMap['month']}');
+                    // debugPrint(
+                    //     'hello $theRecordFileName :: ${theRecordFileCreatedAtMap['day']}');
+                    // debugPrint(
+                    //     'hello $theRecordFileName :: ${theRecordFileCreatedAtMap['hour']}');
+                    // debugPrint(
+                    //     'hello $theRecordFileName :: ${theRecordFileCreatedAtMap['minutes']}');
+                    // debugPrint(
+                    //     'hello $theRecordFileName :: ${theRecordFileCreatedAtMap['seconds']}');
+                    // debugPrint(
+                    //     'hello $theRecordFileName :: ${theRecordFileCreatedAtMap['millisecond']}');
+
+                    // final String year =
+                    //     theRecordFileCreatedAtConverted.year.toString();
+                    // final String month =
+                    //     theRecordFileCreatedAtConverted.month.toString();
+                    // final String day =
+                    //     theRecordFileCreatedAtConverted.day.toString();
+                    // final String hour =
+                    //     theRecordFileCreatedAtConverted.hour.toString();
+                    // final String minute =
+                    //     theRecordFileCreatedAtConverted.minute.toString();
+
+                    // debugPrint(
+                    //     '$theRecordFileName created at:: $theRecordFileCreatedAtConverted');
+                    // debugPrint('$theRecordFileName year is:: $year');
+                    // debugPrint('$theRecordFileName month is:: $month');
+                    // debugPrint('$theRecordFileName day is:: $day');
+                    // debugPrint('$theRecordFileName hour is:: $hour');
+                    // debugPrint('$theRecordFileName minute is:: $minute');
+
+                    var theRecordFileCreatedAtVarListBoilerPlate = {
+                      'time': '${theRecordFileCreatedAtConverted.hour}:${theRecordFileCreatedAtConverted.minute}',
+                      'date': '${theRecordFileCreatedAtConverted.day}-${theRecordFileCreatedAtConverted.month}-${theRecordFileCreatedAtConverted.year}',
+                      // 'date': theRecordFileCreatedAtConverted.month.toString(),
+                    };
+                    debugPrint('e7m:: ${theRecordFileCreatedAtVarListBoilerPlate['time']}');
+                    debugPrint('e7m:: ${theRecordFileCreatedAtVarListBoilerPlate['date']}');
+                    debugPrint('ehm::');
 
                     return WidgetSubjectFileRecords(
                       subjectFileRecordId: "${theRecord + 1}",
                       subjectFileRecordName: theRecordItem.data()["fileName"],
                       subjectFileRecordTime:
-                          theRecordItem.data()["fileCreatedAt"].toString(),
+                          theRecordFileCreatedAtVarListBoilerPlate['time'].toString(),
                       subjectFileRecordDate:
-                          theRecordItem.data()["fileCreatedAt"].toString(),
+                          theRecordFileCreatedAtVarListBoilerPlate['date'].toString(),
                     );
                   },
                 );
@@ -168,8 +224,7 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                       );
                 } else {
                   debugPrint('the file name is already exist !!!');
-                  Get.snackbar(
-                      'error', 'the file name is already exist !!!');
+                  Get.snackbar('error', 'the file name is already exist !!!');
                 }
               } else {
                 Get.back();
@@ -193,3 +248,13 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
     );
   }
 }
+
+
+
+/*
+
+f2 created at:: 2022-09-10 06:34:04.933 :: 1662780844933
+f3 created at:: 2022-09-10 06:42:30.413 :: 1662781350413
+f4 created at:: 2022-09-10 06:45:18.378 :: 1662781518378
+
+*/

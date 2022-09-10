@@ -1,24 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class WidgetSubjectFileRecords extends StatelessWidget {
   const WidgetSubjectFileRecords({
     Key? key,
-    // required this.subjectRecordName,
     required this.subjectFileRecordId,
     required this.subjectFileRecordName,
     required this.subjectFileRecordTime,
     required this.subjectFileRecordDate,
-    // required this.subjectRecordFileItemsNumber,
   }) : super(key: key);
 
-  // final String subjectRecordName;
   final String subjectFileRecordId;
   final String subjectFileRecordName;
   final String subjectFileRecordTime;
   final String subjectFileRecordDate;
-  // final int subjectRecordFileItemsNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +23,7 @@ class WidgetSubjectFileRecords extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 10.0, left: 6.0, right: 6.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(13.0),
-          color: Colors.white,
+          color: Colors.white.withOpacity(0.9),
           boxShadow: const [
             BoxShadow(
               color: Colors.grey,
@@ -53,7 +48,7 @@ class WidgetSubjectFileRecords extends StatelessWidget {
               textAlign: TextAlign.start,
             ),
           ),
-          subtitle: Text('$subjectFileRecordTime am - $subjectFileRecordDate'),
+          subtitle: Text('$subjectFileRecordTime am • $subjectFileRecordDate'),
           trailing: IconButton(
             onPressed: () {
               debugPrint('trash clicked');
