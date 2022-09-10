@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:grasp_app/src/reusable_codes/functions/date_time_functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/loadings/loading_indicator.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/dialogs/dialog_add.dart';
@@ -43,6 +44,7 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
   // end listOfCurrentFilesName of the current subject names
 
   final ServiceFirestore serviceFirestore = ServiceFirestore();
+  final DateTimeOptimizer dateTimeOptimizer = DateTimeOptimizer();
 
   final TextEditingController controllerAddGraspFile = TextEditingController();
 
@@ -172,16 +174,18 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                     // debugPrint('$theRecordFileName minute is:: $minute');
 
                     var theRecordFileCreatedAtVarListBoilerPlate = {
-                      'time':
-                          '${theRecordFileCreatedAtConverted.hour}:${theRecordFileCreatedAtConverted.minute}',
+                      'time': dateTimeOptimizer.dateTimeTwelveHourFormater(
+                          hourNumber: theRecordFileCreatedAtConverted.hour,
+                          minuteNumber: theRecordFileCreatedAtConverted.minute),
+                      // '${theRecordFileCreatedAtConverted.hour}:${theRecordFileCreatedAtConverted.minute}',
                       'date':
-                          '${numberToMonthName(monthNumber: theRecordFileCreatedAtConverted.month)}.${theRecordFileCreatedAtConverted.day}, ${theRecordFileCreatedAtConverted.year}',
+                          '${dateTimeOptimizer.dateTimeNumberToMonthName(monthNumber: theRecordFileCreatedAtConverted.month)}.${theRecordFileCreatedAtConverted.day}, ${theRecordFileCreatedAtConverted.year}',
                       // 'date': theRecordFileCreatedAtConverted.month.toString(),
                     };
-                    debugPrint(
-                        'e7m:: ${theRecordFileCreatedAtVarListBoilerPlate['time']}');
-                    debugPrint(
-                        'e7m:: ${theRecordFileCreatedAtVarListBoilerPlate['date']}');
+                    // debugPrint(
+                    //     'e7m:: ${theRecordFileCreatedAtVarListBoilerPlate['time']}');
+                    // debugPrint(
+                    //     'e7m:: ${theRecordFileCreatedAtVarListBoilerPlate['date']}');
 
                     return WidgetSubjectFileRecords(
                       subjectFileRecordId: "${theRecord + 1}",
@@ -253,52 +257,7 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
     );
   }
 
-  String numberToMonthName({required int monthNumber}) {
-    String result = "";
-    switch (monthNumber) {
-      case 1:
-        result = "Jan";
-        break;
-      case 2:
-        result = "Feb";
-        break;
-      case 3:
-        result = "Mar";
-        break;
-      case 4:
-        result = "Apr";
-        break;
-      case 5:
-        result = "May";
-        break;
-      case 6:
-        result = "Jun";
-        break;
-      case 7:
-        result = "july";
-        break;
-      case 8:
-        result = "Aug";
-        break;
-      case 9:
-        result = "Sep";
-        break;
-      case 10:
-        result = "Oct";
-        break;
-      case 11:
-        result = "Nov";
-        break;
-      case 12:
-        result = "Dec";
-        break;
-      default:
-        result = 'invalid month number';
-    }
-    return result;
-  }
 }
-
 
 
 /*

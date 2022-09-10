@@ -48,7 +48,7 @@ class WidgetSubjectFileRecords extends StatelessWidget {
               textAlign: TextAlign.start,
             ),
           ),
-          subtitle: Text('$subjectFileRecordTime am • $subjectFileRecordDate'),
+          subtitle: Text('$subjectFileRecordTime • $subjectFileRecordDate'),
           trailing: IconButton(
             onPressed: () {
               debugPrint('trash clicked');
