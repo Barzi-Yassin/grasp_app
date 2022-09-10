@@ -46,8 +46,6 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
   final TextEditingController controllerAddGraspSubject =
       TextEditingController();
 
-  int subjectidLocal = 1000;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
