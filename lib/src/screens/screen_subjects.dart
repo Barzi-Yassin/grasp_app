@@ -43,7 +43,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
     debugPrint('There are $len elements in the list');
     return list;
   }
-  // start list of the current subject names
+  // end list of the current subject names
 
   final TextEditingController controllerAddGraspSubject =
       TextEditingController();
