@@ -27,6 +27,24 @@ class ScreenSubjects extends StatefulWidget {
 class _ScreenSubjectsState extends State<ScreenSubjects> {
   final ServiceFirestore serviceFirestore = ServiceFirestore();
 
+  // start list of the current subject names
+
+  //  TODO: the list values is duplicated many times
+  List<String> list = [];
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    list = <String>[];
+  }
+
+  List<String> listOfCurrentSubjectNames() {
+    int len = list.length;
+    debugPrint('There are $len elements in the list');
+    return list;
+  }
+  // start list of the current subject names
+
   final TextEditingController controllerAddGraspSubject =
       TextEditingController();
 
@@ -103,6 +121,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                               snapshotSubject.data!.docs[theRecord];
                           final theRecordSubjectName =
                               theRecordItem.data()["subjectName"];
+                          listOfCurrentSubjectNames().add(theRecordSubjectName);
                           return WidgetSubjectRecords(
                             theUser: widget.theUser,
                             theFileSubjectName: theRecordSubjectName,
@@ -126,21 +145,30 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
             controller: controllerAddGraspSubject,
             title: 'Subject',
             theOnPressed: () async {
+              // debugPrint(list.contains('sub1').toString());
+              debugPrint(list.contains('sub1').toString());
+
               if (controllerAddGraspSubject.text.isNotEmpty) {
-                await serviceFirestore
-                    .createSubject(
-                      user: widget.theUser,
-                      theSubjectName:
-                          controllerAddGraspSubject.text, // TODO: dispose it
-                      theSubjectItemsNumber: 1,
-                      // theSubjectId: subjectidLocal++,
-                      theSubjectId: 0,
-                    )
-                    .then(
-                      (_) => Get.back(),
-                    );
+                if (!list.contains(controllerAddGraspSubject.text)) {
+                  await serviceFirestore
+                      .createSubject(
+                        user: widget.theUser,
+                        theSubjectName:
+                            controllerAddGraspSubject.text, // TODO: dispose it
+                        theSubjectItemsNumber: 1,
+                        // theSubjectId: subjectidLocal++,
+                        theSubjectId: 0,
+                      )
+                      .then(
+                        (_) => Get.back(),
+                      );
+                } else {
+                  debugPrint('the subject name is already exist !!!');
+                  Get.snackbar(
+                      'error', 'the subject name is already exist !!!');
+                }
               } else {
-                Get.back();
+                // Get.back();
                 Get.snackbar('error', 'Give a name to the new subjects!');
               }
             },
