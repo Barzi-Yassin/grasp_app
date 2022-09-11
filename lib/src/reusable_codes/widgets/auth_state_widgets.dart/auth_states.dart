@@ -13,9 +13,20 @@ class InputEmail extends StatefulWidget {
 
 class _InputEmailState extends State<InputEmail> {
   @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
+
+  @override
   void initState() {
     super.initState();
-    widget.theControllerEmail.addListener(() => setState(() {}));
+    widget.theControllerEmail.addListener(() {
+      if (mounted) {
+        setState(() {});
+      }
+    });
   }
 
   @override
@@ -72,9 +83,20 @@ class InputPassword extends StatefulWidget {
 
 class _InputPasswordState extends State<InputPassword> {
   @override
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
+ 
+  @override
   void initState() {
     super.initState();
-    widget.theControllerPassword.addListener(() => setState(() {}));
+    widget.theControllerPassword.addListener(() {
+      if (mounted) {
+        setState(() {});
+      }
+    });
   }
 
   IconData passwordHideShowIconHandler = Icons.visibility_off;
