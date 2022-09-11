@@ -79,7 +79,11 @@ class _ScreenSigninState extends State<ScreenSignin> {
                                 debugPrint(
                                   'controllerSigninEmail= <${controllerSigninEmail.text}>',
                                 );
-                                setState(() => isLoading = false);
+                                setState(() {
+                                  isLoading = false;
+                                  controllerSigninEmail.clear();
+                                  controllerSigninPassword.clear();
+                                });
                                 Get.offAll(
                                   ScreenSubjects(
                                     theUser: credential.user!,

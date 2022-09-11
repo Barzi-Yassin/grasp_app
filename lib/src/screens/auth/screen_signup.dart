@@ -90,7 +90,11 @@ class _ScreenSignupState extends State<ScreenSignup> {
                                 await serviceFirestore
                                     .addUserToDB(user: credential.user!)
                                     .then((value) async {
-                                  setState(() => isLoading = false);
+                                  setState(() {
+                                    isLoading = false;
+                                    controllerSignupEmail.clear();
+                                    controllerSignupPassword.clear();
+                                  });
                                   await Get.offAll(
                                     ScreenSetUserProfileName(
                                       theUser: credential.user!,
