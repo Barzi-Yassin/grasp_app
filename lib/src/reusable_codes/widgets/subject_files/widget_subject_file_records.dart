@@ -9,6 +9,7 @@ class WidgetSubjectFileRecords extends StatelessWidget {
     Key? key,
     required this.theUser,
     required this.theFileName,
+    required this.theFileSubjectName,
     required this.subjectFileRecordId,
     required this.subjectFileRecordName,
     required this.subjectFileRecordTime,
@@ -17,6 +18,7 @@ class WidgetSubjectFileRecords extends StatelessWidget {
 
   final User theUser;
   final String theFileName;
+  final String theFileSubjectName;
 
   final String subjectFileRecordId;
   final String subjectFileRecordName;
@@ -44,6 +46,7 @@ class WidgetSubjectFileRecords extends StatelessWidget {
           onTap: () => Get.to(() => ScreenMessages(
                 theUser: theUser,
                 theFileName: theFileName,
+                theFileSubjectName: theFileSubjectName,
               )),
           dense: true,
           iconColor: const Color.fromARGB(255, 0, 171, 193),

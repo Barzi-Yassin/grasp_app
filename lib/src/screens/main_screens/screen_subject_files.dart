@@ -190,6 +190,7 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                     return WidgetSubjectFileRecords(
                       theUser: widget.theUser,
                       theFileName: theRecordFileName,
+                      theFileSubjectName: widget.theFileSubjectName,
                       subjectFileRecordId: "${theRecord + 1}",
                       subjectFileRecordName: theRecordFileName,
                       subjectFileRecordTime:
