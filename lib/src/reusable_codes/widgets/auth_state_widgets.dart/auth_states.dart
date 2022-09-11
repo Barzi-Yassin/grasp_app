@@ -1,18 +1,27 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 
-class InputEmail extends StatelessWidget {
+class InputEmail extends StatefulWidget {
   const InputEmail({Key? key, required this.theControllerEmail})
       : super(key: key);
 
   final TextEditingController theControllerEmail;
 
   @override
+  State<InputEmail> createState() => _InputEmailState();
+}
+
+class _InputEmailState extends State<InputEmail> {
+  @override
+  void initState() {
+    super.initState();
+    widget.theControllerEmail.addListener(() => setState(() {}));
+  }
+
+  @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: theControllerEmail,
+      controller: widget.theControllerEmail,
       textAlign: TextAlign.center,
       keyboardType: TextInputType.emailAddress,
       textInputAction: TextInputAction.next,
@@ -30,15 +39,20 @@ class InputEmail extends StatelessWidget {
             theSize: 28,
           ),
         ),
-        suffixIcon: customePaddingOnly(
-          thePaddingRight: 10,
-          theChild: customeIconButton(
-            theOnPressed: () => theControllerEmail.clear(),
-            theIcon: Icons.close,
-            theSize: 22,
-            theColor: Colors.grey.shade400,
-          ),
-        ),
+        suffixIcon: widget.theControllerEmail.text.isEmpty
+            ? const SizedBox(
+                width: 0,
+                height: 0,
+              )
+            : customePaddingOnly(
+                thePaddingRight: 10,
+                theChild: customeIconButton(
+                  theOnPressed: () => widget.theControllerEmail.clear(),
+                  theIcon: Icons.close,
+                  theSize: 22,
+                  theColor: Colors.grey.shade400,
+                ),
+              ),
         border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(40)),
             borderSide: BorderSide.none),
@@ -57,6 +71,12 @@ class InputPassword extends StatefulWidget {
 }
 
 class _InputPasswordState extends State<InputPassword> {
+  @override
+  void initState() {
+    super.initState();
+    widget.theControllerPassword.addListener(() => setState(() {}));
+  }
+
   IconData passwordHideShowIconHandler = Icons.visibility_off;
   bool hidePassword = true;
 
@@ -82,23 +102,28 @@ class _InputPasswordState extends State<InputPassword> {
             theSize: 27,
           ),
         ),
-        suffixIcon: customePaddingOnly(
-          thePaddingRight: 10,
-          theChild: customeIconButton(
-            theOnPressed: () => setState(() {
-              hidePassword = !hidePassword;
-              debugPrint(hidePassword.toString());
-              if (hidePassword) {
-                passwordHideShowIconHandler = Icons.visibility_off;
-              } else {
-                passwordHideShowIconHandler = Icons.visibility_sharp;
-              }
-            }),
-            theIcon: passwordHideShowIconHandler,
-            theSize: 21,
-            theColor: Colors.grey.shade400,
-          ),
-        ),
+        suffixIcon: widget.theControllerPassword.text.isEmpty
+            ? const SizedBox(
+                width: 0,
+                height: 0,
+              )
+            : customePaddingOnly(
+                thePaddingRight: 10,
+                theChild: customeIconButton(
+                  theOnPressed: () => setState(() {
+                    hidePassword = !hidePassword;
+                    debugPrint(hidePassword.toString());
+                    if (hidePassword) {
+                      passwordHideShowIconHandler = Icons.visibility_off;
+                    } else {
+                      passwordHideShowIconHandler = Icons.visibility_sharp;
+                    }
+                  }),
+                  theIcon: passwordHideShowIconHandler,
+                  theSize: 21,
+                  theColor: Colors.grey.shade400,
+                ),
+              ),
         border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(40)),
             borderSide: BorderSide.none),
@@ -106,4 +131,3 @@ class _InputPasswordState extends State<InputPassword> {
     );
   }
 }
-
