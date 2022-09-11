@@ -115,6 +115,10 @@ class _ScreenSignupState extends State<ScreenSignup> {
                     ),
                     TextButton(
                       onPressed: () {
+                        setState(() {
+                          controllerSignupEmail.clear();
+                          controllerSignupPassword.clear();
+                        });
                         Get.to(() => const ScreenSignin());
                       },
                       child: customeText(
