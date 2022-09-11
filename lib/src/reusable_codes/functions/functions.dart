@@ -14,6 +14,35 @@ BoxDecoration backgroundGradientCyan() {
   );
 }
 
+// // screen body gradient
+// BoxDecoration messagesContainer() {
+//   return BoxDecoration(
+//     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(40)),
+//     border: const Border(
+//       top: BorderSide(color: Colors.white, width: 1, style: BorderStyle.solid),
+//       bottom: BorderSide(color: Colors.white, width: 1, style: BorderStyle.solid),
+//       left: BorderSide(color: Colors.white, width: 1, style: BorderStyle.solid),
+//       right: BorderSide(color: Colors.white, width: 1, style: BorderStyle.solid),
+//     ),
+//     gradient: LinearGradient(
+//       begin: Alignment.topCenter,
+//       end: Alignment.bottomCenter,
+//       colors: [
+//         Colors.cyan.shade300,
+//         Colors.grey.shade400,
+//       ],
+//     ),
+//   );
+// }
+
+// // screen body gradient
+// BoxDecoration messagesContainerHeader() {
+//   return BoxDecoration(
+//     borderRadius: BorderRadius.circular(180),
+//     border: Border.all(color: Colors.white),
+//   );
+// }
+
 // dialog header gradient
 LinearGradient dialogHeaderGradient() {
   return LinearGradient(
