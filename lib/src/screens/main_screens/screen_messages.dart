@@ -129,15 +129,24 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      customeIconButton(
-                        theOnPressed: () {},
-                        theIcon: Icons.star_border,
-                        theSize: 30,
+                      customePaddingOnly(
+                        thePaddingRight: 5,
+                        thePaddingBottom: 11,
+
+                        theChild: customeIconButton(
+                          theOnPressed: () {},
+                          theIcon: Icons.star_border,
+                          theSize: 30,
+                        ),
                       ),
-                      customeIconButton(
-                        theOnPressed: () {},
-                        theIcon: Icons.favorite_border,
-                        theSize: 25,
+                      customePaddingOnly(
+                        thePaddingRight: 5,
+                        thePaddingBottom: 5,
+                        theChild: customeIconButton(
+                          theOnPressed: () {},
+                          theIcon: Icons.favorite_border,
+                          theSize: 25,
+                        ),
                       ),
                     ],
                   ),
@@ -170,41 +179,41 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                             .doc(widget.theFileName)
                             .collection('messages')
                             .snapshots(),
-                        builder: (context, snapshotFiles) {
-                          if (snapshotFiles.connectionState ==
+                        builder: (context, snapshotMessages) {
+                          if (snapshotMessages.connectionState ==
                               ConnectionState.waiting) {
                             return loadingIndicator();
-                          } else if (snapshotFiles.hasError) {
-                            return Text("err ${snapshotFiles.error}");
-                          } else if (snapshotFiles.data == null ||
-                              !snapshotFiles.hasData) {
+                          } else if (snapshotMessages.hasError) {
+                            return Text("err ${snapshotMessages.error}");
+                          } else if (snapshotMessages.data == null ||
+                              !snapshotMessages.hasData) {
                             return const Text(
-                                'snapshotFiles is empty(StreamBuilder)');
+                                'snapshotMessages is empty(StreamBuilder)');
                           }
 
-                          // snapshotFiles.data!.docs.first;
-                          debugPrint('44444files');
+                          // snapshotMessages.data!.docs.first;
+                          debugPrint('44444messages');
                           debugPrint(
-                              snapshotFiles.data!.docs.length.toString());
-                          debugPrint(snapshotFiles.data.toString());
+                              snapshotMessages.data!.docs.length.toString());
+                          debugPrint(snapshotMessages.data.toString());
 
-                          snapshotFiles.data?.docs;
+                          snapshotMessages.data?.docs;
 
-                          final int filesLength =
-                              snapshotFiles.data!.docs.length;
+                          final int messagesLength =
+                              snapshotMessages.data!.docs.length;
 
-                          if (filesLength == 0) {
+                          if (messagesLength == 0) {
                             return customeText(theData: 'No messages found!');
                           } else {
                             return ListView.builder(
                               // padding:
                               //     const EdgeInsets.symmetric(vertical: 20.0),
                               scrollDirection: Axis.vertical,
-                              itemCount: snapshotFiles.data!.docs.length,
+                              itemCount: snapshotMessages.data!.docs.length,
                               itemBuilder: (context, theRecord) {
                                 final QueryDocumentSnapshot<
                                         Map<String, dynamic>> theRecordItem =
-                                    snapshotFiles.data!.docs[theRecord];
+                                    snapshotMessages.data!.docs[theRecord];
                                 final theMessage =
                                     theRecordItem.data()["message"];
                                 final theMessageCreatedAt =
