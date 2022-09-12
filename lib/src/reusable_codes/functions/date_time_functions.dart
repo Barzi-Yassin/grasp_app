@@ -62,7 +62,7 @@ class DateTimeOptimizer {
     } else if (hourNumber == 12) {
       result = "12:$generatePairMinuteNumber pm";
     } else {
-      generatePairHourNumber = (hourNumber - 12).toString().length == 1
+      generatePairHourNumber = "${hourNumber - 12}".length == 1
           ? "0${hourNumber - 12}"
           : (hourNumber - 12).toString();
       result = "$generatePairHourNumber:$generatePairMinuteNumber pm";
