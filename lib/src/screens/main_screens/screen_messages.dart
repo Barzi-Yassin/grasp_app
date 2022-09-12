@@ -1,9 +1,14 @@
 import 'package:badges/badges.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
+import 'package:grasp_app/src/reusable_codes/functions/date_time_functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
+import 'package:grasp_app/src/reusable_codes/functions/loadings/loading_indicator.dart';
+import 'package:grasp_app/src/services/firebase/service_firestore.dart';
 
 class ScreenMessages extends StatefulWidget {
   const ScreenMessages({
@@ -22,6 +27,9 @@ class ScreenMessages extends StatefulWidget {
 }
 
 class _ScreenMessagesState extends State<ScreenMessages> {
+  final ServiceFirestore serviceFirestore = ServiceFirestore();
+  final DateTimeOptimizer dateTimeOptimizer = DateTimeOptimizer();
+
   final TextEditingController controllerMessage = TextEditingController();
 
   final FocusNode focusNodeMessage = FocusNode();
@@ -40,6 +48,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
     double screenWidth = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.grey.shade400,
         appBar: AppBar(
           backgroundColor: Colors.cyan.shade700,
           centerTitle: true,
@@ -57,6 +66,9 @@ class _ScreenMessagesState extends State<ScreenMessages> {
               ),
             ],
           ),
+          actions: [
+            customeIcon(theIcon: Icons.height_sharp),
+          ],
         ),
         body: Container(
           // padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -111,8 +123,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                 ),
                 title:
                     customeText(theData: widget.theFileName, theFontSize: 20),
-                trailing: Container(
-                  // color: Colors.red,
+                trailing: SizedBox(
                   width: 100,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -149,18 +160,92 @@ class _ScreenMessagesState extends State<ScreenMessages> {
               child: Column(
                 children: [
                   Expanded(
-                    child: SizedBox(
-                      child: Center(
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          alignment: Alignment.center,
-                          height: 200,
-                          // width: 20,
-                          color: Colors.teal,
-                          child: messageInput(),
-                        ),
-                      ),
-                    ),
+                    child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                        stream: serviceFirestore.firestoreInstance
+                            .collection("users")
+                            .doc(widget.theUser.uid)
+                            .collection("subjects")
+                            .doc(widget.theFileSubjectName)
+                            .collection("files")
+                            .doc(widget.theFileName)
+                            .collection('messages')
+                            .snapshots(),
+                        builder: (context, snapshotFiles) {
+                          if (snapshotFiles.connectionState ==
+                              ConnectionState.waiting) {
+                            return loadingIndicator();
+                          } else if (snapshotFiles.hasError) {
+                            return Text("err ${snapshotFiles.error}");
+                          } else if (snapshotFiles.data == null ||
+                              !snapshotFiles.hasData) {
+                            return const Text(
+                                'snapshotFiles is empty(StreamBuilder)');
+                          }
+
+                          // snapshotFiles.data!.docs.first;
+                          debugPrint('44444files');
+                          debugPrint(
+                              snapshotFiles.data!.docs.length.toString());
+                          debugPrint(snapshotFiles.data.toString());
+
+                          snapshotFiles.data?.docs;
+
+                          final int filesLength =
+                              snapshotFiles.data!.docs.length;
+
+                          if (filesLength == 0) {
+                            return customeText(theData: 'No messages found!');
+                          } else {
+                            return ListView.builder(
+                              // padding:
+                              //     const EdgeInsets.symmetric(vertical: 20.0),
+                              scrollDirection: Axis.vertical,
+                              itemCount: snapshotFiles.data!.docs.length,
+                              itemBuilder: (context, theRecord) {
+                                final QueryDocumentSnapshot<
+                                        Map<String, dynamic>> theRecordItem =
+                                    snapshotFiles.data!.docs[theRecord];
+                                final theMessage =
+                                    theRecordItem.data()["message"];
+                                final theMessageCreatedAt =
+                                    theRecordItem.data()["createdAt"];
+
+                                final theRecordFileCreatedAtConverted =
+                                    DateTime.fromMillisecondsSinceEpoch(
+                                        theMessageCreatedAt);
+
+                                var theRecordMessageCreatedAtVarListBoilerPlate =
+                                    {
+                                  'time': dateTimeOptimizer
+                                      .dateTimeTwelveHourFormater(
+                                          hourNumber:
+                                              theRecordFileCreatedAtConverted
+                                                  .hour,
+                                          minuteNumber:
+                                              theRecordFileCreatedAtConverted
+                                                  .minute),
+                                  // '${theRecordFileCreatedAtConverted.hour}:${theRecordFileCreatedAtConverted.minute}',
+                                  'date':
+                                      '${dateTimeOptimizer.dateTimeNumberToMonthName(monthNumber: theRecordFileCreatedAtConverted.month)}.${theRecordFileCreatedAtConverted.day}, ${theRecordFileCreatedAtConverted.year}',
+                                  // 'date': theRecordFileCreatedAtConverted.month.toString(),
+                                };
+                                // debugPrint(
+                                //     'e7m:: ${theRecordMessageCreatedAtVarListBoilerPlate['time']}');
+                                // debugPrint(
+                                //     'e7m:: ${theRecordMessageCreatedAtVarListBoilerPlate['date']}');
+
+                                return ListTile(
+                                  title: customeText(theData: theMessage),
+                                  trailing: customeText(
+                                      theData:
+                                          theRecordMessageCreatedAtVarListBoilerPlate[
+                                                  'time']
+                                              .toString()),
+                                );
+                              },
+                            );
+                          }
+                        }),
                   ),
                   Container(
                     // height: 50,
@@ -226,7 +311,22 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                           ),
                         ),
                         customeIconButton(
-                            theOnPressed: () {}, theIcon: Icons.send)
+                            theOnPressed: () {
+                              if (controllerMessage.text.isNotEmpty) {
+                                serviceFirestore
+                                    .createMessage(
+                                      user: widget.theUser,
+                                      theFileSubjectName:
+                                          widget.theFileSubjectName,
+                                      theMessageFileName: widget.theFileName,
+                                      theMessage: controllerMessage.text,
+                                    )
+                                    .then((value) => controllerMessage.clear());
+                              } else {
+                                Get.snackbar('error', 'please enter a message');
+                              }
+                            },
+                            theIcon: Icons.send)
                       ],
                     ),
                   ),
