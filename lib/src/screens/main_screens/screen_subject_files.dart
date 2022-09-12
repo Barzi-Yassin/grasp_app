@@ -239,7 +239,7 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                   Get.snackbar('error', 'the file name is already exist !!!');
                 }
               } else {
-                Get.back();
+                // Get.back();
                 Get.snackbar('error', 'Give a name to the new grasps!');
               }
             },
