@@ -71,6 +71,7 @@ IconButton customeIconButton(
     Color? theColor}) {
   return IconButton(
       onPressed: theOnPressed,
+      constraints: BoxConstraints.tight(const Size.fromRadius(18),),
       icon: Icon(
         theIcon,
         size: theSize,
