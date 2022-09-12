@@ -46,12 +46,26 @@ class DateTimeOptimizer {
 
   String dateTimeTwelveHourFormater(
       {required int hourNumber, required int minuteNumber}) {
-    String result = "";
+    String result;
+    String generatePairHourNumber;
+    String generatePairMinuteNumber = minuteNumber.toString();
+
+    if (minuteNumber < 10) {
+      generatePairMinuteNumber = "0$minuteNumber";
+    }
 
     if (hourNumber < 12) {
-      result = "$hourNumber:$minuteNumber am";
+      generatePairHourNumber = hourNumber.toString().length == 1
+          ? "0$hourNumber"
+          : hourNumber.toString();
+      result = "$generatePairHourNumber:$generatePairMinuteNumber am";
+    } else if (hourNumber == 12) {
+      result = "12:$generatePairMinuteNumber pm";
     } else {
-      result = "${hourNumber - 12}:$minuteNumber pm";
+      generatePairHourNumber = (hourNumber - 12).toString().length == 1
+          ? "0${hourNumber - 12}"
+          : (hourNumber - 12).toString();
+      result = "$generatePairHourNumber:$generatePairMinuteNumber pm";
     }
 
     return result;
