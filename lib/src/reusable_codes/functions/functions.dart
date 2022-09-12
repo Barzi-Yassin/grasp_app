@@ -64,14 +64,27 @@ IconButton functionArrowbackIconButton(BuildContext context) {
   );
 }
 
-IconButton customeIconButton(
-    {required theOnPressed,
-    required IconData theIcon,
-    double? theSize,
-    Color? theColor}) {
+IconButton customeIconButton({
+  required theOnPressed,
+  required IconData theIcon,
+  double? theSize,
+  Color? theColor,
+  double? thePaddingLeft,
+  double? thePaddingTop,
+  double? thePaddingRight,
+  double? thePaddingBottom,
+}) {
   return IconButton(
       onPressed: theOnPressed,
-      constraints: BoxConstraints.tight(const Size.fromRadius(18),),
+      constraints: BoxConstraints.tight(
+        const Size.fromRadius(18),
+      ),
+      padding: EdgeInsets.only(
+        left: thePaddingLeft ?? 0,
+        top: thePaddingTop ?? 0,
+        right: thePaddingRight ?? 0,
+        bottom: thePaddingBottom ?? 0,
+      ),
       icon: Icon(
         theIcon,
         size: theSize,

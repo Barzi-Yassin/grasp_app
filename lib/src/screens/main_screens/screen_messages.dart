@@ -113,13 +113,16 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                   )),
               child: ListTile(
                 contentPadding:
-                    const EdgeInsets.only(right: 4, top: 2, bottom: 2),
+                    const EdgeInsets.only(left: 10, right: 10, top: 0, bottom: 9),
                 minLeadingWidth: 0,
                 dense: true,
                 leading: Container(
                   // color: Colors.red,
                   child: customeIconButton(
-                      theOnPressed: () {}, theIcon: Icons.edit),
+                      theOnPressed: () {
+                        // TODO: do edit functionality
+                      },
+                      theIcon: Icons.edit),
                 ),
                 title:
                     customeText(theData: widget.theFileName, theFontSize: 20),
@@ -129,24 +132,15 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      customePaddingOnly(
-                        thePaddingRight: 5,
-                        thePaddingBottom: 11,
-
-                        theChild: customeIconButton(
-                          theOnPressed: () {},
-                          theIcon: Icons.star_border,
-                          theSize: 30,
-                        ),
+                      customeIconButton(
+                        theOnPressed: () {},
+                        theIcon: Icons.star_border,
+                        theSize: 30,
                       ),
-                      customePaddingOnly(
-                        thePaddingRight: 5,
-                        thePaddingBottom: 5,
-                        theChild: customeIconButton(
-                          theOnPressed: () {},
-                          theIcon: Icons.favorite_border,
-                          theSize: 25,
-                        ),
+                      customeIconButton(
+                        theOnPressed: () {},
+                        theIcon: Icons.favorite_border,
+                        theSize: 25,
                       ),
                     ],
                   ),
