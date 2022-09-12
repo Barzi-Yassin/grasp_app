@@ -35,7 +35,7 @@ class ServiceFirestore {
       uid: user.uid,
       email: user.email!,
       createdAt: DateTime.now(),
-      name: theName ?? "not inputed yet!",
+      name: theName ?? "Username",
       imageUrl: theImageUrl ?? "not inputed yet!",
     );
 
@@ -52,7 +52,7 @@ class ServiceFirestore {
     required String theSubjectName,
     required theSubjectItemsNumber,
     required int theSubjectId,
-  }) async {
+  }) async { 
     GraspSubjectModel graspSubjectModel = GraspSubjectModel(
       uid: user.uid,
       subjectName: theSubjectName,
