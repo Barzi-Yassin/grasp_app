@@ -57,6 +57,9 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
       appBar: AppBar(
         backgroundColor: Colors.cyan.shade700,
         centerTitle: true,
+        leading: customeIconButton(theOnPressed: (){
+          // TODO: do the sorting here
+        }, theIcon: Icons.sort),
         title: const Text('Subjects'),
         // actions: [
         //   Icon(Icons.add),
