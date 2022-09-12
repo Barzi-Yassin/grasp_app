@@ -39,7 +39,8 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
 
   List<String> listOfCurrentSubjectNames() {
     int len = listOfCurrentSubjectsName.length;
-    debugPrint('There are ${len+1} subjects(s) in the listOfCurrentSubjectsName');
+    debugPrint(
+        'There are ${len + 1} subjects(s) in the listOfCurrentSubjectsName');
     return listOfCurrentSubjectsName;
   }
   // end listOfCurrentSubjectsName of the current subject names
@@ -118,17 +119,51 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                           final theRecordSubjectName =
                               theRecordItem.data()["subjectName"];
 
-                          if (!listOfCurrentSubjectsName.contains(theRecordSubjectName)) {
+                          if (!listOfCurrentSubjectsName
+                              .contains(theRecordSubjectName)) {
                             listOfCurrentSubjectNames()
                                 .add(theRecordSubjectName);
                           }
 
-                          return WidgetSubjectRecords(
-                            theUser: widget.theUser,
-                            theFileSubjectName: theRecordSubjectName,
-                            theGetSubjectItemsLength: subjectLength
-                                .toString(), // TODO: return files length using provider
-                          );
+                          return StreamBuilder<
+                                  QuerySnapshot<Map<String, dynamic>>>(
+                              stream: serviceFirestore.firestoreInstance
+                                  .collection("users")
+                                  .doc(widget.theUser.uid)
+                                  .collection("subjects")
+                                  .doc(theRecordSubjectName)
+                                  .collection("files")
+                                  .snapshots(),
+                              builder: (context, snapshotFiles) {
+                                
+                                if (snapshotFiles.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return loadingIndicator();
+                                } else if (snapshotFiles.hasError) {
+                                  return Text("err ${snapshotFiles.error}");
+                                } else if (snapshotFiles.data == null ||
+                                    !snapshotFiles.hasData) {
+                                  return const Text(
+                                      'snapshotFiles is empty(StreamBuilder)');
+                                }
+
+                                // snapshotFiles.data!.docs.first;
+                                debugPrint('44444files');
+                                debugPrint(
+                                    snapshotFiles.data!.docs.length.toString());
+                                debugPrint(snapshotFiles.data.toString());
+
+                                snapshotFiles.data?.docs;
+
+                                final int filesLength =
+                                    snapshotFiles.data!.docs.length;
+
+                                return WidgetSubjectRecords(
+                                  theUser: widget.theUser,
+                                  theFileSubjectName: theRecordSubjectName,
+                                  theSubjectItemsLength: filesLength.toString(), // TODO: return files length using provider
+                                );
+                              });
                         },
                       );
                     }
@@ -146,10 +181,13 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
             controller: controllerAddGraspSubject,
             title: 'Subject',
             theOnPressed: () async {
-              debugPrint(listOfCurrentSubjectsName.contains(controllerAddGraspSubject.text).toString());
+              debugPrint(listOfCurrentSubjectsName
+                  .contains(controllerAddGraspSubject.text)
+                  .toString());
 
               if (controllerAddGraspSubject.text.isNotEmpty) {
-                if (!listOfCurrentSubjectsName.contains(controllerAddGraspSubject.text)) {
+                if (!listOfCurrentSubjectsName
+                    .contains(controllerAddGraspSubject.text)) {
                   await serviceFirestore
                       .createSubject(
                         user: widget.theUser,

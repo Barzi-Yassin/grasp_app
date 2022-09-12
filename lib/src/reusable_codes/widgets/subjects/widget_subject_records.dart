@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:grasp_app/src/data/datalist_subject.dart';
+import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/routes/route_screens.dart';
 import 'package:grasp_app/src/screens/main_screens/screen_subjects.dart';
 import 'package:grasp_app/src/screens/main_screens/screen_subject_files.dart';
@@ -14,12 +15,24 @@ class WidgetSubjectRecords extends StatelessWidget {
     Key? key,
     required this.theUser,
     required this.theFileSubjectName,
-    required this.theGetSubjectItemsLength,
+    required this.theSubjectItemsLength,
   }) : super(key: key);
 
   final User theUser;
   final String theFileSubjectName;
-  final String theGetSubjectItemsLength;
+  final String theSubjectItemsLength;
+
+  String generateSubjectItemsGramatically() {
+    String result = "";
+    if (theSubjectItemsLength == '0') {
+      result = "empty";
+    } else if (theSubjectItemsLength == '1') {
+      result = " item";
+    } else {
+      result = " items";
+    }
+    return result;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,17 +78,17 @@ class WidgetSubjectRecords extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.end,
             mainAxisSize: MainAxisSize.min,
-            children:  [
-              Text(
-                theGetSubjectItemsLength,
-                style: const TextStyle(fontSize: 14, letterSpacing: 0.5), // TODO: update it
+            children: [
+              customeText(
+                theData:
+                    theSubjectItemsLength == '0' ? '' : theSubjectItemsLength,
+                theFontSize: 14,
+                theLetterSpacing: 0.5,
               ),
-              const Text(
-                ' items',
-                style: TextStyle(
-                  fontSize: 12,
-                  letterSpacing: 0.87,
-                ),
+              customeText(
+                theData: generateSubjectItemsGramatically(),
+                theFontSize: 12,
+                theLetterSpacing: 0.87,
               ),
             ],
           ),
