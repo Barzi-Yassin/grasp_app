@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:grasp_app/src/models/grasp_file_model.dart';
+import 'package:grasp_app/src/models/grasp_message_model.dart';
 import 'package:grasp_app/src/models/grasp_subject_model.dart';
 import 'package:grasp_app/src/models/grasp_user_model.dart';
 
@@ -69,6 +70,7 @@ class ServiceFirestore {
         .set(graspSubjectModel.toMap());
     return graspSubjectModel;
   }
+
 // create file
   Future<GraspFileModel> createFile({
     required User user,
@@ -99,5 +101,31 @@ class ServiceFirestore {
         .doc(theFileName)
         .set(graspFileModel.toMap());
     return graspFileModel;
+  }
+
+// create message
+  Future<GraspMessageModel> createMessage({
+    required User user,
+    required String theFileSubjectName,
+    required String theMessageFileName,
+    required String theMessage,
+  }) async {
+    GraspMessageModel graspMessageModel = GraspMessageModel(
+      message: theMessage,
+      messageFileName: theMessageFileName,
+      createdAt: DateTime.now(),
+    );
+
+    await firestoreInstance
+        .collection("users")
+        .doc(user.uid)
+        .collection("subjects")
+        .doc(theFileSubjectName)
+        .collection("files")
+        .doc(theMessageFileName).
+        collection("messages")
+        .doc()
+        .set(graspMessageModel.toMap());
+    return graspMessageModel;
   }
 }
