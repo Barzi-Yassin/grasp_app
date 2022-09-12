@@ -1,6 +1,8 @@
 import 'package:badges/badges.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 
 class ScreenMessages extends StatefulWidget {
@@ -22,14 +24,16 @@ class ScreenMessages extends StatefulWidget {
 class _ScreenMessagesState extends State<ScreenMessages> {
   final TextEditingController controllerMessage = TextEditingController();
 
-  // var focusNode = FocusNode();
-  // @override
-  // void initState() {
-  //   focusNode.addListener(() {
-  //     debugPrint(focusNode.hasFocus.toString());
-  //   });
-  //   super.initState();
-  // }
+  final FocusNode focusNodeMessage = FocusNode();
+
+  @override
+  void initState() {
+    // focusNode.addListener(() {
+    //   debugPrint(focusNode.hasFocus.toString());
+    // });
+    controllerMessage.addListener(() => setState(() {}));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +43,20 @@ class _ScreenMessagesState extends State<ScreenMessages> {
         appBar: AppBar(
           backgroundColor: Colors.cyan.shade700,
           centerTitle: true,
-          title: Text('${widget.theFileSubjectName} > ${widget.theFileName}'),
+          // title: Text('${widget.theFileSubjectName} > ${widget.theFileName}'),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const FaIcon(
+                FontAwesomeIcons.solidFolderOpen,
+                size: 20,
+              ),
+              customeText(
+                theData: "  ${widget.theFileSubjectName}",
+                // theFontSize: 21
+              ),
+            ],
+          ),
         ),
         body: Container(
           // padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -48,7 +65,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
           decoration: backgroundGradientCyan(),
           child: Badge(
             // toAnimate: false,
-            animationType: BadgeAnimationType.fade,
+            animationType: BadgeAnimationType.scale,
             animationDuration: const Duration(milliseconds: 700),
             // padding: const EdgeInsets.all(10),
             // gradient: LinearGradient(
@@ -82,12 +99,39 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                       // Colors.grey.shade300,
                     ],
                   )),
-              child: customeIconButton(
-                  theOnPressed: () {
-                    debugPrint(screenWidth.toString());
-                    debugPrint({screenWidth / 2}.toString());
-                  },
-                  theIcon: Icons.add),
+              child: ListTile(
+                contentPadding:
+                    const EdgeInsets.only(right: 4, top: 2, bottom: 2),
+                minLeadingWidth: 0,
+                dense: true,
+                leading: Container(
+                  // color: Colors.red,
+                  child: customeIconButton(
+                      theOnPressed: () {}, theIcon: Icons.edit),
+                ),
+                title:
+                    customeText(theData: widget.theFileName, theFontSize: 20),
+                trailing: Container(
+                  // color: Colors.red,
+                  width: 100,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      customeIconButton(
+                        theOnPressed: () {},
+                        theIcon: Icons.star_border,
+                        theSize: 30,
+                      ),
+                      customeIconButton(
+                        theOnPressed: () {},
+                        theIcon: Icons.favorite_border,
+                        theSize: 25,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
             child: Container(
               margin:
@@ -105,62 +149,85 @@ class _ScreenMessagesState extends State<ScreenMessages> {
               child: Column(
                 children: [
                   Expanded(
-                    child: Container(
-                        // height: double.infinity,
-                        // width: 20,
-                        // color: Colors.blue,
+                    child: SizedBox(
+                      child: Center(
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          alignment: Alignment.center,
+                          height: 200,
+                          // width: 20,
+                          color: Colors.teal,
+                          child: messageInput(),
                         ),
+                      ),
+                    ),
                   ),
                   Container(
                     // height: 50,
                     width: screenWidth - 20,
                     // child: customeText(theData: 'fffffff'),
                     decoration: BoxDecoration(
-                      // color: Colors.cyan,
-                      borderRadius: BorderRadius.circular(22),
-                      gradient: LinearGradient(
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                        colors: [
-                          Colors.grey.shade300,
-                          Colors.grey.shade200,
-                          Colors.white,
-                        ],
-                      ),
-                    ),
-                    child: TextFormField(
-                      // focusNode: focusNode,
-                      controller: controllerMessage,
-                      textAlign: TextAlign.center,
-                      keyboardType: TextInputType.multiline,
-                      textInputAction: TextInputAction.newline,
-                      cursorColor: Colors.cyan,
-                      onSaved: (message) {},
-                      maxLines: 1,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white70,
-                        hintText: "Message...",
-                        prefixIcon: customePaddingOnly(
-                          thePaddingLeft: 10,
-                          theChild: customeIconShaderMask(
-                            theIcon: Icons.emoji_emotions_outlined,
-                            theSize: 28,
+                        // color: Colors.cyan,
+                        borderRadius: BorderRadius.circular(22),
+                        gradient: LinearGradient(
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
+                          colors: [
+                            Colors.grey.shade300,
+                            Colors.grey.shade200,
+                            Colors.white,
+                          ],
+                        )),
+                    child:
+                        //  Row(
+                        //   children: [
+                        //     Expanded(child: messageInput()),
+                        //     customeIconButton(
+                        //         theOnPressed: () {}, theIcon: Icons.send)
+                        //   ],
+                        // ),
+                        Row(
+                      children: [
+                        Expanded(
+                          child: TextFormField(
+                            // focusNode: focusNode,
+                            controller: controllerMessage,
+                            textAlign: TextAlign.center,
+                            keyboardType: TextInputType.multiline,
+                            textInputAction: TextInputAction.newline,
+                            cursorColor: Colors.cyan,
+                            onSaved: (message) {},
+                            maxLines: 1,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white70,
+                              hintText: "Message...",
+                              prefixIcon: customePaddingOnly(
+                                thePaddingLeft: 10,
+                                theChild: customeIconShaderMask(
+                                  theIcon: Icons.emoji_emotions_outlined,
+                                  theSize: 28,
+                                ),
+                              ),
+                              suffixIcon: customePaddingOnly(
+                                thePaddingRight: 10,
+                                theChild: customeIconButton(
+                                  theOnPressed: () => controllerMessage.clear(),
+                                  theIcon: Icons.close,
+                                  theSize: 22,
+                                  theColor: Colors.grey.shade400,
+                                ),
+                              ),
+                              border: const OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(40)),
+                                  borderSide: BorderSide.none),
+                            ),
                           ),
                         ),
-                        suffixIcon: customePaddingOnly(
-                          thePaddingRight: 10,
-                          theChild: customeIconButton(
-                            theOnPressed: () => controllerMessage.clear(),
-                            theIcon: Icons.close,
-                            theSize: 22,
-                            theColor: Colors.grey.shade400,
-                          ),
-                        ),
-                        border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(40)),
-                            borderSide: BorderSide.none),
-                      ),
+                        customeIconButton(
+                            theOnPressed: () {}, theIcon: Icons.send)
+                      ],
                     ),
                   ),
                 ],
@@ -168,6 +235,30 @@ class _ScreenMessagesState extends State<ScreenMessages> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget messageInput() {
+    return TextField(
+      focusNode: focusNodeMessage,
+      controller: controllerMessage,
+      keyboardType: TextInputType.multiline,
+      textInputAction: TextInputAction.newline,
+      decoration: InputDecoration(
+        hintText: 'hint...',
+        // border: OutlineInputBorder(),
+        suffixIcon: controllerMessage.text.isEmpty
+            ? const SizedBox(
+                width: 0,
+                height: 0,
+              )
+            : customeIconButton(
+                theOnPressed: () => controllerMessage.clear(),
+                theIcon: Icons.close,
+                theSize: 22,
+                theColor: Colors.grey.shade400,
+              ),
       ),
     );
   }
