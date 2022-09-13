@@ -58,8 +58,8 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
         backgroundColor: Colors.cyan.shade700,
         centerTitle: true,
         leading: functionArrowbackIconButton(context),
-        title:
-            appbarTitleFolderIconAndName(theFolderaName: widget.theFileSubjectName),
+        title: appbarTitleFolderIconAndName(
+            theFolderaName: widget.theFileSubjectName),
         // actions: [IconButton(onPressed: () {
         //   // Navigator.pop(context);
         //   // return EndDrawer();
@@ -191,7 +191,7 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                       subjectFileRecordDate:
                           theRecordFileCreatedAtVarListBoilerPlate['date']
                               .toString(),
-                      theLongPressed: () async => await serviceFirestore
+                      theTrailingOnPressed: () async => await serviceFirestore
                           .deleteFile(
                         user: widget.theUser,
                         theFileSubjectName: widget.theFileSubjectName,

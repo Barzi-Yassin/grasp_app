@@ -14,13 +14,13 @@ class WidgetSubjectFileRecords extends StatelessWidget {
     required this.subjectFileRecordName,
     required this.subjectFileRecordTime,
     required this.subjectFileRecordDate,
-    required this.theLongPressed,
+    required this.theTrailingOnPressed,
   }) : super(key: key);
 
   final User theUser;
   final String theFileName;
   final String theFileSubjectName;
-  final theLongPressed;
+  final theTrailingOnPressed;
 
   final String subjectFileRecordId;
   final String subjectFileRecordName;
@@ -45,7 +45,6 @@ class WidgetSubjectFileRecords extends StatelessWidget {
           ],
         ),
         child: ListTile(
-          onLongPress: theLongPressed,
           onTap: () => Get.to(() => ScreenMessages(
                 theUser: theUser,
                 theFileName: theFileName,
@@ -68,9 +67,7 @@ class WidgetSubjectFileRecords extends StatelessWidget {
           ),
           subtitle: Text('$subjectFileRecordTime • $subjectFileRecordDate'),
           trailing: IconButton(
-            onPressed: () {
-              debugPrint('trash clicked');
-            },
+            onPressed: theTrailingOnPressed,
             icon: const FaIcon(FontAwesomeIcons.trashCan),
             color: Colors.cyan,
           ),

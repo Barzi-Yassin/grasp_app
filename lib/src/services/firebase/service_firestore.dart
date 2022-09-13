@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:grasp_app/src/models/grasp_file_model.dart';
 import 'package:grasp_app/src/models/grasp_message_model.dart';
 import 'package:grasp_app/src/models/grasp_message_reaction_model.dart';
@@ -120,7 +121,7 @@ class ServiceFirestore {
     return graspFileModel;
   }
 
-// delete file
+// delete file ::::::  // TODO: clean the message deletion process !!!
   Future deleteFile({
     required User user,
     required String theFileSubjectName,
@@ -133,6 +134,42 @@ class ServiceFirestore {
         .doc(theFileSubjectName)
         .collection("files")
         .doc(theFileName);
+
+    docMessageDeleteFunction({required String theDocMessageId}) async {
+      final DocumentReference<Map<String, dynamic>> docMessage =
+          firestoreInstance
+              .collection("users")
+              .doc(user.uid)
+              .collection("subjects")
+              .doc(theFileSubjectName)
+              .collection("files")
+              .doc(theFileName)
+              .collection("messages")
+              .doc(theDocMessageId);
+
+      await docMessage.delete();
+    }
+
+    final Stream<QuerySnapshot<Map<String, dynamic>>> theStream =
+        firestoreInstance
+            .collection("users")
+            .doc(user.uid)
+            .collection("subjects")
+            .doc(theFileSubjectName)
+            .collection("files")
+            .doc(theFileName)
+            .collection('messages')
+            .snapshots();
+
+    theStream.forEach((snapshotMessage) {
+      debugPrint('hellllllo :: ${snapshotMessage.docs.length}');
+      debugPrint('hellllllo :: $snapshotMessage');
+      snapshotMessage.docs.forEach((snapshotMessage) async {
+        final messageDocid = snapshotMessage.data()["messageDocId"];
+        debugPrint('hellllllo messageDocid ==== $messageDocid');
+        docMessageDeleteFunction(theDocMessageId: messageDocid);
+      });
+    });
 
     await docFile.delete();
     return;
