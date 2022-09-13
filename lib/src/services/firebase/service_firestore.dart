@@ -133,6 +133,7 @@ class ServiceFirestore {
     return graspMessageModel;
   }
 
+  // react a message
   Future<GraspMessageReactionModel> reactMessage({
     required User user,
     required String theFileSubjectName,
@@ -157,6 +158,28 @@ class ServiceFirestore {
     await docMessage.update(graspMessageReactionModel.toMap());
     return graspMessageReactionModel;
   }
+  
+  // delete a message
+  Future deleteMessage({
+    required User user,
+    required String theFileSubjectName,
+    required String theMessageFileName,
+    required String theMessageDocId,
+  }) async {
+    final docMessage = firestoreInstance
+        .collection("users")
+        .doc(user.uid)
+        .collection("subjects")
+        .doc(theFileSubjectName)
+        .collection("files")
+        .doc(theMessageFileName)
+        .collection("messages")
+        .doc(theMessageDocId);
+
+     await docMessage.delete();
+    return;
+  }
+  
 
 // react a message
   // Future<GraspMessageModel> reactMessage({

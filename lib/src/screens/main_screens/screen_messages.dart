@@ -206,7 +206,8 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                             return customeText(theData: 'No messages found!');
                           } else {
                             return ListView.separated(
-                              padding: const EdgeInsets.only(bottom: 10.0),
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 10.0),
                               separatorBuilder:
                                   (BuildContext context, int index) =>
                                       const Divider(),
@@ -220,8 +221,10 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                     theRecordItem.data()["message"];
                                 final theMessageCreatedAt =
                                     theRecordItem.data()["createdAt"];
-                                final theRecordItemReact = theRecordItem.data()["isReacted"];
-                                final theRecordItemDocId = theRecordItem.data()["messageDocId"];
+                                final theRecordItemReact =
+                                    theRecordItem.data()["isReacted"];
+                                final theRecordItemDocId =
+                                    theRecordItem.data()["messageDocId"];
 
                                 final theRecordFileCreatedAtConverted =
                                     DateTime.fromMillisecondsSinceEpoch(
@@ -287,6 +290,15 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                           ),
                                         ),
                                         child: ListTile(
+                                          onLongPress: () =>
+                                              serviceFirestore.deleteMessage(
+                                            user: widget.theUser,
+                                            theFileSubjectName:
+                                                widget.theFileSubjectName,
+                                            theMessageFileName:
+                                                widget.theFileName,
+                                            theMessageDocId: theRecordItemDocId,
+                                          ),
                                           title:
                                               customeText(theData: theMessage),
                                           subtitle: Row(
