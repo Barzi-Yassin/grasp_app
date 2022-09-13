@@ -37,7 +37,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
     listOfCurrentSubjectsName = <String>[];
   }
 
-  List<String> listOfCurrentSubjectNames() {
+  List<String> listOfCurrentSubjectsNameFunction() {
     int len = listOfCurrentSubjectsName.length;
     debugPrint(
         'There are ${len + 1} subjects(s) in the listOfCurrentSubjectsName');
@@ -125,7 +125,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
 
                           if (!listOfCurrentSubjectsName
                               .contains(theRecordSubjectName)) {
-                            listOfCurrentSubjectNames()
+                            listOfCurrentSubjectsNameFunction()
                                 .add(theRecordSubjectName);
                           }
 
@@ -150,7 +150,6 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                                       'snapshotFiles is empty(StreamBuilder)');
                                 }
 
-                                // snapshotFiles.data!.docs.first;
                                 debugPrint('44444files');
                                 debugPrint(
                                     snapshotFiles.data!.docs.length.toString());
@@ -165,7 +164,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                                   theUser: widget.theUser,
                                   theFileSubjectName: theRecordSubjectName,
                                   theSubjectItemsLength: filesLength
-                                      .toString(), // TODO: return files length using provider
+                                      .toString(), 
                                   theLongPressed: () async =>
                                       await serviceFirestore
                                           .deleteSubject(
@@ -173,7 +172,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                                     theSubjectName: theRecordSubjectName,
                                   )
                                           .then((value) {
-                                    listOfCurrentSubjectNames()
+                                    listOfCurrentSubjectsNameFunction()
                                         .remove(theRecordSubjectName);
                                     Get.snackbar('Subject',
                                         '$theRecordSubjectName deleted successfully');
