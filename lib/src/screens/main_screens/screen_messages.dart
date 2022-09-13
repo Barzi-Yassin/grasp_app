@@ -32,7 +32,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
 
   final FocusNode focusNodeMessage = FocusNode();
 
-  bool isReacted = true;
+  bool showDate = true;
 
   @override
   void initState() {
@@ -240,28 +240,32 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                 return Badge(
                                   animationType: BadgeAnimationType.fade,
                                   position:
-                                      BadgePosition.topEnd(top: 20, end: 9),
+                                      BadgePosition.topEnd(top: 20, end: 19),
                                   badgeColor: Colors.white,
                                   elevation: 0,
                                   badgeContent: SizedBox(
                                     height: 15,
-                                    child: customeIconButton(
-                                        theOnPressed: () {
-                                          serviceFirestore.reactMessage(
-                                            theMessageDocId: theRecordItemDocId,
-                                            user: widget.theUser,
-                                            theFileSubjectName:
-                                                widget.theFileSubjectName,
-                                            theMessageFileName:
-                                                widget.theFileName,
-                                            theIsReacted: !theRecordItemReact,
-                                          );
-                                        },
+                                    child: InkWell(
+                                      onTap: () async =>
+                                          await serviceFirestore.reactMessage(
+                                        theMessageDocId: theRecordItemDocId,
+                                        user: widget.theUser,
+                                        theFileSubjectName:
+                                            widget.theFileSubjectName,
+                                        theMessageFileName: widget.theFileName,
+                                        theIsReacted: !theRecordItemReact,
+                                      ),
+                                      onLongPress: () =>
+                                          setState(() => showDate = !showDate),
+                                      highlightColor: Colors.transparent,
+                                      child: customeIcon(
                                         theIcon: theRecordItemReact
                                             ? Icons.favorite
                                             : Icons.favorite_border,
                                         theSize: 15,
-                                        theColor: Colors.cyan.shade300),
+                                        theColor: Colors.cyan.shade300,
+                                      ),
+                                    ),
                                   ),
                                   child: Row(
                                     children: [
@@ -294,15 +298,16 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               customeText(
-                                                theData:
-                                                    'show date on longpress',
+                                                theData: showDate
+                                                    ? "\n${theRecordMessageCreatedAtVarListBoilerPlate['date']}"
+                                                    : '',
+                                                // 'show date on longpress',
                                                 theTextAlign: TextAlign.end,
                                                 theFontSize: 11,
                                               ),
                                               customeText(
                                                 theData:
                                                     "\n${theRecordMessageCreatedAtVarListBoilerPlate['time']}",
-                                                // "\n${theRecordMessageCreatedAtVarListBoilerPlate['date']}",
                                                 theTextAlign: TextAlign.start,
                                                 theFontSize: 11,
                                               ),
