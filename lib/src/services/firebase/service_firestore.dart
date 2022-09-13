@@ -10,6 +10,7 @@ import 'package:grasp_app/src/models/grasp_user_model.dart';
 
 class ServiceFirestore {
   final FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
+
   // add user credential to db
   Future<GraspUserModel> addUserToDB({required User user}) async {
     GraspUserModel graspUserModel = GraspUserModel(
@@ -72,6 +73,21 @@ class ServiceFirestore {
     return graspSubjectModel;
   }
 
+  // delete subject
+  Future deleteSubject({
+    required User user,
+    required String theSubjectName,
+  }) async {
+    final DocumentReference<Map<String, dynamic>> docSubject = firestoreInstance
+        .collection("users")
+        .doc(user.uid)
+        .collection("subjects")
+        .doc(theSubjectName);
+
+    await docSubject.delete();
+    return;
+  }
+
 // create file
   Future<GraspFileModel> createFile({
     required User user,
@@ -102,6 +118,24 @@ class ServiceFirestore {
         .doc(theFileName)
         .set(graspFileModel.toMap());
     return graspFileModel;
+  }
+
+// delete file
+  Future deleteFile({
+    required User user,
+    required String theFileSubjectName,
+    required String theFileName,
+  }) async {
+    final DocumentReference<Map<String, dynamic>> docFile = firestoreInstance
+        .collection("users")
+        .doc(user.uid)
+        .collection("subjects")
+        .doc(theFileSubjectName)
+        .collection("files")
+        .doc(theFileName);
+
+    await docFile.delete();
+    return;
   }
 
 // create message
@@ -151,14 +185,15 @@ class ServiceFirestore {
         .collection("messages")
         .doc(theMessageDocId);
 
-    GraspMessageReactionModel graspMessageReactionModel = GraspMessageReactionModel(
+    GraspMessageReactionModel graspMessageReactionModel =
+        GraspMessageReactionModel(
       isReacted: theIsReacted,
     );
 
     await docMessage.update(graspMessageReactionModel.toMap());
     return graspMessageReactionModel;
   }
-  
+
   // delete a message
   Future deleteMessage({
     required User user,
@@ -166,7 +201,7 @@ class ServiceFirestore {
     required String theMessageFileName,
     required String theMessageDocId,
   }) async {
-    final docMessage = firestoreInstance
+    final DocumentReference<Map<String, dynamic>> docMessage = firestoreInstance
         .collection("users")
         .doc(user.uid)
         .collection("subjects")
@@ -176,32 +211,7 @@ class ServiceFirestore {
         .collection("messages")
         .doc(theMessageDocId);
 
-     await docMessage.delete();
+    await docMessage.delete();
     return;
   }
-  
-
-// react a message
-  // Future<GraspMessageModel> reactMessage({
-  //   required User user,
-  //   required String theFileSubjectName,
-  //   required String theMessageFileName,
-  //   required bool theReactValue,
-  // }) async {
-  //   GraspMessageModel graspMessageModel = GraspMessageModel(
-  //     isReacted: theReactValue
-  //   );
-
-  //   await firestoreInstance
-  //       .collection("users")
-  //       .doc(user.uid)
-  //       .collection("subjects")
-  //       .doc(theFileSubjectName)
-  //       .collection("files")
-  //       .doc(theMessageFileName).
-  //       collection("messages")
-  //       .doc()
-  //       .set(graspMessageModel.toMap());
-  //   return graspMessageModel;
-  // }
 }
