@@ -16,11 +16,13 @@ class WidgetSubjectRecords extends StatelessWidget {
     required this.theUser,
     required this.theFileSubjectName,
     required this.theSubjectItemsLength,
+    required this.theLongPressed,
   }) : super(key: key);
 
   final User theUser;
   final String theFileSubjectName;
   final String theSubjectItemsLength;
+  final theLongPressed;
 
   String generateSubjectItemsGramatically() {
     String result = "";
@@ -53,6 +55,7 @@ class WidgetSubjectRecords extends StatelessWidget {
           ],
         ),
         child: ListTile(
+          onLongPress: theLongPressed,
           onTap: () => Get.to(
             ScreenSubjectFiles(
               theUser: theUser,

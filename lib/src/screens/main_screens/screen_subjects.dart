@@ -57,9 +57,11 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
       appBar: AppBar(
         backgroundColor: Colors.cyan.shade700,
         centerTitle: true,
-        leading: customeIconButton(theOnPressed: (){
-          // TODO: do the sorting here
-        }, theIcon: Icons.sort),
+        leading: customeIconButton(
+            theOnPressed: () {
+              // TODO: do the sorting
+            },
+            theIcon: Icons.sort),
         title: const Text('Subjects'),
         // actions: [
         //   Icon(Icons.add),
@@ -81,7 +83,6 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
             ),
             Expanded(
               child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                  // collection("users").doc('subjects').collection(theSubjectId.toString()).doc(user.uid)
                   stream: serviceFirestore.firestoreInstance
                       .collection("users")
                       .doc(widget.theUser.uid)
@@ -113,7 +114,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                     } else {
                       return ListView.builder(
                         // clipBehavior: Clip.hardEdge,
-                        padding: const EdgeInsets.symmetric(vertical: 20.0),
+                        padding: const EdgeInsets.only(top: 20.0, bottom: 70),
                         scrollDirection: Axis.vertical,
                         itemCount: snapshotSubject.data!.docs.length,
                         itemBuilder: (context, theRecord) {
@@ -138,7 +139,6 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                                   .collection("files")
                                   .snapshots(),
                               builder: (context, snapshotFiles) {
-                                
                                 if (snapshotFiles.connectionState ==
                                     ConnectionState.waiting) {
                                   return loadingIndicator();
@@ -164,7 +164,20 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                                 return WidgetSubjectRecords(
                                   theUser: widget.theUser,
                                   theFileSubjectName: theRecordSubjectName,
-                                  theSubjectItemsLength: filesLength.toString(), // TODO: return files length using provider
+                                  theSubjectItemsLength: filesLength
+                                      .toString(), // TODO: return files length using provider
+                                  theLongPressed: () async =>
+                                      await serviceFirestore
+                                          .deleteSubject(
+                                    user: widget.theUser,
+                                    theSubjectName: theRecordSubjectName,
+                                  )
+                                          .then((value) {
+                                    listOfCurrentSubjectNames()
+                                        .remove(theRecordSubjectName);
+                                    Get.snackbar('Subject',
+                                        '$theRecordSubjectName deleted successfully');
+                                  }),
                                 );
                               });
                         },
