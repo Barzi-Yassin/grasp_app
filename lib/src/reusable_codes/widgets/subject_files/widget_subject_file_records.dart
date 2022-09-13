@@ -14,11 +14,13 @@ class WidgetSubjectFileRecords extends StatelessWidget {
     required this.subjectFileRecordName,
     required this.subjectFileRecordTime,
     required this.subjectFileRecordDate,
+    required this.theLongPressed,
   }) : super(key: key);
 
   final User theUser;
   final String theFileName;
   final String theFileSubjectName;
+  final theLongPressed;
 
   final String subjectFileRecordId;
   final String subjectFileRecordName;
@@ -43,6 +45,7 @@ class WidgetSubjectFileRecords extends StatelessWidget {
           ],
         ),
         child: ListTile(
+          onLongPress: theLongPressed,
           onTap: () => Get.to(() => ScreenMessages(
                 theUser: theUser,
                 theFileName: theFileName,

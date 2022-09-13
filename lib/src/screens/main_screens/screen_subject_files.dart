@@ -36,7 +36,7 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
     listOfCurrentFilesName = <String>[];
   }
 
-  List<String> listOfCurrentSubjectNames() {
+  List<String> listOfCurrentFilesNameFunction() {
     int len = listOfCurrentFilesName.length;
     debugPrint('There are ${len + 1} file(s) in the listOfCurrentFilesName');
     return listOfCurrentFilesName;
@@ -120,7 +120,7 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                         theRecordItem.data()["fileCreatedAt"];
 
                     if (!listOfCurrentFilesName.contains(theRecordFileName)) {
-                      listOfCurrentSubjectNames().add(theRecordFileName);
+                      listOfCurrentFilesNameFunction().add(theRecordFileName);
                     }
                     final theRecordFileCreatedAtConverted =
                         DateTime.fromMillisecondsSinceEpoch(
@@ -199,6 +199,18 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                       subjectFileRecordDate:
                           theRecordFileCreatedAtVarListBoilerPlate['date']
                               .toString(),
+                      theLongPressed: () async => await serviceFirestore
+                          .deleteFile(
+                        user: widget.theUser,
+                        theFileSubjectName: widget.theFileSubjectName,
+                        theFileName: theRecordFileName,
+                      )
+                          .then((value) {
+                        listOfCurrentFilesNameFunction()
+                            .remove(theRecordFileName);
+                        Get.snackbar('File',
+                            '$theRecordFileName deleted successfully');
+                      }),
                     );
                   },
                 );
