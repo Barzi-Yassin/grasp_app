@@ -53,7 +53,8 @@ class _ScreenMessagesState extends State<ScreenMessages> {
           backgroundColor: Colors.cyan.shade700,
           centerTitle: true,
           // title: Text('${widget.theFileSubjectName} > ${widget.theFileName}'),
-          title: appbarTitleFolderIconAndName(theFolderaName: widget.theFileSubjectName),
+          title: appbarTitleFolderIconAndName(
+              theFolderaName: widget.theFileSubjectName),
           actions: [
             customeIconButton(
                 theOnPressed: () {},
@@ -237,6 +238,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                 //     'e7m:: ${theRecordMessageCreatedAtVarListBoilerPlate['date']}');
 
                                 return Badge(
+                                  animationType: BadgeAnimationType.fade,
                                   position:
                                       BadgePosition.topEnd(top: 20, end: 9),
                                   badgeColor: Colors.white,
