@@ -58,16 +58,8 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
         backgroundColor: Colors.cyan.shade700,
         centerTitle: true,
         leading: functionArrowbackIconButton(context),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const FaIcon(
-              FontAwesomeIcons.solidFolderOpen,
-              size: 20,
-            ),
-            Text('  ${widget.theFileSubjectName}'),
-          ],
-        ),
+        title:
+            appbarTitleFolderIconAndName(theFolderaName: widget.theFileSubjectName),
         // actions: [IconButton(onPressed: () {
         //   // Navigator.pop(context);
         //   // return EndDrawer();
@@ -208,8 +200,8 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                           .then((value) {
                         listOfCurrentFilesNameFunction()
                             .remove(theRecordFileName);
-                        Get.snackbar('File',
-                            '$theRecordFileName deleted successfully');
+                        Get.snackbar(
+                            'File', '$theRecordFileName deleted successfully');
                       }),
                     );
                   },

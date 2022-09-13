@@ -2,9 +2,7 @@ import 'package:badges/badges.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:grasp_app/src/reusable_codes/functions/date_time_functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/loadings/loading_indicator.dart';
@@ -55,19 +53,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
           backgroundColor: Colors.cyan.shade700,
           centerTitle: true,
           // title: Text('${widget.theFileSubjectName} > ${widget.theFileName}'),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const FaIcon(
-                FontAwesomeIcons.solidFolderOpen,
-                size: 20,
-              ),
-              customeText(
-                theData: "  ${widget.theFileSubjectName}",
-                // theFontSize: 21
-              ),
-            ],
-          ),
+          title: appbarTitleFolderIconAndName(theFolderaName: widget.theFileSubjectName),
           actions: [
             customeIconButton(
                 theOnPressed: () {},
