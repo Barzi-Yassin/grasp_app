@@ -67,7 +67,11 @@ class _ScreenMessagesState extends State<ScreenMessages> {
             ],
           ),
           actions: [
-            customeIcon(theIcon: Icons.height_sharp),
+            customeIconButton(
+                theOnPressed: () {},
+                theIcon: Icons.height_sharp,
+                theSize: 24,
+                thePaddingRight: 15),
           ],
         ),
         body: Container(
@@ -112,8 +116,8 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                     ],
                   )),
               child: ListTile(
-                contentPadding:
-                    const EdgeInsets.only(left: 10, right: 10, top: 0, bottom: 9),
+                contentPadding: const EdgeInsets.only(
+                    left: 10, right: 10, top: 0, bottom: 9),
                 minLeadingWidth: 0,
                 dense: true,
                 leading: Container(
@@ -199,9 +203,11 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                           if (messagesLength == 0) {
                             return customeText(theData: 'No messages found!');
                           } else {
-                            return ListView.builder(
-                              // padding:
-                              //     const EdgeInsets.symmetric(vertical: 20.0),
+                            return ListView.separated(
+                              padding: const EdgeInsets.only(bottom: 10.0),
+                              separatorBuilder:
+                                  (BuildContext context, int index) =>
+                                      const Divider(),
                               scrollDirection: Axis.vertical,
                               itemCount: snapshotMessages.data!.docs.length,
                               itemBuilder: (context, theRecord) {
@@ -237,13 +243,60 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                 // debugPrint(
                                 //     'e7m:: ${theRecordMessageCreatedAtVarListBoilerPlate['date']}');
 
-                                return ListTile(
-                                  title: customeText(theData: theMessage),
-                                  trailing: customeText(
-                                      theData:
-                                          theRecordMessageCreatedAtVarListBoilerPlate[
-                                                  'time']
-                                              .toString()),
+                                return Badge(
+                                  position:
+                                      BadgePosition.topEnd(top: 20, end: 9),
+                                  badgeColor: Colors.white,
+                                  elevation: 0,
+                                  badgeContent: SizedBox(
+                                    height: 15,
+                                    child: customeIconButton(
+                                      theOnPressed: () {},
+                                      theIcon: Icons.favorite_border,
+                                      theSize: 15,
+                                      theColor: Colors.cyan.shade300
+                                    ),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        margin: const EdgeInsets.only(left: 4),
+                                        width: screenWidth - 50,
+                                        alignment: Alignment.centerLeft,
+                                        decoration: BoxDecoration(
+                                          // color: Colors.teal,
+                                          border: Border.all(
+                                              color: Colors.white, width: 0.5),
+                                          borderRadius: const BorderRadius.all(
+                                            Radius.circular(8),
+                                          ),
+                                        ),
+                                        child: ListTile(
+                                          title:
+                                              customeText(theData: theMessage),
+                                          subtitle: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              customeText(
+                                                theData:
+                                                    'show date on longpress',
+                                                theTextAlign: TextAlign.end,
+                                                theFontSize: 11,
+                                              ),
+                                              customeText(
+                                                theData:
+                                                    "\n${theRecordMessageCreatedAtVarListBoilerPlate['time']}",
+                                                // "\n${theRecordMessageCreatedAtVarListBoilerPlate['date']}",
+                                                theTextAlign: TextAlign.start,
+                                                theFontSize: 11,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 );
                               },
                             );
@@ -255,17 +308,18 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                     width: screenWidth - 20,
                     // child: customeText(theData: 'fffffff'),
                     decoration: BoxDecoration(
-                        // color: Colors.cyan,
-                        borderRadius: BorderRadius.circular(22),
-                        gradient: LinearGradient(
-                          begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter,
-                          colors: [
-                            Colors.grey.shade300,
-                            Colors.grey.shade200,
-                            Colors.white,
-                          ],
-                        )),
+                      // color: Colors.cyan,
+                      borderRadius: BorderRadius.circular(22),
+                      gradient: LinearGradient(
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                        colors: [
+                          Colors.grey.shade300,
+                          Colors.grey.shade200,
+                          Colors.white,
+                        ],
+                      ),
+                    ),
                     child:
                         //  Row(
                         //   children: [
@@ -314,22 +368,23 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                           ),
                         ),
                         customeIconButton(
-                            theOnPressed: () {
-                              if (controllerMessage.text.isNotEmpty) {
-                                serviceFirestore
-                                    .createMessage(
-                                      user: widget.theUser,
-                                      theFileSubjectName:
-                                          widget.theFileSubjectName,
-                                      theMessageFileName: widget.theFileName,
-                                      theMessage: controllerMessage.text,
-                                    )
-                                    .then((value) => controllerMessage.clear());
-                              } else {
-                                Get.snackbar('error', 'please enter a message');
-                              }
-                            },
-                            theIcon: Icons.send)
+                          theOnPressed: () {
+                            if (controllerMessage.text.isNotEmpty) {
+                              serviceFirestore
+                                  .createMessage(
+                                    user: widget.theUser,
+                                    theFileSubjectName:
+                                        widget.theFileSubjectName,
+                                    theMessageFileName: widget.theFileName,
+                                    theMessage: controllerMessage.text,
+                                  )
+                                  .then((value) => controllerMessage.clear());
+                            } else {
+                              Get.snackbar('error', 'please enter a message');
+                            }
+                          },
+                          theIcon: Icons.send,
+                        )
                       ],
                     ),
                   ),
