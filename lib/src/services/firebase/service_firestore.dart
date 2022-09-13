@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:grasp_app/src/models/grasp_file_model.dart';
 import 'package:grasp_app/src/models/grasp_message_model.dart';
+import 'package:grasp_app/src/models/grasp_message_reaction_model.dart';
 import 'package:grasp_app/src/models/grasp_subject_model.dart';
 import 'package:grasp_app/src/models/grasp_user_model.dart';
 
@@ -53,7 +54,7 @@ class ServiceFirestore {
     required String theSubjectName,
     required theSubjectItemsNumber,
     required int theSubjectId,
-  }) async { 
+  }) async {
     GraspSubjectModel graspSubjectModel = GraspSubjectModel(
       uid: user.uid,
       subjectName: theSubjectName,
@@ -110,22 +111,74 @@ class ServiceFirestore {
     required String theMessageFileName,
     required String theMessage,
   }) async {
-    GraspMessageModel graspMessageModel = GraspMessageModel(
-      message: theMessage,
-      messageFileName: theMessageFileName,
-      createdAt: DateTime.now(),
-    );
-
-    await firestoreInstance
+    final docMessage = firestoreInstance
         .collection("users")
         .doc(user.uid)
         .collection("subjects")
         .doc(theFileSubjectName)
         .collection("files")
-        .doc(theMessageFileName).
-        collection("messages")
-        .doc()
-        .set(graspMessageModel.toMap());
+        .doc(theMessageFileName)
+        .collection("messages")
+        .doc();
+
+    GraspMessageModel graspMessageModel = GraspMessageModel(
+      messageDocId: docMessage.id,
+      message: theMessage,
+      messageFileName: theMessageFileName,
+      isReacted: false,
+      createdAt: DateTime.now(),
+    );
+
+    await docMessage.set(graspMessageModel.toMap());
     return graspMessageModel;
   }
+
+  Future<GraspMessageReactionModel> reactMessage({
+    required User user,
+    required String theFileSubjectName,
+    required String theMessageFileName,
+    required String theMessageDocId,
+    required bool theIsReacted,
+  }) async {
+    final docMessage = firestoreInstance
+        .collection("users")
+        .doc(user.uid)
+        .collection("subjects")
+        .doc(theFileSubjectName)
+        .collection("files")
+        .doc(theMessageFileName)
+        .collection("messages")
+        .doc(theMessageDocId);
+
+    GraspMessageReactionModel graspMessageReactionModel = GraspMessageReactionModel(
+      isReacted: theIsReacted,
+    );
+
+    await docMessage.update(graspMessageReactionModel.toMap());
+    return graspMessageReactionModel;
+  }
+
+// react a message
+  // Future<GraspMessageModel> reactMessage({
+  //   required User user,
+  //   required String theFileSubjectName,
+  //   required String theMessageFileName,
+  //   required bool theReactValue,
+  // }) async {
+  //   GraspMessageModel graspMessageModel = GraspMessageModel(
+  //     isReacted: theReactValue
+  //   );
+
+  //   await firestoreInstance
+  //       .collection("users")
+  //       .doc(user.uid)
+  //       .collection("subjects")
+  //       .doc(theFileSubjectName)
+  //       .collection("files")
+  //       .doc(theMessageFileName).
+  //       collection("messages")
+  //       .doc()
+  //       .set(graspMessageModel.toMap());
+  //   return graspMessageModel;
+  // }
 }

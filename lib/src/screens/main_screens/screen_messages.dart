@@ -34,6 +34,8 @@ class _ScreenMessagesState extends State<ScreenMessages> {
 
   final FocusNode focusNodeMessage = FocusNode();
 
+  bool isReacted = true;
+
   @override
   void initState() {
     // focusNode.addListener(() {
@@ -218,6 +220,8 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                     theRecordItem.data()["message"];
                                 final theMessageCreatedAt =
                                     theRecordItem.data()["createdAt"];
+                                final theRecordItemReact = theRecordItem.data()["isReacted"];
+                                final theRecordItemDocId = theRecordItem.data()["messageDocId"];
 
                                 final theRecordFileCreatedAtConverted =
                                     DateTime.fromMillisecondsSinceEpoch(
@@ -251,11 +255,22 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                   badgeContent: SizedBox(
                                     height: 15,
                                     child: customeIconButton(
-                                      theOnPressed: () {},
-                                      theIcon: Icons.favorite_border,
-                                      theSize: 15,
-                                      theColor: Colors.cyan.shade300
-                                    ),
+                                        theOnPressed: () {
+                                          serviceFirestore.reactMessage(
+                                            theMessageDocId: theRecordItemDocId,
+                                            user: widget.theUser,
+                                            theFileSubjectName:
+                                                widget.theFileSubjectName,
+                                            theMessageFileName:
+                                                widget.theFileName,
+                                            theIsReacted: !theRecordItemReact,
+                                          );
+                                        },
+                                        theIcon: theRecordItemReact
+                                            ? Icons.favorite
+                                            : Icons.favorite_border,
+                                        theSize: 15,
+                                        theColor: Colors.cyan.shade300),
                                   ),
                                   child: Row(
                                     children: [
