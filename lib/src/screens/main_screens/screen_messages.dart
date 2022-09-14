@@ -2,10 +2,12 @@ import 'package:badges/badges.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:get/get.dart';
 import 'package:grasp_app/src/reusable_codes/functions/date_time_functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/loadings/loading_indicator.dart';
+import 'package:grasp_app/src/reusable_codes/widgets/dialogs/dialog_delete.dart';
 import 'package:grasp_app/src/services/firebase/service_firestore.dart';
 
 class ScreenMessages extends StatefulWidget {
@@ -197,14 +199,16 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                   const EdgeInsets.symmetric(vertical: 10.0),
                               separatorBuilder:
                                   (BuildContext context, int index) =>
-                                      const Divider(color: Colors.transparent,),
+                                      const Divider(
+                                color: Colors.transparent,
+                              ),
                               scrollDirection: Axis.vertical,
                               itemCount: snapshotMessages.data!.docs.length,
                               itemBuilder: (context, theRecord) {
                                 final QueryDocumentSnapshot<
                                         Map<String, dynamic>> theRecordItem =
                                     snapshotMessages.data!.docs[theRecord];
-                                final theMessage =
+                                final theRecordItemMessage =
                                     theRecordItem.data()["message"];
                                 final theMessageCreatedAt =
                                     theRecordItem.data()["createdAt"];
@@ -212,6 +216,22 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                     theRecordItem.data()["isReacted"];
                                 final theRecordItemDocId =
                                     theRecordItem.data()["messageDocId"];
+
+                                final int theRecordItemMessageLength =
+                                    theRecordItemMessage.length;
+
+                                String theRecordItemMessageAbbreviated;
+
+                                if (theRecordItemMessageLength < 5) {
+                                  theRecordItemMessageAbbreviated =
+                                      '${theRecordItemMessage.substring(0, theRecordItemMessageLength)}';
+                                } else {
+                                  theRecordItemMessageAbbreviated =
+                                      '${theRecordItemMessage.substring(0, 5)}...';
+                                }
+
+                                debugPrint(
+                                    'ttttttt :: $theRecordItemMessageAbbreviated');
 
                                 final theRecordFileCreatedAtConverted =
                                     DateTime.fromMillisecondsSinceEpoch(
@@ -286,28 +306,58 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                         child: ListTile(
                                           dense: true,
                                           contentPadding: const EdgeInsets.only(
-                                              left: 10, right: 16, top: 10, bottom: 0),
-                                          onLongPress: () =>
-                                              serviceFirestore.deleteMessage(
-                                            user: widget.theUser,
-                                            theFileSubjectName:
-                                                widget.theFileSubjectName,
-                                            theMessageFileName:
-                                                widget.theFileName,
-                                            theMessageDocId: theRecordItemDocId,
-                                          ),
-                                          title:
-                                              customeText(theData: theMessage),
+                                              left: 10,
+                                              right: 16,
+                                              top: 10,
+                                              bottom: 0),
+                                          onLongPress: () {
+                                            showAnimatedDialog(
+                                              barrierColor: Colors.black38,
+                                              barrierDismissible: true,
+                                              context: context,
+                                              animationType:
+                                                  DialogTransitionType.sizeFade,
+                                              curve: Curves.easeOut,
+                                              alignment: Alignment.bottomCenter,
+                                              duration: const Duration(
+                                                  milliseconds: 800),
+                                              builder: (_) => DialogDelete(
+                                                theTitle: "Message",
+                                                theName:
+                                                    theRecordItemMessageAbbreviated,
+                                                theOnPressed: () async {
+                                                  await serviceFirestore
+                                                      .deleteMessage(
+                                                    user: widget.theUser,
+                                                    theFileSubjectName: widget
+                                                        .theFileSubjectName,
+                                                    theMessageFileName:
+                                                        widget.theFileName,
+                                                    theMessageDocId:
+                                                        theRecordItemDocId,
+                                                  )
+                                                      .then((value) {
+                                                        Get.back();
+                                                    return Get.snackbar(
+                                                        'Message Deleted',
+                                                        'the messsage $theRecordItemMessageAbbreviated is successfully deleted.');
+                                                  });
+                                                },
+                                              ),
+                                            );
+                                          },
+                                          title: customeText(
+                                              theData: theRecordItemMessage),
                                           subtitle: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
-                                                crossAxisAlignment: CrossAxisAlignment.end,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
                                             children: [
                                               customeText(
                                                 theData: showDate
                                                     ? "\n${theRecordMessageCreatedAtVarListBoilerPlate['date']}"
                                                     : '',
-                                                // 'show date on longpress',
                                                 theTextAlign: TextAlign.end,
                                                 theFontSize: 11,
                                               ),
