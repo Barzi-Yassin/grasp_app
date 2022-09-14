@@ -26,7 +26,7 @@ class _DialogAddState extends State<DialogAdd> {
       titlePadding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
       // titlePadding: const EdgeInsets.fromLTRB(12.0, 24.0, 12.0, 0.0),
       contentPadding: const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 8.0),
-      actionsPadding: const EdgeInsets.symmetric(horizontal: 8.0),
+      actionsPadding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
       elevation: 5,
       actionsOverflowButtonSpacing: 0,
       shape: const RoundedRectangleBorder(
