@@ -197,7 +197,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                   const EdgeInsets.symmetric(vertical: 10.0),
                               separatorBuilder:
                                   (BuildContext context, int index) =>
-                                      const Divider(),
+                                      const Divider(color: Colors.transparent,),
                               scrollDirection: Axis.vertical,
                               itemCount: snapshotMessages.data!.docs.length,
                               itemBuilder: (context, theRecord) {
@@ -240,7 +240,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                 return Badge(
                                   animationType: BadgeAnimationType.fade,
                                   position:
-                                      BadgePosition.topEnd(top: 20, end: 19),
+                                      BadgePosition.topEnd(top: 20, end: 17),
                                   badgeColor: Colors.white,
                                   elevation: 0,
                                   badgeContent: SizedBox(
@@ -270,18 +270,23 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                   child: Row(
                                     children: [
                                       Container(
-                                        margin: const EdgeInsets.only(left: 4),
+                                        margin: const EdgeInsets.only(left: 6),
                                         width: screenWidth - 50,
                                         alignment: Alignment.centerLeft,
                                         decoration: BoxDecoration(
                                           // color: Colors.teal,
                                           border: Border.all(
                                               color: Colors.white, width: 0.5),
-                                          borderRadius: const BorderRadius.all(
-                                            Radius.circular(8),
+                                          borderRadius: const BorderRadius.only(
+                                            topRight: Radius.circular(8),
+                                            bottomLeft: Radius.circular(8),
+                                            bottomRight: Radius.circular(8),
                                           ),
                                         ),
                                         child: ListTile(
+                                          dense: true,
+                                          contentPadding: const EdgeInsets.only(
+                                              left: 10, right: 16, top: 10, bottom: 0),
                                           onLongPress: () =>
                                               serviceFirestore.deleteMessage(
                                             user: widget.theUser,
@@ -296,6 +301,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                           subtitle: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
+                                                crossAxisAlignment: CrossAxisAlignment.end,
                                             children: [
                                               customeText(
                                                 theData: showDate
