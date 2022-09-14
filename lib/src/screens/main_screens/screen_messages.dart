@@ -34,14 +34,14 @@ class _ScreenMessagesState extends State<ScreenMessages> {
 
   bool showDate = true;
 
-  @override
-  void initState() {
-    // focusNode.addListener(() {
-    //   debugPrint(focusNode.hasFocus.toString());
-    // });
-    controllerMessage.addListener(() => setState(() {}));
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   // focusNode.addListener(() {
+  //   //   debugPrint(focusNode.hasFocus.toString());
+  //   // });
+  //   controllerMessage.addListener(() => setState(() {}));
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
