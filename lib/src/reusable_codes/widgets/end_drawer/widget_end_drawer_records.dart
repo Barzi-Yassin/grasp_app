@@ -26,7 +26,7 @@ class WidgetEndDrawerRecords extends StatelessWidget {
   final IconData iconImportants = Icons.label_important;
   final IconData iconArchivedGrasps = Icons.archive;
   final IconData iconGraspGuidance = FontAwesomeIcons.circleInfo;
-  final IconData iconExit = Icons.logout;
+  final IconData iconLogout = Icons.logout;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -98,7 +98,7 @@ class WidgetEndDrawerRecords extends StatelessWidget {
     } else if (enddrawerRecordId == 6) {
       return iconGraspGuidance;
     } else {
-      return iconExit;
+      return iconLogout;
     }
   }
 }

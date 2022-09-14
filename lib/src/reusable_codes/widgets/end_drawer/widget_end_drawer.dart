@@ -196,7 +196,7 @@ class EndDrawer extends StatelessWidget {
                         ),
                         WidgetEndDrawerRecords(
                           enddrawerRecordId: 7,
-                          enddrawerRecordTitle: "Exit",
+                          enddrawerRecordTitle: "Logout",
                           enddrawerRecordRoutePath: RouteScreens.routeInit,
                           isSignOut: true,
                         ),
