@@ -11,6 +11,7 @@ import 'package:grasp_app/src/models/grasp_user_model.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/loadings/loading_indicator.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/dialogs/dialog_add.dart';
+import 'package:grasp_app/src/reusable_codes/widgets/dialogs/dialog_delete.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/end_drawer/widget_end_drawer.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/subjects/widget_subject_records.dart';
 import 'package:grasp_app/src/screens/main_screens/screen_subject_files.dart';
@@ -51,6 +52,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade400,
       endDrawer: SafeArea(
         child: EndDrawer(),
       ),
@@ -129,6 +131,12 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                                 .add(theRecordSubjectName);
                           }
 
+                          // final length = serviceFirestore.getSubjectItemsLength(
+                          //     user: widget.theUser,
+                          //     theSubjectName: theRecordSubjectName);
+
+                          //     debugPrint('bbbbb :: $length');
+
                           return StreamBuilder<
                                   QuerySnapshot<Map<String, dynamic>>>(
                               stream: serviceFirestore.firestoreInstance
@@ -163,20 +171,44 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                                 return WidgetSubjectRecords(
                                   theUser: widget.theUser,
                                   theFileSubjectName: theRecordSubjectName,
-                                  theSubjectItemsLength: filesLength
-                                      .toString(), 
-                                  theLongPressed: () async =>
-                                      await serviceFirestore
-                                          .deleteSubject(
-                                    user: widget.theUser,
-                                    theSubjectName: theRecordSubjectName,
-                                  )
-                                          .then((value) {
-                                    listOfCurrentSubjectsNameFunction()
-                                        .remove(theRecordSubjectName);
-                                    Get.snackbar('Subject',
-                                        '$theRecordSubjectName deleted successfully');
-                                  }),
+                                  theSubjectItemsLength: filesLength.toString(),
+                                  theLongPressed: () async {
+                                    if (filesLength == 0) {
+                                      showAnimatedDialog(
+                                        barrierColor: Colors.black38,
+                                        barrierDismissible: true,
+                                        context: context,
+                                        animationType:
+                                            DialogTransitionType.sizeFade,
+                                        curve: Curves.easeOut,
+                                        alignment: Alignment.bottomCenter,
+                                        duration:
+                                            const Duration(milliseconds: 800),
+                                        builder: (_) => DialogDelete(
+                                          theTitle: "Subject",
+                                          theName: theRecordSubjectName,
+                                          theOnPressed: () async {
+                                            await serviceFirestore
+                                                .deleteSubject(
+                                              user: widget.theUser,
+                                              theSubjectName:
+                                                  theRecordSubjectName,
+                                            )
+                                                .then((value) {
+                                              Get.back();
+                                              listOfCurrentSubjectsNameFunction()
+                                                  .remove(theRecordSubjectName);
+                                              Get.snackbar('Subject',
+                                                  '$theRecordSubjectName deleted successfully');
+                                            });
+                                          },
+                                        ),
+                                      );
+                                    } else {
+                                      Get.snackbar('Caution',
+                                          'remove all the files inside $theRecordSubjectName subject, then it could be deleted.');
+                                    }
+                                  },
                                 );
                               });
                         },

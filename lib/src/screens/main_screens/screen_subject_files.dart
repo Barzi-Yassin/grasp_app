@@ -8,6 +8,7 @@ import 'package:grasp_app/src/reusable_codes/functions/date_time_functions.dart'
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/loadings/loading_indicator.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/dialogs/dialog_add.dart';
+import 'package:grasp_app/src/reusable_codes/widgets/dialogs/dialog_delete.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/end_drawer/widget_end_drawer.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/subject_files/widget_subject_file_records.dart';
 import 'package:grasp_app/src/services/firebase/service_firestore.dart';
@@ -191,18 +192,40 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                       subjectFileRecordDate:
                           theRecordFileCreatedAtVarListBoilerPlate['date']
                               .toString(),
-                      theTrailingOnPressed: () async => await serviceFirestore
-                          .deleteFile(
-                        user: widget.theUser,
-                        theFileSubjectName: widget.theFileSubjectName,
-                        theFileName: theRecordFileName,
-                      )
-                          .then((value) {
-                        listOfCurrentFilesNameFunction()
-                            .remove(theRecordFileName);
-                        Get.snackbar(
-                            'File', '$theRecordFileName deleted successfully');
-                      }),
+                      theTrailingOnPressed: () async {
+                        showAnimatedDialog(
+                          barrierColor: Colors.black38,
+                          barrierDismissible: true,
+                          context: context,
+                          animationType: DialogTransitionType.sizeFade,
+                          curve: Curves.easeOut,
+                          alignment: Alignment.bottomCenter,
+                          duration: const Duration(milliseconds: 800),
+                          builder: (_) => DialogDelete(
+                            theTitle: "Grasp",
+                            theName: theRecordFileName,
+                            theOnPressed: () async {
+                              // await serviceFirestore;
+
+                              await serviceFirestore
+                                  .deleteFile(
+                                user: widget.theUser,
+                                theFileSubjectName: widget.theFileSubjectName,
+                                theFileName: theRecordFileName,
+                              )
+                                  .then(
+                                (value) {
+                                  Get.back();
+                                  listOfCurrentFilesNameFunction()
+                                      .remove(theRecordFileName);
+                                  Get.snackbar('File',
+                                      '$theRecordFileName deleted successfully');
+                                },
+                              );
+                            },
+                          ),
+                        );
+                      },
                     );
                   },
                 );

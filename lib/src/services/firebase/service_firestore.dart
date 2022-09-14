@@ -175,6 +175,32 @@ class ServiceFirestore {
     return;
   }
 
+/*
+  //  get subject items length
+  Future<String> getSubjectItemsLength(
+      {required User user, required String theSubjectName}) async {
+    final QuerySnapshot<Map<String, dynamic>> theSubjectFilesStream = await firestoreInstance
+        .collection("users")
+        .doc(user.uid)
+        .collection("subjects")
+        .doc(theSubjectName)
+        .collection("files")
+        .get();
+
+    return theSubjectFilesStream.docs.length.toString();
+    
+    // (
+      
+    //   (element) {
+    //   debugPrint('ppppp :: ${element.data().length}');
+    //   // element.data().
+    // });
+
+    // return 'ff';
+  }
+
+  */
+
 // create message
   Future<GraspMessageModel> createMessage({
     required User user,
