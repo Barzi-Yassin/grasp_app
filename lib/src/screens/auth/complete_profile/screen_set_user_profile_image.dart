@@ -162,17 +162,10 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
                           onPressed: () async {
                             if (imageSelected != null) {
                               setState(() => isLoading = true);
-                              await uploadImage(
+                              uploadImage(
                                 imageSelected!,
                                 theUser: widget.theUser,
-                              )
-                                  .then((_) async => await serviceFirestore
-                                          .addUserInfoAfterAuthToDB(
-                                        user: widget.theUser,
-                                        theName: widget.theControllerUsername,
-                                        theImageUrl: imageDownloadLink,
-                                      ))
-                                  .then((_) async {
+                              ).then((_) async {
                                 if (mounted) {
                                   setState(() => isLoading = false);
                                 }
@@ -238,10 +231,16 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
           break;
         case TaskState.success:
           imgDlRef = await imagesRef.getDownloadURL();
-          setState(() {
-            imageDownloadLink = imgDlRef;
-            // isLoading = false;
-          });
+          serviceFirestore.addUserInfoAfterAuthToDB(
+            user: widget.theUser,
+            theName: widget.theControllerUsername,
+            theImageUrl: imgDlRef.toString(),
+          );
+
+          // setState(() {
+          //   imageDownloadLink = imgDlRef;
+          //   // isLoading = false;
+          // });
           debugPrint('TaskState:: is <success> || download url: $imgDlRef');
           break;
         case TaskState.canceled:
