@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:grasp_app/src/reusable_codes/functions/date_time_functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
@@ -34,7 +35,8 @@ class _ScreenMessagesState extends State<ScreenMessages> {
 
   final FocusNode focusNodeMessage = FocusNode();
 
-  bool showDate = true;
+  bool isDateVisibile = false;
+  bool isReadingMode = false;
 
   // @override
   // void initState() {
@@ -59,10 +61,20 @@ class _ScreenMessagesState extends State<ScreenMessages> {
               theFolderaName: widget.theFileSubjectName),
           actions: [
             customeIconButton(
-                theOnPressed: () {},
-                theIcon: Icons.height_sharp,
-                theSize: 24,
-                thePaddingRight: 15),
+              theOnPressed: () =>
+                  setState(() => isDateVisibile = !isDateVisibile),
+              theIcon: FontAwesomeIcons.solidCalendarXmark,
+              theSize: 18,
+              theSplashRadius: 18,
+            ),
+            const SizedBox(width: 2),
+            customeIconButton(
+              theOnPressed: () {},
+              theIcon: Icons.height_sharp,
+              theSize: 24,
+              theSplashRadius: 18,
+            ),
+            const SizedBox(width: 6)
           ],
         ),
         body: Container(
@@ -275,8 +287,6 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                         theMessageFileName: widget.theFileName,
                                         theIsReacted: !theRecordItemReact,
                                       ),
-                                      onLongPress: () =>
-                                          setState(() => showDate = !showDate),
                                       highlightColor: Colors.transparent,
                                       child: customeIcon(
                                         theIcon: theRecordItemReact
@@ -355,7 +365,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                                 CrossAxisAlignment.end,
                                             children: [
                                               customeText(
-                                                theData: showDate
+                                                theData: isDateVisibile
                                                     ? "\n${theRecordMessageCreatedAtVarListBoilerPlate['date']}"
                                                     : '',
                                                 theTextAlign: TextAlign.end,
