@@ -69,7 +69,8 @@ class _DialogDeleteState extends State<DialogDelete> {
         ),
       ),
       content: customeText(
-          theData: 'Delete ${widget.theTitle.toLowerCase()} ${widget.theName} permanently !'),
+          theData:
+              'Delete ${widget.theTitle.toLowerCase()} "${widget.theName}" permanently !'),
       actions: <Widget>[
         ElevatedButton(
           style: ButtonStyle(
@@ -85,11 +86,13 @@ class _DialogDeleteState extends State<DialogDelete> {
             style: TextStyle(color: Colors.cyan),
           ),
         ),
-        ElevatedButton(
+        ElevatedButton.icon(
           style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.cyan)),
+            backgroundColor: MaterialStateProperty.all(Colors.cyan),
+          ),
           onPressed: widget.theOnPressed,
-          child: const Text('Delete'),
+          icon: customeIcon(theIcon: Icons.delete_forever_outlined),
+          label: const Text('Delete'),
         ),
       ],
     );
