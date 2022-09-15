@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:grasp_app/src/reusable_codes/functions/date_time_functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/loadings/loading_indicator.dart';
-import 'package:grasp_app/src/reusable_codes/functions/sub_string.dart';
+import 'package:grasp_app/src/reusable_codes/functions/custome_string_functions.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/dialogs/dialog_delete.dart';
 import 'package:grasp_app/src/services/firebase/service_firestore.dart';
 
@@ -282,7 +282,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                 return Badge(
                                   animationType: BadgeAnimationType.fade,
                                   position:
-                                      BadgePosition.topEnd(top: 20, end: 17),
+                                      BadgePosition.topEnd(top: 17, end: 17),
                                   badgeColor: Colors.white,
                                   elevation: 0,
                                   badgeContent: SizedBox(
@@ -364,7 +364,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                                         Get.back();
                                                         return Get.snackbar(
                                                             'Message caution',
-                                                            'The messsage $theRecordItemMessageAbbreviated has been deleted successfully.');
+                                                            'The messsage "$theRecordItemMessageAbbreviated" has been deleted successfully.');
                                                       });
                                                     },
                                                   );
@@ -514,7 +514,9 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                                 controllerMessage.clear());
                                       } else {
                                         Get.snackbar(
-                                            'Message caution', 'Please enter a message.');
+                                          'Message caution',
+                                          'Please enter a message.',
+                                        );
                                       }
                                     },
                                     theIcon: Icons.send, // mic
