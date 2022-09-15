@@ -53,16 +53,8 @@ class _ScreenMessagesState extends State<ScreenMessages> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    final int lengthFolderName = widget.theFileSubjectName.length;
-    final int lengthFileName = widget.theFileSubjectName.length;
-
-    // if (theRecordItemMessageLength < 5) {
-    //   theRecordItemMessageAbbreviated =
-    //       '${theRecordItemMessage.substring(0, theRecordItemMessageLength)}';
-    // } else {
-    //   theRecordItemMessageAbbreviated =
-    //       '${theRecordItemMessage.substring(0, 5)}...';
-    // }
+    final String isReadingModeAppbarTitle =
+        '${customeStringFunctions.customeSubString(theString: widget.theFileSubjectName, theResultLengthLimit: 4)}/ ${customeStringFunctions.customeSubString(theString: widget.theFileName, theResultLengthLimit: 4)}';
 
     return SafeArea(
       child: Scaffold(
@@ -72,7 +64,9 @@ class _ScreenMessagesState extends State<ScreenMessages> {
           centerTitle: true,
           // title: Text('${widget.theFileSubjectName} > ${widget.theFileName}'),
           title: appbarTitleFolderIconAndName(
-              theFolderaName: widget.theFileSubjectName),
+              theFolderaName: isReadingMode
+                  ? isReadingModeAppbarTitle
+                  : widget.theFileSubjectName),
           actions: [
             customeIconButton(
               theOnPressed: () =>
