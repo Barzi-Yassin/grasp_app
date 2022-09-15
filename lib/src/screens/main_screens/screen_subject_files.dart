@@ -52,6 +52,7 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade400,
       endDrawer: SafeArea(
         child: EndDrawer(),
       ),
