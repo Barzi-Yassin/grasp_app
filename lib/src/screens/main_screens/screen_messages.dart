@@ -71,8 +71,9 @@ class _ScreenMessagesState extends State<ScreenMessages> {
             ),
             const SizedBox(width: 2),
             customeIconButton(
-              theOnPressed: () {},
-              theIcon: Icons.height_sharp,
+              theOnPressed: () =>
+                  setState(() => isReadingMode = !isReadingMode),
+              theIcon: isReadingMode ? Icons.edit_note : Icons.height_sharp,
               theSize: 24,
               theSplashRadius: 18,
             ),
@@ -85,6 +86,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
           width: double.infinity,
           decoration: backgroundGradientCyan(),
           child: Badge(
+            showBadge: isReadingMode ? false : true,
             // toAnimate: false,
             animationType: BadgeAnimationType.scale,
             animationDuration: const Duration(milliseconds: 700),
@@ -101,7 +103,6 @@ class _ScreenMessagesState extends State<ScreenMessages> {
             position: BadgePosition.topStart(start: 5, top: 10),
             // borderSide: const BorderSide(color: Colors.white60, width: 1),
             badgeColor: Colors.transparent,
-            showBadge: true,
             badgeContent: Container(
               height: 50,
               width: screenWidth - 20,
@@ -157,17 +158,22 @@ class _ScreenMessagesState extends State<ScreenMessages> {
               ),
             ),
             child: Container(
-              margin:
-                  const EdgeInsets.only(left: 5, right: 5, top: 40, bottom: 5),
-              padding: const EdgeInsets.only(top: 22.5),
+              margin: EdgeInsets.only(
+                  left: 5,
+                  right: 5,
+                  top: isReadingMode ? 5 : 40,
+                  bottom: 5), 
+              padding:
+                  EdgeInsets.only(top: isReadingMode ? 0 : 22.5),
               width: double.infinity,
               // height: 200,
               // alignment: Alignment.topCenter,
               decoration: BoxDecoration(
                 shape: BoxShape.rectangle,
                 border: Border.all(color: Colors.grey.shade300, width: 2.5),
-                borderRadius: const BorderRadius.vertical(
-                    bottom: Radius.circular(34), top: Radius.circular(5)),
+                borderRadius: BorderRadius.vertical(
+                    bottom: Radius.circular(isReadingMode ? 5 : 34),
+                    top: const Radius.circular(5)),
               ),
               child: Column(
                 children: [
@@ -323,40 +329,49 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                               top: 10,
                                               bottom: 0),
                                           onLongPress: () {
-                                            showAnimatedDialog(
-                                              barrierColor: Colors.black38,
-                                              barrierDismissible: true,
-                                              context: context,
-                                              animationType:
-                                                  DialogTransitionType.sizeFade,
-                                              curve: Curves.easeOut,
-                                              alignment: Alignment.bottomCenter,
-                                              duration: const Duration(
-                                                  milliseconds: 800),
-                                              builder: (_) => DialogDelete(
-                                                theTitle: "Message",
-                                                theName:
-                                                    theRecordItemMessageAbbreviated,
-                                                theOnPressed: () async {
-                                                  await serviceFirestore
-                                                      .deleteMessage(
-                                                    user: widget.theUser,
-                                                    theFileSubjectName: widget
-                                                        .theFileSubjectName,
-                                                    theMessageFileName:
-                                                        widget.theFileName,
-                                                    theMessageDocId:
-                                                        theRecordItemDocId,
-                                                  )
-                                                      .then((value) {
-                                                    Get.back();
-                                                    return Get.snackbar(
-                                                        'Message Deleted',
-                                                        'the messsage $theRecordItemMessageAbbreviated is successfully deleted.');
-                                                  });
+                                            if (!isReadingMode) {
+                                              showAnimatedDialog(
+                                                barrierColor: Colors.black38,
+                                                barrierDismissible: true,
+                                                context: context,
+                                                animationType:
+                                                    DialogTransitionType
+                                                        .sizeFade,
+                                                curve: Curves.easeOut,
+                                                alignment:
+                                                    Alignment.bottomCenter,
+                                                duration: const Duration(
+                                                    milliseconds: 800),
+                                                builder: (_) {
+                                                  return DialogDelete(
+                                                    theTitle: "Message",
+                                                    theName:
+                                                        theRecordItemMessageAbbreviated,
+                                                    theOnPressed: () async {
+                                                      await serviceFirestore
+                                                          .deleteMessage(
+                                                        user: widget.theUser,
+                                                        theFileSubjectName: widget
+                                                            .theFileSubjectName,
+                                                        theMessageFileName:
+                                                            widget.theFileName,
+                                                        theMessageDocId:
+                                                            theRecordItemDocId,
+                                                      )
+                                                          .then((value) {
+                                                        Get.back();
+                                                        return Get.snackbar(
+                                                            'Message Deleted',
+                                                            'the messsage $theRecordItemMessageAbbreviated is successfully deleted.');
+                                                      });
+                                                    },
+                                                  );
                                                 },
-                                              ),
-                                            );
+                                              );
+                                            } else {
+                                              Get.snackbar('Caution',
+                                                  'Message can\'t be deleted, while you\'re in reading mode.');
+                                            }
                                           },
                                           title: customeText(
                                               theData: theRecordItemMessage),
@@ -391,120 +406,128 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                           }
                         }),
                   ),
-                  Row(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(left: 2),
-                        height: 50,
-                        width: screenWidth - 65,
-                        alignment: Alignment.centerLeft,
-                        // child: customeText(theData: 'fffffff'),
-                        decoration: BoxDecoration(
-                          // color: Colors.cyan,
-                          borderRadius: const BorderRadius.horizontal(
-                            left: Radius.circular(22),
-                            right: Radius.circular(10),
-                          ),
-                          gradient: LinearGradient(
-                            begin: Alignment.bottomCenter,
-                            end: Alignment.topCenter,
-                            colors: [
-                              Colors.grey.shade300,
-                              Colors.grey.shade200,
-                              Colors.white,
-                            ],
-                          ),
-                        ),
-                        child:
-                            //  Row(
-                            //   children: [
-                            //     Expanded(child: messageInput()),
-                            //     customeIconButton(
-                            //         theOnPressed: () {}, theIcon: Icons.send)
-                            //   ],
-                            // ),
-                            Expanded(
-                          child: TextField(
-                            // focusNode: focusNode,
-                            controller: controllerMessage,
-                            textAlign: TextAlign.center,
-                            keyboardType: TextInputType.multiline,
-                            textInputAction: TextInputAction.newline,
-                            cursorColor: Colors.cyan,
-                            // onSaved: (message) {},
-                            // maxLines: 1,
-                            decoration: InputDecoration(
-                              // filled: true,
-                              // fillColor: Colors.white70,
-                              hintText: "Message...",
-                              prefixIcon: customePaddingOnly(
-                                thePaddingLeft: 10,
-                                theChild: customeIconShaderMask(
-                                  theIcon: Icons.emoji_emotions_outlined,
-                                  theSize: 28,
+                  isReadingMode
+                      ? const SizedBox(
+                          width: 0,
+                          height: 0,
+                        )
+                      : Row(
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(left: 2),
+                              height: 50,
+                              width: screenWidth - 65,
+                              alignment: Alignment.centerLeft,
+                              // child: customeText(theData: 'fffffff'),
+                              decoration: BoxDecoration(
+                                // color: Colors.cyan,
+                                borderRadius: const BorderRadius.horizontal(
+                                  left: Radius.circular(22),
+                                  right: Radius.circular(10),
+                                ),
+                                gradient: LinearGradient(
+                                  begin: Alignment.bottomCenter,
+                                  end: Alignment.topCenter,
+                                  colors: [
+                                    Colors.grey.shade300,
+                                    Colors.grey.shade200,
+                                    Colors.white,
+                                  ],
                                 ),
                               ),
-                              // suffixIcon: customePaddingOnly(
-                              //   thePaddingRight: 10,
-                              //   theChild: customeIconButton(
-                              //     theOnPressed: () => controllerMessage.clear(),
-                              //     theIcon: Icons.close,
-                              //     theSize: 22,
-                              //     theColor: Colors.grey.shade400,
-                              //   ),
-                              // ),
-                              border: const OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(40)),
-                                  borderSide: BorderSide.none),
+                              child:
+                                  //  Row(
+                                  //   children: [
+                                  //     Expanded(child: messageInput()),
+                                  //     customeIconButton(
+                                  //         theOnPressed: () {}, theIcon: Icons.send)
+                                  //   ],
+                                  // ),
+                                  Expanded(
+                                child: TextField(
+                                  // focusNode: focusNode,
+                                  controller: controllerMessage,
+                                  textAlign: TextAlign.center,
+                                  keyboardType: TextInputType.multiline,
+                                  textInputAction: TextInputAction.newline,
+                                  cursorColor: Colors.cyan,
+                                  // onSaved: (message) {},
+                                  // maxLines: 1,
+                                  decoration: InputDecoration(
+                                    // filled: true,
+                                    // fillColor: Colors.white70,
+                                    hintText: "Message...",
+                                    prefixIcon: customePaddingOnly(
+                                      thePaddingLeft: 10,
+                                      theChild: customeIconShaderMask(
+                                        theIcon: Icons.emoji_emotions_outlined,
+                                        theSize: 28,
+                                      ),
+                                    ),
+                                    // suffixIcon: customePaddingOnly(
+                                    //   thePaddingRight: 10,
+                                    //   theChild: customeIconButton(
+                                    //     theOnPressed: () => controllerMessage.clear(),
+                                    //     theIcon: Icons.close,
+                                    //     theSize: 22,
+                                    //     theColor: Colors.grey.shade400,
+                                    //   ),
+                                    // ),
+                                    border: const OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(40)),
+                                        borderSide: BorderSide.none),
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
+                            Container(
+                              height: 50,
+                              width: 44,
+                              margin: const EdgeInsets.only(left: 3),
+                              // padding: EdgeInsets.symmetric(horizontal: 5),
+                              decoration: BoxDecoration(
+                                // color: Colors.cyan,
+                                borderRadius: const BorderRadius.horizontal(
+                                  left: Radius.circular(10),
+                                  right: Radius.circular(24),
+                                ),
+                                gradient: LinearGradient(
+                                  begin: Alignment.bottomCenter,
+                                  end: Alignment.topCenter,
+                                  colors: [
+                                    Colors.grey.shade300,
+                                    Colors.grey.shade200,
+                                    Colors.white,
+                                  ],
+                                ),
+                              ),
+                              child: customeIconButton(
+                                theOnPressed: () async {
+                                  if (controllerMessage.text.isNotEmpty) {
+                                    await serviceFirestore
+                                        .createMessage(
+                                          user: widget.theUser,
+                                          theFileSubjectName:
+                                              widget.theFileSubjectName,
+                                          theMessageFileName:
+                                              widget.theFileName,
+                                          theMessage: controllerMessage.text,
+                                        )
+                                        .then((value) =>
+                                            controllerMessage.clear());
+                                  } else {
+                                    Get.snackbar(
+                                        'error', 'please enter a message');
+                                  }
+                                },
+                                theIcon: Icons.send, // mic
+                                theColor: Colors.cyan.shade600,
+                                theSize: 27,
+                              ),
+                            )
+                          ],
                         ),
-                      ),
-                      Container(
-                        height: 50,
-                        width: 44,
-                        margin: const EdgeInsets.only(left: 3),
-                        // padding: EdgeInsets.symmetric(horizontal: 5),
-                        decoration: BoxDecoration(
-                          // color: Colors.cyan,
-                          borderRadius: const BorderRadius.horizontal(
-                            left: Radius.circular(10),
-                            right: Radius.circular(24),
-                          ),
-                          gradient: LinearGradient(
-                            begin: Alignment.bottomCenter,
-                            end: Alignment.topCenter,
-                            colors: [
-                              Colors.grey.shade300,
-                              Colors.grey.shade200,
-                              Colors.white,
-                            ],
-                          ),
-                        ),
-                        child: customeIconButton(
-                          theOnPressed: () async {
-                            if (controllerMessage.text.isNotEmpty) {
-                              await serviceFirestore
-                                  .createMessage(
-                                    user: widget.theUser,
-                                    theFileSubjectName:
-                                        widget.theFileSubjectName,
-                                    theMessageFileName: widget.theFileName,
-                                    theMessage: controllerMessage.text,
-                                  )
-                                  .then((value) => controllerMessage.clear());
-                            } else {
-                              Get.snackbar('error', 'please enter a message');
-                            }
-                          },
-                          theIcon: Icons.send, // mic
-                          theColor: Colors.cyan.shade600,
-                          theSize: 27,
-                        ),
-                      )
-                    ],
-                  ),
                 ],
               ),
             ),
