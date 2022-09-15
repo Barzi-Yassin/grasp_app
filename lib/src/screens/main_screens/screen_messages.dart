@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:grasp_app/src/reusable_codes/functions/date_time_functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/loadings/loading_indicator.dart';
+import 'package:grasp_app/src/reusable_codes/functions/sub_string.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/dialogs/dialog_delete.dart';
 import 'package:grasp_app/src/services/firebase/service_firestore.dart';
 
@@ -30,6 +31,8 @@ class ScreenMessages extends StatefulWidget {
 class _ScreenMessagesState extends State<ScreenMessages> {
   final ServiceFirestore serviceFirestore = ServiceFirestore();
   final DateTimeOptimizer dateTimeOptimizer = DateTimeOptimizer();
+  final CustomeStringFunctions customeStringFunctions =
+      CustomeStringFunctions();
 
   final TextEditingController controllerMessage = TextEditingController();
 
@@ -50,6 +53,17 @@ class _ScreenMessagesState extends State<ScreenMessages> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+    final int lengthFolderName = widget.theFileSubjectName.length;
+    final int lengthFileName = widget.theFileSubjectName.length;
+
+    // if (theRecordItemMessageLength < 5) {
+    //   theRecordItemMessageAbbreviated =
+    //       '${theRecordItemMessage.substring(0, theRecordItemMessageLength)}';
+    // } else {
+    //   theRecordItemMessageAbbreviated =
+    //       '${theRecordItemMessage.substring(0, 5)}...';
+    // }
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey.shade400,
@@ -159,12 +173,8 @@ class _ScreenMessagesState extends State<ScreenMessages> {
             ),
             child: Container(
               margin: EdgeInsets.only(
-                  left: 5,
-                  right: 5,
-                  top: isReadingMode ? 5 : 40,
-                  bottom: 5), 
-              padding:
-                  EdgeInsets.only(top: isReadingMode ? 0 : 22.5),
+                  left: 5, right: 5, top: isReadingMode ? 5 : 40, bottom: 5),
+              padding: EdgeInsets.only(top: isReadingMode ? 0 : 22.5),
               width: double.infinity,
               // height: 200,
               // alignment: Alignment.topCenter,
@@ -237,18 +247,11 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                 final theRecordItemDocId =
                                     theRecordItem.data()["messageDocId"];
 
-                                final int theRecordItemMessageLength =
-                                    theRecordItemMessage.length;
-
-                                String theRecordItemMessageAbbreviated;
-
-                                if (theRecordItemMessageLength < 5) {
-                                  theRecordItemMessageAbbreviated =
-                                      '${theRecordItemMessage.substring(0, theRecordItemMessageLength)}';
-                                } else {
-                                  theRecordItemMessageAbbreviated =
-                                      '${theRecordItemMessage.substring(0, 5)}...';
-                                }
+                                final String theRecordItemMessageAbbreviated =
+                                    customeStringFunctions.customeSubString(
+                                  theString: theRecordItemMessage,
+                                  theResultLengthLimit: 5,
+                                );
 
                                 debugPrint(
                                     'ttttttt :: $theRecordItemMessageAbbreviated');
@@ -537,27 +540,27 @@ class _ScreenMessagesState extends State<ScreenMessages> {
     );
   }
 
-  Widget messageInput() {
-    return TextField(
-      focusNode: focusNodeMessage,
-      controller: controllerMessage,
-      keyboardType: TextInputType.multiline,
-      textInputAction: TextInputAction.newline,
-      decoration: InputDecoration(
-        hintText: 'hint...',
-        // border: OutlineInputBorder(),
-        suffixIcon: controllerMessage.text.isEmpty
-            ? const SizedBox(
-                width: 0,
-                height: 0,
-              )
-            : customeIconButton(
-                theOnPressed: () => controllerMessage.clear(),
-                theIcon: Icons.close,
-                theSize: 22,
-                theColor: Colors.grey.shade400,
-              ),
-      ),
-    );
-  }
+  // Widget messageInput() {
+  //   return TextField(
+  //     focusNode: focusNodeMessage,
+  //     controller: controllerMessage,
+  //     keyboardType: TextInputType.multiline,
+  //     textInputAction: TextInputAction.newline,
+  //     decoration: InputDecoration(
+  //       hintText: 'hint...',
+  //       // border: OutlineInputBorder(),
+  //       suffixIcon: controllerMessage.text.isEmpty
+  //           ? const SizedBox(
+  //               width: 0,
+  //               height: 0,
+  //             )
+  //           : customeIconButton(
+  //               theOnPressed: () => controllerMessage.clear(),
+  //               theIcon: Icons.close,
+  //               theSize: 22,
+  //               theColor: Colors.grey.shade400,
+  //             ),
+  //     ),
+  //   );
+  // }
 }
