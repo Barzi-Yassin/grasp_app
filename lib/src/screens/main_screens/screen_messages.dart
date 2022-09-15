@@ -363,16 +363,16 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                                           .then((value) {
                                                         Get.back();
                                                         return Get.snackbar(
-                                                            'Message Deleted',
-                                                            'the messsage $theRecordItemMessageAbbreviated is successfully deleted.');
+                                                            'Message caution',
+                                                            'The messsage $theRecordItemMessageAbbreviated has been deleted successfully.');
                                                       });
                                                     },
                                                   );
                                                 },
                                               );
                                             } else {
-                                              Get.snackbar('Caution',
-                                                  'Message can\'t be deleted, while you\'re in reading mode.');
+                                              Get.snackbar('Message caution',
+                                                  'Messages may not be deleted, while you\'re in reading mode.');
                                             }
                                           },
                                           title: customeText(
@@ -514,7 +514,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                                 controllerMessage.clear());
                                       } else {
                                         Get.snackbar(
-                                            'error', 'please enter a message');
+                                            'Message caution', 'Please enter a message.');
                                       }
                                     },
                                     theIcon: Icons.send, // mic

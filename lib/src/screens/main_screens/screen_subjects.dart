@@ -198,15 +198,15 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                                               Get.back();
                                               listOfCurrentSubjectsNameFunction()
                                                   .remove(theRecordSubjectName);
-                                              Get.snackbar('Subject',
-                                                  '$theRecordSubjectName deleted successfully');
+                                              Get.snackbar('Subject caution',
+                                                  'The subject "$theRecordSubjectName" has been deleted successfully.');
                                             });
                                           },
                                         ),
                                       );
                                     } else {
-                                      Get.snackbar('Caution',
-                                          'remove all the files inside $theRecordSubjectName subject, then it could be deleted.');
+                                      Get.snackbar('Subject caution',
+                                          'Delete all the grasps inside "$theRecordSubjectName" subject, then it could be deleted.');
                                     }
                                   },
                                 );
@@ -250,11 +250,11 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                 } else {
                   debugPrint('the subject name is already exist !!!');
                   Get.snackbar(
-                      'error', 'the subject name is already exist !!!');
+                      'Subject caution', 'The subject name is already exist!');
                 }
               } else {
                 // Get.back();
-                Get.snackbar('error', 'Give a name to the new subjects!');
+                Get.snackbar('Subject caution', 'Give a name to the new subjects!');
               }
             },
           ),

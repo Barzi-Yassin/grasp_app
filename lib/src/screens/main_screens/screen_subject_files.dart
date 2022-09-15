@@ -217,8 +217,8 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                                   Get.back();
                                   listOfCurrentFilesNameFunction()
                                       .remove(theRecordFileName);
-                                  Get.snackbar('File',
-                                      '$theRecordFileName deleted successfully');
+                                  Get.snackbar('Grasp caution',
+                                      'The Grasp "$theRecordFileName" has been deleted successfully.');
                                 },
                               );
                             },
@@ -262,11 +262,11 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                       );
                 } else {
                   debugPrint('the file name is already exist !!!');
-                  Get.snackbar('error', 'the file name is already exist !!!');
+                  Get.snackbar('Grasp caution', 'The file name is already exist!');
                 }
               } else {
                 // Get.back();
-                Get.snackbar('error', 'Give a name to the new grasps!');
+                Get.snackbar('Grasp caution', 'Give a name to the new grasps!');
               }
             },
           ),

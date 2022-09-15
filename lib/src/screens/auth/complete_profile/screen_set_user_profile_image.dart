@@ -178,8 +178,8 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
                               if (mounted) {
                                 setState(() => isLoading = false);
                               }
-                              Get.snackbar('No image selected yet!',
-                                  'Select an image to save, or skip it for now.');
+                              Get.snackbar('Image Caution',
+                                  'No image selected yet! \nSelect an image to save, or skip it for now.');
                             }
                           },
                           child: customeText(theData: 'SAVE'),
