@@ -63,7 +63,9 @@ class _ScreenMessagesState extends State<ScreenMessages> {
             customeIconButton(
               theOnPressed: () =>
                   setState(() => isDateVisibile = !isDateVisibile),
-              theIcon: FontAwesomeIcons.solidCalendarXmark,
+              theIcon: isDateVisibile
+                  ? FontAwesomeIcons.solidCalendarXmark
+                  : FontAwesomeIcons.solidCalendarCheck,
               theSize: 18,
               theSplashRadius: 18,
             ),
@@ -74,7 +76,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
               theSize: 24,
               theSplashRadius: 18,
             ),
-            const SizedBox(width: 6)
+            const SizedBox(width: 6),
           ],
         ),
         body: Container(
