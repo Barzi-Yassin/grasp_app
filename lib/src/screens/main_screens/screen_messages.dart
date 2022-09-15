@@ -414,10 +414,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                               margin: const EdgeInsets.only(left: 2),
                               height: 50,
                               width: screenWidth - 65,
-                              alignment: Alignment.centerLeft,
-                              // child: customeText(theData: 'fffffff'),
                               decoration: BoxDecoration(
-                                // color: Colors.cyan,
                                 borderRadius: const BorderRadius.horizontal(
                                   left: Radius.circular(22),
                                   right: Radius.circular(10),
@@ -433,50 +430,41 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                 ),
                               ),
                               child:
-                                  //  Row(
-                                  //   children: [
-                                  //     Expanded(child: messageInput()),
-                                  //     customeIconButton(
-                                  //         theOnPressed: () {}, theIcon: Icons.send)
-                                  //   ],
-                                  // ),
-                                  Expanded(
-                                child: TextField(
-                                  // focusNode: focusNode,
-                                  controller: controllerMessage,
-                                  textAlign: TextAlign.center,
-                                  keyboardType: TextInputType.multiline,
-                                  textInputAction: TextInputAction.newline,
-                                  cursorColor: Colors.cyan,
-                                  // onSaved: (message) {},
-                                  // maxLines: 1,
-                                  decoration: InputDecoration(
-                                    // filled: true,
-                                    // fillColor: Colors.white70,
-                                    hintText: "Message...",
-                                    prefixIcon: customePaddingOnly(
-                                      thePaddingLeft: 10,
-                                      theChild: customeIconShaderMask(
-                                        theIcon: Icons.emoji_emotions_outlined,
-                                        theSize: 28,
+                                  TextField(
+                                    // focusNode: focusNode,
+                                    controller: controllerMessage,
+                                    textAlign: TextAlign.center,
+                                    keyboardType: TextInputType.multiline,
+                                    textInputAction: TextInputAction.newline,
+                                    cursorColor: Colors.cyan,
+                                    // onSaved: (message) {},
+                                    // maxLines: 1,
+                                    decoration: InputDecoration(
+                                      // filled: true,
+                                      // fillColor: Colors.white70,
+                                      hintText: "Message...",
+                                      prefixIcon: customePaddingOnly(
+                                        thePaddingLeft: 10,
+                                        theChild: customeIconShaderMask(
+                                          theIcon: Icons.emoji_emotions_outlined,
+                                          theSize: 28,
+                                        ),
                                       ),
+                                      // suffixIcon: customePaddingOnly(
+                                      //   thePaddingRight: 10,
+                                      //   theChild: customeIconButton(
+                                      //     theOnPressed: () => controllerMessage.clear(),
+                                      //     theIcon: Icons.close,
+                                      //     theSize: 22,
+                                      //     theColor: Colors.grey.shade400,
+                                      //   ),
+                                      // ),
+                                      border: const OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(40)),
+                                          borderSide: BorderSide.none),
                                     ),
-                                    // suffixIcon: customePaddingOnly(
-                                    //   thePaddingRight: 10,
-                                    //   theChild: customeIconButton(
-                                    //     theOnPressed: () => controllerMessage.clear(),
-                                    //     theIcon: Icons.close,
-                                    //     theSize: 22,
-                                    //     theColor: Colors.grey.shade400,
-                                    //   ),
-                                    // ),
-                                    border: const OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(40)),
-                                        borderSide: BorderSide.none),
                                   ),
-                                ),
-                              ),
                             ),
                             Container(
                               height: 50,
