@@ -205,8 +205,6 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                             theTitle: "Grasp",
                             theName: theRecordFileName,
                             theOnPressed: () async {
-                              // await serviceFirestore;
-
                               await serviceFirestore
                                   .deleteFile(
                                 user: widget.theUser,
