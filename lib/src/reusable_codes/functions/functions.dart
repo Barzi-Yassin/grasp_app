@@ -106,12 +106,70 @@ IconButton customeIconButton({
         right: thePaddingRight ?? 0,
         bottom: thePaddingBottom ?? 0,
       ),
+      // color: Colors.amber,
+      // focusColor: Colors.orange,
+      // hoverColor: Colors.amber,
+      splashColor: Colors.cyan.shade700,
+      // disabledColor: Colors.grey.shade400,
+      highlightColor: Colors.grey.shade400,
       icon: Icon(
         theIcon,
         size: theSize,
         color: theColor,
       ));
 }
+
+ShaderMask customeIconShaderMask({
+  required IconData theIcon,
+  required double theSize,
+  double? theRadius,
+  Color? theColor1,
+  Color? theColor2,
+  TileMode? theTileMode,
+}) {
+  return ShaderMask(
+    shaderCallback: (bounds) => RadialGradient(
+      center: Alignment.center,
+      radius: theRadius ?? 0.325,
+      colors: [
+        theColor1 ?? Colors.pink.shade200,
+        theColor2 ?? Colors.cyan.shade200,
+      ],
+      tileMode: theTileMode ?? TileMode.decal,
+    ).createShader(bounds),
+    child: Icon(
+      theIcon,
+      size: theSize,
+      color: Colors.white,
+    ),
+  );
+}
+
+// ShaderMask customeIconButtonShaderMask({
+//   required IconData theIcon,
+//   required double theSize,
+//   double? theRadius,
+//   Color? theColor1,
+//   Color? theColor2,
+//   TileMode? theTileMode,
+// }) {
+//   return ShaderMask(
+//     shaderCallback: (bounds) => RadialGradient(
+//       center: Alignment.center,
+//       radius: theRadius ?? 0.325,
+//       colors: [
+//         theColor1 ?? Colors.pink.shade200,
+//         theColor2 ?? Colors.cyan.shade200,
+//       ],
+//       tileMode: theTileMode ?? TileMode.decal,
+//     ).createShader(bounds),
+//     child: Icon(
+//       theIcon,
+//       size: theSize,
+//       color: Colors.white,
+//     ),
+//   );
+// }
 
 Icon customeIcon(
     {required IconData theIcon, double? theSize, Color? theColor}) {
@@ -173,32 +231,6 @@ Padding customePaddingOnly(
         right: thePaddingRight ?? 0,
         bottom: thePaddingBottom ?? 0),
     child: theChild,
-  );
-}
-
-ShaderMask customeIconShaderMask({
-  required IconData theIcon,
-  required double theSize,
-  double? theRadius,
-  Color? theColor1,
-  Color? theColor2,
-  TileMode? theTileMode,
-}) {
-  return ShaderMask(
-    shaderCallback: (bounds) => RadialGradient(
-      center: Alignment.center,
-      radius: theRadius ?? 0.325,
-      colors: [
-        theColor1 ?? Colors.pink.shade200,
-        theColor2 ?? Colors.cyan.shade200,
-      ],
-      tileMode: theTileMode ?? TileMode.decal,
-    ).createShader(bounds),
-    child: Icon(
-      theIcon,
-      size: theSize,
-      color: Colors.white,
-    ),
   );
 }
 
