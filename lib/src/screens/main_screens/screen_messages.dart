@@ -53,6 +53,11 @@ class _ScreenMessagesState extends State<ScreenMessages> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
+    debugPrint('e7m width :: $screenWidth');
+    debugPrint('e7m height:: $screenHeight');
+
     final String isReadingModeAppbarTitle =
         '${customeStringFunctions.customeSubString(theString: widget.theFileSubjectName, theResultLengthLimit: 4)}/ ${customeStringFunctions.customeSubString(theString: widget.theFileName, theResultLengthLimit: 4)}';
 
@@ -408,29 +413,33 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                           width: 0,
                           height: 0,
                         )
-                      : Row(
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.only(left: 2),
-                              height: 50,
-                              width: screenWidth - 65,
-                              decoration: BoxDecoration(
-                                borderRadius: const BorderRadius.horizontal(
-                                  left: Radius.circular(22),
-                                  right: Radius.circular(10),
-                                ),
-                                gradient: LinearGradient(
-                                  begin: Alignment.bottomCenter,
-                                  end: Alignment.topCenter,
-                                  colors: [
-                                    Colors.grey.shade300,
-                                    Colors.grey.shade200,
-                                    Colors.white,
-                                  ],
-                                ),
-                              ),
-                              child:
-                                  TextField(
+                      : (screenWidth > screenHeight)
+                          ? const SizedBox(
+                              width: 0,
+                              height: 0,
+                            )
+                          : Row(
+                              children: [
+                                Container(
+                                  margin: const EdgeInsets.only(left: 2),
+                                  height: 50,
+                                  width: screenWidth - 65,
+                                  decoration: BoxDecoration(
+                                    borderRadius: const BorderRadius.horizontal(
+                                      left: Radius.circular(22),
+                                      right: Radius.circular(10),
+                                    ),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.bottomCenter,
+                                      end: Alignment.topCenter,
+                                      colors: [
+                                        Colors.grey.shade300,
+                                        Colors.grey.shade200,
+                                        Colors.white,
+                                      ],
+                                    ),
+                                  ),
+                                  child: TextField(
                                     // focusNode: focusNode,
                                     controller: controllerMessage,
                                     textAlign: TextAlign.center,
@@ -446,7 +455,8 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                       prefixIcon: customePaddingOnly(
                                         thePaddingLeft: 10,
                                         theChild: customeIconShaderMask(
-                                          theIcon: Icons.emoji_emotions_outlined,
+                                          theIcon:
+                                              Icons.emoji_emotions_outlined,
                                           theSize: 28,
                                         ),
                                       ),
@@ -465,54 +475,55 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                           borderSide: BorderSide.none),
                                     ),
                                   ),
+                                ),
+                                Container(
+                                  height: 50,
+                                  width: 44,
+                                  margin: const EdgeInsets.only(left: 3),
+                                  // padding: EdgeInsets.symmetric(horizontal: 5),
+                                  decoration: BoxDecoration(
+                                    // color: Colors.cyan,
+                                    borderRadius: const BorderRadius.horizontal(
+                                      left: Radius.circular(10),
+                                      right: Radius.circular(24),
+                                    ),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.bottomCenter,
+                                      end: Alignment.topCenter,
+                                      colors: [
+                                        Colors.grey.shade300,
+                                        Colors.grey.shade200,
+                                        Colors.white,
+                                      ],
+                                    ),
+                                  ),
+                                  child: customeIconButton(
+                                    theOnPressed: () async {
+                                      if (controllerMessage.text.isNotEmpty) {
+                                        await serviceFirestore
+                                            .createMessage(
+                                              user: widget.theUser,
+                                              theFileSubjectName:
+                                                  widget.theFileSubjectName,
+                                              theMessageFileName:
+                                                  widget.theFileName,
+                                              theMessage:
+                                                  controllerMessage.text,
+                                            )
+                                            .then((value) =>
+                                                controllerMessage.clear());
+                                      } else {
+                                        Get.snackbar(
+                                            'error', 'please enter a message');
+                                      }
+                                    },
+                                    theIcon: Icons.send, // mic
+                                    theColor: Colors.cyan.shade600,
+                                    theSize: 27,
+                                  ),
+                                )
+                              ],
                             ),
-                            Container(
-                              height: 50,
-                              width: 44,
-                              margin: const EdgeInsets.only(left: 3),
-                              // padding: EdgeInsets.symmetric(horizontal: 5),
-                              decoration: BoxDecoration(
-                                // color: Colors.cyan,
-                                borderRadius: const BorderRadius.horizontal(
-                                  left: Radius.circular(10),
-                                  right: Radius.circular(24),
-                                ),
-                                gradient: LinearGradient(
-                                  begin: Alignment.bottomCenter,
-                                  end: Alignment.topCenter,
-                                  colors: [
-                                    Colors.grey.shade300,
-                                    Colors.grey.shade200,
-                                    Colors.white,
-                                  ],
-                                ),
-                              ),
-                              child: customeIconButton(
-                                theOnPressed: () async {
-                                  if (controllerMessage.text.isNotEmpty) {
-                                    await serviceFirestore
-                                        .createMessage(
-                                          user: widget.theUser,
-                                          theFileSubjectName:
-                                              widget.theFileSubjectName,
-                                          theMessageFileName:
-                                              widget.theFileName,
-                                          theMessage: controllerMessage.text,
-                                        )
-                                        .then((value) =>
-                                            controllerMessage.clear());
-                                  } else {
-                                    Get.snackbar(
-                                        'error', 'please enter a message');
-                                  }
-                                },
-                                theIcon: Icons.send, // mic
-                                theColor: Colors.cyan.shade600,
-                                theSize: 27,
-                              ),
-                            )
-                          ],
-                        ),
                 ],
               ),
             ),
