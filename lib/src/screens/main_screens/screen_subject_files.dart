@@ -58,7 +58,7 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
       ),
       appBar: AppBar(
         backgroundColor: Colors.cyan.shade700,
-        centerTitle: true,
+        // centerTitle: true,
         leading: functionArrowbackIconButton(context),
         title: appbarTitleFolderIconAndName(
             theFolderaName: widget.theFileSubjectName),

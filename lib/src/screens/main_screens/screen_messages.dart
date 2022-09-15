@@ -55,8 +55,8 @@ class _ScreenMessagesState extends State<ScreenMessages> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-    debugPrint('e7m width :: $screenWidth');
-    debugPrint('e7m height:: $screenHeight');
+    debugPrint('test width :: $screenWidth');
+    debugPrint('test height:: $screenHeight');
 
     final String isReadingModeAppbarTitle =
         '${customeStringFunctions.customeSubString(theString: widget.theFileSubjectName, theResultLengthLimit: 4)}/ ${customeStringFunctions.customeSubString(theString: widget.theFileName, theResultLengthLimit: 4)}';
@@ -66,7 +66,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
         backgroundColor: Colors.grey.shade400,
         appBar: AppBar(
           backgroundColor: Colors.cyan.shade700,
-          centerTitle: true,
+          // centerTitle: true,
           // title: Text('${widget.theFileSubjectName} > ${widget.theFileName}'),
           title: appbarTitleFolderIconAndName(
               theFolderaName: isReadingMode
@@ -275,9 +275,9 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                   // 'date': theRecordFileCreatedAtConverted.month.toString(),
                                 };
                                 // debugPrint(
-                                //     'e7m:: ${theRecordMessageCreatedAtVarListBoilerPlate['time']}');
+                                //     'test:: ${theRecordMessageCreatedAtVarListBoilerPlate['time']}');
                                 // debugPrint(
-                                //     'e7m:: ${theRecordMessageCreatedAtVarListBoilerPlate['date']}');
+                                //     'test:: ${theRecordMessageCreatedAtVarListBoilerPlate['date']}');
 
                                 return Badge(
                                   animationType: BadgeAnimationType.fade,
