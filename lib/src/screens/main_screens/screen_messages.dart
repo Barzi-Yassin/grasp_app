@@ -337,7 +337,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                                         theRecordItemDocId,
                                                   )
                                                       .then((value) {
-                                                        Get.back();
+                                                    Get.back();
                                                     return Get.snackbar(
                                                         'Message Deleted',
                                                         'the messsage $theRecordItemMessageAbbreviated is successfully deleted.');
@@ -379,46 +379,51 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                           }
                         }),
                   ),
-                  Container(
-                    // height: 50,
-                    width: screenWidth - 20,
-                    // child: customeText(theData: 'fffffff'),
-                    decoration: BoxDecoration(
-                      // color: Colors.cyan,
-                      borderRadius: BorderRadius.circular(22),
-                      gradient: LinearGradient(
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                        colors: [
-                          Colors.grey.shade300,
-                          Colors.grey.shade200,
-                          Colors.white,
-                        ],
-                      ),
-                    ),
-                    child:
-                        //  Row(
-                        //   children: [
-                        //     Expanded(child: messageInput()),
-                        //     customeIconButton(
-                        //         theOnPressed: () {}, theIcon: Icons.send)
-                        //   ],
-                        // ),
-                        Row(
-                      children: [
-                        Expanded(
-                          child: TextFormField(
+                  Row(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(left: 2),
+                        height: 50,
+                        width: screenWidth - 65,
+                        alignment: Alignment.centerLeft,
+                        // child: customeText(theData: 'fffffff'),
+                        decoration: BoxDecoration(
+                          // color: Colors.cyan,
+                          borderRadius: const BorderRadius.horizontal(
+                            left: Radius.circular(22),
+                            right: Radius.circular(10),
+                          ),
+                          gradient: LinearGradient(
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                            colors: [
+                              Colors.grey.shade300,
+                              Colors.grey.shade200,
+                              Colors.white,
+                            ],
+                          ),
+                        ),
+                        child:
+                            //  Row(
+                            //   children: [
+                            //     Expanded(child: messageInput()),
+                            //     customeIconButton(
+                            //         theOnPressed: () {}, theIcon: Icons.send)
+                            //   ],
+                            // ),
+                            Expanded(
+                          child: TextField(
                             // focusNode: focusNode,
                             controller: controllerMessage,
                             textAlign: TextAlign.center,
                             keyboardType: TextInputType.multiline,
                             textInputAction: TextInputAction.newline,
                             cursorColor: Colors.cyan,
-                            onSaved: (message) {},
-                            maxLines: 1,
+                            // onSaved: (message) {},
+                            // maxLines: 1,
                             decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white70,
+                              // filled: true,
+                              // fillColor: Colors.white70,
                               hintText: "Message...",
                               prefixIcon: customePaddingOnly(
                                 thePaddingLeft: 10,
@@ -427,15 +432,15 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                   theSize: 28,
                                 ),
                               ),
-                              suffixIcon: customePaddingOnly(
-                                thePaddingRight: 10,
-                                theChild: customeIconButton(
-                                  theOnPressed: () => controllerMessage.clear(),
-                                  theIcon: Icons.close,
-                                  theSize: 22,
-                                  theColor: Colors.grey.shade400,
-                                ),
-                              ),
+                              // suffixIcon: customePaddingOnly(
+                              //   thePaddingRight: 10,
+                              //   theChild: customeIconButton(
+                              //     theOnPressed: () => controllerMessage.clear(),
+                              //     theIcon: Icons.close,
+                              //     theSize: 22,
+                              //     theColor: Colors.grey.shade400,
+                              //   ),
+                              // ),
                               border: const OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(40)),
@@ -443,10 +448,32 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                             ),
                           ),
                         ),
-                        customeIconButton(
-                          theOnPressed: () {
+                      ),
+                      Container(
+                        height: 50,
+                        width: 44,
+                        margin: const EdgeInsets.only(left: 3),
+                        // padding: EdgeInsets.symmetric(horizontal: 5),
+                        decoration: BoxDecoration(
+                          // color: Colors.cyan,
+                          borderRadius: const BorderRadius.horizontal(
+                            left: Radius.circular(10),
+                            right: Radius.circular(24),
+                          ),
+                          gradient: LinearGradient(
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                            colors: [
+                              Colors.grey.shade300,
+                              Colors.grey.shade200,
+                              Colors.white,
+                            ],
+                          ),
+                        ),
+                        child: customeIconButton(
+                          theOnPressed: () async {
                             if (controllerMessage.text.isNotEmpty) {
-                              serviceFirestore
+                              await serviceFirestore
                                   .createMessage(
                                     user: widget.theUser,
                                     theFileSubjectName:
@@ -459,10 +486,12 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                               Get.snackbar('error', 'please enter a message');
                             }
                           },
-                          theIcon: Icons.send,
-                        )
-                      ],
-                    ),
+                          theIcon: Icons.send, // mic
+                          theColor: Colors.cyan.shade600,
+                          theSize: 27,
+                        ),
+                      )
+                    ],
                   ),
                 ],
               ),
