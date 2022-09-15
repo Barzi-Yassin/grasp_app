@@ -22,17 +22,17 @@ class ServiceAuth {
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        Get.snackbar('error', 'The password provided is too weak.');
+        Get.snackbar('Sign up caution', 'The password provided is too weak.');
         debugPrint('error :: The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
-        Get.snackbar('error', 'The account already exists for that email.');
+        Get.snackbar('Sign up caution', 'The account already exists for that email.');
         debugPrint('error :: The account already exists for that email.');
       } else {
-        Get.snackbar('error', e.message.toString());
+        Get.snackbar('Sign up caution', e.message.toString());
         debugPrint('error :: ${e.message}');
       }
     } catch (e) {
-      Get.snackbar('error', e.toString());
+      Get.snackbar('Sign up caution', e.toString());
       debugPrint(e.toString());
     }
     return credential;
@@ -49,13 +49,14 @@ class ServiceAuth {
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        Get.snackbar('error', 'No user found for that email.');
+        Get.snackbar('Sign in caution', 'No user found for that email.');
         debugPrint('No user found for that email.');
       } else if (e.code == 'wrong-password') {
-        Get.snackbar('error', 'Wrong password provided for that user.');
+        // Get.snackbar('Sign in caution', 'Wrong password provided for that user.');
+        Get.snackbar('Sign in caution', 'Sign in failed! try to focus on your inputs.');
         debugPrint('Wrong password provided for that user.');
       } else {
-        Get.snackbar('error', e.message.toString());
+        Get.snackbar('Sign in caution', e.message.toString());
         debugPrint('error :: ${e.message}');
       }
     }
