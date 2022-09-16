@@ -33,7 +33,8 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
   final ServiceFirestore serviceFirestore = ServiceFirestore();
   final SortSubjectsFunctions sortSubjectsFunctions = SortSubjectsFunctions();
   final DateTimeOptimizer dateTimeOptimizer = DateTimeOptimizer();
-  final CustomeStringFunctions customeStringFunctions = CustomeStringFunctions();
+  final CustomeStringFunctions customeStringFunctions =
+      CustomeStringFunctions();
 
   // start listOfCurrentSubjectsName of the current subject names
   List<String> listOfCurrentSubjectsName = [];
@@ -91,109 +92,144 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
         height: double.infinity,
         width: double.infinity,
         decoration: backgroundGradientCyan(),
-        child: Column(
-          children: [
-            SizedBox(
-              height: 90,
-              child: customeText(
-                  theData:
-                      '${widget.theUser.uid}\n${widget.theUser.email}\n$sortedSubjectsFieldName\nAscending= ${!isSortDescending}',
-                  theFontSize: 20), //  TODO: temporary
-            ),
-            Expanded(
-              child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                  stream: serviceFirestore.firestoreInstance
-                      .collection("users2")
-                      .doc(widget.theUser.uid)
-                      .collection('subjects')
-                      .orderBy(sortedSubjectsFieldName,
-                          descending: isSortDescending)
-                      .snapshots(),
-                  builder: (context, snapshotSubject) {
-                    if (snapshotSubject.connectionState ==
-                        ConnectionState.waiting) {
-                      return loadingIndicator();
-                    } else if (snapshotSubject.hasError) {
-                      return Text("err ${snapshotSubject.error}");
-                    } else if (snapshotSubject.data == null ||
-                        !snapshotSubject.hasData) {
-                      return const Text(
-                          'snapshotSubject is empty(StreamBuilder)');
-                    }
+        child: Expanded(
+          child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+              stream: serviceFirestore.firestoreInstance
+                  .collection("users2")
+                  .doc(widget.theUser.uid)
+                  .collection('subjects')
+                  .orderBy(sortedSubjectsFieldName,
+                      descending: isSortDescending)
+                  .snapshots(),
+              builder: (context, snapshotSubject) {
+                if (snapshotSubject.connectionState ==
+                    ConnectionState.waiting) {
+                  return loadingIndicator();
+                } else if (snapshotSubject.hasError) {
+                  return Text("err ${snapshotSubject.error}");
+                } else if (snapshotSubject.data == null ||
+                    !snapshotSubject.hasData) {
+                  return const Text('snapshotSubject is empty(StreamBuilder)');
+                }
 
-                    // snapshotSubject.data!.docs.first;
-                    debugPrint('22222subjects');
-                    debugPrint(snapshotSubject.data!.docs.length.toString());
-                    debugPrint(snapshotSubject.data.toString());
+                // snapshotSubject.data!.docs.first;
+                debugPrint('22222subjects');
+                debugPrint(snapshotSubject.data!.docs.length.toString());
+                debugPrint(snapshotSubject.data.toString());
 
-                    snapshotSubject.data?.docs;
+                snapshotSubject.data?.docs;
 
-                    final int subjectLength = snapshotSubject.data!.docs.length;
+                final int subjectLength = snapshotSubject.data!.docs.length;
 
-                    if (subjectLength == 0) {
-                      return customeText(theData: 'No subject found!');
-                    } else {
-                      return ListView.builder(
-                        // clipBehavior: Clip.hardEdge,
-                        padding: const EdgeInsets.only(top: 20.0, bottom: 70),
-                        scrollDirection: Axis.vertical,
-                        itemCount: snapshotSubject.data!.docs.length,
-                        itemBuilder: (context, theRecord) {
-                          final theRecordItem =
-                              snapshotSubject.data!.docs[theRecord];
-                          final theRecordItemSubjectName =
-                              theRecordItem.data()["subjectName"];
-                          final int theRecordItemSubjectUpdatedAt =
-                              theRecordItem.data()["subjectUpdateAt"];
-                          final int theRecordItemSubjectCreatedAt =
-                              theRecordItem.data()["subjectCreatedAt"];
+                if (subjectLength == 0) {
+                  return customeText(theData: 'No subject found!');
+                } else {
+                  return ListView.builder(
+                    // clipBehavior: Clip.hardEdge,
+                    padding: const EdgeInsets.only(top: 5.0, bottom: 70),
+                    scrollDirection: Axis.vertical,
+                    itemCount: snapshotSubject.data!.docs.length,
+                    itemBuilder: (context, theRecord) {
+                      final theRecordItem =
+                          snapshotSubject.data!.docs[theRecord];
+                      final theRecordItemSubjectName =
+                          theRecordItem.data()["subjectName"];
+                      final int theRecordItemSubjectUpdatedAt =
+                          theRecordItem.data()["subjectUpdateAt"];
+                      final int theRecordItemSubjectCreatedAt =
+                          theRecordItem.data()["subjectCreatedAt"];
 
-                          final String theRecordItemSubjectCreatedAtReady =
-                              dateTimeOptimizer.dateTimeGenerator(
-                                  theTimeStamp: theRecordItemSubjectCreatedAt);
-                          final String theRecordItemSubjectUpdatedAtReady =
-                              dateTimeOptimizer.dateTimeGenerator(
-                                  theTimeStamp: theRecordItemSubjectUpdatedAt);
+                      final String theRecordItemSubjectCreatedAtReady =
+                          dateTimeOptimizer.dateTimeGenerator(
+                              theTimeStamp: theRecordItemSubjectCreatedAt);
+                      final String theRecordItemSubjectUpdatedAtReady =
+                          dateTimeOptimizer.dateTimeGenerator(
+                              theTimeStamp: theRecordItemSubjectUpdatedAt);
 
-                          final String theRecordItemSubjectNameAbbreviated = customeStringFunctions.customeSubString(theString: theRecordItemSubjectName, theResultLengthLimit: 5);
-                          if (!listOfCurrentSubjectsName
-                              .contains(theRecordItemSubjectName)) {
-                            listOfCurrentSubjectsNameFunction()
-                                .add(theRecordItemSubjectName);
-                          }
+                      final String theRecordItemSubjectNameAbbreviated =
+                          customeStringFunctions.customeSubString(
+                              theString: theRecordItemSubjectName,
+                              theResultLengthLimit: 5);
+                      if (!listOfCurrentSubjectsName
+                          .contains(theRecordItemSubjectName)) {
+                        listOfCurrentSubjectsNameFunction()
+                            .add(theRecordItemSubjectName);
+                      }
 
-                          return StreamBuilder<
-                                  QuerySnapshot<Map<String, dynamic>>>(
-                              stream: serviceFirestore.firestoreInstance
-                                  .collection("users2")
-                                  .doc(widget.theUser.uid)
-                                  .collection("subjects")
-                                  .doc(theRecordItemSubjectName)
-                                  .collection("files")
-                                  .snapshots(),
-                              builder: (context, snapshotFiles) {
-                                if (snapshotFiles.connectionState ==
-                                    ConnectionState.waiting) {
-                                  return loadingIndicator();
-                                } else if (snapshotFiles.hasError) {
-                                  return Text("err ${snapshotFiles.error}");
-                                } else if (snapshotFiles.data == null ||
-                                    !snapshotFiles.hasData) {
-                                  return const Text(
-                                      'snapshotFiles is empty(StreamBuilder)');
-                                }
+                      return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                          stream: serviceFirestore.firestoreInstance
+                              .collection("users2")
+                              .doc(widget.theUser.uid)
+                              .collection("subjects")
+                              .doc(theRecordItemSubjectName)
+                              .collection("files")
+                              .snapshots(),
+                          builder: (context, snapshotFiles) {
+                            if (snapshotFiles.connectionState ==
+                                ConnectionState.waiting) {
+                              return loadingIndicator();
+                            } else if (snapshotFiles.hasError) {
+                              return Text("err ${snapshotFiles.error}");
+                            } else if (snapshotFiles.data == null ||
+                                !snapshotFiles.hasData) {
+                              return const Text(
+                                  'snapshotFiles is empty(StreamBuilder)');
+                            }
 
-                                debugPrint('44444files');
-                                debugPrint(
-                                    snapshotFiles.data!.docs.length.toString());
-                                debugPrint(snapshotFiles.data.toString());
+                            debugPrint('44444files');
+                            debugPrint(
+                                snapshotFiles.data!.docs.length.toString());
+                            debugPrint(snapshotFiles.data.toString());
 
-                                snapshotFiles.data?.docs;
+                            snapshotFiles.data?.docs;
 
-                                final int filesLength =
-                                    snapshotFiles.data!.docs.length;
+                            final int filesLength =
+                                snapshotFiles.data!.docs.length;
 
-                                return WidgetSubjectRecords(
+                            return Column(
+                              children: [
+                                theRecord == 0
+                                    ? Container(
+                                        height: 50,
+                                        alignment: Alignment.center,
+                                        child: Row(
+                                          children:  [
+                                            Expanded(
+                                              child: Divider(
+                                                thickness: 1,
+                                                endIndent: 10,
+                                              ),
+                                            ),
+                                            Text(
+                                              sortSubjectsFunctions.getSortName(theSortedSubjectsFieldName: sortedSubjectsFieldName),
+                                              style: TextStyle(
+                                                color: Colors.black26,
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Divider(
+                                                thickness: 1,
+                                                indent: 10,
+                                                endIndent: 10,
+                                              ),
+                                            ),
+                                            Text(
+                                              sortSubjectsFunctions.getSortAscOrDesc(isSortDescending: isSortDescending),
+                                              style: TextStyle(
+                                                color: Colors.black26,
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Divider(
+                                                thickness: 1,
+                                                indent: 10,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    : const SizedBox(height: 0, width: 0),
+                                WidgetSubjectRecords(
                                   theUser: widget.theUser,
                                   theFileSubjectName: theRecordItemSubjectName,
                                   theSubjectItemsLength: filesLength.toString(),
@@ -239,14 +275,14 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                                           'Delete all the grasps inside "$theRecordItemSubjectNameAbbreviated" subject, then it could be deleted.');
                                     }
                                   },
-                                );
-                              });
-                        },
-                      );
-                    }
-                  }),
-            ),
-          ],
+                                ),
+                              ],
+                            );
+                          });
+                    },
+                  );
+                }
+              }),
         ),
       ),
       floatingActionButton: FloatingActionButton(

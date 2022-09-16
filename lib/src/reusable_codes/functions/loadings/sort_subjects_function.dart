@@ -13,4 +13,23 @@ class SortSubjectsFunctions {
     }
     return result;
   }
+
+  String getSortName({required String theSortedSubjectsFieldName}) {
+    String result = "Newest";
+    if (theSortedSubjectsFieldName == "subjectItemsNumber") {
+      result = "Items";
+    }
+    if (theSortedSubjectsFieldName == "subjectName") {
+      result = "Name";
+    }
+
+    return result;
+  }
+
+  String getSortAscOrDesc({required bool isSortDescending}) {
+    String result = isSortDescending ? "Descending" : "Ascending";
+    return result;
+  }
+
+  
 }
