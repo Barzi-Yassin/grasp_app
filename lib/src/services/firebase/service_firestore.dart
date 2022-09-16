@@ -55,13 +55,12 @@ class ServiceFirestore {
     required User user,
     required String theSubjectName,
     required theSubjectItemsNumber,
-    required int theSubjectId,
   }) async {
     GraspSubjectModel graspSubjectModel = GraspSubjectModel(
       uid: user.uid,
       subjectName: theSubjectName,
-      subjectId: theSubjectId,
       subjectItemsNumber: theSubjectItemsNumber,
+      subjectUpdateAt: DateTime.now(),
       subjectCreatedAt: DateTime.now(),
     );
 

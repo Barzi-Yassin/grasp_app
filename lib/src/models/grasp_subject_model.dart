@@ -4,29 +4,29 @@ import 'dart:convert';
 class GraspSubjectModel {
   String uid;
   String subjectName;
-  int subjectId;
-  int subjectItemsNumber;
+  String subjectItemsNumber;
+  DateTime subjectUpdateAt;
   DateTime subjectCreatedAt;
   GraspSubjectModel({
     required this.uid,
     required this.subjectName,
-    required this.subjectId,
     required this.subjectItemsNumber,
+    required this.subjectUpdateAt,
     required this.subjectCreatedAt,
   });
 
   GraspSubjectModel copyWith({
     String? uid,
     String? subjectName,
-    int? subjectId,
-    int? subjectItemsNumber,
+    String? subjectItemsNumber,
+    DateTime? subjectUpdateAt,
     DateTime? subjectCreatedAt,
   }) {
     return GraspSubjectModel(
       uid: uid ?? this.uid,
       subjectName: subjectName ?? this.subjectName,
-      subjectId: subjectId ?? this.subjectId,
       subjectItemsNumber: subjectItemsNumber ?? this.subjectItemsNumber,
+      subjectUpdateAt: subjectUpdateAt ?? this.subjectUpdateAt,
       subjectCreatedAt: subjectCreatedAt ?? this.subjectCreatedAt,
     );
   }
@@ -35,8 +35,8 @@ class GraspSubjectModel {
     return <String, dynamic>{
       'uid': uid,
       'subjectName': subjectName,
-      'subjectId': subjectId,
       'subjectItemsNumber': subjectItemsNumber,
+      'subjectUpdateAt': subjectUpdateAt.millisecondsSinceEpoch,
       'subjectCreatedAt': subjectCreatedAt.millisecondsSinceEpoch,
     };
   }
@@ -45,8 +45,8 @@ class GraspSubjectModel {
     return GraspSubjectModel(
       uid: map['uid'] as String,
       subjectName: map['subjectName'] as String,
-      subjectId: map['subjectId'] as int,
-      subjectItemsNumber: map['subjectItemsNumber'] as int,
+      subjectItemsNumber: map['subjectItemsNumber'] as String,
+      subjectUpdateAt: DateTime.fromMillisecondsSinceEpoch(map['subjectUpdateAt'] as int),
       subjectCreatedAt: DateTime.fromMillisecondsSinceEpoch(map['subjectCreatedAt'] as int),
     );
   }
@@ -57,7 +57,7 @@ class GraspSubjectModel {
 
   @override
   String toString() {
-    return 'GraspSubjectModel(uid: $uid, subjectName: $subjectName, subjectId: $subjectId, subjectItemsNumber: $subjectItemsNumber, subjectCreatedAt: $subjectCreatedAt)';
+    return 'GraspSubjectModel(uid: $uid, subjectName: $subjectName, subjectItemsNumber: $subjectItemsNumber, subjectUpdateAt: $subjectUpdateAt, subjectCreatedAt: $subjectCreatedAt)';
   }
 
   @override
@@ -67,8 +67,8 @@ class GraspSubjectModel {
     return 
       other.uid == uid &&
       other.subjectName == subjectName &&
-      other.subjectId == subjectId &&
       other.subjectItemsNumber == subjectItemsNumber &&
+      other.subjectUpdateAt == subjectUpdateAt &&
       other.subjectCreatedAt == subjectCreatedAt;
   }
 
@@ -76,8 +76,8 @@ class GraspSubjectModel {
   int get hashCode {
     return uid.hashCode ^
       subjectName.hashCode ^
-      subjectId.hashCode ^
       subjectItemsNumber.hashCode ^
+      subjectUpdateAt.hashCode ^
       subjectCreatedAt.hashCode;
   }
 }

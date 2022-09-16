@@ -65,7 +65,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
       appBar: AppBar(
         backgroundColor: Colors.cyan.shade700,
         centerTitle: true,
-        leading: GestureDetector(          
+        leading: GestureDetector(
           onTap: () {
             setState(() => sortingSubjetsNumber++);
             debugPrint(
@@ -256,8 +256,6 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                         theSubjectName:
                             controllerAddGraspSubject.text, // TODO: dispose it
                         theSubjectItemsNumber: 1,
-                        // theSubjectId: subjectidLocal++,
-                        theSubjectId: 0,
                       )
                       .then(
                         (_) => Get.back(),
