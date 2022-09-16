@@ -94,8 +94,7 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                 return loadingIndicator();
               } else if (snapshotFiles.hasError) {
                 return Text("err ${snapshotFiles.error}");
-              } else if (snapshotFiles.data == null ||
-                  !snapshotFiles.hasData) {
+              } else if (snapshotFiles.data == null || !snapshotFiles.hasData) {
                 return const Text('snapshotFiles is empty(StreamBuilder)');
               }
 
@@ -137,99 +136,43 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                         DateTime.fromMillisecondsSinceEpoch(
                             theRecordFileCreatedAt);
 
-                    // var theRecordFileCreatedAtVarList = {
-                    //   'year': theRecordFileCreatedAtConverted.year.toString(),
-                    //   'month': theRecordFileCreatedAtConverted.month.toString(),
-                    //   'day': theRecordFileCreatedAtConverted.day.toString(),
-                    //   'hour': theRecordFileCreatedAtConverted.hour.toString(),
-                    //   'minutes':
-                    //       theRecordFileCreatedAtConverted.minute.toString(),
-                    //   'seconds':
-                    //       theRecordFileCreatedAtConverted.second.toString(),
-                    //   'millisecond': theRecordFileCreatedAtConverted.millisecond
-                    //       .toString(),
-                    // };
-
-                    // debugPrint(
-                    //     'hello $theRecordItemFileName :: ${theRecordFileCreatedAtVarList['year']}');
-                    // debugPrint(
-                    //     'hello $theRecordItemFileName :: ${theRecordFileCreatedAtVarList['month']}');
-                    // debugPrint(
-                    //     'hello $theRecordItemFileName :: ${theRecordFileCreatedAtVarList['day']}');
-                    // debugPrint(
-                    //     'hello $theRecordItemFileName :: ${theRecordFileCreatedAtVarList['hour']}');
-                    // debugPrint(
-                    //     'hello $theRecordItemFileName :: ${theRecordFileCreatedAtVarList['minutes']}');
-                    // debugPrint(
-                    //     'hello $theRecordItemFileName :: ${theRecordFileCreatedAtVarList['seconds']}');
-                    // debugPrint(
-                    //     'hello $theRecordItemFileName :: ${theRecordFileCreatedAtVarList['millisecond']}');
-
-                    // final String year =
-                    //     theRecordFileCreatedAtConverted.year.toString();
-                    // final String month =
-                    //     theRecordFileCreatedAtConverted.month.toString();
-                    // final String day =
-                    //     theRecordFileCreatedAtConverted.day.toString();
-                    // final String hour =
-                    //     theRecordFileCreatedAtConverted.hour.toString();
-                    // final String minute =
-                    //     theRecordFileCreatedAtConverted.minute.toString();
-
-                    // debugPrint(
-                    //     '$theRecordItemFileName created at:: $theRecordFileCreatedAtConverted');
-                    // debugPrint('$theRecordItemFileName year is:: $year');
-                    // debugPrint('$theRecordItemFileName month is:: $month');
-                    // debugPrint('$theRecordItemFileName day is:: $day');
-                    // debugPrint('$theRecordItemFileName hour is:: $hour');
-                    // debugPrint('$theRecordItemFileName minute is:: $minute');
-
                     var theRecordFileCreatedAtVarListBoilerPlate = {
                       'time': dateTimeOptimizer.dateTimeTwelveHourFormater(
                           hourNumber: theRecordFileCreatedAtConverted.hour,
-                          minuteNumber:
-                              theRecordFileCreatedAtConverted.minute),
-                      // '${theRecordFileCreatedAtConverted.hour}:${theRecordFileCreatedAtConverted.minute}',
+                          minuteNumber: theRecordFileCreatedAtConverted.minute),
                       'date':
                           '${dateTimeOptimizer.dateTimeNumberToMonthName(monthNumber: theRecordFileCreatedAtConverted.month)}.${theRecordFileCreatedAtConverted.day}, ${theRecordFileCreatedAtConverted.year}',
-                      // 'date': theRecordFileCreatedAtConverted.month.toString(),
                     };
-                    // debugPrint(
-                    //     'e7m:: ${theRecordFileCreatedAtVarListBoilerPlate['time']}');
-                    // debugPrint(
-                    //     'e7m:: ${theRecordFileCreatedAtVarListBoilerPlate['date']}');
-
                     return Column(
                       children: [
                         theRecord == 0
                             ? Container(
-                              height: 50,
-                              alignment: Alignment.center,
-                              child: Row(
-                                // mainAxisAlignment:
-                                //     MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Expanded(
-                                    child: Divider(
-                                      thickness: 1,
-                                      endIndent: 10,
+                                height: 50,
+                                alignment: Alignment.center,
+                                child: Row(
+                                  children: [
+                                    const Expanded(
+                                      child: Divider(
+                                        thickness: 1,
+                                        endIndent: 10,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    widget.theFileSubjectCreatedAt,
-                                    style: const TextStyle(
-                                        color: Color.fromARGB(
-                                            144, 73, 120, 123)),
-                                  ),
-                                  const Expanded(
-                                    child: Divider(
-                                      thickness: 1,
-                                      indent: 10,
+                                    Text(
+                                      widget.theFileSubjectCreatedAt,
+                                      style: const TextStyle(
+                                        color:
+                                            Colors.black26,
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            )
+                                    const Expanded(
+                                      child: Divider(
+                                        thickness: 1,
+                                        indent: 10,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
                             : const SizedBox(height: 0, width: 0),
                         WidgetSubjectFileRecords(
                           theUser: widget.theUser,
@@ -275,7 +218,7 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                                           theSubjectItemsNumber:
                                               listOfCurrentFilesName.length
                                                   .toString());
-                        
+
                                       Get.snackbar('Grasp caution',
                                           'The Grasp "$theRecordItemFileNameAbbreviated" has been deleted successfully.');
                                       debugPrint(
@@ -287,7 +230,6 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                             );
                           },
                         ),
-                        
                       ],
                     );
                   },
