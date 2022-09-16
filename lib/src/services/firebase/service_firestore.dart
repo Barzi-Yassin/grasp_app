@@ -93,16 +93,14 @@ class ServiceFirestore {
     required User user,
     required String theFileSubjectName,
     required String theFileName,
-    required String theFileId,
     bool? theIsFileFaved,
     bool? theIsFileStared,
     bool? theIsFileUpdated,
   }) async {
     GraspFileModel graspFileModel = GraspFileModel(
       uid: user.uid,
-      fileSubjectIdName: theFileSubjectName,
+      fileSubjectName: theFileSubjectName,
       fileName: theFileName,
-      fileId: theFileId,
       fileCreatedAt: DateTime.now(),
       fileUpdatedAt: DateTime.now(),
       isFileFaved: theIsFileFaved,

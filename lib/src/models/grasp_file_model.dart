@@ -3,30 +3,26 @@ import 'dart:convert';
 
 class GraspFileModel {
   String uid;
-  String fileSubjectIdName;
+  String fileSubjectName;
   String fileName;
-  String fileId;
   bool? isFileStared;
   bool? isFileFaved;
   DateTime fileCreatedAt;
   DateTime fileUpdatedAt;
   GraspFileModel({
     required this.uid,
-    required this.fileSubjectIdName,
+    required this.fileSubjectName,
     required this.fileName,
-    required this.fileId,
     this.isFileStared,
     this.isFileFaved,
     required this.fileCreatedAt,
     required this.fileUpdatedAt,
   });
-  
 
   GraspFileModel copyWith({
     String? uid,
-    String? fileSubjectIdName,
+    String? fileSubjectName,
     String? fileName,
-    String? fileId,
     bool? isFileStared,
     bool? isFileFaved,
     DateTime? fileCreatedAt,
@@ -34,9 +30,8 @@ class GraspFileModel {
   }) {
     return GraspFileModel(
       uid: uid ?? this.uid,
-      fileSubjectIdName: fileSubjectIdName ?? this.fileSubjectIdName,
+      fileSubjectName: fileSubjectName ?? this.fileSubjectName,
       fileName: fileName ?? this.fileName,
-      fileId: fileId ?? this.fileId,
       isFileStared: isFileStared ?? this.isFileStared,
       isFileFaved: isFileFaved ?? this.isFileFaved,
       fileCreatedAt: fileCreatedAt ?? this.fileCreatedAt,
@@ -47,9 +42,8 @@ class GraspFileModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'uid': uid,
-      'fileSubjectIdName': fileSubjectIdName,
+      'fileSubjectName': fileSubjectName,
       'fileName': fileName,
-      'fileId': fileId,
       'isFileStared': isFileStared,
       'isFileFaved': isFileFaved,
       'fileCreatedAt': fileCreatedAt.millisecondsSinceEpoch,
@@ -60,9 +54,8 @@ class GraspFileModel {
   factory GraspFileModel.fromMap(Map<String, dynamic> map) {
     return GraspFileModel(
       uid: map['uid'] as String,
-      fileSubjectIdName: map['fileSubjectIdName'] as String,
+      fileSubjectName: map['fileSubjectName'] as String,
       fileName: map['fileName'] as String,
-      fileId: map['fileId'] as String,
       isFileStared: map['isFileStared'] != null ? map['isFileStared'] as bool : null,
       isFileFaved: map['isFileFaved'] != null ? map['isFileFaved'] as bool : null,
       fileCreatedAt: DateTime.fromMillisecondsSinceEpoch(map['fileCreatedAt'] as int),
@@ -76,7 +69,7 @@ class GraspFileModel {
 
   @override
   String toString() {
-    return 'GraspFileModel(uid: $uid, fileSubjectIdName: $fileSubjectIdName, fileName: $fileName, fileId: $fileId, isFileStared: $isFileStared, isFileFaved: $isFileFaved, fileCreatedAt: $fileCreatedAt, fileUpdatedAt: $fileUpdatedAt)';
+    return 'GraspFileModel(uid: $uid, fileSubjectName: $fileSubjectName, fileName: $fileName, isFileStared: $isFileStared, isFileFaved: $isFileFaved, fileCreatedAt: $fileCreatedAt, fileUpdatedAt: $fileUpdatedAt)';
   }
 
   @override
@@ -85,9 +78,8 @@ class GraspFileModel {
   
     return 
       other.uid == uid &&
-      other.fileSubjectIdName == fileSubjectIdName &&
+      other.fileSubjectName == fileSubjectName &&
       other.fileName == fileName &&
-      other.fileId == fileId &&
       other.isFileStared == isFileStared &&
       other.isFileFaved == isFileFaved &&
       other.fileCreatedAt == fileCreatedAt &&
@@ -97,9 +89,8 @@ class GraspFileModel {
   @override
   int get hashCode {
     return uid.hashCode ^
-      fileSubjectIdName.hashCode ^
+      fileSubjectName.hashCode ^
       fileName.hashCode ^
-      fileId.hashCode ^
       isFileStared.hashCode ^
       isFileFaved.hashCode ^
       fileCreatedAt.hashCode ^

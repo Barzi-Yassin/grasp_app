@@ -253,7 +253,6 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                         user: widget.theUser,
                         theFileSubjectName: widget.theFileSubjectName,
                         theFileName: controllerAddGraspFile.text,
-                        theFileId: 1.toString(),
                         theIsFileFaved: false,
                         theIsFileStared: true,
                         theIsFileUpdated: false,
