@@ -22,7 +22,7 @@ class ServiceFirestore {
     );
 
     await firestoreInstance
-        .collection("users")
+        .collection("users2")
         .doc(user.uid)
         .set(graspUserModel.toMap());
     return graspUserModel;
@@ -44,7 +44,7 @@ class ServiceFirestore {
     );
 
     await firestoreInstance
-        .collection("users")
+        .collection("users2")
         .doc(user.uid)
         .update(graspUserModel.toMap());
     return graspUserModel;
@@ -54,7 +54,7 @@ class ServiceFirestore {
   Future<GraspSubjectModel> createSubject({
     required User user,
     required String theSubjectName,
-    required theSubjectItemsNumber,
+    required String theSubjectItemsNumber,
   }) async {
     GraspSubjectModel graspSubjectModel = GraspSubjectModel(
       uid: user.uid,
@@ -65,7 +65,7 @@ class ServiceFirestore {
     );
 
     await firestoreInstance
-        .collection("users")
+        .collection("users2")
         .doc(user.uid)
         .collection('subjects')
         .doc(theSubjectName)
@@ -79,7 +79,7 @@ class ServiceFirestore {
     required String theSubjectName,
   }) async {
     final DocumentReference<Map<String, dynamic>> docSubject = firestoreInstance
-        .collection("users")
+        .collection("users2")
         .doc(user.uid)
         .collection("subjects")
         .doc(theSubjectName);
@@ -110,7 +110,7 @@ class ServiceFirestore {
     );
 
     await firestoreInstance
-        .collection("users")
+        .collection("users2")
         .doc(user.uid)
         .collection("subjects")
         .doc(theFileSubjectName)
@@ -127,7 +127,7 @@ class ServiceFirestore {
     required String theFileName,
   }) async {
     final DocumentReference<Map<String, dynamic>> docFile = firestoreInstance
-        .collection("users")
+        .collection("users2")
         .doc(user.uid)
         .collection("subjects")
         .doc(theFileSubjectName)
@@ -137,7 +137,7 @@ class ServiceFirestore {
     docMessageDeleteFunction({required String theDocMessageId}) async {
       final DocumentReference<Map<String, dynamic>> docMessage =
           firestoreInstance
-              .collection("users")
+              .collection("users2")
               .doc(user.uid)
               .collection("subjects")
               .doc(theFileSubjectName)
@@ -151,7 +151,7 @@ class ServiceFirestore {
 
     final Stream<QuerySnapshot<Map<String, dynamic>>> theStream =
         firestoreInstance
-            .collection("users")
+            .collection("users2")
             .doc(user.uid)
             .collection("subjects")
             .doc(theFileSubjectName)
@@ -179,7 +179,7 @@ class ServiceFirestore {
   Future<String> getSubjectItemsLength(
       {required User user, required String theSubjectName}) async {
     final QuerySnapshot<Map<String, dynamic>> theSubjectFilesStream = await firestoreInstance
-        .collection("users")
+        .collection("users2")
         .doc(user.uid)
         .collection("subjects")
         .doc(theSubjectName)
@@ -208,7 +208,7 @@ class ServiceFirestore {
     required String theMessage,
   }) async {
     final docMessage = firestoreInstance
-        .collection("users")
+        .collection("users2")
         .doc(user.uid)
         .collection("subjects")
         .doc(theFileSubjectName)
@@ -238,7 +238,7 @@ class ServiceFirestore {
     required bool theIsReacted,
   }) async {
     final docMessage = firestoreInstance
-        .collection("users")
+        .collection("users2")
         .doc(user.uid)
         .collection("subjects")
         .doc(theFileSubjectName)
@@ -264,7 +264,7 @@ class ServiceFirestore {
     required String theMessageDocId,
   }) async {
     final DocumentReference<Map<String, dynamic>> docMessage = firestoreInstance
-        .collection("users")
+        .collection("users2")
         .doc(user.uid)
         .collection("subjects")
         .doc(theFileSubjectName)

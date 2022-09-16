@@ -99,7 +99,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
             Expanded(
               child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                   stream: serviceFirestore.firestoreInstance
-                      .collection("users")
+                      .collection("users2")
                       .doc(widget.theUser.uid)
                       .collection('subjects')
                       .orderBy(sortedSubjectsFieldName,
@@ -155,7 +155,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                           return StreamBuilder<
                                   QuerySnapshot<Map<String, dynamic>>>(
                               stream: serviceFirestore.firestoreInstance
-                                  .collection("users")
+                                  .collection("users2")
                                   .doc(widget.theUser.uid)
                                   .collection("subjects")
                                   .doc(theRecordSubjectName)
@@ -255,7 +255,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                         user: widget.theUser,
                         theSubjectName:
                             controllerAddGraspSubject.text, // TODO: dispose it
-                        theSubjectItemsNumber: 1,
+                        theSubjectItemsNumber: "1",
                       )
                       .then(
                         (_) => Get.back(),

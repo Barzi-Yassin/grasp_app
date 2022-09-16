@@ -15,8 +15,8 @@ class ServiceStorage {
 
   // uploadImage(File file, {required User theUser}) async {
   //   final storageRef = FirebaseStorage.instance.ref();
-  //   final imagesRef = storageRef.child("users/${theUser.uid}/profileImage");
-  //   // final imagesRef = storageRef.child("users/profileimage");
+  //   final imagesRef = storageRef.child("users2/${theUser.uid}/profileImage");
+  //   // final imagesRef = storageRef.child("users2/profileimage");
 
   //   String? imgDlRef;
 
