@@ -8,6 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:grasp_app/src/data/datalist_subject.dart';
 import 'package:grasp_app/src/models/grasp_user_model.dart';
+import 'package:grasp_app/src/reusable_codes/functions/custome_string_functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/date_time_functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/loadings/loading_indicator.dart';
@@ -32,6 +33,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
   final ServiceFirestore serviceFirestore = ServiceFirestore();
   final SortSubjectsFunctions sortSubjectsFunctions = SortSubjectsFunctions();
   final DateTimeOptimizer dateTimeOptimizer = DateTimeOptimizer();
+  final CustomeStringFunctions customeStringFunctions = CustomeStringFunctions();
 
   // start listOfCurrentSubjectsName of the current subject names
   List<String> listOfCurrentSubjectsName = [];
@@ -152,9 +154,8 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                           final String theRecordItemSubjectUpdatedAtReady =
                               dateTimeOptimizer.dateTimeGenerator(
                                   theTimeStamp: theRecordItemSubjectUpdatedAt);
-                          // debugPrint('....... :: ${dateTimeOptimizer.dateTimeGenerator(theTimeStamp: theRecordItemSubjectCreatedAt)}');
-                          // debugPrint('....... :: ${dateTimeOptimizer.dateTimeGenerator(theTimeStamp: theRecordItemSubjectUpdatedAt)}');
 
+                          final String theRecordItemSubjectNameAbbreviated = customeStringFunctions.customeSubString(theString: theRecordItemSubjectName, theResultLengthLimit: 5);
                           if (!listOfCurrentSubjectsName
                               .contains(theRecordItemSubjectName)) {
                             listOfCurrentSubjectsNameFunction()
@@ -228,14 +229,14 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                                                   .remove(
                                                       theRecordItemSubjectName);
                                               Get.snackbar('Subject caution',
-                                                  'The subject "$theRecordItemSubjectName" has been deleted successfully.');
+                                                  'The subject "$theRecordItemSubjectNameAbbreviated" has been deleted successfully.');
                                             });
                                           },
                                         ),
                                       );
                                     } else {
                                       Get.snackbar('Subject caution',
-                                          'Delete all the grasps inside "$theRecordItemSubjectName" subject, then it could be deleted.');
+                                          'Delete all the grasps inside "$theRecordItemSubjectNameAbbreviated" subject, then it could be deleted.');
                                     }
                                   },
                                 );
