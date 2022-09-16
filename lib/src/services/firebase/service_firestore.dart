@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:grasp_app/src/models/grasp_file_model.dart';
 import 'package:grasp_app/src/models/grasp_message_model.dart';
-import 'package:grasp_app/src/models/grasp_message_reaction_model.dart';
+import 'package:grasp_app/src/models/secondary_models/grasp_message_reaction_model.dart';
 import 'package:grasp_app/src/models/grasp_subject_model.dart';
 import 'package:grasp_app/src/models/grasp_user_model.dart';
 
