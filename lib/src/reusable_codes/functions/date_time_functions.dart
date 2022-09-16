@@ -70,4 +70,18 @@ class DateTimeOptimizer {
 
     return result;
   }
+
+  String dateTimeGenerator({required int theTimeStamp}) {
+    String result = "";
+    final theTimeStampConverted =
+        DateTime.fromMillisecondsSinceEpoch(theTimeStamp);
+
+    result = dateTimeTwelveHourFormater(
+        hourNumber: theTimeStampConverted.hour,
+        minuteNumber: theTimeStampConverted.minute);
+
+    result += ' - ${dateTimeNumberToMonthName(monthNumber: theTimeStampConverted.month)}.${theTimeStampConverted.day}, ${theTimeStampConverted.year}';
+
+    return result;
+  }
 }
