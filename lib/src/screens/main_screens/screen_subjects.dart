@@ -167,7 +167,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                           builder: (context, snapshotFiles) {
                             if (snapshotFiles.connectionState ==
                                 ConnectionState.waiting) {
-                              return loadingIndicator();
+                              return loadingIndicator(theColor: Colors.transparent);
                             } else if (snapshotFiles.hasError) {
                               return Text("err ${snapshotFiles.error}");
                             } else if (snapshotFiles.data == null ||
