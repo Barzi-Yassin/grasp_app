@@ -51,6 +51,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
   final TextEditingController controllerAddGraspSubject =
       TextEditingController();
   int sortingSubjetsNumber = 0;
+  bool isSortDescending = false;
 
   @override
   Widget build(BuildContext context) {
@@ -64,15 +65,18 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
       appBar: AppBar(
         backgroundColor: Colors.cyan.shade700,
         centerTitle: true,
-        leading: customeIconButton(
-            theOnPressed: () {
-              // TODO: do the sorting
-              setState(() => sortingSubjetsNumber++);
-              debugPrint(
-                  'sorts :: $sortingSubjetsNumber, $sortedSubjectsFieldName, \$ ');
-            },
-            theIcon: Icons.sort),
+        leading: GestureDetector(          
+          onTap: () {
+            setState(() => sortingSubjetsNumber++);
+            debugPrint(
+                'sorts :: $sortingSubjetsNumber, $sortedSubjectsFieldName, \$ ');
+          },
+          onLongPress: () =>
+              setState(() => isSortDescending = !isSortDescending),
+          child: customeIcon(theIcon: Icons.sort),
+        ),
         title: const Text('Subjects'),
+
         // actions: [
         //   Icon(Icons.add),
         //   Icon(Icons.add),
@@ -86,10 +90,10 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
         child: Column(
           children: [
             SizedBox(
-              height: 80,
+              height: 90,
               child: customeText(
                   theData:
-                      '${widget.theUser.uid}\n${widget.theUser.email}\n$sortedSubjectsFieldName',
+                      '${widget.theUser.uid}\n${widget.theUser.email}\n$sortedSubjectsFieldName\nAscending= ${!isSortDescending}',
                   theFontSize: 20), //  TODO: temporary
             ),
             Expanded(
@@ -98,7 +102,8 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                       .collection("users")
                       .doc(widget.theUser.uid)
                       .collection('subjects')
-                      .orderBy(sortedSubjectsFieldName, descending: false)
+                      .orderBy(sortedSubjectsFieldName,
+                          descending: isSortDescending)
                       .snapshots(),
                   builder: (context, snapshotSubject) {
                     if (snapshotSubject.connectionState ==
