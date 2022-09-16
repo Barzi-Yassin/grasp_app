@@ -88,6 +88,26 @@ class ServiceFirestore {
     return;
   }
 
+  // update subject
+  Future<GraspSubjectUpdateModel> updateSubject({
+    required User user,
+    required String theSubjectName,
+    required String theSubjectItemsNumber,
+  }) async {
+    GraspSubjectUpdateModel graspSubjectUpdateModel = GraspSubjectUpdateModel(
+      subjectItemsNumber: theSubjectItemsNumber,
+      subjectUpdateAt: DateTime.now(),
+    );
+
+    await firestoreInstance
+        .collection("users2")
+        .doc(user.uid)
+        .collection('subjects')
+        .doc(theSubjectName)
+        .update(graspSubjectUpdateModel.toMap());
+    return graspSubjectUpdateModel;
+  }
+
 // create file
   Future<GraspFileModel> createFile({
     required User user,

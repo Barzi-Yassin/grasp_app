@@ -218,8 +218,17 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                                   Get.back();
                                   listOfCurrentFilesNameFunction()
                                       .remove(theRecordFileName);
+                                  serviceFirestore.updateSubject(
+                                      user: widget.theUser,
+                                      theSubjectName: widget.theFileSubjectName,
+                                      theSubjectItemsNumber:
+                                          listOfCurrentFilesName.length
+                                              .toString());
+                                              
                                   Get.snackbar('Grasp caution',
                                       'The Grasp "$theRecordFileName" has been deleted successfully.');
+                                  debugPrint(
+                                      'jjjjjjjj delete :: ${listOfCurrentFilesName.length}');
                                 },
                               );
                             },
@@ -250,20 +259,29 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                     .contains(controllerAddGraspFile.text)) {
                   await serviceFirestore
                       .createFile(
-                        user: widget.theUser,
-                        theFileSubjectName: widget.theFileSubjectName,
-                        theFileName: controllerAddGraspFile.text,
-                        theIsFileFaved: false,
-                        theIsFileStared: true,
-                        theIsFileUpdated: false,
-                      )
+                    user: widget.theUser,
+                    theFileSubjectName: widget.theFileSubjectName,
+                    theFileName: controllerAddGraspFile.text,
+                    theIsFileFaved: false,
+                    theIsFileStared: true,
+                    theIsFileUpdated: false,
+                  )
                       .then(
-                        (_) => Get.back(),
-                      );
+                    (_) {
+                      serviceFirestore.updateSubject(
+                          user: widget.theUser,
+                          theSubjectName: widget.theFileSubjectName,
+                          theSubjectItemsNumber:
+                              listOfCurrentFilesName.length.toString());
+                      debugPrint(
+                          'jjjjjjjj :: ${listOfCurrentFilesName.length}');
+                      Get.back();
+                    },
+                  );
                 } else {
-                  debugPrint('the file name is already exist !!!');
+                  debugPrint('the grasp name is already exist !!!');
                   Get.snackbar(
-                      'Grasp caution', 'The file name is already exist!');
+                      'Grasp caution', 'The grasp name is already exist!');
                 }
               } else {
                 // Get.back();
