@@ -80,6 +80,7 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                 .collection("subjects")
                 .doc(widget.theFileSubjectName)
                 .collection("files")
+                .orderBy("fileCreatedAt", descending: true)
                 .snapshots(),
             builder: (context, snapshotFiles) {
               if (snapshotFiles.connectionState == ConnectionState.waiting) {
@@ -262,7 +263,8 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                       );
                 } else {
                   debugPrint('the file name is already exist !!!');
-                  Get.snackbar('Grasp caution', 'The file name is already exist!');
+                  Get.snackbar(
+                      'Grasp caution', 'The file name is already exist!');
                 }
               } else {
                 // Get.back();

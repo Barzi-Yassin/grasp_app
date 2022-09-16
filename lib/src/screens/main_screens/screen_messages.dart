@@ -196,6 +196,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                             .collection("files")
                             .doc(widget.theFileName)
                             .collection('messages')
+                            .orderBy('createdAt')
                             .snapshots(),
                         builder: (context, snapshotMessages) {
                           if (snapshotMessages.connectionState ==

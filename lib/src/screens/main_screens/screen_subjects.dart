@@ -89,6 +89,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                       .collection("users")
                       .doc(widget.theUser.uid)
                       .collection('subjects')
+                      .orderBy("subjectCreatedAt", descending: true)
                       .snapshots(),
                   builder: (context, snapshotSubject) {
                     if (snapshotSubject.connectionState ==
@@ -254,7 +255,8 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                 }
               } else {
                 // Get.back();
-                Get.snackbar('Subject caution', 'Give a name to the new subjects!');
+                Get.snackbar(
+                    'Subject caution', 'Give a name to the new subjects!');
               }
             },
           ),
