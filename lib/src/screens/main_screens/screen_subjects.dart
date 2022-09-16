@@ -10,6 +10,7 @@ import 'package:grasp_app/src/data/datalist_subject.dart';
 import 'package:grasp_app/src/models/grasp_user_model.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/loadings/loading_indicator.dart';
+import 'package:grasp_app/src/reusable_codes/functions/loadings/sort_subjects_function.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/dialogs/dialog_add.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/dialogs/dialog_delete.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/end_drawer/widget_end_drawer.dart';
@@ -28,6 +29,7 @@ class ScreenSubjects extends StatefulWidget {
 
 class _ScreenSubjectsState extends State<ScreenSubjects> {
   final ServiceFirestore serviceFirestore = ServiceFirestore();
+  final SortSubjectsFunctions sortSubjectsFunctions = SortSubjectsFunctions();
 
   // start listOfCurrentSubjectsName of the current subject names
   List<String> listOfCurrentSubjectsName = [];
@@ -48,9 +50,12 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
 
   final TextEditingController controllerAddGraspSubject =
       TextEditingController();
+  int sortingSubjetsNumber = 0;
 
   @override
   Widget build(BuildContext context) {
+    final String sortedSubjectsFieldName = sortSubjectsFunctions
+        .sortSubjectsByFieldName(theSortingSubjectNumber: sortingSubjetsNumber);
     return Scaffold(
       backgroundColor: Colors.grey.shade400,
       endDrawer: SafeArea(
@@ -62,6 +67,9 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
         leading: customeIconButton(
             theOnPressed: () {
               // TODO: do the sorting
+              setState(() => sortingSubjetsNumber++);
+              debugPrint(
+                  'sorts :: $sortingSubjetsNumber, $sortedSubjectsFieldName, \$ ');
             },
             theIcon: Icons.sort),
         title: const Text('Subjects'),
@@ -78,9 +86,10 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
         child: Column(
           children: [
             SizedBox(
-              height: 60,
+              height: 80,
               child: customeText(
-                  theData: '${widget.theUser.uid}\n${widget.theUser.email}',
+                  theData:
+                      '${widget.theUser.uid}\n${widget.theUser.email}\n$sortedSubjectsFieldName',
                   theFontSize: 20), //  TODO: temporary
             ),
             Expanded(
@@ -89,7 +98,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                       .collection("users")
                       .doc(widget.theUser.uid)
                       .collection('subjects')
-                      .orderBy("subjectCreatedAt", descending: true)
+                      .orderBy(sortedSubjectsFieldName, descending: false)
                       .snapshots(),
                   builder: (context, snapshotSubject) {
                     if (snapshotSubject.connectionState ==
