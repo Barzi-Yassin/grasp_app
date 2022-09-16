@@ -66,6 +66,7 @@ Row appbarTitleFolderIconAndName({required String theFolderaName}) {
         FontAwesomeIcons.solidFolderOpen,
         size: 19,
       ),
+      const SizedBox(width: 8),
       Expanded(
         child: customeText(
           theData: theFolderaName,
