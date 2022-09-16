@@ -146,12 +146,6 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                                 .add(theRecordSubjectName);
                           }
 
-                          // final length = serviceFirestore.getSubjectItemsLength(
-                          //     user: widget.theUser,
-                          //     theSubjectName: theRecordSubjectName);
-
-                          //     debugPrint('bbbbb :: $length');
-
                           return StreamBuilder<
                                   QuerySnapshot<Map<String, dynamic>>>(
                               stream: serviceFirestore.firestoreInstance
