@@ -8,6 +8,7 @@ import 'package:grasp_app/src/models/grasp_message_model.dart';
 import 'package:grasp_app/src/models/secondary_models/grasp_message_reaction_model.dart';
 import 'package:grasp_app/src/models/grasp_subject_model.dart';
 import 'package:grasp_app/src/models/grasp_user_model.dart';
+import 'package:grasp_app/src/models/secondary_models/grasp_subject_update_model.dart';
 
 class ServiceFirestore {
   final FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
@@ -171,31 +172,38 @@ class ServiceFirestore {
     return;
   }
 
-/*
   //  get subject items length
-  Future<String> getSubjectItemsLength(
-      {required User user, required String theSubjectName}) async {
-    final QuerySnapshot<Map<String, dynamic>> theSubjectFilesStream = await firestoreInstance
-        .collection("users2")
-        .doc(user.uid)
-        .collection("subjects")
-        .doc(theSubjectName)
-        .collection("files")
-        .get();
+  // Future<String> getSubjectItemsLength(
+  //     {required User user, required String theSubjectName}) async {
+  //   final QuerySnapshot<Map<String, dynamic>> theSubjectFilesStream =
+  //       await firestoreInstance
+  //           .collection("users2")
+  //           .doc(user.uid)
+  //           .collection("subjects")
+  //           .doc(theSubjectName)
+  //           .collection("files")
+  //           .get();
 
-    return theSubjectFilesStream.docs.length.toString();
-    
-    // (
-      
-    //   (element) {
-    //   debugPrint('ppppp :: ${element.data().length}');
-    //   // element.data().
-    // });
+  //   final String result = theSubjectFilesStream.docs.length.toString();
+  //   debugPrint('fffffffff :: $result');
 
-    // return 'ff';
-  }
+  //   return result;
+  // }
 
-  */
+  // in destination
+  /*
+  serviceFirestore
+    .getSubjectItemsLength(
+        user: widget.theUser,
+        theSubjectName: widget.theFileSubjectName)
+    .then((String value) {
+      setState(() {
+        test = value; // test is a local string variable 
+      });
+      debugPrint('testtttt :: $test');
+    });
+    // but icauses infinite reaload
+*/
 
 // create message
   Future<GraspMessageModel> createMessage({
