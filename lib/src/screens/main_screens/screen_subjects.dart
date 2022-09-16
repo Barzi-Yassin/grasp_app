@@ -255,7 +255,6 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                         user: widget.theUser,
                         theSubjectName:
                             controllerAddGraspSubject.text, // TODO: dispose it
-                        theSubjectItemsNumber: "0",
                       )
                       .then(
                         (_) => Get.back(),
