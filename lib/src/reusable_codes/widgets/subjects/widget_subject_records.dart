@@ -17,11 +17,15 @@ class WidgetSubjectRecords extends StatelessWidget {
     required this.theFileSubjectName,
     required this.theSubjectItemsLength,
     required this.theLongPressed,
+    required this.theFileSubjectCreatedAt,
+    required this.theFileSubjectUpdatedAt,
   }) : super(key: key);
 
   final User theUser;
   final String theFileSubjectName;
   final String theSubjectItemsLength;
+  final String theFileSubjectCreatedAt;
+  final String theFileSubjectUpdatedAt;
   final theLongPressed;
 
   String generateSubjectItemsGramatically() {
@@ -60,6 +64,8 @@ class WidgetSubjectRecords extends StatelessWidget {
             ScreenSubjectFiles(
               theUser: theUser,
               theFileSubjectName: theFileSubjectName,
+              theFileSubjectCreatedAt: theFileSubjectCreatedAt,
+              theFileSubjectUpdatedAt: theFileSubjectUpdatedAt,
             ),
           ),
           minVerticalPadding: 20,

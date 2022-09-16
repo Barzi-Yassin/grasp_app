@@ -8,6 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:grasp_app/src/data/datalist_subject.dart';
 import 'package:grasp_app/src/models/grasp_user_model.dart';
+import 'package:grasp_app/src/reusable_codes/functions/date_time_functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/loadings/loading_indicator.dart';
 import 'package:grasp_app/src/reusable_codes/functions/loadings/sort_subjects_function.dart';
@@ -30,6 +31,7 @@ class ScreenSubjects extends StatefulWidget {
 class _ScreenSubjectsState extends State<ScreenSubjects> {
   final ServiceFirestore serviceFirestore = ServiceFirestore();
   final SortSubjectsFunctions sortSubjectsFunctions = SortSubjectsFunctions();
+  final DateTimeOptimizer dateTimeOptimizer = DateTimeOptimizer();
 
   // start listOfCurrentSubjectsName of the current subject names
   List<String> listOfCurrentSubjectsName = [];
@@ -137,13 +139,26 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                         itemBuilder: (context, theRecord) {
                           final theRecordItem =
                               snapshotSubject.data!.docs[theRecord];
-                          final theRecordSubjectName =
+                          final theRecordItemSubjectName =
                               theRecordItem.data()["subjectName"];
+                          final int theRecordItemSubjectUpdatedAt =
+                              theRecordItem.data()["subjectUpdateAt"];
+                          final int theRecordItemSubjectCreatedAt =
+                              theRecordItem.data()["subjectCreatedAt"];
+
+                          final String theRecordItemSubjectCreatedAtReady =
+                              dateTimeOptimizer.dateTimeGenerator(
+                                  theTimeStamp: theRecordItemSubjectCreatedAt);
+                          final String theRecordItemSubjectUpdatedAtReady =
+                              dateTimeOptimizer.dateTimeGenerator(
+                                  theTimeStamp: theRecordItemSubjectUpdatedAt);
+                          // debugPrint('....... :: ${dateTimeOptimizer.dateTimeGenerator(theTimeStamp: theRecordItemSubjectCreatedAt)}');
+                          // debugPrint('....... :: ${dateTimeOptimizer.dateTimeGenerator(theTimeStamp: theRecordItemSubjectUpdatedAt)}');
 
                           if (!listOfCurrentSubjectsName
-                              .contains(theRecordSubjectName)) {
+                              .contains(theRecordItemSubjectName)) {
                             listOfCurrentSubjectsNameFunction()
-                                .add(theRecordSubjectName);
+                                .add(theRecordItemSubjectName);
                           }
 
                           return StreamBuilder<
@@ -152,7 +167,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                                   .collection("users2")
                                   .doc(widget.theUser.uid)
                                   .collection("subjects")
-                                  .doc(theRecordSubjectName)
+                                  .doc(theRecordItemSubjectName)
                                   .collection("files")
                                   .snapshots(),
                               builder: (context, snapshotFiles) {
@@ -179,8 +194,12 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
 
                                 return WidgetSubjectRecords(
                                   theUser: widget.theUser,
-                                  theFileSubjectName: theRecordSubjectName,
+                                  theFileSubjectName: theRecordItemSubjectName,
                                   theSubjectItemsLength: filesLength.toString(),
+                                  theFileSubjectCreatedAt:
+                                      theRecordItemSubjectCreatedAtReady,
+                                  theFileSubjectUpdatedAt:
+                                      theRecordItemSubjectUpdatedAtReady,
                                   theLongPressed: () async {
                                     if (filesLength == 0) {
                                       showAnimatedDialog(
@@ -195,27 +214,28 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                                             const Duration(milliseconds: 800),
                                         builder: (_) => DialogDelete(
                                           theTitle: "Subject",
-                                          theName: theRecordSubjectName,
+                                          theName: theRecordItemSubjectName,
                                           theOnPressed: () async {
                                             await serviceFirestore
                                                 .deleteSubject(
                                               user: widget.theUser,
                                               theSubjectName:
-                                                  theRecordSubjectName,
+                                                  theRecordItemSubjectName,
                                             )
                                                 .then((value) {
                                               Get.back();
                                               listOfCurrentSubjectsNameFunction()
-                                                  .remove(theRecordSubjectName);
+                                                  .remove(
+                                                      theRecordItemSubjectName);
                                               Get.snackbar('Subject caution',
-                                                  'The subject "$theRecordSubjectName" has been deleted successfully.');
+                                                  'The subject "$theRecordItemSubjectName" has been deleted successfully.');
                                             });
                                           },
                                         ),
                                       );
                                     } else {
                                       Get.snackbar('Subject caution',
-                                          'Delete all the grasps inside "$theRecordSubjectName" subject, then it could be deleted.');
+                                          'Delete all the grasps inside "$theRecordItemSubjectName" subject, then it could be deleted.');
                                     }
                                   },
                                 );
