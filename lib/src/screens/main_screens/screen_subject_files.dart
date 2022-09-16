@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:grasp_app/src/reusable_codes/functions/custome_string_functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/date_time_functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/loadings/loading_indicator.dart';
@@ -50,6 +51,8 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
 
   final ServiceFirestore serviceFirestore = ServiceFirestore();
   final DateTimeOptimizer dateTimeOptimizer = DateTimeOptimizer();
+  final CustomeStringFunctions customeStringFunctions =
+      CustomeStringFunctions();
 
   final TextEditingController controllerAddGraspFile = TextEditingController();
 
@@ -77,251 +80,220 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
         height: double.infinity,
         width: double.infinity,
         decoration: backgroundGradientCyan(),
-        child: Column(
-          children: [
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: [
-            //     const Expanded(
-            //       child: Divider(
-            //         thickness: 1,
-            //         endIndent: 10,
-            //       ),
-            //     ),
-            //     Text(
-            //       '${widget.theFileSubjectName}  4',
-            //       style:
-            //           const TextStyle(color: Color.fromARGB(255, 126, 50, 50)),
-            //     ),
-            //     const Expanded(
-            //       child: Divider(
-            //         thickness: 1,
-            //         indent: 10,
-            //       ),
-            //     ),
-            //   ],
-            // ),
-            const SizedBox(height: 0),
-            Expanded(
-              child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                  stream: serviceFirestore.firestoreInstance
-                      .collection("users2")
-                      .doc(widget.theUser.uid)
-                      .collection("subjects")
-                      .doc(widget.theFileSubjectName)
-                      .collection("files")
-                      .orderBy("fileCreatedAt", descending: true)
-                      .snapshots(),
-                  builder: (context, snapshotFiles) {
-                    if (snapshotFiles.connectionState ==
-                        ConnectionState.waiting) {
-                      return loadingIndicator();
-                    } else if (snapshotFiles.hasError) {
-                      return Text("err ${snapshotFiles.error}");
-                    } else if (snapshotFiles.data == null ||
-                        !snapshotFiles.hasData) {
-                      return const Text(
-                          'snapshotFiles is empty(StreamBuilder)');
+        child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+            stream: serviceFirestore.firestoreInstance
+                .collection("users2")
+                .doc(widget.theUser.uid)
+                .collection("subjects")
+                .doc(widget.theFileSubjectName)
+                .collection("files")
+                .orderBy("fileCreatedAt", descending: true)
+                .snapshots(),
+            builder: (context, snapshotFiles) {
+              if (snapshotFiles.connectionState == ConnectionState.waiting) {
+                return loadingIndicator();
+              } else if (snapshotFiles.hasError) {
+                return Text("err ${snapshotFiles.error}");
+              } else if (snapshotFiles.data == null ||
+                  !snapshotFiles.hasData) {
+                return const Text('snapshotFiles is empty(StreamBuilder)');
+              }
+
+              // snapshotFiles.data!.docs.first;
+              debugPrint('44444files');
+              debugPrint(snapshotFiles.data!.docs.length.toString());
+              debugPrint(snapshotFiles.data.toString());
+
+              snapshotFiles.data?.docs;
+
+              final int filesLength = snapshotFiles.data!.docs.length;
+
+              if (filesLength == 0) {
+                return customeText(theData: 'No files found!');
+              } else {
+                return ListView.builder(
+                  padding: const EdgeInsets.only(top: 5.0, bottom: 80),
+                  scrollDirection: Axis.vertical,
+                  itemCount: snapshotFiles.data!.docs.length,
+                  itemBuilder: (context, theRecord) {
+                    final QueryDocumentSnapshot<Map<String, dynamic>>
+                        theRecordItem = snapshotFiles.data!.docs[theRecord];
+                    final theRecordItemFileName =
+                        theRecordItem.data()["fileName"];
+                    final theRecordFileCreatedAt =
+                        theRecordItem.data()["fileCreatedAt"];
+
+                    final String theRecordItemFileNameAbbreviated =
+                        customeStringFunctions.customeSubString(
+                            theString: theRecordItemFileName,
+                            theResultLengthLimit: 5);
+
+                    if (!listOfCurrentFilesName
+                        .contains(theRecordItemFileName)) {
+                      listOfCurrentFilesNameFunction()
+                          .add(theRecordItemFileName);
                     }
+                    final theRecordFileCreatedAtConverted =
+                        DateTime.fromMillisecondsSinceEpoch(
+                            theRecordFileCreatedAt);
 
-                    // snapshotFiles.data!.docs.first;
-                    debugPrint('44444files');
-                    debugPrint(snapshotFiles.data!.docs.length.toString());
-                    debugPrint(snapshotFiles.data.toString());
+                    // var theRecordFileCreatedAtVarList = {
+                    //   'year': theRecordFileCreatedAtConverted.year.toString(),
+                    //   'month': theRecordFileCreatedAtConverted.month.toString(),
+                    //   'day': theRecordFileCreatedAtConverted.day.toString(),
+                    //   'hour': theRecordFileCreatedAtConverted.hour.toString(),
+                    //   'minutes':
+                    //       theRecordFileCreatedAtConverted.minute.toString(),
+                    //   'seconds':
+                    //       theRecordFileCreatedAtConverted.second.toString(),
+                    //   'millisecond': theRecordFileCreatedAtConverted.millisecond
+                    //       .toString(),
+                    // };
 
-                    snapshotFiles.data?.docs;
+                    // debugPrint(
+                    //     'hello $theRecordItemFileName :: ${theRecordFileCreatedAtVarList['year']}');
+                    // debugPrint(
+                    //     'hello $theRecordItemFileName :: ${theRecordFileCreatedAtVarList['month']}');
+                    // debugPrint(
+                    //     'hello $theRecordItemFileName :: ${theRecordFileCreatedAtVarList['day']}');
+                    // debugPrint(
+                    //     'hello $theRecordItemFileName :: ${theRecordFileCreatedAtVarList['hour']}');
+                    // debugPrint(
+                    //     'hello $theRecordItemFileName :: ${theRecordFileCreatedAtVarList['minutes']}');
+                    // debugPrint(
+                    //     'hello $theRecordItemFileName :: ${theRecordFileCreatedAtVarList['seconds']}');
+                    // debugPrint(
+                    //     'hello $theRecordItemFileName :: ${theRecordFileCreatedAtVarList['millisecond']}');
 
-                    final int filesLength = snapshotFiles.data!.docs.length;
+                    // final String year =
+                    //     theRecordFileCreatedAtConverted.year.toString();
+                    // final String month =
+                    //     theRecordFileCreatedAtConverted.month.toString();
+                    // final String day =
+                    //     theRecordFileCreatedAtConverted.day.toString();
+                    // final String hour =
+                    //     theRecordFileCreatedAtConverted.hour.toString();
+                    // final String minute =
+                    //     theRecordFileCreatedAtConverted.minute.toString();
 
-                    if (filesLength == 0) {
-                      return customeText(theData: 'No files found!');
-                    } else {
-                      return ListView.builder(
-                        padding: const EdgeInsets.symmetric(vertical: 20.0),
-                        scrollDirection: Axis.vertical,
-                        itemCount: snapshotFiles.data!.docs.length,
-                        itemBuilder: (context, theRecord) {
-                          final QueryDocumentSnapshot<Map<String, dynamic>>
-                              theRecordItem =
-                              snapshotFiles.data!.docs[theRecord];
-                          final theRecordFileName =
-                              theRecordItem.data()["fileName"];
-                          final theRecordFileCreatedAt =
-                              theRecordItem.data()["fileCreatedAt"];
+                    // debugPrint(
+                    //     '$theRecordItemFileName created at:: $theRecordFileCreatedAtConverted');
+                    // debugPrint('$theRecordItemFileName year is:: $year');
+                    // debugPrint('$theRecordItemFileName month is:: $month');
+                    // debugPrint('$theRecordItemFileName day is:: $day');
+                    // debugPrint('$theRecordItemFileName hour is:: $hour');
+                    // debugPrint('$theRecordItemFileName minute is:: $minute');
 
-                          if (!listOfCurrentFilesName
-                              .contains(theRecordFileName)) {
-                            listOfCurrentFilesNameFunction()
-                                .add(theRecordFileName);
-                          }
-                          final theRecordFileCreatedAtConverted =
-                              DateTime.fromMillisecondsSinceEpoch(
-                                  theRecordFileCreatedAt);
+                    var theRecordFileCreatedAtVarListBoilerPlate = {
+                      'time': dateTimeOptimizer.dateTimeTwelveHourFormater(
+                          hourNumber: theRecordFileCreatedAtConverted.hour,
+                          minuteNumber:
+                              theRecordFileCreatedAtConverted.minute),
+                      // '${theRecordFileCreatedAtConverted.hour}:${theRecordFileCreatedAtConverted.minute}',
+                      'date':
+                          '${dateTimeOptimizer.dateTimeNumberToMonthName(monthNumber: theRecordFileCreatedAtConverted.month)}.${theRecordFileCreatedAtConverted.day}, ${theRecordFileCreatedAtConverted.year}',
+                      // 'date': theRecordFileCreatedAtConverted.month.toString(),
+                    };
+                    // debugPrint(
+                    //     'e7m:: ${theRecordFileCreatedAtVarListBoilerPlate['time']}');
+                    // debugPrint(
+                    //     'e7m:: ${theRecordFileCreatedAtVarListBoilerPlate['date']}');
 
-                          // var theRecordFileCreatedAtVarList = {
-                          //   'year': theRecordFileCreatedAtConverted.year.toString(),
-                          //   'month': theRecordFileCreatedAtConverted.month.toString(),
-                          //   'day': theRecordFileCreatedAtConverted.day.toString(),
-                          //   'hour': theRecordFileCreatedAtConverted.hour.toString(),
-                          //   'minutes':
-                          //       theRecordFileCreatedAtConverted.minute.toString(),
-                          //   'seconds':
-                          //       theRecordFileCreatedAtConverted.second.toString(),
-                          //   'millisecond': theRecordFileCreatedAtConverted.millisecond
-                          //       .toString(),
-                          // };
-
-                          // debugPrint(
-                          //     'hello $theRecordFileName :: ${theRecordFileCreatedAtVarList['year']}');
-                          // debugPrint(
-                          //     'hello $theRecordFileName :: ${theRecordFileCreatedAtVarList['month']}');
-                          // debugPrint(
-                          //     'hello $theRecordFileName :: ${theRecordFileCreatedAtVarList['day']}');
-                          // debugPrint(
-                          //     'hello $theRecordFileName :: ${theRecordFileCreatedAtVarList['hour']}');
-                          // debugPrint(
-                          //     'hello $theRecordFileName :: ${theRecordFileCreatedAtVarList['minutes']}');
-                          // debugPrint(
-                          //     'hello $theRecordFileName :: ${theRecordFileCreatedAtVarList['seconds']}');
-                          // debugPrint(
-                          //     'hello $theRecordFileName :: ${theRecordFileCreatedAtVarList['millisecond']}');
-
-                          // final String year =
-                          //     theRecordFileCreatedAtConverted.year.toString();
-                          // final String month =
-                          //     theRecordFileCreatedAtConverted.month.toString();
-                          // final String day =
-                          //     theRecordFileCreatedAtConverted.day.toString();
-                          // final String hour =
-                          //     theRecordFileCreatedAtConverted.hour.toString();
-                          // final String minute =
-                          //     theRecordFileCreatedAtConverted.minute.toString();
-
-                          // debugPrint(
-                          //     '$theRecordFileName created at:: $theRecordFileCreatedAtConverted');
-                          // debugPrint('$theRecordFileName year is:: $year');
-                          // debugPrint('$theRecordFileName month is:: $month');
-                          // debugPrint('$theRecordFileName day is:: $day');
-                          // debugPrint('$theRecordFileName hour is:: $hour');
-                          // debugPrint('$theRecordFileName minute is:: $minute');
-
-                          var theRecordFileCreatedAtVarListBoilerPlate = {
-                            'time':
-                                dateTimeOptimizer.dateTimeTwelveHourFormater(
-                                    hourNumber:
-                                        theRecordFileCreatedAtConverted.hour,
-                                    minuteNumber:
-                                        theRecordFileCreatedAtConverted.minute),
-                            // '${theRecordFileCreatedAtConverted.hour}:${theRecordFileCreatedAtConverted.minute}',
-                            'date':
-                                '${dateTimeOptimizer.dateTimeNumberToMonthName(monthNumber: theRecordFileCreatedAtConverted.month)}.${theRecordFileCreatedAtConverted.day}, ${theRecordFileCreatedAtConverted.year}',
-                            // 'date': theRecordFileCreatedAtConverted.month.toString(),
-                          };
-                          // debugPrint(
-                          //     'e7m:: ${theRecordFileCreatedAtVarListBoilerPlate['time']}');
-                          // debugPrint(
-                          //     'e7m:: ${theRecordFileCreatedAtVarListBoilerPlate['date']}');
-
-                          return Column(
-                            children: [
-                              WidgetSubjectFileRecords(
-                                theUser: widget.theUser,
-                                theFileName: theRecordFileName,
-                                theFileSubjectName: widget.theFileSubjectName,
-                                subjectFileRecordId: "${theRecord + 1}",
-                                subjectFileRecordName: theRecordFileName,
-                                subjectFileRecordTime:
-                                    theRecordFileCreatedAtVarListBoilerPlate[
-                                            'time']
-                                        .toString(),
-                                subjectFileRecordDate:
-                                    theRecordFileCreatedAtVarListBoilerPlate[
-                                            'date']
-                                        .toString(),
-                                theTrailingOnPressed: () async {
-                                  showAnimatedDialog(
-                                    barrierColor: Colors.black38,
-                                    barrierDismissible: true,
-                                    context: context,
-                                    animationType:
-                                        DialogTransitionType.sizeFade,
-                                    curve: Curves.easeOut,
-                                    alignment: Alignment.bottomCenter,
-                                    duration: const Duration(milliseconds: 800),
-                                    builder: (_) => DialogDelete(
-                                      theTitle: "Grasp",
-                                      theName: theRecordFileName,
-                                      theOnPressed: () async {
-                                        await serviceFirestore
-                                            .deleteFile(
-                                          user: widget.theUser,
-                                          theFileSubjectName:
-                                              widget.theFileSubjectName,
-                                          theFileName: theRecordFileName,
-                                        )
-                                            .then(
-                                          (value) {
-                                            Get.back();
-                                            listOfCurrentFilesNameFunction()
-                                                .remove(theRecordFileName);
-                                            serviceFirestore.updateSubject(
-                                                user: widget.theUser,
-                                                theSubjectName:
-                                                    widget.theFileSubjectName,
-                                                theSubjectItemsNumber:
-                                                    listOfCurrentFilesName
-                                                        .length
-                                                        .toString());
-
-                                            Get.snackbar('Grasp caution',
-                                                'The Grasp "$theRecordFileName" has been deleted successfully.');
-                                            debugPrint(
-                                                'jjjjjjjj delete :: ${listOfCurrentFilesName.length}');
-                                          },
-                                        );
-                                      },
+                    return Column(
+                      children: [
+                        theRecord == 0
+                            ? Container(
+                              height: 50,
+                              alignment: Alignment.center,
+                              child: Row(
+                                // mainAxisAlignment:
+                                //     MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Expanded(
+                                    child: Divider(
+                                      thickness: 1,
+                                      endIndent: 10,
                                     ),
+                                  ),
+                                  Text(
+                                    widget.theFileSubjectCreatedAt,
+                                    style: const TextStyle(
+                                        color: Color.fromARGB(
+                                            144, 73, 120, 123)),
+                                  ),
+                                  const Expanded(
+                                    child: Divider(
+                                      thickness: 1,
+                                      indent: 10,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                            : const SizedBox(height: 0, width: 0),
+                        WidgetSubjectFileRecords(
+                          theUser: widget.theUser,
+                          theFileName: theRecordItemFileName,
+                          theFileSubjectName: widget.theFileSubjectName,
+                          subjectFileRecordId: "${theRecord + 1}",
+                          subjectFileRecordName: theRecordItemFileName,
+                          subjectFileRecordTime:
+                              theRecordFileCreatedAtVarListBoilerPlate['time']
+                                  .toString(),
+                          subjectFileRecordDate:
+                              theRecordFileCreatedAtVarListBoilerPlate['date']
+                                  .toString(),
+                          theTrailingOnPressed: () async {
+                            showAnimatedDialog(
+                              barrierColor: Colors.black38,
+                              barrierDismissible: true,
+                              context: context,
+                              animationType: DialogTransitionType.sizeFade,
+                              curve: Curves.easeOut,
+                              alignment: Alignment.bottomCenter,
+                              duration: const Duration(milliseconds: 800),
+                              builder: (_) => DialogDelete(
+                                theTitle: "Grasp",
+                                theName: theRecordItemFileName,
+                                theOnPressed: () async {
+                                  await serviceFirestore
+                                      .deleteFile(
+                                    user: widget.theUser,
+                                    theFileSubjectName:
+                                        widget.theFileSubjectName,
+                                    theFileName: theRecordItemFileName,
+                                  )
+                                      .then(
+                                    (value) {
+                                      Get.back();
+                                      listOfCurrentFilesNameFunction()
+                                          .remove(theRecordItemFileName);
+                                      serviceFirestore.updateSubject(
+                                          user: widget.theUser,
+                                          theSubjectName:
+                                              widget.theFileSubjectName,
+                                          theSubjectItemsNumber:
+                                              listOfCurrentFilesName.length
+                                                  .toString());
+                        
+                                      Get.snackbar('Grasp caution',
+                                          'The Grasp "$theRecordItemFileNameAbbreviated" has been deleted successfully.');
+                                      debugPrint(
+                                          'jjjjjjjj delete :: ${listOfCurrentFilesName.length}');
+                                    },
                                   );
                                 },
                               ),
-                              theRecord == (snapshotFiles.data!.docs.length - 1)
-                                  ? SizedBox(
-                                    height: 50,
-                                    child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          const Expanded(
-                                            child: Divider(
-                                              thickness: 1,
-                                              endIndent: 10,
-                                            ),
-                                          ),
-                                          Text(
-                                            widget.theFileSubjectCreatedAt,
-                                            style: const TextStyle(
-                                                color: Color.fromARGB(
-                                                    255, 126, 50, 50)),
-                                          ),
-                                          const Expanded(
-                                            child: Divider(
-                                              thickness: 1,
-                                              indent: 10,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                  )
-                                  : const SizedBox(height: 0, width: 0),
-                            ],
-                          );
-                        },
-                      );
-                    }
-                  }),
-            ),
-          ],
-        ),
+                            );
+                          },
+                        ),
+                        
+                      ],
+                    );
+                  },
+                );
+              }
+            }),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => showAnimatedDialog(
