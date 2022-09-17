@@ -122,6 +122,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
               // child: customeText(theData: 'fffffff'),
               decoration: BoxDecoration(
                   // color: Colors.cyan,
+                  border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.circular(50),
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
@@ -317,7 +318,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                               snapshotMessages.data!.docs.length;
 
                           if (messagesLength == 0) {
-                            return customeText(theData: 'No messages found!');
+                            return customeText(theData: '\n\nNo messages found!');
                           } else {
                             return ListView.separated(
                               padding: EdgeInsets.only(
@@ -381,7 +382,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                   position:
                                       BadgePosition.topEnd(top: 17, end: 17),
                                   badgeColor: Colors.grey.shade100,
-                                  // borderSide: BorderSide(color: Colors.cyan.shade100),
+                                  borderSide: BorderSide(color: Colors.white),
                                   elevation: 0,
                                   badgeContent: SizedBox(
                                     height: 15,
@@ -412,7 +413,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                         width: screenWidth - 50,
                                         alignment: Alignment.centerLeft,
                                         decoration: const BoxDecoration(
-                                          color: Colors.white,
+                                          color: Colors.white70,
                                           // border: Border.all(
                                           //     color: Colors.cyan, width: 0.5),
                                           borderRadius: BorderRadius.only(
