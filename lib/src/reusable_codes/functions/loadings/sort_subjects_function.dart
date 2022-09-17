@@ -27,9 +27,7 @@ class SortSubjectsFunctions {
   }
 
   String getSortAscOrDesc({required bool isSortDescending}) {
-    String result = isSortDescending ? "Descending" : "Ascending";
+    String result = isSortDescending ? "Ascending" : "Descending";
     return result;
   }
-
-  
 }

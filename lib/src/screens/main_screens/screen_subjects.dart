@@ -101,7 +101,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                       .doc(widget.theUser.uid)
                       .collection('subjects')
                       .orderBy(sortedSubjectsFieldName,
-                          descending: isSortDescending)
+                          descending: sortedSubjectsFieldName == "subjectName" ? !isSortDescending : isSortDescending)
                       .snapshots(),
                   builder: (context, snapshotSubject) {
                     if (snapshotSubject.connectionState ==
