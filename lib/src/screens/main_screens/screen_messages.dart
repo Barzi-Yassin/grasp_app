@@ -134,46 +134,141 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                       // Colors.grey.shade300,
                     ],
                   )),
-              child: ListTile(
+              child:
+                  //  Container(
+                  //   margin: const EdgeInsets.only(left: 15),
+                  //   // color: Colors.purple.shade100.withOpacity(0.7),
+                  //   child: Row(
+                  //     children: [
+                  //       Expanded(
+                  //         flex: 1,
+                  //         child: customeIconButton(
+                  //             theOnPressed: () {
+                  //               debugPrint('kkkkkkkkkkkkkkk2222');
+                  //             },
+                  //             theIcon: Icons.edit),
+                  //       ),
+                  //       Expanded(
+                  //         flex: 4,
+                  //         child: customeText(theData: 'fffffff'),
+                  //       ),
+                  //       Expanded(
+                  //         flex: 2,
+                  //         child: SizedBox(
+                  //           width: 100,
+                  //           child: Row(
+                  //             mainAxisAlignment: MainAxisAlignment.center,
+                  //             crossAxisAlignment: CrossAxisAlignment.center,
+                  //             children: [
+                  //               customeIconButton(
+                  //                 theOnPressed: () {
+                  //                   debugPrint('kkkkkkkkkkkkkkk2222');
+                  //                 },
+                  //                 theIcon: Icons.star_border,
+                  //                 theSize: 30,
+                  //               ),
+                  //               customeIconButton(
+                  //                 theOnPressed: () {},
+                  //                 theIcon: Icons.favorite_border,
+                  //                 theSize: 25,
+                  //               ),
+                  //             ],
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // )
+
+                  ListTile(
                 contentPadding: const EdgeInsets.only(
                     left: 10, right: 10, top: 0, bottom: 9),
                 minLeadingWidth: 0,
                 dense: true,
-                leading: Container(
-                  // color: Colors.red,
-                  child: customeIconButton(
-                      theOnPressed: () {
-                        // TODO: do edit functionality
-                      },
-                      theIcon: Icons.edit),
-                ),
-                title:
-                    customeText(theData: widget.theFileName, theFontSize: 20),
-                trailing: SizedBox(
-                  width: 100,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      customeIconButton(
-                        theOnPressed: () {},
+                enabled: true,
+                // leading: Container(
+                //   // color: Colors.red,
+                //   child: InkWell(
+                //     onTap: () {
+                //       debugPrint(
+                //           'kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
+                //       // showAnimatedDialog(
+                //       //   barrierColor: Colors.black38,
+                //       //   barrierDismissible: true,
+                //       //   context: context,
+                //       //   animationType: DialogTransitionType.sizeFade,
+                //       //   curve: Curves.easeOut,
+                //       //   alignment: Alignment.bottomCenter,
+                //       //   duration: const Duration(milliseconds: 800),
+                //       //   builder: (_) => DialogEdit(
+                //       //     title: "Grasp",
+                //       //     controller: controllerEditFileName,
+                //       //     theOnPressed: () {},
+                //       //   ),
+                //       // );
+                //     },
+                //     child: customeIcon(theIcon: Icons.edit),
+                //   ),
+                // ),
+
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: customeIconButton(
+                        theOnPressed: () {
+                          debugPrint('kkkkkkkkkkkkkkk1111');
+                        },
                         theIcon: Icons.star_border,
                         theSize: 30,
                       ),
-                      customeIconButton(
-                        theOnPressed: () {},
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: customeText(
+                        theData: widget.theFileName,
+                        theFontSize: 20,
+                        theTextAlign: TextAlign.center
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: customeIconButton(
+                        theOnPressed: () {
+                          debugPrint('kkkkkkkkkkkkkkk2222');
+                        },
                         theIcon: Icons.favorite_border,
                         theSize: 25,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
+                // trailing: SizedBox(
+                //   width: 100,
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.center,
+                //     crossAxisAlignment: CrossAxisAlignment.center,
+                //     children: [
+                //       customeIconButton(
+                //         theOnPressed: () {},
+                //         theIcon: Icons.star_border,
+                //         theSize: 30,
+                //       ),
+                //       customeIconButton(
+                //         theOnPressed: () {},
+                //         theIcon: Icons.favorite_border,
+                //         theSize: 25,
+                //       ),
+                //     ],
+                //   ),
+                // ),
               ),
             ),
             child: Container(
               margin: EdgeInsets.only(
                   left: 5, right: 5, top: isReadingMode ? 5 : 40, bottom: 5),
-              padding: EdgeInsets.only(top: isReadingMode ? 0 : 22.5),
               width: double.infinity,
               // height: 200,
               // alignment: Alignment.topCenter,
@@ -225,8 +320,9 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                             return customeText(theData: 'No messages found!');
                           } else {
                             return ListView.separated(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 10.0),
+                              padding: EdgeInsets.only(
+                                  top: isReadingMode ? 10 : 40,
+                                  bottom: 10.0), // here
                               separatorBuilder:
                                   (BuildContext context, int index) =>
                                       const Divider(
@@ -284,7 +380,8 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                   animationType: BadgeAnimationType.fade,
                                   position:
                                       BadgePosition.topEnd(top: 17, end: 17),
-                                  badgeColor: Colors.white,
+                                  badgeColor: Colors.grey.shade100,
+                                  // borderSide: BorderSide(color: Colors.cyan.shade100),
                                   elevation: 0,
                                   badgeContent: SizedBox(
                                     height: 15,
@@ -304,7 +401,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                             ? Icons.favorite
                                             : Icons.favorite_border,
                                         theSize: 15,
-                                        theColor: Colors.cyan.shade300,
+                                        theColor: Colors.cyan,
                                       ),
                                     ),
                                   ),
@@ -314,11 +411,11 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                         margin: const EdgeInsets.only(left: 6),
                                         width: screenWidth - 50,
                                         alignment: Alignment.centerLeft,
-                                        decoration: BoxDecoration(
-                                          // color: Colors.teal,
-                                          border: Border.all(
-                                              color: Colors.white, width: 0.5),
-                                          borderRadius: const BorderRadius.only(
+                                        decoration: const BoxDecoration(
+                                          color: Colors.white,
+                                          // border: Border.all(
+                                          //     color: Colors.cyan, width: 0.5),
+                                          borderRadius: BorderRadius.only(
                                             topRight: Radius.circular(8),
                                             bottomLeft: Radius.circular(8),
                                             bottomRight: Radius.circular(8),
