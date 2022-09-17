@@ -160,8 +160,7 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                                     Text(
                                       widget.theFileSubjectCreatedAt,
                                       style: const TextStyle(
-                                        color:
-                                            Colors.black26,
+                                        color: Colors.black26,
                                       ),
                                     ),
                                     const Expanded(
@@ -186,7 +185,8 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                           subjectFileRecordDate:
                               theRecordFileCreatedAtVarListBoilerPlate['date']
                                   .toString(),
-                          theTrailingOnPressed: () async {
+                          theTrailingOnPressed: () {},
+                          theOnLongPress: () async {
                             showAnimatedDialog(
                               barrierColor: Colors.black38,
                               barrierDismissible: true,
