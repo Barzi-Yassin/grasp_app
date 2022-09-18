@@ -172,7 +172,7 @@ class EndDrawer extends StatelessWidget {
                           enddrawerRecordRoutePath:
                               RouteScreens.routeFilterStars,
                           isSignOut: false,
-                          theOnTap: () => Get.to(()=> const ScreenFilterStars()),
+                          theOnTap: () => Get.to(()=> ScreenFilterStars(theUser: theUser,)),
                         ),
                         WidgetEndDrawerRecords(
                           enddrawerRecordId: 3,

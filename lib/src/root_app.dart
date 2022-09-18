@@ -38,7 +38,7 @@ class RootApp extends StatelessWidget {
             page: () => const ScreenMyProfile()),
         GetPage(
             name: RouteScreens.routeFilterStars,
-            page: () => const ScreenFilterStars()),
+            page: () => ScreenFilterStars()),
         GetPage(
             name: RouteScreens.routeFilterFavorites,
             page: () => ScreenFilterFavorites()),
