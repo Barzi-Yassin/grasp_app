@@ -70,43 +70,43 @@ class ScreenFilterFavorites extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 5.0, bottom: 80),
                   scrollDirection: Axis.vertical,
                   itemCount: snapshotFiles.data!.docs.length,
-                  itemBuilder: (context, theRecord) {
+                  itemBuilder: (context, theRecordFav) {
                     final QueryDocumentSnapshot<Map<String, dynamic>>
-                        theRecordItem = snapshotFiles.data!.docs[theRecord];
+                        theRecordFavItem = snapshotFiles.data!.docs[theRecordFav];
 
-                    final String theRecordItemFileSubjectName =
-                        theRecordItem.data()['fileSubjectName'];
+                    final String theRecordFavItemFileSubjectName =
+                        theRecordFavItem.data()['fileSubjectName'];
 
-                    final theRecordItemFileName =
-                        theRecordItem.data()["fileName"];
-                    final theRecordFileCreatedAt =
-                        theRecordItem.data()["fileCreatedAt"];
+                    final theRecordFavItemFileName =
+                        theRecordFavItem.data()["fileName"];
+                    final theRecordFavFileCreatedAt =
+                        theRecordFavItem.data()["fileCreatedAt"];
 
-                    final String theRecordItemFileNameAbbreviated =
+                    final String theRecordFavItemFileNameAbbreviated =
                         customeStringFunctions.customeSubString(
-                            theString: theRecordItemFileName,
+                            theString: theRecordFavItemFileName,
                             theResultLengthLimit: 5);
 
                     // if (!listOfCurrentFilesName
-                    //     .contains(theRecordItemFileName)) {
+                    //     .contains(theRecordFavItemFileName)) {
                     //   listOfCurrentFilesNameFunction()
-                    //       .add(theRecordItemFileName);
+                    //       .add(theRecordFavItemFileName);
                     // } // fix here dynamic
 
-                    // final theRecordFileCreatedAtConverted =
+                    // final theRecordFavFileCreatedAtConverted =
                     //     DateTime.fromMillisecondsSinceEpoch(
-                    //         theRecordFileCreatedAt); // // fix here dynamic
+                    //         theRecordFavFileCreatedAt); // // fix here dynamic
 
-                    // var theRecordFileCreatedAtVarListBoilerPlate = {
+                    // var theRecordFavFileCreatedAtVarListBoilerPlate = {
                     //   'time': dateTimeOptimizer.dateTimeTwelveHourFormater(
-                    //       hourNumber: theRecordFileCreatedAtConverted.hour,
-                    //       minuteNumber: theRecordFileCreatedAtConverted.minute),
+                    //       hourNumber: theRecordFavFileCreatedAtConverted.hour,
+                    //       minuteNumber: theRecordFavFileCreatedAtConverted.minute),
                     //   'date':
-                    //       '${dateTimeOptimizer.dateTimeNumberToMonthName(monthNumber: theRecordFileCreatedAtConverted.month)}.${theRecordFileCreatedAtConverted.day}, ${theRecordFileCreatedAtConverted.year}',
+                    //       '${dateTimeOptimizer.dateTimeNumberToMonthName(monthNumber: theRecordFavFileCreatedAtConverted.month)}.${theRecordFavFileCreatedAtConverted.day}, ${theRecordFavFileCreatedAtConverted.year}',
                     // }; // fix here dynamic
                     return Column(
                       children: [
-                        theRecord == 0
+                        theRecordFav == 0
                             ? Container(
                                 // height: 50,
                                 height: 20,
@@ -138,15 +138,15 @@ class ScreenFilterFavorites extends StatelessWidget {
                             : const SizedBox(height: 0, width: 0),
                         WidgetSubjectFileRecords(
                           theUser: theUser!,
-                          theFileName: theRecordItemFileName,
-                          theFileSubjectName: theRecordItemFileSubjectName,
-                          subjectFileRecordId: "${theRecord + 1}",
-                          subjectFileRecordName: theRecordItemFileName,
+                          theFileName: theRecordFavItemFileName,
+                          theFileSubjectName: theRecordFavItemFileSubjectName,
+                          subjectFileRecordId: "${theRecordFav + 1}",
+                          subjectFileRecordName: theRecordFavItemFileName,
                           subjectFileRecordTime: "subject",
-                          // theRecordFileCreatedAtVarListBoilerPlate['time']
+                          // theRecordFavFileCreatedAtVarListBoilerPlate['time']
                           //     .toString(), // fix here dynamic
-                          subjectFileRecordDate: theRecordItemFileSubjectName,
-                          // theRecordFileCreatedAtVarListBoilerPlate['date']
+                          subjectFileRecordDate: theRecordFavItemFileSubjectName,
+                          // theRecordFavFileCreatedAtVarListBoilerPlate['date']
                           //     .toString(),
                           theTrailingOnPressed: () {
                             Get.snackbar(
@@ -163,7 +163,7 @@ class ScreenFilterFavorites extends StatelessWidget {
                             //   duration: const Duration(milliseconds: 800),
                             //   builder: (_) => DialogEdit(
                             //     title: "Grasp",
-                            //     fileNameOld: theRecordItemFileNameAbbreviated,
+                            //     fileNameOld: theRecordFavItemFileNameAbbreviated,
                             //     controller: controllerEditGraspFileName,
                             //     theOnPressed: () {},
                             //   ),
@@ -181,20 +181,20 @@ class ScreenFilterFavorites extends StatelessWidget {
                           //     duration: const Duration(milliseconds: 800),
                           //     builder: (_) => DialogDelete(
                           //       theTitle: "Grasp",
-                          //       theName: theRecordItemFileName,
+                          //       theName: theRecordFavItemFileName,
                           //       theOnPressed: () async {
                           //         await serviceFirestore
                           //             .deleteFile(
                           //           user: widget.theUser,
                           //           theFileSubjectName:
                           //               widget.theFileSubjectName,
-                          //           theFileName: theRecordItemFileName,
+                          //           theFileName: theRecordFavItemFileName,
                           //         )
                           //             .then(
                           //           (value) {
                           //             Get.back();
                           //             listOfCurrentFilesNameFunction()
-                          //                 .remove(theRecordItemFileName);
+                          //                 .remove(theRecordFavItemFileName);
                           //             serviceFirestore.updateSubject(
                           //                 user: widget.theUser,
                           //                 theSubjectName:
@@ -204,7 +204,7 @@ class ScreenFilterFavorites extends StatelessWidget {
                           //                         .toString());
 
                           //             Get.snackbar('Grasp caution',
-                          //                 'The Grasp "$theRecordItemFileNameAbbreviated" has been deleted successfully.');
+                          //                 'The Grasp "$theRecordFavItemFileNameAbbreviated" has been deleted successfully.');
                           //             // debugPrint(
                           //             //     'jjjjjjjj delete :: ${listOfCurrentFilesName.length}'); // fix here dynamic
                           //           },
