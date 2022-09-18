@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:grasp_app/src/reusable_codes/functions/loadings/loading_indicator.dart';
 import 'package:grasp_app/src/routes/route_screens.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/end_drawer/widget_end_drawer_records.dart';
 import 'package:grasp_app/src/screens/auth/screen_signin.dart';
@@ -8,14 +10,23 @@ import 'package:grasp_app/src/screens/screens_from_enddrawer/screen_filter_favor
 import 'package:grasp_app/src/screens/screens_from_enddrawer/screen_filter_stars.dart';
 import 'package:grasp_app/src/screens/screens_from_enddrawer/screen_grasp_guidance.dart';
 import 'package:grasp_app/src/screens/screens_from_enddrawer/screen_my_profile.dart';
+import 'package:grasp_app/src/services/firebase/service_firestore.dart';
 
-class EndDrawer extends StatelessWidget {
-  EndDrawer({Key? key, this.theUser}) : super(key: key);
+class EndDrawer extends StatefulWidget {
+  const EndDrawer({Key? key, this.theUser}) : super(key: key);
   final User? theUser;
 
+  @override
+  State<EndDrawer> createState() => _EndDrawerState();
+}
+
+class _EndDrawerState extends State<EndDrawer> {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
+  final ServiceFirestore serviceFirestore = ServiceFirestore();
+
   final Color _enddrawerHeaderStuffLineColor = Colors.white;
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -46,7 +57,7 @@ class EndDrawer extends StatelessWidget {
         ),
         child: Column(
           children: [
-            // end-drawer header
+            // end-drawer headerl
             Container(
               padding: const EdgeInsets.only(left: 20, top: 8, bottom: 0),
               decoration: BoxDecoration(
@@ -63,62 +74,93 @@ class EndDrawer extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(0.0),
                     margin: const EdgeInsets.all(0.0),
-                    child: Row(
-                      children: [
-                        // end-drawer (text)
-                        Expanded(
-                          flex: 5,
-                          child: SizedBox(
-                            height: 60,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              verticalDirection: VerticalDirection.down,
-                              children: [
-                                Container(
-                                  alignment: Alignment.topLeft,
-                                  padding: const EdgeInsets.only(
-                                      left: 10, bottom: 18),
-                                  child: Text(
-                                    'Barzy Yasin',
-                                    textAlign: TextAlign.left,
-                                    maxLines: 1,
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: _enddrawerHeaderStuffLineColor,
-                                      fontWeight: FontWeight.w500,
-                                      letterSpacing: 0.5,
+                    child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                        stream: serviceFirestore.firestoreInstance
+                            .collection("users2")
+                            .doc(widget.theUser!.uid)
+                            .snapshots(),
+                        builder: (context, snapshotProfile) {
+                          if (snapshotProfile.connectionState ==
+                              ConnectionState.waiting) {
+                            return loadingIndicator();
+                          } else if (snapshotProfile.hasError) {
+                            return Text("err ${snapshotProfile.error}");
+                          } else if (snapshotProfile.data == null ||
+                              !snapshotProfile.hasData) {
+                            return const Text(
+                                'snapshotFiles is empty(StreamBuilder)');
+                          }
+
+                          final snapshotProfileUsername = snapshotProfile.data!.get("name");
+                          final snapshotProfileImgUrl = snapshotProfile.data!.get("imageUrl");
+
+                          debugPrint('00000 :: ${snapshotProfile.data}');
+                          debugPrint('00000 :: $snapshotProfileUsername');
+                          debugPrint('00000 :: $snapshotProfileImgUrl');
+                          return Row(
+                            children: [
+                              // end-drawer (text)
+                              Expanded(
+                                flex: 5,
+                                child: SizedBox(
+                                  height: 60,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    verticalDirection: VerticalDirection.down,
+                                    children: [
+                                      Container(
+                                        alignment: Alignment.topLeft,
+                                        padding: const EdgeInsets.only(
+                                            left: 10, bottom: 18),
+                                        child: Text(
+                                          snapshotProfileUsername, // here
+                                          textAlign: TextAlign.left,
+                                          maxLines: 1,
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            color:
+                                                _enddrawerHeaderStuffLineColor,
+                                            fontWeight: FontWeight.w500,
+                                            letterSpacing: 0.5,
+                                          ),
+                                        ),
+                                      ),
+                                      // Divider(
+                                      //   color: _enddrawerHeaderStuffLineColor,
+                                      //   thickness: 1.9,
+                                      // ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              // end-drawer (image)
+                              Expanded(
+                                flex: 2,
+                                child: InkWell(
+                                  child: Container(
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                          color: _enddrawerHeaderStuffLineColor,
+                                          width: 2.0),
+                                    ),
+                                    alignment: Alignment.center,
+                                    child:  CircleAvatar(
+                                      backgroundImage:
+                                          snapshotProfileImgUrl.length >20 
+                                          ? NetworkImage(snapshotProfileImgUrl) as ImageProvider
+                                          :
+                                          const AssetImage(
+                                              'assets/images/person.jpg'), // here
+                                      radius: 26,
                                     ),
                                   ),
                                 ),
-                                // Divider(
-                                //   color: _enddrawerHeaderStuffLineColor,
-                                //   thickness: 1.9,
-                                // ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        // end-drawer (image)
-                        Expanded(
-                          flex: 2,
-                          child: Container(
-                            height: 50,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                  color: _enddrawerHeaderStuffLineColor,
-                                  width: 2.0),
-                            ),
-                            alignment: Alignment.center,
-                            child: const CircleAvatar(
-                              backgroundImage:
-                                  AssetImage('assets/images/3.jpeg'),
-                              radius: 26,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                              ),
+                            ],
+                          );
+                        }),
                   ),
                   Row(
                     children: [
@@ -163,7 +205,7 @@ class EndDrawer extends StatelessWidget {
                           enddrawerRecordTitle: "My profile",
                           enddrawerRecordRoutePath: RouteScreens.routeMyProfile,
                           isSignOut: false,
-                          theOnTap: () => Get.to(()=> const ScreenMyProfile()),
+                          theOnTap: () => Get.to(() => const ScreenMyProfile()),
                         ),
                         const SizedBox(height: 18),
                         WidgetEndDrawerRecords(
@@ -172,7 +214,14 @@ class EndDrawer extends StatelessWidget {
                           enddrawerRecordRoutePath:
                               RouteScreens.routeFilterStars,
                           isSignOut: false,
-                          theOnTap: () => Get.to(()=> ScreenFilterStars(theUser: theUser,)),
+                          theOnTap: () {
+                            Get.back();
+                            return Get.to(
+                              () => ScreenFilterStars(
+                                theUser: widget.theUser,
+                              ),
+                            );
+                          },
                         ),
                         WidgetEndDrawerRecords(
                           enddrawerRecordId: 3,
@@ -180,9 +229,14 @@ class EndDrawer extends StatelessWidget {
                           enddrawerRecordRoutePath:
                               RouteScreens.routeFilterFavorites,
                           isSignOut: false,
-                          theOnTap: () => Get.to(ScreenFilterFavorites(
-                            theUser: theUser,
-                          )),
+                          theOnTap: () {
+                            Get.back();
+                            return Get.to(
+                              ScreenFilterFavorites(
+                                theUser: widget.theUser,
+                              ),
+                            );
+                          },
                         ),
                         //     enddrawerRecordId: 4,
                         //     enddrawerRecordTitle: "Importants",
@@ -205,14 +259,16 @@ class EndDrawer extends StatelessWidget {
                           enddrawerRecordRoutePath:
                               RouteScreens.routeGraspGuidance,
                           isSignOut: false,
-                          theOnTap: () => Get.to(()=> const ScreenGraspGuidance()),
+                          theOnTap: () =>
+                              Get.to(() => const ScreenGraspGuidance()),
                         ),
                         WidgetEndDrawerRecords(
                           enddrawerRecordId: 7,
                           enddrawerRecordTitle: "Logout",
                           enddrawerRecordRoutePath: RouteScreens.routeInit,
                           isSignOut: true,
-                          theOnTap: () => Get.offAll(()=> const ScreenSignin()),
+                          theOnTap: () =>
+                              Get.offAll(() => const ScreenSignin()),
                         ),
                       ],
                     ),
