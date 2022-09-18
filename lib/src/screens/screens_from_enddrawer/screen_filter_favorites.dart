@@ -73,6 +73,10 @@ class ScreenFilterFavorites extends StatelessWidget {
                   itemBuilder: (context, theRecord) {
                     final QueryDocumentSnapshot<Map<String, dynamic>>
                         theRecordItem = snapshotFiles.data!.docs[theRecord];
+
+                    final String theRecordItemFileSubjectName =
+                        theRecordItem.data()['fileSubjectName'];
+
                     final theRecordItemFileName =
                         theRecordItem.data()["fileName"];
                     final theRecordFileCreatedAt =
@@ -130,21 +134,18 @@ class ScreenFilterFavorites extends StatelessWidget {
                                 //     ),
                                 //   ],
                                 // ),
-                              
                               )
                             : const SizedBox(height: 0, width: 0),
                         WidgetSubjectFileRecords(
                           theUser: theUser!,
                           theFileName: theRecordItemFileName,
-                          theFileSubjectName:
-                              theRecordItem.data()["subjectFileName"] ??
-                                  "its null",
+                          theFileSubjectName: theRecordItemFileSubjectName,
                           subjectFileRecordId: "${theRecord + 1}",
                           subjectFileRecordName: theRecordItemFileName,
                           subjectFileRecordTime: "subject",
                           // theRecordFileCreatedAtVarListBoilerPlate['time']
                           //     .toString(), // fix here dynamic
-                          subjectFileRecordDate: theRecordItem.data()['fileSubjectName'],
+                          subjectFileRecordDate: theRecordItemFileSubjectName,
                           // theRecordFileCreatedAtVarListBoilerPlate['date']
                           //     .toString(),
                           theTrailingOnPressed: () {
