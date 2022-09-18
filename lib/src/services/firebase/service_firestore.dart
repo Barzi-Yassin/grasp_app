@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:grasp_app/src/models/grasp_file_model.dart';
 import 'package:grasp_app/src/models/grasp_message_model.dart';
+import 'package:grasp_app/src/models/secondary_models/grasp_fav_star_model.dart';
 import 'package:grasp_app/src/models/secondary_models/grasp_message_reaction_model.dart';
 import 'package:grasp_app/src/models/grasp_subject_model.dart';
 import 'package:grasp_app/src/models/grasp_user_model.dart';
@@ -136,6 +137,47 @@ class ServiceFirestore {
         .doc(theFileName)
         .set(graspFileModel.toMap());
     return graspFileModel;
+  }
+
+// add file to fav or star list
+  Future<GraspFavStarModel> favStarFile({
+    required User user,
+    required String theFileSubjectName,
+    required String theFileName,
+    required bool isFileFaved,
+    required bool isFileStared,
+  }) async {
+    GraspFavStarModel graspFavStarModel = GraspFavStarModel(
+      uid: user.uid,
+      fileSubjectName: theFileSubjectName,
+      fileName: theFileName,
+      isFileFaved: isFileFaved,
+      isFileStared: isFileStared,
+    );
+
+    if (isFileFaved) {
+      await firestoreInstance
+          .collection("users2")
+          .doc(user.uid)
+          .collection("favAndStars")
+          .doc('favfiles')
+          .collection("files")
+          .doc(theFileName)
+          .set(graspFavStarModel.toMap());
+    }
+
+    if (isFileStared) {
+      await firestoreInstance
+          .collection("users2")
+          .doc(user.uid)
+          .collection("favAndStars")
+          .doc('starfiles')
+          .collection("files")
+          .doc(theFileName)
+          .set(graspFavStarModel.toMap());
+    }
+
+    return graspFavStarModel;
   }
 
 // delete file ::::::  // TODO: clean the message deletion process !!!

@@ -135,136 +135,64 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                       // Colors.grey.shade300,
                     ],
                   )),
-              child:
-                  //  Container(
-                  //   margin: const EdgeInsets.only(left: 15),
-                  //   // color: Colors.purple.shade100.withOpacity(0.7),
-                  //   child: Row(
-                  //     children: [
-                  //       Expanded(
-                  //         flex: 1,
-                  //         child: customeIconButton(
-                  //             theOnPressed: () {
-                  //               debugPrint('kkkkkkkkkkkkkkk2222');
-                  //             },
-                  //             theIcon: Icons.edit),
-                  //       ),
-                  //       Expanded(
-                  //         flex: 4,
-                  //         child: customeText(theData: 'fffffff'),
-                  //       ),
-                  //       Expanded(
-                  //         flex: 2,
-                  //         child: SizedBox(
-                  //           width: 100,
-                  //           child: Row(
-                  //             mainAxisAlignment: MainAxisAlignment.center,
-                  //             crossAxisAlignment: CrossAxisAlignment.center,
-                  //             children: [
-                  //               customeIconButton(
-                  //                 theOnPressed: () {
-                  //                   debugPrint('kkkkkkkkkkkkkkk2222');
-                  //                 },
-                  //                 theIcon: Icons.star_border,
-                  //                 theSize: 30,
-                  //               ),
-                  //               customeIconButton(
-                  //                 theOnPressed: () {},
-                  //                 theIcon: Icons.favorite_border,
-                  //                 theSize: 25,
-                  //               ),
-                  //             ],
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ],
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  // Expanded(
+                  //   flex: 1,
+                  //   child: customeIconButton(
+                  //     theOnPressed: () {
+                  //       debugPrint('kkkkkkkkkkkkkkk1111 star');
+                  //       // serviceFirestore.favStarFile(
+                  //       //   user: widget.theUser,
+                  //       //   theFileSubjectName: widget.theFileSubjectName,
+                  //       //   theFileName: widget.theFileName,
+                  //       //   isFileFaved: false,
+                  //       //   isFileStared: true,
+                  //       // );
+                  //     },
+                  //     theIcon: Icons.star_border,
+                  //     theSize: 30,
                   //   ),
-                  // )
-
-                  ListTile(
-                contentPadding: const EdgeInsets.only(
-                    left: 10, right: 10, top: 0, bottom: 9),
-                minLeadingWidth: 0,
-                dense: true,
-                enabled: true,
-                // leading: Container(
-                //   // color: Colors.red,
-                //   child: InkWell(
-                //     onTap: () {
-                //       debugPrint(
-                //           'kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
-                //       // showAnimatedDialog(
-                //       //   barrierColor: Colors.black38,
-                //       //   barrierDismissible: true,
-                //       //   context: context,
-                //       //   animationType: DialogTransitionType.sizeFade,
-                //       //   curve: Curves.easeOut,
-                //       //   alignment: Alignment.bottomCenter,
-                //       //   duration: const Duration(milliseconds: 800),
-                //       //   builder: (_) => DialogEdit(
-                //       //     title: "Grasp",
-                //       //     controller: controllerEditFileName,
-                //       //     theOnPressed: () {},
-                //       //   ),
-                //       // );
-                //     },
-                //     child: customeIcon(theIcon: Icons.edit),
-                //   ),
-                // ),
-
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: customeIconButton(
-                        theOnPressed: () {
-                          debugPrint('kkkkkkkkkkkkkkk1111');
-                        },
-                        theIcon: Icons.star_border,
-                        theSize: 30,
-                      ),
-                    ),
-                    Expanded(
-                      flex: 3,
-                      child: customeText(
+                  // ),
+                  InkWell(
+                    onLongPress: () {
+                      debugPrint('kkkkkkkkkkkkkkk1111 star');
+                      serviceFirestore.favStarFile(
+                        user: widget.theUser,
+                        theFileSubjectName: widget.theFileSubjectName,
+                        theFileName: widget.theFileName,
+                        isFileFaved: false,
+                        isFileStared: true,
+                      );
+                    },
+                    onTap: () {
+                      debugPrint('kkkkkkkkkkkkkkk1111 fav');
+                      serviceFirestore.favStarFile(
+                        user: widget.theUser,
+                        theFileSubjectName: widget.theFileSubjectName,
+                        theFileName: widget.theFileName,
+                        isFileFaved: true,
+                        isFileStared: false,
+                      );
+                    },
+                    child: customeText(
                         theData: widget.theFileName,
                         theFontSize: 20,
-                        theTextAlign: TextAlign.center
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: customeIconButton(
-                        theOnPressed: () {
-                          debugPrint('kkkkkkkkkkkkkkk2222');
-                        },
-                        theIcon: Icons.favorite_border,
-                        theSize: 25,
-                      ),
-                    ),
-                  ],
-                ),
-                // trailing: SizedBox(
-                //   width: 100,
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.center,
-                //     crossAxisAlignment: CrossAxisAlignment.center,
-                //     children: [
-                //       customeIconButton(
-                //         theOnPressed: () {},
-                //         theIcon: Icons.star_border,
-                //         theSize: 30,
-                //       ),
-                //       customeIconButton(
-                //         theOnPressed: () {},
-                //         theIcon: Icons.favorite_border,
-                //         theSize: 25,
-                //       ),
-                //     ],
-                //   ),
-                // ),
+                        theTextAlign: TextAlign.center),
+                  ),
+                  // Expanded(
+                  //   flex: 1,
+                  //   child: customeIconButton(
+                  //     theOnPressed: () {
+                  //       debugPrint('kkkkkkkkkkkkkkk2222 fav');
+                  //     },
+                  //     theIcon: Icons.favorite_border,
+                  //     theSize: 25,
+                  //   ),
+                  // ),
+                ],
               ),
             ),
             child: Container(
@@ -318,7 +246,8 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                               snapshotMessages.data!.docs.length;
 
                           if (messagesLength == 0) {
-                            return customeText(theData: '\n\nNo messages found!');
+                            return customeText(
+                                theData: '\n\nNo messages found!');
                           } else {
                             return ListView.separated(
                               padding: EdgeInsets.only(
@@ -412,8 +341,8 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                         margin: const EdgeInsets.only(left: 6),
                                         width: screenWidth - 50,
                                         alignment: Alignment.centerLeft,
-                                        decoration: const BoxDecoration(
-                                          color: Colors.white70,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white.withOpacity(0.9),
                                           // border: Border.all(
                                           //     color: Colors.cyan, width: 0.5),
                                           borderRadius: BorderRadius.only(
