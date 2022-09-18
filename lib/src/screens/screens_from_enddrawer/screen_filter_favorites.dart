@@ -39,7 +39,7 @@ class ScreenFilterFavorites extends StatelessWidget {
         child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
             stream: serviceFirestore.firestoreInstance
                 .collection("users2")
-                .doc("O6fkMGCKFBSTMsPIfiDXjFjG47E3")
+                .doc(theUser!.uid)
                 .collection("favAndStars")
                 .doc("favfiles")
                 .collection("files")
