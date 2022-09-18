@@ -1,8 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
-import 'package:grasp_app/src/screens/auth/screen_signin.dart';
 
 class WidgetEndDrawerRecords extends StatelessWidget {
   WidgetEndDrawerRecords({
@@ -20,7 +17,7 @@ class WidgetEndDrawerRecords extends StatelessWidget {
   final bool isSignOut;
   final theOnTap;
 
-  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  // final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   final IconData iconProfile = FontAwesomeIcons.userLarge;
   final IconData iconStars = FontAwesomeIcons.solidStar;

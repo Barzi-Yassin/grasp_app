@@ -74,7 +74,8 @@ class _EndDrawerState extends State<EndDrawer> {
                   Container(
                     padding: const EdgeInsets.all(0.0),
                     margin: const EdgeInsets.all(0.0),
-                    child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                    child: StreamBuilder<
+                            DocumentSnapshot<Map<String, dynamic>>>(
                         stream: serviceFirestore.firestoreInstance
                             .collection("users2")
                             .doc(widget.theUser!.uid)
@@ -91,8 +92,10 @@ class _EndDrawerState extends State<EndDrawer> {
                                 'snapshotFiles is empty(StreamBuilder)');
                           }
 
-                          final snapshotProfileUsername = snapshotProfile.data!.get("name");
-                          final snapshotProfileImgUrl = snapshotProfile.data!.get("imageUrl");
+                          final snapshotProfileUsername =
+                              snapshotProfile.data!.get("name");
+                          final snapshotProfileImgUrl =
+                              snapshotProfile.data!.get("imageUrl");
 
                           debugPrint('00000 :: ${snapshotProfile.data}');
                           debugPrint('00000 :: $snapshotProfileUsername');
@@ -146,14 +149,17 @@ class _EndDrawerState extends State<EndDrawer> {
                                           width: 2.0),
                                     ),
                                     alignment: Alignment.center,
-                                    child:  CircleAvatar(
-                                      backgroundImage:
-                                          snapshotProfileImgUrl.length >20 
-                                          ? NetworkImage(snapshotProfileImgUrl) as ImageProvider
-                                          :
-                                          const AssetImage(
-                                              'assets/images/person.jpg'), // here
+                                    child: CircleAvatar(
+                                      backgroundColor: Colors.transparent,
                                       radius: 26,
+                                      backgroundImage:
+                                          snapshotProfileImgUrl.length > 20
+                                              ? NetworkImage(
+                                                  snapshotProfileImgUrl,
+                                                ) as ImageProvider
+                                              : const AssetImage(
+                                                  'assets/images/person.jpg',
+                                                ), // here
                                     ),
                                   ),
                                 ),

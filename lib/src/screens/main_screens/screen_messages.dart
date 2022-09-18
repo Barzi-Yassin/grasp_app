@@ -322,7 +322,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                   position:
                                       BadgePosition.topEnd(top: 17, end: 17),
                                   badgeColor: Colors.grey.shade100,
-                                  borderSide: BorderSide(color: Colors.white),
+                                  borderSide: const BorderSide(color: Colors.white),
                                   elevation: 0,
                                   badgeContent: SizedBox(
                                     height: 15,
@@ -356,7 +356,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                           color: Colors.white.withOpacity(0.9),
                                           // border: Border.all(
                                           //     color: Colors.cyan, width: 0.5),
-                                          borderRadius: BorderRadius.only(
+                                          borderRadius: const BorderRadius.only(
                                             topRight: Radius.circular(8),
                                             bottomLeft: Radius.circular(8),
                                             bottomRight: Radius.circular(8),

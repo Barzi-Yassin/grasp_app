@@ -80,9 +80,11 @@ class ScreenFilterStars extends StatelessWidget {
 
                     final theRecordStarItemFileName =
                         theRecordStarItem.data()["fileName"];
+                    // ignore: unused_local_variable
                     final theRecordStarFileCreatedAt =
                         theRecordStarItem.data()["fileCreatedAt"];
 
+                    // ignore: unused_local_variable
                     final String theRecordStarItemFileNameAbbreviated =
                         customeStringFunctions.customeSubString(
                             theString: theRecordStarItemFileName,

@@ -75,7 +75,7 @@ class _DialogEditState extends State<DialogEdit> {
           children: [
             customeText(theData: 'Old grasp "${widget.fileNameOld}" name'),
             // SizedBox(height: 5),
-            Divider(thickness: 2),
+            const Divider(thickness: 2),
             TextFormField(
               controller: widget.controller,
               textAlign: TextAlign.center,

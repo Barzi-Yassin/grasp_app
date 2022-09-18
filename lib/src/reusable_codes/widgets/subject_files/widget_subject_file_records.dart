@@ -73,7 +73,7 @@ class WidgetSubjectFileRecords extends StatelessWidget {
           //   maxLines: 1,
           //   textAlign: TextAlign.start,
           // ),
-          title: Container(
+          title: SizedBox(
             // color: Colors.amber.shade500,
             height: 50,
             child: Row(

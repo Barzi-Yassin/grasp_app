@@ -79,9 +79,11 @@ class ScreenFilterFavorites extends StatelessWidget {
 
                     final theRecordFavItemFileName =
                         theRecordFavItem.data()["fileName"];
+                    // ignore: unused_local_variable
                     final theRecordFavFileCreatedAt =
                         theRecordFavItem.data()["fileCreatedAt"];
 
+                    // ignore: unused_local_variable
                     final String theRecordFavItemFileNameAbbreviated =
                         customeStringFunctions.customeSubString(
                             theString: theRecordFavItemFileName,
