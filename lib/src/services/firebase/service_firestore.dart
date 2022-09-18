@@ -346,4 +346,26 @@ class ServiceFirestore {
     await docMessage.delete();
     return;
   }
+
+//  ------------------------------------------------------------------------------------------------------------------------------
+
+  // Future<String> getUsernameOrProfileImageByFuture(
+  //     {required User theUser, required bool isUsernameTrueOrImageFalse}) async {
+  //   debugPrint('666 :: ${theUser.uid}');
+  //   String result = 'skip hhha';
+  //   String fieldNameGenerator =
+  //       isUsernameTrueOrImageFalse ? "name" : "imageUrl";
+  //   await firestoreInstance
+  //       .collection('users2')
+  //       .doc(theUser.uid)
+  //       .get()
+  //       .then((value) {
+  //     debugPrint(
+  //         '666 :: kkk :: ${value.data()?[fieldNameGenerator] ?? 'null name'}');
+  //     result = value.data()?[fieldNameGenerator] ?? "Username";
+  //     debugPrint('666 :: kkk2 :: $result');
+  //   });
+
+  //   return result;
+  // }
 }
