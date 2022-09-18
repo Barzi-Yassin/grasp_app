@@ -18,11 +18,13 @@ class ScreenMessages extends StatefulWidget {
     required this.theUser,
     required this.theFileName,
     required this.theFileSubjectName,
+    required this.theFileCreatedAt,
   });
 
   final User theUser;
   final String theFileName;
   final String theFileSubjectName;
+  final String theFileCreatedAt;
 
   @override
   State<ScreenMessages> createState() => _ScreenMessagesState();
@@ -157,25 +159,34 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                   //   ),
                   // ),
                   InkWell(
-                    onLongPress: () {
+                    onLongPress: () async {
                       debugPrint('kkkkkkkkkkkkkkk1111 star');
-                      serviceFirestore.favStarFile(
-                        user: widget.theUser,
-                        theFileSubjectName: widget.theFileSubjectName,
-                        theFileName: widget.theFileName,
-                        isFileFaved: false,
-                        isFileStared: true,
-                      );
+                      await serviceFirestore
+                          .favStarFile(
+                            user: widget.theUser,
+                            theFileSubjectName: widget.theFileSubjectName,
+                            theFileName: widget.theFileName,
+                            theFileCreatedAt: widget.theFileCreatedAt,
+                            isFileFaved: false,
+                            isFileStared: true,
+                          )
+                          .then((value) =>
+                              debugPrint('kkkkkkkkkkkkkkk1111 added to star'));
                     },
-                    onTap: () {
+                    onTap: () async {
                       debugPrint('kkkkkkkkkkkkkkk1111 fav');
-                      serviceFirestore.favStarFile(
-                        user: widget.theUser,
-                        theFileSubjectName: widget.theFileSubjectName,
-                        theFileName: widget.theFileName,
-                        isFileFaved: true,
-                        isFileStared: false,
-                      );
+
+                      await serviceFirestore
+                          .favStarFile(
+                            user: widget.theUser,
+                            theFileSubjectName: widget.theFileSubjectName,
+                            theFileName: widget.theFileName,
+                            theFileCreatedAt: widget.theFileCreatedAt,
+                            isFileFaved: true,
+                            isFileStared: false,
+                          )
+                          .then((value) =>
+                              debugPrint('kkkkkkkkkkkkkkk1111 added to fav'));
                     },
                     child: customeText(
                         theData: widget.theFileName,

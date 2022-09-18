@@ -144,6 +144,7 @@ class ServiceFirestore {
     required User user,
     required String theFileSubjectName,
     required String theFileName,
+    required String theFileCreatedAt,
     required bool isFileFaved,
     required bool isFileStared,
   }) async {
@@ -153,6 +154,8 @@ class ServiceFirestore {
       fileName: theFileName,
       isFileFaved: isFileFaved,
       isFileStared: isFileStared,
+      fileCreatedAt: theFileCreatedAt,
+      fileFavedOrStaredAt: DateTime.now(),
     );
 
     if (isFileFaved) {

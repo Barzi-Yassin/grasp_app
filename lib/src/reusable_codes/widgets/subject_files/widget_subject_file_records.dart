@@ -52,6 +52,7 @@ class WidgetSubjectFileRecords extends StatelessWidget {
                 theUser: theUser,
                 theFileName: theFileName,
                 theFileSubjectName: theFileSubjectName,
+                theFileCreatedAt: '$subjectFileRecordTime • $subjectFileRecordDate',
               )),
           onLongPress: theOnLongPress,
           dense: true,

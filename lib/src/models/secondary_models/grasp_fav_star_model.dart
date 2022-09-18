@@ -7,12 +7,16 @@ class GraspFavStarModel {
   String fileName;
   bool isFileFaved;
   bool isFileStared;
+  DateTime fileFavedOrStaredAt;
+  String fileCreatedAt;
   GraspFavStarModel({
     required this.uid,
     required this.fileSubjectName,
     required this.fileName,
     required this.isFileFaved,
     required this.isFileStared,
+    required this.fileFavedOrStaredAt,
+    required this.fileCreatedAt,
   });
 
   GraspFavStarModel copyWith({
@@ -21,6 +25,8 @@ class GraspFavStarModel {
     String? fileName,
     bool? isFileFaved,
     bool? isFileStared,
+    DateTime? fileFavedOrStaredAt,
+    String? fileCreatedAt,
   }) {
     return GraspFavStarModel(
       uid: uid ?? this.uid,
@@ -28,6 +34,8 @@ class GraspFavStarModel {
       fileName: fileName ?? this.fileName,
       isFileFaved: isFileFaved ?? this.isFileFaved,
       isFileStared: isFileStared ?? this.isFileStared,
+      fileFavedOrStaredAt: fileFavedOrStaredAt ?? this.fileFavedOrStaredAt,
+      fileCreatedAt: fileCreatedAt ?? this.fileCreatedAt,
     );
   }
 
@@ -38,6 +46,8 @@ class GraspFavStarModel {
       'fileName': fileName,
       'isFileFaved': isFileFaved,
       'isFileStared': isFileStared,
+      'fileFavedOrStaredAt': fileFavedOrStaredAt.millisecondsSinceEpoch,
+      'fileCreatedAt': fileCreatedAt,
     };
   }
 
@@ -48,6 +58,8 @@ class GraspFavStarModel {
       fileName: map['fileName'] as String,
       isFileFaved: map['isFileFaved'] as bool,
       isFileStared: map['isFileStared'] as bool,
+      fileFavedOrStaredAt: DateTime.fromMillisecondsSinceEpoch(map['fileFavedOrStaredAt'] as int),
+      fileCreatedAt: map['fileCreatedAt'] as String,
     );
   }
 
@@ -57,7 +69,7 @@ class GraspFavStarModel {
 
   @override
   String toString() {
-    return 'GraspFavStarModel(uid: $uid, fileSubjectName: $fileSubjectName, fileName: $fileName, isFileFaved: $isFileFaved, isFileStared: $isFileStared)';
+    return 'GraspFavStarModel(uid: $uid, fileSubjectName: $fileSubjectName, fileName: $fileName, isFileFaved: $isFileFaved, isFileStared: $isFileStared, fileFavedOrStaredAt: $fileFavedOrStaredAt, fileCreatedAt: $fileCreatedAt)';
   }
 
   @override
@@ -69,7 +81,9 @@ class GraspFavStarModel {
       other.fileSubjectName == fileSubjectName &&
       other.fileName == fileName &&
       other.isFileFaved == isFileFaved &&
-      other.isFileStared == isFileStared;
+      other.isFileStared == isFileStared &&
+      other.fileFavedOrStaredAt == fileFavedOrStaredAt &&
+      other.fileCreatedAt == fileCreatedAt;
   }
 
   @override
@@ -78,6 +92,8 @@ class GraspFavStarModel {
       fileSubjectName.hashCode ^
       fileName.hashCode ^
       isFileFaved.hashCode ^
-      isFileStared.hashCode;
+      isFileStared.hashCode ^
+      fileFavedOrStaredAt.hashCode ^
+      fileCreatedAt.hashCode;
   }
 }
