@@ -56,7 +56,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
   final TextEditingController controllerAddGraspSubject =
       TextEditingController();
   int sortingSubjetsNumber = 0;
-  bool isSortDescending = false;
+  bool isSortDescending = true;
 
   @override
   Widget build(BuildContext context) {
