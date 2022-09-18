@@ -43,7 +43,7 @@ class ScreenFilterFavorites extends StatelessWidget {
                 .collection("favAndStars")
                 .doc("favfiles")
                 .collection("files")
-                // .orderBy("fileCreatedAt", descending: true)
+                .orderBy("fileFavedOrStaredAt", descending: true)
                 .snapshots(),
             builder: (context, snapshotFiles) {
               if (snapshotFiles.connectionState == ConnectionState.waiting) {
@@ -104,31 +104,33 @@ class ScreenFilterFavorites extends StatelessWidget {
                       children: [
                         theRecord == 0
                             ? Container(
-                                height: 50,
+                                // height: 50,
+                                height: 20,
                                 alignment: Alignment.center,
-                                child: Row(
-                                  children: const [
-                                    Expanded(
-                                      child: Divider(
-                                        thickness: 1,
-                                        endIndent: 10,
-                                      ),
-                                    ),
-                                    Text(
-                                      // widget.theFileSubjectCreatedAt,
-                                      'ffff',
-                                      style: TextStyle(
-                                        color: Colors.black26,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Divider(
-                                        thickness: 1,
-                                        indent: 10,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                // child: Row(
+                                //   children: const [
+                                //     Expanded(
+                                //       child: Divider(
+                                //         thickness: 1,
+                                //         endIndent: 10,
+                                //       ),
+                                //     ),
+                                //     Text(
+                                //       // widget.theFileSubjectCreatedAt,
+                                //       'ffff',
+                                //       style: TextStyle(
+                                //         color: Colors.black26,
+                                //       ),
+                                //     ),
+                                //     Expanded(
+                                //       child: Divider(
+                                //         thickness: 1,
+                                //         indent: 10,
+                                //       ),
+                                //     ),
+                                //   ],
+                                // ),
+                              
                               )
                             : const SizedBox(height: 0, width: 0),
                         WidgetSubjectFileRecords(
@@ -139,10 +141,10 @@ class ScreenFilterFavorites extends StatelessWidget {
                                   "its null",
                           subjectFileRecordId: "${theRecord + 1}",
                           subjectFileRecordName: theRecordItemFileName,
-                          subjectFileRecordTime: 'fff',
+                          subjectFileRecordTime: "subject",
                           // theRecordFileCreatedAtVarListBoilerPlate['time']
                           //     .toString(), // fix here dynamic
-                          subjectFileRecordDate: 'kkk',
+                          subjectFileRecordDate: theRecordItem.data()['fileSubjectName'],
                           // theRecordFileCreatedAtVarListBoilerPlate['date']
                           //     .toString(),
                           theTrailingOnPressed: () {
