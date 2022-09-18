@@ -23,29 +23,29 @@ class RootApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // change to GetMaterialApp to use the get package
-    return GetMaterialApp(
+    return const GetMaterialApp(
       debugShowCheckedModeBanner: true,
       // theme: ThemeData(
       //   primaryColor: Colors.cyan,
       // ),
       title: 'Grasp',
-      home: const ScreenSignin(),
+      home: ScreenSignin(),
 
       // initialRoute: ,
-      getPages: [
-        GetPage(
-            name: RouteScreens.routeMyProfile,
-            page: () => const ScreenMyProfile()),
-        GetPage(
-            name: RouteScreens.routeFilterStars,
-            page: () => ScreenFilterStars()),
-        GetPage(
-            name: RouteScreens.routeFilterFavorites,
-            page: () => ScreenFilterFavorites()),
-        GetPage(
-            name: RouteScreens.routeGraspGuidance,
-            page: () => const ScreenGraspGuidance()),
-      ],
+      // getPages: [
+      //   GetPage(
+      //       name: RouteScreens.routeMyProfile,
+      //       page: () => ScreenMyProfile()),
+      //   GetPage(
+      //       name: RouteScreens.routeFilterStars,
+      //       page: () => ScreenFilterStars()),
+      //   GetPage(
+      //       name: RouteScreens.routeFilterFavorites,
+      //       page: () => ScreenFilterFavorites()),
+      //   GetPage(
+      //       name: RouteScreens.routeGraspGuidance,
+      //       page: () => const ScreenGraspGuidance()),
+      // ],
 
       // routes: {
         // RouteScreens.routeInit: (context) => ScreenSubjects(),

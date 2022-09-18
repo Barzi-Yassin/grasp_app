@@ -22,7 +22,6 @@ class EndDrawer extends StatefulWidget {
 
 class _EndDrawerState extends State<EndDrawer> {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-
   final ServiceFirestore serviceFirestore = ServiceFirestore();
 
   final Color _enddrawerHeaderStuffLineColor = Colors.white;
@@ -55,52 +54,48 @@ class _EndDrawerState extends State<EndDrawer> {
             ],
           ),
         ),
-        child: Column(
-          children: [
-            // end-drawer headerl
-            Container(
-              padding: const EdgeInsets.only(left: 20, top: 8, bottom: 0),
-              decoration: BoxDecoration(
-                // color: Colors.grey.shade300,
-                color: Colors.cyan.shade600,
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  topLeft: Radius.circular(20),
-                ),
-              ),
-              // end-drawer all items in a row
-              child: Column(
+        child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+            stream: serviceFirestore.firestoreInstance
+                .collection("users2")
+                .doc(widget.theUser!.uid)
+                .snapshots(),
+            builder: (context, snapshotProfile) {
+              if (snapshotProfile.connectionState == ConnectionState.waiting) {
+                return loadingIndicator();
+              } else if (snapshotProfile.hasError) {
+                return Text("err ${snapshotProfile.error}");
+              } else if (snapshotProfile.data == null ||
+                  !snapshotProfile.hasData) {
+                return const Text('snapshotFiles is empty(StreamBuilder)');
+              }
+
+              final snapshotProfileUsername = snapshotProfile.data!.get("name");
+              final snapshotProfileImgUrl =
+                  snapshotProfile.data!.get("imageUrl");
+
+              debugPrint('00000 :: ${snapshotProfile.data}');
+              debugPrint('00000 :: $snapshotProfileUsername');
+              debugPrint('00000 :: $snapshotProfileImgUrl');
+              return Column(
                 children: [
+                  // end-drawer headerl
                   Container(
-                    padding: const EdgeInsets.all(0.0),
-                    margin: const EdgeInsets.all(0.0),
-                    child: StreamBuilder<
-                            DocumentSnapshot<Map<String, dynamic>>>(
-                        stream: serviceFirestore.firestoreInstance
-                            .collection("users2")
-                            .doc(widget.theUser!.uid)
-                            .snapshots(),
-                        builder: (context, snapshotProfile) {
-                          if (snapshotProfile.connectionState ==
-                              ConnectionState.waiting) {
-                            return loadingIndicator();
-                          } else if (snapshotProfile.hasError) {
-                            return Text("err ${snapshotProfile.error}");
-                          } else if (snapshotProfile.data == null ||
-                              !snapshotProfile.hasData) {
-                            return const Text(
-                                'snapshotFiles is empty(StreamBuilder)');
-                          }
-
-                          final snapshotProfileUsername =
-                              snapshotProfile.data!.get("name");
-                          final snapshotProfileImgUrl =
-                              snapshotProfile.data!.get("imageUrl");
-
-                          debugPrint('00000 :: ${snapshotProfile.data}');
-                          debugPrint('00000 :: $snapshotProfileUsername');
-                          debugPrint('00000 :: $snapshotProfileImgUrl');
-                          return Row(
+                    padding: const EdgeInsets.only(left: 20, top: 8, bottom: 0),
+                    decoration: BoxDecoration(
+                      // color: Colors.grey.shade300,
+                      color: Colors.cyan.shade600,
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(20),
+                        topLeft: Radius.circular(20),
+                      ),
+                    ),
+                    // end-drawer all items in a row
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(0.0),
+                          margin: const EdgeInsets.all(0.0),
+                          child: Row(
                             children: [
                               // end-drawer (text)
                               Expanded(
@@ -165,125 +160,130 @@ class _EndDrawerState extends State<EndDrawer> {
                                 ),
                               ),
                             ],
-                          );
-                        }),
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 17,
-                        child: Container(
-                          margin: const EdgeInsets.only(bottom: 0.0),
-                          child: const Divider(
-                            color: Colors.white,
-                            height: 0,
-                            thickness: 2.0,
                           ),
                         ),
-                      ),
-                      const Expanded(
-                        flex: 3,
-                        child: Divider(
-                          color: Colors.transparent,
-                          height: 0,
-                          thickness: 2.0,
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 17,
+                              child: Container(
+                                margin: const EdgeInsets.only(bottom: 0.0),
+                                child: const Divider(
+                                  color: Colors.white,
+                                  height: 0,
+                                  thickness: 2.0,
+                                ),
+                              ),
+                            ),
+                            const Expanded(
+                              flex: 3,
+                              child: Divider(
+                                color: Colors.transparent,
+                                height: 0,
+                                thickness: 2.0,
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 10)
+                      ],
+                    ),
                   ),
-                  const SizedBox(height: 10)
+                  Expanded(
+                    child: Container(
+                      // color: Colors.yellow,
+                      padding: const EdgeInsets.only(
+                          left: 15, top: 20, right: 35, bottom: 5),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            children: [
+                              WidgetEndDrawerRecords(
+                                enddrawerRecordId: 1,
+                                enddrawerRecordTitle: "My profile",
+                                enddrawerRecordRoutePath:
+                                    RouteScreens.routeMyProfile,
+                                isSignOut: false,
+                                theOnTap: () => Get.to(() => ScreenMyProfile(
+                                      theUser: widget.theUser,
+                                      theImgUrl: snapshotProfileImgUrl,
+                                    )),
+                              ),
+                              const SizedBox(height: 18),
+                              WidgetEndDrawerRecords(
+                                enddrawerRecordId: 2,
+                                enddrawerRecordTitle: "Stars",
+                                enddrawerRecordRoutePath:
+                                    RouteScreens.routeFilterStars,
+                                isSignOut: false,
+                                theOnTap: () {
+                                  Get.back();
+                                  return Get.to(
+                                    () => ScreenFilterStars(
+                                      theUser: widget.theUser,
+                                    ),
+                                  );
+                                },
+                              ),
+                              WidgetEndDrawerRecords(
+                                enddrawerRecordId: 3,
+                                enddrawerRecordTitle: "Favorites",
+                                enddrawerRecordRoutePath:
+                                    RouteScreens.routeFilterFavorites,
+                                isSignOut: false,
+                                theOnTap: () {
+                                  Get.back();
+                                  return Get.to(
+                                    ScreenFilterFavorites(
+                                      theUser: widget.theUser,
+                                    ),
+                                  );
+                                },
+                              ),
+                              //     enddrawerRecordId: 4,
+                              //     enddrawerRecordTitle: "Importants",
+                              // WidgetEndDrawerRecords(
+                              //     enddrawerRecordRoutePath:
+                              //         RouteScreens.routeFilterImportants, isSignOut: false,),
+                              // WidgetEndDrawerRecords(
+                              //     enddrawerRecordId: 5,
+                              //     enddrawerRecordTitle: "Archived Grasps",
+                              //     enddrawerRecordRoutePath:
+                              //         RouteScreens.routeFilterArchived, isSignOut: false,),
+                            ],
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              WidgetEndDrawerRecords(
+                                enddrawerRecordId: 6,
+                                enddrawerRecordTitle: "Grasp guidance",
+                                enddrawerRecordRoutePath:
+                                    RouteScreens.routeGraspGuidance,
+                                isSignOut: false,
+                                theOnTap: () =>
+                                    Get.to(() => const ScreenGraspGuidance()),
+                              ),
+                              WidgetEndDrawerRecords(
+                                enddrawerRecordId: 7,
+                                enddrawerRecordTitle: "Logout",
+                                enddrawerRecordRoutePath:
+                                    RouteScreens.routeInit,
+                                isSignOut: true,
+                                theOnTap: () =>
+                                    Get.offAll(() => const ScreenSignin()),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
                 ],
-              ),
-            ),
-            Expanded(
-              child: Container(
-                // color: Colors.yellow,
-                padding: const EdgeInsets.only(
-                    left: 15, top: 20, right: 35, bottom: 5),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      children: [
-                        WidgetEndDrawerRecords(
-                          enddrawerRecordId: 1,
-                          enddrawerRecordTitle: "My profile",
-                          enddrawerRecordRoutePath: RouteScreens.routeMyProfile,
-                          isSignOut: false,
-                          theOnTap: () => Get.to(() => const ScreenMyProfile()),
-                        ),
-                        const SizedBox(height: 18),
-                        WidgetEndDrawerRecords(
-                          enddrawerRecordId: 2,
-                          enddrawerRecordTitle: "Stars",
-                          enddrawerRecordRoutePath:
-                              RouteScreens.routeFilterStars,
-                          isSignOut: false,
-                          theOnTap: () {
-                            Get.back();
-                            return Get.to(
-                              () => ScreenFilterStars(
-                                theUser: widget.theUser,
-                              ),
-                            );
-                          },
-                        ),
-                        WidgetEndDrawerRecords(
-                          enddrawerRecordId: 3,
-                          enddrawerRecordTitle: "Favorites",
-                          enddrawerRecordRoutePath:
-                              RouteScreens.routeFilterFavorites,
-                          isSignOut: false,
-                          theOnTap: () {
-                            Get.back();
-                            return Get.to(
-                              ScreenFilterFavorites(
-                                theUser: widget.theUser,
-                              ),
-                            );
-                          },
-                        ),
-                        //     enddrawerRecordId: 4,
-                        //     enddrawerRecordTitle: "Importants",
-                        // WidgetEndDrawerRecords(
-                        //     enddrawerRecordRoutePath:
-                        //         RouteScreens.routeFilterImportants, isSignOut: false,),
-                        // WidgetEndDrawerRecords(
-                        //     enddrawerRecordId: 5,
-                        //     enddrawerRecordTitle: "Archived Grasps",
-                        //     enddrawerRecordRoutePath:
-                        //         RouteScreens.routeFilterArchived, isSignOut: false,),
-                      ],
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        WidgetEndDrawerRecords(
-                          enddrawerRecordId: 6,
-                          enddrawerRecordTitle: "Grasp guidance",
-                          enddrawerRecordRoutePath:
-                              RouteScreens.routeGraspGuidance,
-                          isSignOut: false,
-                          theOnTap: () =>
-                              Get.to(() => const ScreenGraspGuidance()),
-                        ),
-                        WidgetEndDrawerRecords(
-                          enddrawerRecordId: 7,
-                          enddrawerRecordTitle: "Logout",
-                          enddrawerRecordRoutePath: RouteScreens.routeInit,
-                          isSignOut: true,
-                          theOnTap: () =>
-                              Get.offAll(() => const ScreenSignin()),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            )
-          ],
-        ),
+              );
+            }),
       ),
     );
   }
