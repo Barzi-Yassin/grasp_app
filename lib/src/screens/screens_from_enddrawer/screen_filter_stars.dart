@@ -22,6 +22,7 @@ class ScreenFilterStars extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade400,
       endDrawer: SafeArea(
         child: EndDrawer(theUser: theUser),
       ),

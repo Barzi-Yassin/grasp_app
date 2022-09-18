@@ -22,6 +22,7 @@ class ScreenFilterFavorites extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade400,
       endDrawer: SafeArea(
         child: EndDrawer(theUser: theUser),
       ),
@@ -72,7 +73,8 @@ class ScreenFilterFavorites extends StatelessWidget {
                   itemCount: snapshotFiles.data!.docs.length,
                   itemBuilder: (context, theRecordFav) {
                     final QueryDocumentSnapshot<Map<String, dynamic>>
-                        theRecordFavItem = snapshotFiles.data!.docs[theRecordFav];
+                        theRecordFavItem =
+                        snapshotFiles.data!.docs[theRecordFav];
 
                     final String theRecordFavItemFileSubjectName =
                         theRecordFavItem.data()['fileSubjectName'];
@@ -147,7 +149,8 @@ class ScreenFilterFavorites extends StatelessWidget {
                           subjectFileRecordTime: "subject",
                           // theRecordFavFileCreatedAtVarListBoilerPlate['time']
                           //     .toString(), // fix here dynamic
-                          subjectFileRecordDate: theRecordFavItemFileSubjectName,
+                          subjectFileRecordDate:
+                              theRecordFavItemFileSubjectName,
                           // theRecordFavFileCreatedAtVarListBoilerPlate['date']
                           //     .toString(),
                           theTrailingOnPressed: () {

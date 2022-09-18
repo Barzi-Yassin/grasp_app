@@ -5,10 +5,11 @@ import 'package:grasp_app/src/reusable_codes/widgets/end_drawer/widget_end_drawe
 
 class ScreenGraspGuidance extends StatelessWidget {
   const ScreenGraspGuidance({Key? key, this.theUser}) : super(key: key);
-final User? theUser;
+  final User? theUser;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade400,
       endDrawer: SafeArea(
         child: EndDrawer(theUser: theUser),
       ),
