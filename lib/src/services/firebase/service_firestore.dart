@@ -368,4 +368,16 @@ class ServiceFirestore {
 
   //   return result;
   // }
+  /*
+  // in destination.
+  onTap: () async {
+      String h = '///';
+      await serviceFirestore
+          .getUsernameOrProfileImageByFuture(
+              theUser: widget.theUser!,
+              isUsernameTrueOrImageFalse: false)
+          .then((String value) => h = value);
+      debugPrint('666 :::: $h ');
+    },
+*/
 }
