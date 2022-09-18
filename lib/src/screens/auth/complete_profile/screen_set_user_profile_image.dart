@@ -142,7 +142,7 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
                               )
                                   .then((_) {
                                 setState(() => isLoading = false);
-                                Get.to(ScreenSubjects(theUser: widget.theUser));
+                                Get.offAll(ScreenSubjects(theUser: widget.theUser));
                               });
                             } else {
                               serviceFirestore
@@ -169,7 +169,7 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
                                 if (mounted) {
                                   setState(() => isLoading = false);
                                 }
-                                await Get.offAll(
+                                Get.offAll(
                                   ScreenSubjects(theUser: widget.theUser),
                                 );
                               });
