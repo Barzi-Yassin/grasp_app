@@ -11,12 +11,14 @@ class WidgetEndDrawerRecords extends StatelessWidget {
     required this.enddrawerRecordTitle,
     required this.enddrawerRecordRoutePath,
     required this.isSignOut,
+    required this.theOnTap,
   }) : super(key: key);
 
   final int enddrawerRecordId;
   final String enddrawerRecordTitle;
   final String enddrawerRecordRoutePath;
   final bool isSignOut;
+  final theOnTap;
 
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
@@ -49,16 +51,17 @@ class WidgetEndDrawerRecords extends StatelessWidget {
             ],
           ),
           child: ListTile(
-            onTap: () {
-              debugPrint(isSignOut.toString());
-              if (!isSignOut) {
-                Get.toNamed(enddrawerRecordRoutePath);
-              } else {
-                firebaseAuth
-                    .signOut()
-                    .then((_) => Get.offAll(const ScreenSignin()));
-              }
-            },
+            onTap: theOnTap,
+            // () {
+            //   debugPrint(isSignOut.toString());
+            //   if (!isSignOut) {
+            //     Get.toNamed(enddrawerRecordRoutePath);
+            //   } else {
+            //     firebaseAuth
+            //         .signOut()
+            //         .then((_) => Get.offAll(const ScreenSignin()));
+            //   }
+            // },
             // minVerticalPadding: 20,
             iconColor: Colors.cyan.shade600,
             title: Text(

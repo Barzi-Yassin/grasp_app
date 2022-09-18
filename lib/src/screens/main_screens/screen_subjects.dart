@@ -65,7 +65,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
     return Scaffold(
       backgroundColor: Colors.grey.shade400,
       endDrawer: SafeArea(
-        child: EndDrawer(),
+        child: EndDrawer(theUser: widget.theUser),
       ),
       appBar: AppBar(
         backgroundColor: Colors.cyan.shade700,

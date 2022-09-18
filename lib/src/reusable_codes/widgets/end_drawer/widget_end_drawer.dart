@@ -1,10 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:grasp_app/src/routes/route_screens.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/end_drawer/widget_end_drawer_records.dart';
+import 'package:grasp_app/src/screens/screens_from_enddrawer/screen_filter_favorites.dart';
 
 class EndDrawer extends StatelessWidget {
-  EndDrawer({Key? key}) : super(key: key);
+  EndDrawer({Key? key, this.theUser}) : super(key: key);
+  final User? theUser;
 
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
@@ -156,6 +159,7 @@ class EndDrawer extends StatelessWidget {
                           enddrawerRecordTitle: "My profile",
                           enddrawerRecordRoutePath: RouteScreens.routeMyProfile,
                           isSignOut: false,
+                          theOnTap: (){},
                         ),
                         const SizedBox(height: 18),
                         WidgetEndDrawerRecords(
@@ -164,6 +168,7 @@ class EndDrawer extends StatelessWidget {
                           enddrawerRecordRoutePath:
                               RouteScreens.routeFilterStars,
                           isSignOut: false,
+                          theOnTap: (){},
                         ),
                         WidgetEndDrawerRecords(
                           enddrawerRecordId: 3,
@@ -171,10 +176,13 @@ class EndDrawer extends StatelessWidget {
                           enddrawerRecordRoutePath:
                               RouteScreens.routeFilterFavorites,
                           isSignOut: false,
+                          theOnTap: (){
+                            Get.to(ScreenFilterFavorites(theUser: theUser,));
+                          },
                         ),
-                        // WidgetEndDrawerRecords(
                         //     enddrawerRecordId: 4,
                         //     enddrawerRecordTitle: "Importants",
+                        // WidgetEndDrawerRecords(
                         //     enddrawerRecordRoutePath:
                         //         RouteScreens.routeFilterImportants, isSignOut: false,),
                         // WidgetEndDrawerRecords(
@@ -193,12 +201,14 @@ class EndDrawer extends StatelessWidget {
                           enddrawerRecordRoutePath:
                               RouteScreens.routeGraspGuidance,
                           isSignOut: false,
+                          theOnTap: (){},
                         ),
                         WidgetEndDrawerRecords(
                           enddrawerRecordId: 7,
                           enddrawerRecordTitle: "Logout",
                           enddrawerRecordRoutePath: RouteScreens.routeInit,
                           isSignOut: true,
+                          theOnTap: (){},
                         ),
                       ],
                     ),

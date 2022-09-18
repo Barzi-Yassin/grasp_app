@@ -10,6 +10,7 @@ import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/loadings/loading_indicator.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/dialogs/dialog_add.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/dialogs/dialog_delete.dart';
+// ignore: unused_import
 import 'package:grasp_app/src/reusable_codes/widgets/dialogs/dialog_edit.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/end_drawer/widget_end_drawer.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/subject_files/widget_subject_file_records.dart';
@@ -64,7 +65,7 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
     return Scaffold(
       backgroundColor: Colors.grey.shade400,
       endDrawer: SafeArea(
-        child: EndDrawer(),
+        child: EndDrawer(theUser: widget.theUser),
       ),
       appBar: AppBar(
         backgroundColor: Colors.cyan.shade700,
