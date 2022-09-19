@@ -56,7 +56,8 @@ class _ScreenMessagesState extends State<ScreenMessages> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-
+    final theFileNameAbbreviated = customeStringFunctions.customeSubString(
+        theString: widget.theFileName, theResultLengthLimit: 8);
     debugPrint('test width :: $screenWidth');
     debugPrint('test height:: $screenHeight');
 
@@ -172,6 +173,11 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                           )
                           .then((value) =>
                               debugPrint('kkkkkkkkkkkkkkk1111 added to star'));
+                      customeSnackbar(
+                        theTitle: 'Message caution',
+                        theMessage:
+                            'The grasp "$theFileNameAbbreviated" added to favorites.',
+                      );
                     },
                     onTap: () async {
                       debugPrint('kkkkkkkkkkkkkkk1111 fav');
@@ -187,6 +193,11 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                           )
                           .then((value) =>
                               debugPrint('kkkkkkkkkkkkkkk1111 added to fav'));
+                      customeSnackbar(
+                        theTitle: 'Message caution',
+                        theMessage:
+                            'The grasp "$theFileNameAbbreviated" added to star.',
+                      );
                     },
                     child: customeText(
                         theData: widget.theFileName,
@@ -421,8 +432,9 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                               );
                                             }
                                           },
-                                          title: customeText(
-                                              theData: theRecordItemMessage),
+                                          title: 
+                                          customeText(theData: theRecordItemMessage),
+                                          // SelectableText(theRecordItemMessage),
                                           subtitle: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
