@@ -3,7 +3,7 @@
   Grasp 
 </h1>
 
-<center><code>Note Taking mobile application project.</code><center/> 
+<center><code>Note Taking mobile application project.</code></center> <br> 
 Grasp is useful to save our daily important notes with an a amazing perfomance and functionalities.
 <br/>
 It contains the minimal implementation required to save user daily information as a grasp point.
