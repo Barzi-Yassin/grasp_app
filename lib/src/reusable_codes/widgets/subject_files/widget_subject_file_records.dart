@@ -103,7 +103,7 @@ class WidgetSubjectFileRecords extends StatelessWidget {
                               theResultLengthLimit: 20,
                             ),
                       theFontSize: 18,
-                      theLetterSpacing: 0.71,
+                      theLetterSpacing: 0.5,
                       theMaxLines: 1,
                       theColor: Colors.grey.shade700,
                       theTextAlign: TextAlign.start,

@@ -271,7 +271,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                                                 milliseconds: 800),
                                             builder: (_) => DialogDelete(
                                               theTitle: "Subject",
-                                              theName: theRecordItemSubjectName,
+                                              theName: theRecordItemSubjectNameAbbreviated,
                                               theOnPressed: () async {
                                                 await serviceFirestore
                                                     .deleteSubject(
@@ -297,8 +297,9 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                                           customeSnackbar(
                                             theTitle: 'Subject caution',
                                             theMessage:
-                                                'The subject "$theRecordItemSubjectNameAbbreviated" has been deleted successfully.',
+                                                'Delete all the grasps inside "$theRecordItemSubjectNameAbbreviated" subject, then it could be deleted.',
                                           );
+                                          debugPrint('eeeeeeee :: $theRecordItemSubjectNameAbbreviated');
                                         }
                                       },
                                     ),
