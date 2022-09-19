@@ -206,100 +206,67 @@ class _ScreenMyProfileState extends State<ScreenMyProfile> {
                       ),
                     ),
 
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        // ElevatedButton(
-                        //   onPressed: () {
-                        //     setState(() => isLoading = true);
-                        //     if (controllerUsername.text.isNotEmpty) {
-                        //       serviceFirestore
-                        //           .addUserInfoAfterAuthToDB(
-                        //         user: widget.theUser!,
-                        //         theName: controllerUsername.text,
-                        //       )
-                        //           .then((_) {
-                        //         setState(() => isLoading = false);
-                        //         // Get.to(ScreenSubjects(theUser: widget.theUser));
-                        //       });
-                        //     } else {
-                        //       serviceFirestore
-                        //           .addUserInfoAfterAuthToDB(
-                        //               user: widget.theUser!)
-                        //           .then((_) {
-                        //         setState(() => isLoading = false);
-                        //         // Get.offAll(
-                        //         //     ScreenSubjects(theUser: widget.theUser));
-                        //       });
-                        //     }
-                        //   },
-                        //   child: customeText(theData: 'SKIP'),
-                        // ),
-                        // const SizedBox(width: 50),
-                        ElevatedButton(
-                          onPressed: () async {
-                            if (imageSelected != null) {
-                              setState(() => isLoading = true);
-                              uploadImage(
-                                imageSelected!,
-                                theUser: widget.theUser!,
-                              ).then((_) {
+                    ElevatedButton(
+                      onPressed: () async {
+                        if (imageSelected != null) {
+                          setState(() => isLoading = true);
+                          uploadImage(
+                            imageSelected!,
+                            theUser: widget.theUser!,
+                          ).then((_) {
+                            Navigator.of(context).pop();
+                            Navigator.of(context).pop();
+                          });
+                        } else if (controllerUsername.text.isNotEmpty &&
+                            controllerUsername.text != widget.theUsername) {
+                          String temp = controllerUsername.text;
+                          temp = temp.replaceAll(" ", "");
+
+                          if (temp.isNotEmpty) {
+                            await serviceFirestore
+                                .addUserInfoAfterAuthToDB(
+                              user: widget.theUser!,
+                              theImageUrl: widget.theImgUrl,
+                              theName: controllerUsername.text,
+                            )
+                                .then(
+                              (_) {
                                 Navigator.of(context).pop();
                                 Navigator.of(context).pop();
-                              });
-                            } else if (controllerUsername.text.isNotEmpty &&
-                                controllerUsername.text != widget.theUsername) {
-                              String temp = controllerUsername.text;
-                              temp = temp.replaceAll(" ", "");
+                              },
+                            );
+                          } else {
+                            customeSnackbar(
+                              theTitle: 'Username caution',
+                              theMessage: 'Try not to input spaces only!',
+                            );
+                            return;
+                          }
 
-                              if (temp.isNotEmpty) {
-                                await serviceFirestore
-                                    .addUserInfoAfterAuthToDB(
-                                  user: widget.theUser!,
-                                  theImageUrl: widget.theImgUrl,
-                                  theName: controllerUsername.text,
-                                )
-                                    .then(
-                                  (_) {
-                                    Navigator.of(context).pop();
-                                    Navigator.of(context).pop();
-                                  },
-                                );
-                              } else {
-                                customeSnackbar(
-                                  theTitle: 'Username caution',
-                                  theMessage: 'Try not to input spaces only!',
-                                );
-                                return;
-                              }
-
-                              if (mounted) {
-                                setState(() => isLoading = false);
-                              }
-                              debugPrint('Username updated.');
-                              customeSnackbar(
-                                theTitle: 'Image Caution',
-                                theMessage: 'Username updated',
-                              );
-                            } else {
-                              debugPrint('Nothing updated!');
-                              customeSnackbar(
-                                theTitle: 'Profile Caution',
-                                theMessage: 'Nothing updated!',
-                              );
-                            }
-                          },
-                          style: customeButtonStyle(),
-                          child: customeText(
-                            theData: 'UPDATE',
-                            theLetterSpacing: 1,
-                            theFontSize: 17,
-                            theFontWeight: FontWeight.w600,
-                            theFontFamily: 'MavenPro',
-                          ),
-                        ),
-                      ],
+                          if (mounted) {
+                            setState(() => isLoading = false);
+                          }
+                          debugPrint('Username updated.');
+                          customeSnackbar(
+                            theTitle: 'Image Caution',
+                            theMessage: 'Username updated',
+                          );
+                        } else {
+                          debugPrint('Nothing updated!');
+                          customeSnackbar(
+                            theTitle: 'Profile Caution',
+                            theMessage: 'Nothing updated!',
+                          );
+                        }
+                      },
+                      style: customeButtonStyle(),
+                      child: customeText(
+                        theData: 'UPDATE',
+                        theLetterSpacing: 1,
+                        theFontSize: 17,
+                        theFontWeight: FontWeight.w600,
+                        theFontFamily: 'MavenPro',
+                      ),
                     ),
                   ],
                 ),
