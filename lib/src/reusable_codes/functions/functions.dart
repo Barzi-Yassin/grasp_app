@@ -354,3 +354,19 @@ Column noItemFound(
     ],
   );
 }
+
+ButtonStyle customeButtonStyle() {
+  return ButtonStyle(
+    backgroundColor: const MaterialStatePropertyAll(Colors.cyan),
+    animationDuration: const Duration(milliseconds: 20),
+    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(18.0),
+        side: BorderSide(
+          color: Colors.grey.shade100,
+          width: 0.2,
+        ),
+      ),
+    ),
+  );
+}
