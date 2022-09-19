@@ -50,10 +50,10 @@ class _ScreenSignupState extends State<ScreenSignup> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(height: screenHeight * 0.15),
-                    customeTextGraspHeader(theData: 'grasp', theFontSize: 50),
+                    customeTextGraspHeader(
+                        theData: '• grasp •', theFontSize: 50),
                     SizedBox(height: screenHeight * 0.06),
-                    customeTextAuthHeader(
-                        theData: '• sign up •', theFontSize: 30),
+                    customeTextAuthHeader(theData: 'sign up', theFontSize: 30),
                     SizedBox(height: screenHeight * 0.02),
                     SizedBox(
                       height: 400,
@@ -64,23 +64,33 @@ class _ScreenSignupState extends State<ScreenSignup> {
                             child: Column(
                               children: [
                                 // email
-                                InputEmail(
-                                  theControllerEmail: controllerSignupEmail,
+                                Material(
+                                  color: Colors.white60,
+                                  borderRadius: BorderRadius.circular(45),
+                                  elevation: 2,
+                                  child: InputEmail(
+                                    theControllerEmail: controllerSignupEmail,
+                                  ),
                                 ),
 
                                 const SizedBox(height: 20),
 
                                 // password
-                                InputPassword(
-                                  theControllerPassword:
-                                      controllerSignupPassword,
+                                Material(
+                                  color: Colors.white60,
+                                  borderRadius: BorderRadius.circular(45),
+                                  elevation: 2,
+                                  child: InputPassword(
+                                    theControllerPassword:
+                                        controllerSignupPassword,
+                                  ),
                                 ),
 
                                 const SizedBox(height: 20),
                               ],
                             ),
                           ),
-                          ElevatedButton(
+                          ElevatedButton.icon(
                             onPressed: () async {
                               if (controllerSignupEmail.text.isNotEmpty &&
                                   controllerSignupPassword.text.isNotEmpty) {
@@ -125,7 +135,30 @@ class _ScreenSignupState extends State<ScreenSignup> {
                                     'One field or more might be empty!');
                               }
                             },
-                            child: const Text('Sign Up'),
+                            label: customeText(
+                              theData: 'SIGN UP',
+                              theLetterSpacing: 1,
+                              theFontSize: 20,
+                              theFontWeight: FontWeight.w600,
+                              theFontFamily: 'MavenPro',
+                            ),
+                            icon: customeIcon(theIcon: Icons.create),
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  const MaterialStatePropertyAll(Colors.cyan),
+                              animationDuration:
+                                  const Duration(milliseconds: 20),
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18.0),
+                                  side: BorderSide(
+                                    color: Colors.grey.shade100,
+                                    width: 0.2,
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -139,8 +172,10 @@ class _ScreenSignupState extends State<ScreenSignup> {
                         Get.to(() => const ScreenSignin());
                       },
                       child: customeText(
-                          theData: '\nAlready Have an Account? \nSign in here',
-                          theTextAlign: TextAlign.center),
+                        theData: '\nAlready have account? \nSign in here',
+                        theTextAlign: TextAlign.center,
+                        theColor: Colors.cyan.shade700,
+                      ),
                     )
                   ],
                 ),

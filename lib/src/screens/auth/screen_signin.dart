@@ -44,10 +44,10 @@ class _ScreenSigninState extends State<ScreenSignin> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(height: screenHeight * 0.15),
-                    customeTextGraspHeader(theData: 'grasp', theFontSize: 50),
+                    customeTextGraspHeader(
+                        theData: '• grasp •', theFontSize: 50),
                     SizedBox(height: screenHeight * 0.06),
-                    customeTextAuthHeader(
-                        theData: '• sign in •', theFontSize: 30),
+                    customeTextAuthHeader(theData: 'sign in', theFontSize: 30),
                     SizedBox(height: screenHeight * 0.02),
                     SizedBox(
                       height: 400,
@@ -58,21 +58,32 @@ class _ScreenSigninState extends State<ScreenSignin> {
                             child: Column(
                               children: [
                                 // email
-                                InputEmail(
-                                    theControllerEmail: controllerSigninEmail),
+                                Material(
+                                  color: Colors.white60,
+                                  borderRadius: BorderRadius.circular(45),
+                                  elevation: 2,
+                                  child: InputEmail(
+                                      theControllerEmail:
+                                          controllerSigninEmail),
+                                ),
 
                                 const SizedBox(height: 20),
 
                                 // password
-                                InputPassword(
-                                    theControllerPassword:
-                                        controllerSigninPassword),
+                                Material(
+                                  color: Colors.white60,
+                                  borderRadius: BorderRadius.circular(45),
+                                  elevation: 2,
+                                  child: InputPassword(
+                                      theControllerPassword:
+                                          controllerSigninPassword),
+                                ),
 
                                 const SizedBox(height: 20),
                               ],
                             ),
                           ),
-                          ElevatedButton(
+                          ElevatedButton.icon(
                             onPressed: () async {
                               if (controllerSigninEmail.text.isNotEmpty &&
                                   controllerSigninPassword.text.isNotEmpty) {
@@ -114,7 +125,30 @@ class _ScreenSigninState extends State<ScreenSignin> {
                                     'One field or more might be empty!');
                               }
                             },
-                            child: const Text('Sign In'),
+                            label: customeText(
+                              theData: ' SIGN IN',
+                              theLetterSpacing: 1,
+                              theFontSize: 20,
+                              theFontWeight: FontWeight.w600,
+                              theFontFamily: 'MavenPro',
+                            ),
+                            icon: customeIcon(theIcon: Icons.login),
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  const MaterialStatePropertyAll(Colors.cyan),
+                              animationDuration:
+                                  const Duration(milliseconds: 20),
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18.0),
+                                  side: BorderSide(
+                                    color: Colors.grey.shade100,
+                                    width: 0.2,
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -128,8 +162,9 @@ class _ScreenSigninState extends State<ScreenSignin> {
                         Get.offAll(() => const ScreenSignup());
                       },
                       child: customeText(
-                        theData: '\nDon\'t Have Account? \nSign up here',
+                        theData: '\nDon\'t have account? \nSign up here',
                         theTextAlign: TextAlign.center,
+                        theColor: Colors.cyan.shade700,
                       ),
                     )
                   ],

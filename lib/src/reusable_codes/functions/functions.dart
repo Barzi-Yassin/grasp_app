@@ -248,18 +248,30 @@ Text customeTextAuthHeader({
   return Text(
     theData.toUpperCase(),
     maxLines: 1,
-    style:  TextStyle(
-        color: Colors.cyan.shade900,
-        fontWeight: FontWeight.w800,
-        fontFamily: 'MavenPro',
-        fontSize: 22,
-        letterSpacing: 1,
-        // foreground: Paint()
-        //   ..style = PaintingStyle.fill
-        //   ..strokeWidth = 1.0
-        //   ..color = Colors.blueGrey
-        // // ..invertColors = true
-        ),
+    style: TextStyle(
+      color: Colors.white.withOpacity(0.9),
+      fontWeight: FontWeight.w800,
+      fontFamily: 'MavenPro',
+      fontSize: 22,
+      letterSpacing: 2,
+      // decorationStyle: TextDecorationStyle.dashed,
+      // decoration: TextDecoration.underline,
+      // decorationThickness: 0.7,
+      // decorationColor: Colors.white,
+      shadows: const [
+        BoxShadow(blurRadius: 8.0, color: Colors.grey),
+        BoxShadow(blurRadius: 010.0, color: Colors.teal),
+        BoxShadow(blurRadius: 010.0, color: Colors.teal),
+        BoxShadow(blurRadius: 010.0, color: Colors.teal),
+        BoxShadow(blurRadius: 5.0, color: Colors.cyan),
+      ],
+
+      // foreground: Paint()
+      //   ..style = PaintingStyle.fill
+      //   ..strokeWidth = 1.0
+      //   ..color = Colors.blueGrey
+      // // ..invertColors = true
+    ),
   );
 }
 
@@ -278,10 +290,15 @@ Text customeTextGraspHeader({
         fontFamily: 'Caveat',
         fontSize: 40,
         letterSpacing: 8,
+        shadows: const [
+          // BoxShadow(blurRadius: 80.0, color: Colors.grey),
+          BoxShadow(blurRadius: 20.0, color: Colors.teal),
+          // BoxShadow(blurRadius: 1.0, color: Colors.cyan),
+        ],
         foreground: Paint()
           ..style = PaintingStyle.stroke
           ..strokeWidth = 2.0
-          ..color = Colors.teal
+          ..color = Colors.cyan.shade800
         // ..invertColors = true
         ),
   );
@@ -297,19 +314,20 @@ Text customeText({
   double? theWordSpacing,
   double? theLetterSpacing,
   int? theMaxLines,
+  List<Shadow>? theShadowlist,
 }) {
   return Text(
     theData,
     maxLines: theMaxLines,
     textAlign: theTextAlign,
     style: TextStyle(
-      color: theColor,
-      fontWeight: theFontWeight,
-      fontFamily: theFontFamily,
-      fontSize: theFontSize,
-      wordSpacing: theWordSpacing,
-      letterSpacing: theLetterSpacing,
-    ),
+        color: theColor,
+        fontWeight: theFontWeight,
+        fontFamily: theFontFamily,
+        fontSize: theFontSize,
+        wordSpacing: theWordSpacing,
+        letterSpacing: theLetterSpacing,
+        shadows: theShadowlist),
   );
 }
 
@@ -327,11 +345,12 @@ Column noItemFound(
       ),
       const SizedBox(height: 5),
       customeText(
-          theData: 'No $theItemName found!',
-          theFontFamily: 'MavenPro',
-          theFontWeight: FontWeight.bold,
-          theTextAlign: TextAlign.center,
-          theLetterSpacing: 1),
+        theData: 'No $theItemName found!',
+        theFontFamily: 'MavenPro',
+        theFontWeight: FontWeight.bold,
+        theTextAlign: TextAlign.center,
+        theLetterSpacing: 1,
+      ),
     ],
   );
 }
