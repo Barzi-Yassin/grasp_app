@@ -28,33 +28,32 @@ It contains the minimal implementation required to save user daily information a
 - [ ] Offline readability <br>
 - [ ] Kurdish language locale <br> 
 - [ ] Dark mode  <br><br>
-- [ ] Authentication (signin + signup) <br>
+- [x] Authentication (signin + signup) <br>
 - [ ] Authentication email link verification <br>
 - [ ] Authentication forget password <br>
-- [ ] Adding username and profile image <br>
-- [ ] Update username and profile image <br><br>
-- [ ] Create Subjects  <br>
-- [ ] Read Subjects  <br>
+- [x] Adding username and profile image <br>
+- [x] Update username and profile image <br><br>
+- [x] Create Subjects  <br>
+- [x] Read Subjects  <br>
 - [ ] Update Subjects  <br>
-- [ ] Delete Subjects  <br>
-- [ ] Sort Subjects by (Newest + Name + Number of items) <br>
-- [ ] Sort Subjects by (Ascending + Descending) <br><br>
-- [ ] Create Grasp files inside Subjects  <br>
-- [ ] Read Grasp files  <br>
+- [x] Delete Subjects  <br>
+- [x] Sort Subjects by (Newest + Name + Number of items) <br>
+- [x] Sort Subjects by (Ascending + Descending) <br><br>
+- [x] Create Grasp files inside Subjects  <br>
+- [x] Read Grasp files  <br>
 - [ ] Update Grasp files  <br>
-- [ ] Delete Grasp files  <br>
-- [ ] Add Grasp file to Favorites list <br>
-- [ ] Add Grasp file to Stars list <br><br>
-- [ ] Adding messages inside Grasp files  <br>
-- [ ] Read messages  <br>
-- [ ] Update messages  <br>
-- [ ] Delete messages  <br>
-- [ ] React messages  <br>
-- [ ] Add image  <br>
-- [ ] Add video  <br>
-- [ ] Add voice  <br>
-- [ ] React messages  <br>
-- [ ] Messages reading mode  <br><br>
+- [x] Delete Grasp files  <br>
+- [x] Add Grasp file to Favorites list <br>
+- [x] Add Grasp file to Stars list <br><br>
+- [x] Adding messages inside Grasp files  <br>
+- [x] Read messages  <br>
+- [x] Update messages  <br>
+- [x] Delete messages  <br>
+- [x] React messages  <br>
+- [ ] Add image message  <br>
+- [ ] Add video message  <br>
+- [ ] Add voice message  <br>
+- [x] Messages reading mode  <br><br>
 - [ ] Grasp guidance screen  <br>
 - [ ] Search functionalities  <br>
 - [ ] Sort files  <br>
