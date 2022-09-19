@@ -108,7 +108,7 @@ class WidgetSubjectFileRecords extends StatelessWidget {
                       theColor: Colors.grey.shade700,
                       theTextAlign: TextAlign.start,
                       // theFontFamily: "MavenPro"
-                      // theFontWeight: FontWeight.w500,
+                      theFontWeight: FontWeight.w500,
                     ),
                     // const SizedBox(height: 6),
                     customeText(
