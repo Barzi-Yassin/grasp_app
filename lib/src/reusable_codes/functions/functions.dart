@@ -248,8 +248,8 @@ Text customeTextAuthHeader({
   return Text(
     theData.toUpperCase(),
     maxLines: 1,
-    style: const TextStyle(
-        color: Colors.blueGrey,
+    style:  TextStyle(
+        color: Colors.cyan.shade900,
         fontWeight: FontWeight.w800,
         fontFamily: 'MavenPro',
         fontSize: 22,
