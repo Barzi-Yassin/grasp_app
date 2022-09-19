@@ -242,16 +242,27 @@ class _ScreenMyProfileState extends State<ScreenMyProfile> {
                               });
                             } else if (controllerUsername.text.isNotEmpty &&
                                 controllerUsername.text != widget.theUsername) {
-                              await serviceFirestore
-                                  .addUserInfoAfterAuthToDB(
-                                user: widget.theUser!,
-                                theImageUrl: widget.theImgUrl,
-                                theName: controllerUsername.text,
-                              )
-                                  .then((value) {
-                                Navigator.of(context).pop();
-                                Navigator.of(context).pop();
-                              });
+                              String temp = controllerUsername.text;
+                              temp = temp.replaceAll(" ", "");
+
+                              if (temp.isNotEmpty) {
+                                await serviceFirestore
+                                    .addUserInfoAfterAuthToDB(
+                                  user: widget.theUser!,
+                                  theImageUrl: widget.theImgUrl,
+                                  theName: controllerUsername.text,
+                                )
+                                    .then(
+                                  (_) {
+                                    Navigator.of(context).pop();
+                                    Navigator.of(context).pop();
+                                  },
+                                );
+                              } else {
+                                Get.snackbar('Username caution',
+                                    'Try not to input spaces only!');
+                                    return;
+                              }
 
                               if (mounted) {
                                 setState(() => isLoading = false);
