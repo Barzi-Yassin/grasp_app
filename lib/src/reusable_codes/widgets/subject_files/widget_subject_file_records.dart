@@ -70,7 +70,11 @@ class WidgetSubjectFileRecords extends StatelessWidget {
           enableFeedback: true,
           enabled: true,
           visualDensity: const VisualDensity(vertical: 0),
-          leading: customeText(theData: subjectFileRecordId),
+          leading: customeText(
+            theData: subjectFileRecordId,
+            theColor: Colors.black54,
+            theFontSize: 16
+          ),
           subtitle: const SizedBox(height: 0),
           // Text(
           //   subjectFileRecordName,
@@ -98,16 +102,21 @@ class WidgetSubjectFileRecords extends StatelessWidget {
                               theString: subjectFileRecordName,
                               theResultLengthLimit: 20,
                             ),
-                      theFontSize: 17,
+                      theFontSize: 18,
                       theLetterSpacing: 0.71,
                       theMaxLines: 1,
+                      theColor: Colors.grey.shade700,
                       theTextAlign: TextAlign.start,
+                      // theFontFamily: "MavenPro"
                       // theFontWeight: FontWeight.w500,
                     ),
                     // const SizedBox(height: 6),
                     customeText(
-                        theData:
-                            '$subjectFileRecordTime • $subjectFileRecordDate'),
+                      theData:
+                          ' $subjectFileRecordTime • $subjectFileRecordDate',
+                      theColor: Colors.grey.shade600,
+                      // theFontFamily: "MavenPro"
+                    ),
                   ],
                 ),
                 customeIconButton(

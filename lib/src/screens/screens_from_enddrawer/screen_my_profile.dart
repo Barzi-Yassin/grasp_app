@@ -159,7 +159,7 @@ class _ScreenMyProfileState extends State<ScreenMyProfile> {
                             child: customeText(
                                 theData: widget.theUsername,
                                 theFontSize: 25,
-                                theColor: Colors.brown,
+                                theColor: Colors.black54,
                                 theFontWeight: FontWeight.w500,
                                 theLetterSpacing: 1,
                                 theWordSpacing: 1),
