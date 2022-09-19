@@ -130,8 +130,12 @@ class _ScreenMyProfileState extends State<ScreenMyProfile> {
                             alignment: Alignment.center,
                             child: CircleAvatar(
                               backgroundImage: imageSelected != null
-                                  ? FileImage(imageSelected!) as ImageProvider
-                                  : NetworkImage(widget.theImgUrl),
+                                  ? FileImage(imageSelected!)
+                                  : widget.theImgUrl.length > 20
+                                      ? NetworkImage(widget.theImgUrl)
+                                      : const AssetImage(
+                                              'assets/images/person.jpg')
+                                          as ImageProvider,
                               radius: 100,
                             ),
                           ),
@@ -261,7 +265,7 @@ class _ScreenMyProfileState extends State<ScreenMyProfile> {
                               } else {
                                 Get.snackbar('Username caution',
                                     'Try not to input spaces only!');
-                                    return;
+                                return;
                               }
 
                               if (mounted) {
