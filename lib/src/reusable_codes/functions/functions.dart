@@ -241,23 +241,47 @@ Padding customePaddingOnly(
 
 Text customeTextAuthHeader({
   required String theData,
-  Color? theColor,
-  int? theMaxLines,
+  // Color? theColor,
+  // int? theMaxLines,
   double? theFontSize,
 }) {
   return Text(
     theData.toUpperCase(),
-    maxLines: theMaxLines,
+    maxLines: 1,
+    style: const TextStyle(
+        color: Colors.blueGrey,
+        fontWeight: FontWeight.w800,
+        fontFamily: 'MavenPro',
+        fontSize: 22,
+        letterSpacing: 1,
+        // foreground: Paint()
+        //   ..style = PaintingStyle.fill
+        //   ..strokeWidth = 1.0
+        //   ..color = Colors.blueGrey
+        // // ..invertColors = true
+        ),
+  );
+}
+
+Text customeTextGraspHeader({
+  required String theData,
+  // Color? theColor,
+  // int? theMaxLines,
+  double? theFontSize,
+}) {
+  return Text(
+    theData.toUpperCase(),
+    maxLines: 1,
     style: TextStyle(
-        color: theColor,
+        // color: theColor,
         fontWeight: FontWeight.w800,
         fontFamily: 'Caveat',
         fontSize: 40,
-        letterSpacing: 3,
+        letterSpacing: 8,
         foreground: Paint()
           ..style = PaintingStyle.stroke
-          ..strokeWidth = 1.0
-          ..color = Colors.brown
+          ..strokeWidth = 2.0
+          ..color = Colors.teal
         // ..invertColors = true
         ),
   );
