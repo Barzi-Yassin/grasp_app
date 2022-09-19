@@ -95,71 +95,81 @@ class _EndDrawerState extends State<EndDrawer> {
                         Container(
                           padding: const EdgeInsets.all(0.0),
                           margin: const EdgeInsets.all(0.0),
-                          child: Row(
-                            children: [
-                              // end-drawer (text)
-                              Expanded(
-                                flex: 5,
-                                child: SizedBox(
-                                  height: 60,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    verticalDirection: VerticalDirection.down,
-                                    children: [
-                                      Container(
-                                        alignment: Alignment.topLeft,
-                                        padding: const EdgeInsets.only(
-                                            left: 10, bottom: 18),
-                                        child: Text(
-                                          snapshotProfileUsername, // here
-                                          textAlign: TextAlign.left,
-                                          maxLines: 1,
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color:
-                                                _enddrawerHeaderStuffLineColor,
-                                            fontWeight: FontWeight.w500,
-                                            letterSpacing: 0.5,
+                          child: InkWell(
+                            onTap: () => Get.to(
+                              () => ScreenMyProfile(
+                                theUser: widget.theUser,
+                                theImgUrl: snapshotProfileImgUrl,
+                                theUsername: snapshotProfileUsername,
+                              ),
+                            ),
+                            child: Row(
+                              children: [
+                                // end-drawer (text)
+                                Expanded(
+                                  flex: 5,
+                                  child: SizedBox(
+                                    height: 60,
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      verticalDirection: VerticalDirection.down,
+                                      children: [
+                                        Container(
+                                          alignment: Alignment.topLeft,
+                                          padding: const EdgeInsets.only(
+                                              left: 10, bottom: 18),
+                                          child: Text(
+                                            snapshotProfileUsername, // here
+                                            textAlign: TextAlign.left,
+                                            maxLines: 1,
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              color:
+                                                  _enddrawerHeaderStuffLineColor,
+                                              fontWeight: FontWeight.w500,
+                                              letterSpacing: 0.5,
+                                            ),
                                           ),
                                         ),
+                                        // Divider(
+                                        //   color: _enddrawerHeaderStuffLineColor,
+                                        //   thickness: 1.9,
+                                        // ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                // end-drawer (image)
+                                Expanded(
+                                  flex: 2,
+                                  child: InkWell(
+                                    child: Container(
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                            color:
+                                                _enddrawerHeaderStuffLineColor,
+                                            width: 2.0),
                                       ),
-                                      // Divider(
-                                      //   color: _enddrawerHeaderStuffLineColor,
-                                      //   thickness: 1.9,
-                                      // ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              // end-drawer (image)
-                              Expanded(
-                                flex: 2,
-                                child: InkWell(
-                                  child: Container(
-                                    height: 50,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                          color: _enddrawerHeaderStuffLineColor,
-                                          width: 2.0),
-                                    ),
-                                    alignment: Alignment.center,
-                                    child: CircleAvatar(
-                                      backgroundColor: Colors.transparent,
-                                      radius: 26,
-                                      backgroundImage:
-                                          snapshotProfileImgUrl.length > 20
-                                              ? NetworkImage(
-                                                  snapshotProfileImgUrl,
-                                                ) as ImageProvider
-                                              : const AssetImage(
-                                                  'assets/images/person.jpg',
-                                                ), // here
+                                      alignment: Alignment.center,
+                                      child: CircleAvatar(
+                                        backgroundColor: Colors.transparent,
+                                        radius: 26,
+                                        backgroundImage:
+                                            snapshotProfileImgUrl.length > 20
+                                                ? NetworkImage(
+                                                    snapshotProfileImgUrl,
+                                                  ) as ImageProvider
+                                                : const AssetImage(
+                                                    'assets/images/person.jpg',
+                                                  ), // here
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                         Row(
@@ -206,11 +216,13 @@ class _EndDrawerState extends State<EndDrawer> {
                                 enddrawerRecordRoutePath:
                                     RouteScreens.routeMyProfile,
                                 isSignOut: false,
-                                theOnTap: () => Get.to(() => ScreenMyProfile(
-                                      theUser: widget.theUser,
-                                      theImgUrl: snapshotProfileImgUrl,
-                                      theUsername: snapshotProfileUsername,
-                                    )),
+                                theOnTap: () => Get.to(
+                                  () => ScreenMyProfile(
+                                    theUser: widget.theUser,
+                                    theImgUrl: snapshotProfileImgUrl,
+                                    theUsername: snapshotProfileUsername,
+                                  ),
+                                ),
                               ),
                               const SizedBox(height: 18),
                               WidgetEndDrawerRecords(
