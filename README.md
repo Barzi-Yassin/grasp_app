@@ -1,65 +1,133 @@
-# Grasp Project (in developing)
+<h1 align="center">
+  <img alt="Grasp" src="https://github.com/Barzy-Yasin/grasp_app/blob/master/assets/images/logo.png?raw=true" width=100px"/><br/>
+  Grasp 
+</h1>
 
-A Grasp project will be created in flutter using dart programming language. Grasp will supports mobile only android platform till now. Grasp will be useful to save user's daily important points with ana amazing perfomance
+<center><code>Note Taking mobile application project.</code><center/> 
+Grasp is useful to save our daily important notes with an a amazing perfomance and functionalities.
+<br/>
+It contains the minimal implementation required to save user daily information as a grasp point.
+<br/>
+<br/>
 
-## Getting Started
+# Services & Softwares
 
-The Grasp contains the minimal implementation required to save user daily information as a grasp point. The repository code is preloaded with some basic screen like basic app folder structure and required fonts to create a new project.
+<center> 
+<a href="https://dart.dev" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/dartlang/dartlang-icon.svg" alt="dart" width="40" height="40"/> </a> 
+<strong height="2">
+<a href="https://flutter.dev" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/flutterio/flutterio-icon.svg" alt="flutter" width="40" height="40"/> </a> 
+</strong>
+<a href="https://firebase.google.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" alt="firebase" width="40" height="40"/> </a>
+</center>
 
-### How Grasp works
+<br>
+<br>
 
-- User can create there own subject(as folder), each subject might has many grasp files.
-- Inside the grasp files user could add many types of data like text, voice, image, and video as well.
-
-
-### Folder Structure
-Here is the core folder structure which flutter provides. (it will be expanded in future)
-
-```
-grasp-app/
-|- android
-|- assets
-|- build
-|- ios
-|- lib
-|- test
-```
-
-Here is the folder structure we have been using in this project. 
-
-```
-assets/
-|- fonts/
-|- images/
-```
-
-```
-lib/
-|- src/screens
-```
-
-### Grasp TODOs
-
-TODO: Create screens.
-TODO: Create local database to save the the grasp files.
-(many other TODOs will added soon!)
-
-
-### Up-Coming Features:
-
-* Saving user grasp files in cloud using firebase.
-* user ability to share his/her own file with there friends.
-* Syncing files to cloud from local database.
+# Features & TODOs
+<h4 align="center">
+- [ ] Offline readability <br>
+- [ ] Kurdish language locale <br> 
+- [ ] Dark mode  <br><br>
+- [ ] Authentication (signin + signup) <br>
+- [ ] Authentication email link verification <br>
+- [ ] Authentication forget password <br>
+- [ ] Adding username and profile image <br>
+- [ ] Update username and profile image <br><br>
+- [ ] Create Subjects  <br>
+- [ ] Read Subjects  <br>
+- [ ] Update Subjects  <br>
+- [ ] Delete Subjects  <br>
+- [ ] Sort Subjects by (Newest + Name + Number of items) <br>
+- [ ] Sort Subjects by (Ascending + Descending) <br><br>
+- [ ] Create Grasp files inside Subjects  <br>
+- [ ] Read Grasp files  <br>
+- [ ] Update Grasp files  <br>
+- [ ] Delete Grasp files  <br>
+- [ ] Add Grasp file to Favorites list <br>
+- [ ] Add Grasp file to Stars list <br><br>
+- [ ] Adding messages inside Grasp files  <br>
+- [ ] Read messages  <br>
+- [ ] Update messages  <br>
+- [ ] Delete messages  <br>
+- [ ] React messages  <br>
+- [ ] Add image  <br>
+- [ ] Add video  <br>
+- [ ] Add voice  <br>
+- [ ] React messages  <br>
+- [ ] Messages reading mode  <br><br>
+- [ ] Grasp guidance screen  <br>
+- [ ] Search functionalities  <br>
+- [ ] Sort files  <br>
+- [ ] Sort messages  <br>
+- [ ] Adding shimmer loading  <br>
+</h4>
 
 
-### Grasp ui/ux in figma
+
+<br>
+<br>
+<br>
+
+# Packages and Dependencies
+
+-  firebase_core: ^1.20.0 <br>
+-  firebase_auth: ^3.7.0<br>
+-  cloud_firestore: ^3.4.6 <br>
+-  firebase_storage: ^10.3.7<br>
+
+-  font_awesome_flutter: ^10.1.0<br>
+-  cupertino_icons: ^1.0.2<br>
+-  flutter_animated_dialog: ^2.0.1<br>
+-  google_fonts: ^3.0.1<br>
+-  get: ^4.6.5<br>
+-  image_picker: ^0.8.5+3<br>
+-  badges: ^2.0.3<br>
+-  cached_network_image: ^3.2.2<br>
+-  flutter_launcher_icons: ^0.10.0<br>
+
+<br>
+<br>
+
+
+# How to run 
+
+Clone repository ``git clone https://github.com/Barzy-Yasin/grasp_app.git``
+
+open ``pubspec.yaml`` 
+
+run ``flutter pub get`` or just  ``ctrl+s`` 
+
+run app on an emulator ``flutter run``
+
+
+
+
+# Grasp ui/ux in figma
 
 Checkout [grasp_screens](https://www.figma.com/file/oRLdosPxq2Ks14VjZDKAP2/Grasp-App-UI%2FUX) for the remote file.
 
+<br>
 
-## Conclusion
+# Conclusion
 
-Grasp app is useful for IT field students in saving there daily important information quickly and we provide high availabilty that the app will be work out of internet.
-
+Grasp app is useful for everybody who saves his/her daily notes especially for college students.
 I will be happy to answer any questions that you may have on this approach.
+
+
+# Developer
+ 
+Linkedin [Barzi](https://www.linkedin.com/in/barzi-yassin-karim/)
+Email  ``barzy.dev@gmail.com``
+
+
+#
+#
+#
+# GIFs
+
+![sorting-subject-ready](https://user-images.githubusercontent.com/87943836/191047656-64758303-8886-45d8-95f0-5992481b123f.gif)
+
+
+
+<br>
 
