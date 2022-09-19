@@ -24,7 +24,6 @@ It contains the minimal implementation required to save user daily information a
 <br>
 
 # Features & TODOs
-<h4 align="center">
 - [ ] Offline readability <br>
 - [ ] Kurdish language locale <br> 
 - [ ] Dark mode  <br><br>
@@ -60,7 +59,6 @@ It contains the minimal implementation required to save user daily information a
 - [ ] Sort files  <br>
 - [ ] Sort messages  <br>
 - [ ] Adding shimmer loading  <br>
-</h4>
 
 
 
@@ -143,4 +141,3 @@ Email  ``barzy.dev@gmail.com``
 
 
 <br>
-<img type="gif" src="https://github.com/Barzy-Yasin/grasp_app/blob/master/gifs/reading-mode-datetime-ready.gif">
