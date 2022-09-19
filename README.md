@@ -102,10 +102,7 @@ run app on an emulator ``flutter run``
 
 
 
-# Grasp ui/ux in figma
-
-Checkout [grasp_screens](https://www.figma.com/file/oRLdosPxq2Ks14VjZDKAP2/Grasp-App-UI%2FUX) for the remote file.
-
+<br>
 <br>
 
 # Conclusion
@@ -114,20 +111,36 @@ Grasp app is useful for everybody who saves his/her daily notes especially for c
 I will be happy to answer any questions that you may have on this approach.
 
 
+<br>
+<br>
+
 # Developer
  
-Linkedin [Barzi](https://www.linkedin.com/in/barzi-yassin-karim/)
+Linkedin [Barzi](https://www.linkedin.com/in/barzi-yassin-karim/),
 Email  ``barzy.dev@gmail.com``
+#
+<br>
+<br>
+<br>
+<br>
 
 
-#
-#
-#
+
 # GIFs
+
+
+<br>
+<br>
+<br>
+
+<h1>sorting-subject</h1>
 
 ![sorting-subject-ready](https://user-images.githubusercontent.com/87943836/191047656-64758303-8886-45d8-95f0-5992481b123f.gif)
 
 
 
-<br>
 
+
+
+<br>
+<img type="gif" src="https://github.com/Barzy-Yasin/grasp_app/blob/master/gifs/reading-mode-datetime-ready.gif">
