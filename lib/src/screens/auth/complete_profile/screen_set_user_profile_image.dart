@@ -125,7 +125,7 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
                                         ? FileImage(imageSelected!)
                                             as ImageProvider
                                         : const AssetImage(
-                                            "assets/images/person.jpg"),
+                                            "assets/images/default.jpg"),
                                     radius: 100,
                                   ),
                                 ),
@@ -165,7 +165,7 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
                                 child: customeText(
                                   theData: 'SKIP',
                                   theLetterSpacing: 1,
-                                  theFontSize: 20,
+                                  theFontSize: 17,
                                   theFontWeight: FontWeight.w600,
                                   theFontFamily: 'MavenPro',
                                 ),
@@ -199,7 +199,7 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
                                 child: customeText(
                                   theData: 'SAVE',
                                   theLetterSpacing: 1,
-                                  theFontSize: 20,
+                                  theFontSize: 17,
                                   theFontWeight: FontWeight.w600,
                                   theFontFamily: 'MavenPro',
                                 ),

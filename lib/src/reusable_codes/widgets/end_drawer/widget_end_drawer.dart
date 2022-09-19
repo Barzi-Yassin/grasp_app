@@ -163,7 +163,7 @@ class _EndDrawerState extends State<EndDrawer> {
                                                     snapshotProfileImgUrl,
                                                   ) as ImageProvider
                                                 : const AssetImage(
-                                                    'assets/images/person.jpg',
+                                                    'assets/images/default.jpg',
                                                   ), // here
                                       ),
                                     ),

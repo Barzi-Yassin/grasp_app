@@ -102,7 +102,7 @@ class _ScreenSetUserProfileNameState extends State<ScreenSetUserProfileName> {
                           child: customeText(
                             theData: 'SKIP',
                             theLetterSpacing: 1,
-                            theFontSize: 20,
+                            theFontSize: 17,
                             theFontWeight: FontWeight.w600,
                             theFontFamily: 'MavenPro',
                           ),
@@ -132,7 +132,7 @@ class _ScreenSetUserProfileNameState extends State<ScreenSetUserProfileName> {
                           child: customeText(
                             theData: 'Next',
                             theLetterSpacing: 1,
-                            theFontSize: 20,
+                            theFontSize: 17,
                             theFontWeight: FontWeight.w600,
                             theFontFamily: 'MavenPro',
                           ),

@@ -138,7 +138,7 @@ class _ScreenMyProfileState extends State<ScreenMyProfile> {
                                           widget.theImgUrl,
                                         )
                                       : const AssetImage(
-                                              'assets/images/person.jpg')
+                                              'assets/images/default.jpg')
                                           as ImageProvider,
                               radius: 100,
                             ),
@@ -283,7 +283,14 @@ class _ScreenMyProfileState extends State<ScreenMyProfile> {
                                   'Profile Caution', 'Nothing updated!');
                             }
                           },
-                          child: customeText(theData: 'UPDATE'),
+                          style: customeButtonStyle(),
+                          child: customeText(
+                            theData: 'UPDATE',
+                            theLetterSpacing: 1,
+                            theFontSize: 17,
+                            theFontWeight: FontWeight.w600,
+                            theFontFamily: 'MavenPro',
+                          ),
                         ),
                       ],
                     ),
