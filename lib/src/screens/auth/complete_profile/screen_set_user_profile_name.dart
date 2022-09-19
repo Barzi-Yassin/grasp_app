@@ -124,8 +124,10 @@ class _ScreenSetUserProfileNameState extends State<ScreenSetUserProfileName> {
                               );
                             } else {
                               // debugPrint('wwwwwww :: 2 :: Try not to input spaces only!');
-                              Get.snackbar('Username caution',
-                                  'Try not to input spaces only!');
+                              customeSnackbar(
+                                theTitle: 'Username caution',
+                                theMessage: 'Try not to input spaces only!',
+                              );
                             }
                           },
                           style: customeButtonStyle(),

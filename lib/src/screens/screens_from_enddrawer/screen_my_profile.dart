@@ -267,8 +267,10 @@ class _ScreenMyProfileState extends State<ScreenMyProfile> {
                                   },
                                 );
                               } else {
-                                Get.snackbar('Username caution',
-                                    'Try not to input spaces only!');
+                                customeSnackbar(
+                                  theTitle: 'Username caution',
+                                  theMessage: 'Try not to input spaces only!',
+                                );
                                 return;
                               }
 
@@ -276,11 +278,16 @@ class _ScreenMyProfileState extends State<ScreenMyProfile> {
                                 setState(() => isLoading = false);
                               }
                               debugPrint('Username updated.');
-                              Get.snackbar('Image Caution', 'Username updated');
+                              customeSnackbar(
+                                theTitle: 'Image Caution',
+                                theMessage: 'Username updated',
+                              );
                             } else {
                               debugPrint('Nothing updated!');
-                              Get.snackbar(
-                                  'Profile Caution', 'Nothing updated!');
+                              customeSnackbar(
+                                theTitle: 'Profile Caution',
+                                theMessage: 'Nothing updated!',
+                              );
                             }
                           },
                           style: customeButtonStyle(),
@@ -357,12 +364,16 @@ class _ScreenMyProfileState extends State<ScreenMyProfile> {
                 if (controllerUsername.text.isNotEmpty &&
                     controllerUsername.text != widget.theUsername) {
                   debugPrint('Image and username updated successfully.');
-                  Get.snackbar('Profile Caution',
-                      'Image and username updated successfully.');
+                  customeSnackbar(
+                    theTitle: 'Profile Caution',
+                    theMessage: 'Image and username updated successfully.',
+                  );
                 } else {
                   debugPrint('Image updated successfully.');
-                  Get.snackbar(
-                      'Profile Caution', 'Image updated successfully.');
+                  customeSnackbar(
+                    theTitle: 'Profile Caution',
+                    theMessage: 'Image updated successfully.',
+                  );
                 }
                 imageSelected = null;
                 // Get.back();
@@ -370,7 +381,10 @@ class _ScreenMyProfileState extends State<ScreenMyProfile> {
             );
           } else {
             debugPrint('Nothing updated!');
-            Get.snackbar('Profile Caution', 'Nothing updated!');
+            customeSnackbar(
+              theTitle: 'Profile Caution',
+              theMessage: 'Nothing updated!',
+            );
           }
 
           // setState(() {

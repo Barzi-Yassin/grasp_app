@@ -196,9 +196,10 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                               theRecordFileCreatedAtVarListBoilerPlate['date']
                                   .toString(),
                           theTrailingOnPressed: () {
-                            Get.snackbar(
-                              'Grasp caution',
-                              'Sorry for that, editing grasp name doesn\'t implemented yet!',
+                            customeSnackbar(
+                              theTitle: 'Grasp caution',
+                              theMessage:
+                                  'Sorry for that, editing grasp name doesn\'t implemented yet!',
                             );
                             // showAnimatedDialog(
                             //   barrierColor: Colors.black38,
@@ -249,8 +250,11 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                                               listOfCurrentFilesName.length
                                                   .toString());
 
-                                      Get.snackbar('Grasp caution',
-                                          'The Grasp "$theRecordItemFileNameAbbreviated" has been deleted successfully.');
+                                      customeSnackbar(
+                                        theTitle: 'Grasp caution',
+                                        theMessage:
+                                            'The Grasp "$theRecordItemFileNameAbbreviated" has been deleted successfully.',
+                                      );
                                       debugPrint(
                                           'jjjjjjjj delete :: ${listOfCurrentFilesName.length}');
                                     },
@@ -306,12 +310,17 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                   );
                 } else {
                   debugPrint('the grasp name is already exist !!!');
-                  Get.snackbar(
-                      'Grasp caution', 'The grasp name is already exist!');
+                  customeSnackbar(
+                    theTitle: 'Grasp caution',
+                    theMessage: 'The grasp name is already exist!',
+                  );
                 }
               } else {
                 // Get.back();
-                Get.snackbar('Grasp caution', 'Give a name to the new grasps!');
+                customeSnackbar(
+                  theTitle: 'Grasp caution',
+                  theMessage: 'Give a name to the new grasps!',
+                );
               }
             },
           ),

@@ -160,9 +160,10 @@ class ScreenFilterFavorites extends StatelessWidget {
                           // theRecordFavFileCreatedAtVarListBoilerPlate['date']
                           //     .toString(),
                           theTrailingOnPressed: () {
-                            Get.snackbar(
-                              'Grasp caution',
-                              'Sorry for that, editing grasp name doesn\'t implemented yet!',
+                            customeSnackbar(
+                              theTitle: 'Grasp caution',
+                              theMessage:
+                                  'Sorry for that, editing grasp name doesn\'t implemented yet!',
                             );
                             // showAnimatedDialog(
                             //   barrierColor: Colors.black38,

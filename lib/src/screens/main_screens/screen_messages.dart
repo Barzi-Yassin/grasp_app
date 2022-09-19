@@ -322,7 +322,8 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                   position:
                                       BadgePosition.topEnd(top: 17, end: 17),
                                   badgeColor: Colors.grey.shade100,
-                                  borderSide: const BorderSide(color: Colors.white),
+                                  borderSide:
+                                      const BorderSide(color: Colors.white),
                                   elevation: 0,
                                   badgeContent: SizedBox(
                                     height: 15,
@@ -401,17 +402,23 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                                       )
                                                           .then((value) {
                                                         Get.back();
-                                                        return Get.snackbar(
-                                                            'Message caution',
-                                                            'The messsage "$theRecordItemMessageAbbreviated" has been deleted successfully.');
+                                                        return customeSnackbar(
+                                                          theTitle:
+                                                              'Message caution',
+                                                          theMessage:
+                                                              'The messsage "$theRecordItemMessageAbbreviated" has been deleted successfully.',
+                                                        );
                                                       });
                                                     },
                                                   );
                                                 },
                                               );
                                             } else {
-                                              Get.snackbar('Message caution',
-                                                  'Messages may not be deleted, while you\'re in reading mode.');
+                                              customeSnackbar(
+                                                theTitle: 'Message caution',
+                                                theMessage:
+                                                    'Messages may not be deleted, while you\'re in reading mode.',
+                                              );
                                             }
                                           },
                                           title: customeText(
@@ -552,9 +559,9 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                             .then((value) =>
                                                 controllerMessage.clear());
                                       } else {
-                                        Get.snackbar(
-                                          'Message caution',
-                                          'Please enter a message.',
+                                        customeSnackbar(
+                                          theTitle: 'Message caution',
+                                          theMessage: 'Please enter a message.',
                                         );
                                       }
                                     },

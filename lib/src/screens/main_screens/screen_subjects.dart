@@ -284,16 +284,21 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                                                   listOfCurrentSubjectsNameFunction()
                                                       .remove(
                                                           theRecordItemSubjectName);
-                                                  Get.snackbar(
-                                                      'Subject caution',
-                                                      'The subject "$theRecordItemSubjectNameAbbreviated" has been deleted successfully.');
+                                                  customeSnackbar(
+                                                    theTitle: 'Subject caution',
+                                                    theMessage:
+                                                        'The subject "$theRecordItemSubjectNameAbbreviated" has been deleted successfully.',
+                                                  );
                                                 });
                                               },
                                             ),
                                           );
                                         } else {
-                                          Get.snackbar('Subject caution',
-                                              'Delete all the grasps inside "$theRecordItemSubjectNameAbbreviated" subject, then it could be deleted.');
+                                          customeSnackbar(
+                                            theTitle: 'Subject caution',
+                                            theMessage:
+                                                'The subject "$theRecordItemSubjectNameAbbreviated" has been deleted successfully.',
+                                          );
                                         }
                                       },
                                     ),
@@ -335,13 +340,17 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                       );
                 } else {
                   debugPrint('the subject name is already exist !!!');
-                  Get.snackbar(
-                      'Subject caution', 'The subject name is already exist!');
+                  customeSnackbar(
+                    theTitle: 'Subject caution',
+                    theMessage: 'The subject name is already exist!',
+                  );
                 }
               } else {
                 // Get.back();
-                Get.snackbar(
-                    'Subject caution', 'Give a name to the new subjects!');
+                customeSnackbar(
+                  theTitle: 'Subject caution',
+                  theMessage: 'Give a name to the new subjects!',
+                );
               }
             },
           ),

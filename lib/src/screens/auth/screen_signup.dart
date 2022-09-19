@@ -131,8 +131,11 @@ class _ScreenSignupState extends State<ScreenSignup> {
                               } else {
                                 debugPrint(
                                     'one field or more might be empty !');
-                                Get.snackbar('Sign up caution',
-                                    'One field or more might be empty!');
+                                customeSnackbar(
+                                  theTitle: 'Sign up caution',
+                                  theMessage:
+                                      'One field or more might be empty!',
+                                );
                               }
                             },
                             label: customeText(
