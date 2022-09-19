@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "413352872203",
+    "project_id": "grasp-a122f",
+    "storage_bucket": "grasp-a122f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:413352872203:android:9e9ec75a10627897053a0e",
+        "android_client_info": {
+          "package_name": "com.example.grasp_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "413352872203-d8q5puvp0g96go23sd6f13qcuvs19hl2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBS00C7pPIo0fCbfTMtVn7JatC0Fh8Cs7U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "413352872203-d8q5puvp0g96go23sd6f13qcuvs19hl2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "413352872203-e0caqlphi6mphpen86i2sakggk735jo0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.graspApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
