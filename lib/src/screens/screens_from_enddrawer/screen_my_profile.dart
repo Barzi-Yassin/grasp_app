@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:badges/badges.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -123,6 +124,7 @@ class _ScreenMyProfileState extends State<ScreenMyProfile> {
                           child: Container(
                             height: 200,
                             decoration: BoxDecoration(
+                              color: Colors.transparent,
                               shape: BoxShape.circle,
                               border:
                                   Border.all(color: Colors.white60, width: 2.0),
@@ -132,7 +134,9 @@ class _ScreenMyProfileState extends State<ScreenMyProfile> {
                               backgroundImage: imageSelected != null
                                   ? FileImage(imageSelected!)
                                   : widget.theImgUrl.length > 20
-                                      ? NetworkImage(widget.theImgUrl)
+                                      ? CachedNetworkImageProvider(
+                                          widget.theImgUrl,
+                                        )
                                       : const AssetImage(
                                               'assets/images/person.jpg')
                                           as ImageProvider,
