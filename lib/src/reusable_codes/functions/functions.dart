@@ -288,3 +288,26 @@ Text customeText({
     ),
   );
 }
+
+Column noItemFound(
+    {required String theItemName, required double theScreenHeight}) {
+  return Column(
+    children: [
+      SizedBox(height: (theScreenHeight / 3)),
+      customeText(
+        theData: '4🧐4',
+        theFontFamily: 'MavenPro',
+        theFontWeight: FontWeight.bold,
+        theTextAlign: TextAlign.center,
+        theFontSize: 40,
+      ),
+      const SizedBox(height: 5),
+      customeText(
+          theData: 'No $theItemName found!',
+          theFontFamily: 'MavenPro',
+          theFontWeight: FontWeight.bold,
+          theTextAlign: TextAlign.center,
+          theLetterSpacing: 1),
+    ],
+  );
+}

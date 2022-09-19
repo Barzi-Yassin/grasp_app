@@ -60,6 +60,9 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     final String sortedSubjectsFieldName = sortSubjectsFunctions
         .sortSubjectsByFieldName(theSortingSubjectNumber: sortingSubjetsNumber);
     return Scaffold(
@@ -101,7 +104,9 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                       .doc(widget.theUser.uid)
                       .collection('subjects')
                       .orderBy(sortedSubjectsFieldName,
-                          descending: sortedSubjectsFieldName == "subjectName" ? !isSortDescending : isSortDescending)
+                          descending: sortedSubjectsFieldName == "subjectName"
+                              ? !isSortDescending
+                              : isSortDescending)
                       .snapshots(),
                   builder: (context, snapshotSubject) {
                     if (snapshotSubject.connectionState ==
@@ -111,7 +116,8 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                       return Text("err ${snapshotSubject.error}");
                     } else if (snapshotSubject.data == null ||
                         !snapshotSubject.hasData) {
-                      return const Text('snapshotSubject is empty(StreamBuilder)');
+                      return const Text(
+                          'snapshotSubject is empty(StreamBuilder)');
                     }
 
                     // snapshotSubject.data!.docs.first;
@@ -124,7 +130,10 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                     final int subjectLength = snapshotSubject.data!.docs.length;
 
                     if (subjectLength == 0) {
-                      return customeText(theData: 'No subject found!');
+                      return noItemFound(
+                        theItemName: 'Subject',
+                        theScreenHeight: screenHeight,
+                      );
                     } else {
                       return ListView.builder(
                         // clipBehavior: Clip.hardEdge,
@@ -158,7 +167,8 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                                 .add(theRecordItemSubjectName);
                           }
 
-                          return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                          return StreamBuilder<
+                                  QuerySnapshot<Map<String, dynamic>>>(
                               stream: serviceFirestore.firestoreInstance
                                   .collection("users2")
                                   .doc(widget.theUser.uid)
@@ -169,7 +179,8 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                               builder: (context, snapshotFiles) {
                                 if (snapshotFiles.connectionState ==
                                     ConnectionState.waiting) {
-                                  return loadingIndicator(theColor: Colors.transparent);
+                                  return loadingIndicator(
+                                      theColor: Colors.transparent);
                                 } else if (snapshotFiles.hasError) {
                                   return Text("err ${snapshotFiles.error}");
                                 } else if (snapshotFiles.data == null ||
@@ -195,7 +206,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                                             height: 50,
                                             alignment: Alignment.center,
                                             child: Row(
-                                              children:  [
+                                              children: [
                                                 const Expanded(
                                                   child: Divider(
                                                     thickness: 1,
@@ -203,7 +214,9 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  sortSubjectsFunctions.getSortName(theSortedSubjectsFieldName: sortedSubjectsFieldName),
+                                                  sortSubjectsFunctions.getSortName(
+                                                      theSortedSubjectsFieldName:
+                                                          sortedSubjectsFieldName),
                                                   style: const TextStyle(
                                                     color: Colors.black26,
                                                   ),
@@ -216,7 +229,10 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  sortSubjectsFunctions.getSortAscOrDesc(isSortDescending: isSortDescending),
+                                                  sortSubjectsFunctions
+                                                      .getSortAscOrDesc(
+                                                          isSortDescending:
+                                                              isSortDescending),
                                                   style: const TextStyle(
                                                     color: Colors.black26,
                                                   ),
@@ -233,8 +249,10 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                                         : const SizedBox(height: 0, width: 0),
                                     WidgetSubjectRecords(
                                       theUser: widget.theUser,
-                                      theFileSubjectName: theRecordItemSubjectName,
-                                      theSubjectItemsLength: filesLength.toString(),
+                                      theFileSubjectName:
+                                          theRecordItemSubjectName,
+                                      theSubjectItemsLength:
+                                          filesLength.toString(),
                                       theFileSubjectCreatedAt:
                                           theRecordItemSubjectCreatedAtReady,
                                       theFileSubjectUpdatedAt:
@@ -249,8 +267,8 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                                                 DialogTransitionType.sizeFade,
                                             curve: Curves.easeOut,
                                             alignment: Alignment.bottomCenter,
-                                            duration:
-                                                const Duration(milliseconds: 800),
+                                            duration: const Duration(
+                                                milliseconds: 800),
                                             builder: (_) => DialogDelete(
                                               theTitle: "Subject",
                                               theName: theRecordItemSubjectName,
@@ -266,7 +284,8 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                                                   listOfCurrentSubjectsNameFunction()
                                                       .remove(
                                                           theRecordItemSubjectName);
-                                                  Get.snackbar('Subject caution',
+                                                  Get.snackbar(
+                                                      'Subject caution',
                                                       'The subject "$theRecordItemSubjectNameAbbreviated" has been deleted successfully.');
                                                 });
                                               },

@@ -21,6 +21,9 @@ class ScreenFilterFavorites extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: Colors.grey.shade400,
       endDrawer: SafeArea(
@@ -65,7 +68,10 @@ class ScreenFilterFavorites extends StatelessWidget {
               final int filesLength = snapshotFiles.data!.docs.length;
 
               if (filesLength == 0) {
-                return customeText(theData: 'No files found!');
+                return noItemFound(
+                  theItemName: 'Faved Grasp',
+                  theScreenHeight: screenHeight,
+                );
               } else {
                 return ListView.builder(
                   padding: const EdgeInsets.only(top: 5.0, bottom: 80),
