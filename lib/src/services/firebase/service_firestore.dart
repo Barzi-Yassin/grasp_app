@@ -21,6 +21,8 @@ class ServiceFirestore {
       uid: user.uid,
       email: user.email!,
       createdAt: DateTime.now(),
+      imageUrl: "not inputed yet!",
+      name: "Username",
     );
 
     await firestoreInstance
