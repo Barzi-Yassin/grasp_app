@@ -30,7 +30,8 @@ class _ScreenSetUserProfileNameState extends State<ScreenSetUserProfileName> {
         child: SingleChildScrollView(
           clipBehavior: Clip.hardEdge,
           scrollDirection: Axis.vertical,
-          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.manual, // TODO: check i guess it causes bad UX
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior
+              .manual, // TODO: check i guess it causes bad UX
           child: Column(
             children: [
               const SizedBox(height: 100),
@@ -96,10 +97,25 @@ class _ScreenSetUserProfileNameState extends State<ScreenSetUserProfileName> {
                   ),
                   const SizedBox(width: 50),
                   ElevatedButton(
-                    onPressed: () => Get.to(ScreenSetUserprofileImage(
-                      theControllerUsername: controllerUsername.text.toString(),
-                      theUser: widget.theUser,
-                    )),
+                    onPressed: () {
+                      String temp = controllerUsername.text;
+                      // debugPrint('wwwwwww :: 1 ::  <$temp>');
+                      temp = temp.replaceAll(" ", "");
+                      // debugPrint('wwwwwww :: 2 ::  <$temp>');
+                      if (temp.isNotEmpty) {
+                        Get.to(
+                          ScreenSetUserprofileImage(
+                            theControllerUsername:
+                                controllerUsername.text.toString(),
+                            theUser: widget.theUser,
+                          ),
+                        );
+                      } else {
+                        // debugPrint('wwwwwww :: 2 :: Try not to input spaces only!');
+                        Get.snackbar(
+                            'Username caution', 'Try not to input spaces only!');
+                      }
+                    },
                     child: customeText(theData: 'Next'),
                   )
                 ],
