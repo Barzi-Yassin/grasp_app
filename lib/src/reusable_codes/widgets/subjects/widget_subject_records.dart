@@ -31,7 +31,7 @@ class WidgetSubjectRecords extends StatelessWidget {
   String generateSubjectItemsGramatically() {
     String result = "";
     if (theSubjectItemsLength == '0') {
-      result = "Empty";
+      result = "empty";
     } else if (theSubjectItemsLength == '1') {
       result = " item  ";
     } else {
