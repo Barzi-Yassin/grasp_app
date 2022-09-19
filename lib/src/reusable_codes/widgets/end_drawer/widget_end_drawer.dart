@@ -277,8 +277,11 @@ class _EndDrawerState extends State<EndDrawer> {
                                 enddrawerRecordRoutePath:
                                     RouteScreens.routeGraspGuidance,
                                 isSignOut: false,
-                                theOnTap: () =>
-                                    Get.to(() => const ScreenGraspGuidance()),
+                                theOnTap: () => Get.to(
+                                  () => ScreenGraspGuidance(
+                                    theUser: widget.theUser,
+                                  ),
+                                ),
                               ),
                               WidgetEndDrawerRecords(
                                 enddrawerRecordId: 7,

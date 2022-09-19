@@ -14,8 +14,23 @@ class ScreenGraspGuidance extends StatelessWidget {
         child: EndDrawer(theUser: theUser),
       ),
       appBar: AppBar(
+        backgroundColor: Colors.cyan.shade700,
+        centerTitle: true,
         leading: functionArrowbackIconButton(context),
         title: const Text('Grasp Guidance'),
+      ),
+      body: Container(
+        decoration: backgroundGradientCyan(),
+        height: double.infinity,
+        width: double.infinity,
+        child: Center(
+          child: customeText(
+            theData: 'Not implemented yet!',
+            theFontSize: 20,
+            theColor: Colors.black54,
+            theLetterSpacing: 1,
+          ),
+        ),
       ),
     );
   }
