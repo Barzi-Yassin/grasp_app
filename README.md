@@ -9,6 +9,7 @@ Grasp is useful to save our daily important notes with an a amazing perfomance a
 It contains the minimal implementation required to save user daily information as a grasp point.
 <br/>
 <br/>
+<br/>
 
 # Services & Softwares
 
@@ -135,17 +136,6 @@ Email  ``barzy.dev@gmail.com``
 
 ![sorting-subject-ready](https://user-images.githubusercontent.com/87943836/191047656-64758303-8886-45d8-95f0-5992481b123f.gif)
 
-
-<br>
-<br>
-<br>
-<br>
-
-## Reading-mode
-
-![reading-mode-datetime-ready (1)](https://user-images.githubusercontent.com/87943836/191056442-d7f6a014-093b-4041-a18e-59ea2da82882.gif)
-
-
 <br>
 <br>
 <br>
@@ -155,4 +145,42 @@ Email  ``barzy.dev@gmail.com``
 
 ![creating-subject-ready](https://user-images.githubusercontent.com/87943836/191057973-98ba51ed-448a-4b4b-85e6-b406d5838533.gif)
 
+
+<br>
+<br>
+<br>
+<br>
+
+## Deleting-subject
+
+![deleting-subject-ready](https://user-images.githubusercontent.com/87943836/191064788-68a7dc0c-3419-47f9-80a9-6e60d14542f4.gif)
+
+
+
+<br>
+<br>
+<br>
+<br>
+
+## Adding-message
+
+![adding-messages-and-deleting-ready](https://user-images.githubusercontent.com/87943836/191065106-f80d1055-ca80-4b65-a33e-46e293689ee1.gif)
+
+<br>
+<br>
+<br>
+<br>
+
+## Add-Grasp-to-favorites
+
+![add-to-fav-ready](https://user-images.githubusercontent.com/87943836/191065378-fa3abf60-67e0-4735-8489-1806f63de0c4.gif)
+
+<br>
+<br>
+<br>
+<br>
+
+## Reading-mode
+
+![reading-mode-datetime-ready (1)](https://user-images.githubusercontent.com/87943836/191056442-d7f6a014-093b-4041-a18e-59ea2da82882.gif)
 
