@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:get/get_navigation/src/snackbar/snackbar_controller.dart';
 
 // screen body gradient
 BoxDecoration backgroundGradientCyan() {
@@ -368,5 +370,27 @@ ButtonStyle customeButtonStyle() {
         ),
       ),
     ),
+  );
+}
+
+SnackbarController customeSnackbar(
+    {required String theTitle, required String theMessage}) {
+  return Get.snackbar(
+    titleText: customeText(
+      theData: theTitle,
+      theFontSize: 18,
+      theFontWeight: FontWeight.w700
+    ),
+    messageText: customeText(
+      theData: theMessage,
+      theFontSize: 15,
+      theLetterSpacing: 0.6
+    ),
+    '',
+    '',
+    backgroundColor: Colors.grey.shade200,
+    duration: const Duration(seconds: 2),
+    borderColor: Colors.cyan.shade300,
+    borderWidth: 2,
   );
 }
