@@ -116,7 +116,7 @@ I will be happy to answer any questions that you may have on this approach.
  
 Linkedin [Barzi](https://www.linkedin.com/in/barzi-yassin-karim/),
 Email  ``barzy.dev@gmail.com``
-#
+
 <br>
 <br>
 <br>
@@ -131,13 +131,28 @@ Email  ``barzy.dev@gmail.com``
 <br>
 <br>
 
-<h1>sorting-subject</h1>
+## Sorting-subjects
 
 ![sorting-subject-ready](https://user-images.githubusercontent.com/87943836/191047656-64758303-8886-45d8-95f0-5992481b123f.gif)
 
 
+<br>
+<br>
+<br>
+<br>
 
+## Reading-mode
 
+![reading-mode-datetime-ready (1)](https://user-images.githubusercontent.com/87943836/191056442-d7f6a014-093b-4041-a18e-59ea2da82882.gif)
 
 
 <br>
+<br>
+<br>
+<br>
+
+## Creating-subject
+
+![creating-subject-ready](https://user-images.githubusercontent.com/87943836/191057973-98ba51ed-448a-4b4b-85e6-b406d5838533.gif)
+
+
