@@ -1,11 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:grasp_app/src/reusable_codes/functions/custome_string_functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/screens/main_screens/screen_messages.dart';
 
 class WidgetSubjectFileRecords extends StatelessWidget {
-  const WidgetSubjectFileRecords({
+  WidgetSubjectFileRecords({
     Key? key,
     required this.theUser,
     required this.theFileName,
@@ -28,6 +29,9 @@ class WidgetSubjectFileRecords extends StatelessWidget {
   final String subjectFileRecordName;
   final String subjectFileRecordTime;
   final String subjectFileRecordDate;
+
+  final CustomeStringFunctions customeStringFunctions =
+      CustomeStringFunctions();
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +56,8 @@ class WidgetSubjectFileRecords extends StatelessWidget {
                 theUser: theUser,
                 theFileName: theFileName,
                 theFileSubjectName: theFileSubjectName,
-                theFileCreatedAt: '$subjectFileRecordTime • $subjectFileRecordDate',
+                theFileCreatedAt:
+                    '$subjectFileRecordTime • $subjectFileRecordDate',
               )),
           onLongPress: theOnLongPress,
           dense: true,
@@ -77,8 +82,8 @@ class WidgetSubjectFileRecords extends StatelessWidget {
             // color: Colors.amber.shade500,
             height: 50,
             child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -87,12 +92,17 @@ class WidgetSubjectFileRecords extends StatelessWidget {
                   children: [
                     const SizedBox(height: 0.5),
                     customeText(
-                      theData: subjectFileRecordName,
+                      theData: subjectFileRecordName.length < 20
+                          ? subjectFileRecordName
+                          : customeStringFunctions.customeSubString(
+                              theString: subjectFileRecordName,
+                              theResultLengthLimit: 20,
+                            ),
                       theFontSize: 17,
-                      theLetterSpacing: 0.5,
+                      theLetterSpacing: 0.71,
                       theMaxLines: 1,
                       theTextAlign: TextAlign.start,
-                      theFontWeight: FontWeight.w500,
+                      // theFontWeight: FontWeight.w500,
                     ),
                     // const SizedBox(height: 6),
                     customeText(
