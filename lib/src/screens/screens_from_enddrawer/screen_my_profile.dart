@@ -17,9 +17,11 @@ class ScreenMyProfile extends StatefulWidget {
     Key? key,
     this.theUser,
     required this.theImgUrl,
+    required this.theUsername,
   }) : super(key: key);
   final User? theUser;
   final String theImgUrl;
+  final String theUsername;
 
   @override
   State<ScreenMyProfile> createState() => _ScreenMyProfileState();
@@ -32,6 +34,7 @@ class _ScreenMyProfileState extends State<ScreenMyProfile> {
   File? imageSelected;
   String? imageDownloadLink;
   bool isLoading = false;
+  bool isUsernameChanging = false;
 
   @override
   void setState(fn) {
@@ -75,14 +78,14 @@ class _ScreenMyProfileState extends State<ScreenMyProfile> {
                     // //         : 'nulllll',
                     // //     theColor: Colors.green,
                     // //     theFontSize: 20), //  TODO: temporary
-                    customeText(
-                      theData: widget.theUser!.email.toString(),
-                    ), //  TODO: temporary
-                    customeText(
-                      theData: widget.theImgUrl,
-                    ), //  TODO: temporary
+                    // customeText(
+                    //   theData: widget.theUser!.email.toString(),
+                    // ), //  TODO: temporary
+                    // customeText(
+                    //   theData: widget.theImgUrl,
+                    // ), //  TODO: temporary
 
-                    const SizedBox(height: 100),
+                    const SizedBox(height: 60),
                     SizedBox(
                       height: 210,
                       width: 210,
@@ -135,38 +138,97 @@ class _ScreenMyProfileState extends State<ScreenMyProfile> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 25),
+                    const SizedBox(height: 30),
+
+                    SizedBox(
+                      height: 160,
+                      child: Column(
+                        // mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          InkWell(
+                            onTap: () => setState(
+                                () => isUsernameChanging = !isUsernameChanging),
+                            child: customeText(
+                                theData: widget.theUsername,
+                                theFontSize: 25,
+                                theColor: Colors.brown,
+                                theFontWeight: FontWeight.w500,
+                                theLetterSpacing: 1,
+                                theWordSpacing: 1),
+                          ),
+                          isUsernameChanging
+                              ? Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 50, vertical: 20),
+                                  // color: Colors.brown.shade100,
+                                  alignment: Alignment.center,
+                                  // height: 100,
+                                  child: TextField(
+                                    controller: controllerUsername,
+                                    textAlign: TextAlign.center,
+                                    keyboardType: TextInputType.multiline,
+                                    textInputAction: TextInputAction.newline,
+                                    cursorColor: Colors.cyan,
+                                    // onSaved: (message) {},
+                                    // maxLines: 1,
+                                    maxLength: 15,
+                                    decoration: const InputDecoration(
+                                      filled: true,
+                                      fillColor: Colors.white70,
+                                      hintText: "new username",
+                                      // suffixIcon: customePaddingOnly(
+                                      //   thePaddingRight: 10,
+                                      //   theChild: customeIconButton(
+                                      //     theOnPressed: () => controllerMessage.clear(),
+                                      //     theIcon: Icons.close,
+                                      //     theSize: 22,
+                                      //     theColor: Colors.grey.shade400,
+                                      //   ),
+                                      // ),
+                                      border: OutlineInputBorder(
+                                          gapPadding: 110,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(40)),
+                                          borderSide: BorderSide.none),
+                                    ),
+                                  ),
+                                )
+                              : const SizedBox(width: 0, height: 0),
+                        ],
+                      ),
+                    ),
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            setState(() => isLoading = true);
-                            if (controllerUsername.text.isNotEmpty) {
-                              serviceFirestore
-                                  .addUserInfoAfterAuthToDB(
-                                user: widget.theUser!,
-                                theName: controllerUsername.text,
-                              )
-                                  .then((_) {
-                                setState(() => isLoading = false);
-                                // Get.to(ScreenSubjects(theUser: widget.theUser));
-                              });
-                            } else {
-                              serviceFirestore
-                                  .addUserInfoAfterAuthToDB(
-                                      user: widget.theUser!)
-                                  .then((_) {
-                                setState(() => isLoading = false);
-                                // Get.offAll(
-                                //     ScreenSubjects(theUser: widget.theUser));
-                              });
-                            }
-                          },
-                          child: customeText(theData: 'SKIP'),
-                        ),
-                        const SizedBox(width: 50),
+                        // ElevatedButton(
+                        //   onPressed: () {
+                        //     setState(() => isLoading = true);
+                        //     if (controllerUsername.text.isNotEmpty) {
+                        //       serviceFirestore
+                        //           .addUserInfoAfterAuthToDB(
+                        //         user: widget.theUser!,
+                        //         theName: controllerUsername.text,
+                        //       )
+                        //           .then((_) {
+                        //         setState(() => isLoading = false);
+                        //         // Get.to(ScreenSubjects(theUser: widget.theUser));
+                        //       });
+                        //     } else {
+                        //       serviceFirestore
+                        //           .addUserInfoAfterAuthToDB(
+                        //               user: widget.theUser!)
+                        //           .then((_) {
+                        //         setState(() => isLoading = false);
+                        //         // Get.offAll(
+                        //         //     ScreenSubjects(theUser: widget.theUser));
+                        //       });
+                        //     }
+                        //   },
+                        //   child: customeText(theData: 'SKIP'),
+                        // ),
+                        // const SizedBox(width: 50),
                         ElevatedButton(
                           onPressed: () async {
                             if (imageSelected != null) {
@@ -174,24 +236,35 @@ class _ScreenMyProfileState extends State<ScreenMyProfile> {
                               uploadImage(
                                 imageSelected!,
                                 theUser: widget.theUser!,
-                              ).then((_) async {
-                                if (mounted) {
-                                  setState(() => isLoading = false);
-                                }
-                                // Get.offAll(
-                                //   ScreenSubjects(theUser: widget.theUser),
-                                // );
+                              ).then((_) {
+                                Navigator.of(context).pop();
+                                Navigator.of(context).pop();
                               });
-                            } else {
-                              debugPrint('no image selected');
+                            } else if (controllerUsername.text.isNotEmpty &&
+                                controllerUsername.text != widget.theUsername) {
+                              await serviceFirestore
+                                  .addUserInfoAfterAuthToDB(
+                                user: widget.theUser!,
+                                theImageUrl: widget.theImgUrl,
+                                theName: controllerUsername.text,
+                              )
+                                  .then((value) {
+                                Navigator.of(context).pop();
+                                Navigator.of(context).pop();
+                              });
+
                               if (mounted) {
                                 setState(() => isLoading = false);
                               }
-                              Get.snackbar('Image Caution',
-                                  'No image selected yet! \nSelect an image to save, or skip it for now.');
+                              debugPrint('Username updated.');
+                              Get.snackbar('Image Caution', 'Username updated');
+                            } else {
+                              debugPrint('Nothing updated!');
+                              Get.snackbar(
+                                  'Profile Caution', 'Nothing updated!');
                             }
                           },
-                          child: customeText(theData: 'SAVE'),
+                          child: customeText(theData: 'UPDATE'),
                         ),
                       ],
                     ),
@@ -240,11 +313,39 @@ class _ScreenMyProfileState extends State<ScreenMyProfile> {
           break;
         case TaskState.success:
           imgDlRef = await imagesRef.getDownloadURL();
-          serviceFirestore.addUserInfoAfterAuthToDB(
-            user: widget.theUser!,
-            theName: controllerUsername.text,
-            theImageUrl: imgDlRef.toString(),
-          );
+          if (imgDlRef != widget.theImgUrl) {
+            serviceFirestore
+                .addUserInfoAfterAuthToDB(
+              user: widget.theUser!,
+              theImageUrl: imgDlRef.toString(),
+              theName: controllerUsername.text.isNotEmpty &&
+                      controllerUsername.text != widget.theUsername
+                  ? controllerUsername.text
+                  : widget.theUsername,
+            )
+                .then(
+              (_) async {
+                if (mounted) {
+                  setState(() => isLoading = false);
+                }
+                if (controllerUsername.text.isNotEmpty &&
+                    controllerUsername.text != widget.theUsername) {
+                  debugPrint('Image and username updated successfully.');
+                  Get.snackbar('Profile Caution',
+                      'Image and username updated successfully.');
+                } else {
+                  debugPrint('Image updated successfully.');
+                  Get.snackbar(
+                      'Profile Caution', 'Image updated successfully.');
+                }
+                imageSelected = null;
+                // Get.back();
+              },
+            );
+          } else {
+            debugPrint('Nothing updated!');
+            Get.snackbar('Profile Caution', 'Nothing updated!');
+          }
 
           // setState(() {
           //   imageDownloadLink = imgDlRef;

@@ -209,6 +209,7 @@ class _EndDrawerState extends State<EndDrawer> {
                                 theOnTap: () => Get.to(() => ScreenMyProfile(
                                       theUser: widget.theUser,
                                       theImgUrl: snapshotProfileImgUrl,
+                                      theUsername: snapshotProfileUsername,
                                     )),
                               ),
                               const SizedBox(height: 18),
