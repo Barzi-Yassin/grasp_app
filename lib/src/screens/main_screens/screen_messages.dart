@@ -176,7 +176,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                       customeSnackbar(
                         theTitle: 'Message caution',
                         theMessage:
-                            'The grasp "$theFileNameAbbreviated" added to favorites.',
+                            'The grasp "$theFileNameAbbreviated" added to your Stars.',
                       );
                     },
                     onTap: () async {
@@ -196,7 +196,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                       customeSnackbar(
                         theTitle: 'Message caution',
                         theMessage:
-                            'The grasp "$theFileNameAbbreviated" added to star.',
+                            'The grasp "$theFileNameAbbreviated" added to your Favorites.',
                       );
                     },
                     child: customeText(
