@@ -175,9 +175,10 @@ class _ScreenSignupState extends State<ScreenSignup> {
                         Get.to(() => const ScreenSignin());
                       },
                       child: customeText(
-                        theData: '\nAlready have account? \nSign in here',
+                        theData: 'Already have account? \nSign in here',
                         theTextAlign: TextAlign.center,
-                        theColor: Colors.cyan.shade700,
+                        theColor: Colors.black45,
+                        // theColor: Colors.cyan.shade700,
                       ),
                     )
                   ],

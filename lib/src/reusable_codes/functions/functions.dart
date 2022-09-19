@@ -244,17 +244,17 @@ Padding customePaddingOnly(
 Text customeTextAuthHeader({
   required String theData,
   // Color? theColor,
-  // int? theMaxLines,
+  int? theMaxLines,
   double? theFontSize,
 }) {
   return Text(
     theData.toUpperCase(),
-    maxLines: 1,
+    maxLines:theMaxLines ?? 1,
     style: TextStyle(
       color: Colors.white.withOpacity(0.9),
       fontWeight: FontWeight.w800,
       fontFamily: 'MavenPro',
-      fontSize: 22,
+      fontSize: theFontSize ?? 22,
       letterSpacing: 2,
       // decorationStyle: TextDecorationStyle.dashed,
       // decoration: TextDecoration.underline,
@@ -292,11 +292,11 @@ Text customeTextGraspHeader({
         fontFamily: 'Caveat',
         fontSize: 40,
         letterSpacing: 8,
-        shadows: const [
-          // BoxShadow(blurRadius: 80.0, color: Colors.grey),
-          BoxShadow(blurRadius: 20.0, color: Colors.teal),
-          // BoxShadow(blurRadius: 1.0, color: Colors.cyan),
-        ],
+        // shadows: const [
+        //   // BoxShadow(blurRadius: 80.0, color: Colors.grey),
+        //   BoxShadow(blurRadius: 20.0, color: Colors.teal),
+        //   // BoxShadow(blurRadius: 1.0, color: Colors.cyan),
+        // ],
         foreground: Paint()
           ..style = PaintingStyle.stroke
           ..strokeWidth = 2.0

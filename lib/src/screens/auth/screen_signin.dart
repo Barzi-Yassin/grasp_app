@@ -165,11 +165,11 @@ class _ScreenSigninState extends State<ScreenSignin> {
                         Get.offAll(() => const ScreenSignup());
                       },
                       child: customeText(
-                        theData: '\nDon\'t have account? \nSign up here',
+                        theData: 'Don\'t have account? \nSign up here',
                         theTextAlign: TextAlign.center,
-                        theColor: Colors.cyan.shade700,
+                        theColor: Colors.black45,
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
