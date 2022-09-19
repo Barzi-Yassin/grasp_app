@@ -293,8 +293,8 @@ class _ScreenMyProfileState extends State<ScreenMyProfile> {
   // Upload image to firebase storage
   uploadImage(File file, {required User theUser}) async {
     final storageRef = FirebaseStorage.instance.ref();
-    final imagesRef = storageRef.child("users2/${theUser.email}/profileImage");
-    // final imagesRef = storageRef.child("users2/profileimage");
+    final imagesRef = storageRef.child("users/${theUser.email}/profileImage");
+    // final imagesRef = storageRef.child("users/profileimage");
 
     String? imgDlRef;
 

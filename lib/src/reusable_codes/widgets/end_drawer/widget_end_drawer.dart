@@ -57,7 +57,7 @@ class _EndDrawerState extends State<EndDrawer> {
         ),
         child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
             stream: serviceFirestore.firestoreInstance
-                .collection("users2")
+                .collection("users")
                 .doc(widget.theUser!.uid)
                 .snapshots(),
             builder: (context, snapshotProfile) {

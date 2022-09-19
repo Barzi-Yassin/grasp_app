@@ -100,7 +100,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
             Expanded(
               child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                   stream: serviceFirestore.firestoreInstance
-                      .collection("users2")
+                      .collection("users")
                       .doc(widget.theUser.uid)
                       .collection('subjects')
                       .orderBy(sortedSubjectsFieldName,
@@ -170,7 +170,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                           return StreamBuilder<
                                   QuerySnapshot<Map<String, dynamic>>>(
                               stream: serviceFirestore.firestoreInstance
-                                  .collection("users2")
+                                  .collection("users")
                                   .doc(widget.theUser.uid)
                                   .collection("subjects")
                                   .doc(theRecordItemSubjectName)

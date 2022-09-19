@@ -89,7 +89,7 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
         decoration: backgroundGradientCyan(),
         child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
             stream: serviceFirestore.firestoreInstance
-                .collection("users2")
+                .collection("users")
                 .doc(widget.theUser.uid)
                 .collection("subjects")
                 .doc(widget.theFileSubjectName)

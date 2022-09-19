@@ -224,7 +224,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                   Expanded(
                     child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                         stream: serviceFirestore.firestoreInstance
-                            .collection("users2")
+                            .collection("users")
                             .doc(widget.theUser.uid)
                             .collection("subjects")
                             .doc(widget.theFileSubjectName)
