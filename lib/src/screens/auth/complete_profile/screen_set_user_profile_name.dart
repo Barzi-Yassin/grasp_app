@@ -50,6 +50,7 @@ class _ScreenSetUserProfileNameState extends State<ScreenSetUserProfileName> {
                   cursorColor: Colors.cyan,
                   onSaved: (username) {},
                   maxLines: 1,
+                  maxLength: 15,
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white70,
