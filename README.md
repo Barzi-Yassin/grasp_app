@@ -55,6 +55,7 @@ It contains the minimal implementation required to save user daily information a
 - [ ] Add voice message  <br>
 - [x] Messages reading mode  <br><br>
 - [ ] Grasp guidance screen  <br>
+- [ ] Grasp splash screen  <br>
 - [ ] Search functionalities  <br>
 - [ ] Sort files  <br>
 - [ ] Sort messages  <br>
