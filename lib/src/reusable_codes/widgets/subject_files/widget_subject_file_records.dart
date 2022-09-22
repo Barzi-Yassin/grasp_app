@@ -90,7 +90,7 @@ class WidgetSubjectFileRecords extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   // mainAxisSize: MainAxisSize.,
                   children: [
@@ -102,18 +102,18 @@ class WidgetSubjectFileRecords extends StatelessWidget {
                               theString: subjectFileRecordName,
                               theResultLengthLimit: 20,
                             ),
-                      theFontSize: 18,
-                      theLetterSpacing: 0.5,
+                      theFontSize: 17,
+                      // theLetterSpacing: 0.5,
                       theMaxLines: 1,
                       theColor: Colors.grey.shade700,
                       theTextAlign: TextAlign.start,
                       // theFontFamily: "MavenPro"
-                      theFontWeight: FontWeight.w500,
+                      // theFontWeight: FontWeight.w500,
                     ),
                     // const SizedBox(height: 6),
                     customeText(
                       theData:
-                          ' $subjectFileRecordTime • $subjectFileRecordDate',
+                          '$subjectFileRecordTime • $subjectFileRecordDate',
                       theColor: Colors.grey.shade600,
                       // theFontFamily: "MavenPro"
                     ),
