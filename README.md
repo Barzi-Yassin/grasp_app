@@ -60,6 +60,7 @@ It contains the minimal implementation required to save user daily information a
 - [ ] Sort files  <br>
 - [ ] Sort messages  <br>
 - [ ] Adding shimmer loading  <br>
+- [ ] Adding three recent grasps  <br>
 
 
 

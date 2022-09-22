@@ -35,26 +35,25 @@ class Widget_GraspGuidanceExpansionTileState
       collapsedIconColor: Colors.white,
       collapsedTextColor: Colors.white,
       title: customeText(
-          theData: '${widget.graspGuidanceId}.  ${widget.graspGuidanceTitle}',
+          theData: '${widget.graspGuidanceId}. ${widget.graspGuidanceTitle}',
           theFontFamily: "MavenPro",
           theFontWeight: FontWeight.w600,
           theFontSize: 17,
-          theLetterSpacing: 0.5
-          ),
+          theLetterSpacing: 0.5),
       trailing: customeIcon(
         theIcon:
             _customTileExpanded ? Icons.arrow_drop_up : Icons.arrow_drop_down,
       ),
       children: <Widget>[
         customeText(
-            theData: widget.graspGuidanceDescription,
-            theFontSize: 016,
-            // theFontWeight: FontWeight.w400,
-            theLetterSpacing: 0.4,
-            theColor: Colors.black54,
-            theFontFamily: "MavenPro"
-            // theMaxLines: 1,
-            ),
+          theData: widget.graspGuidanceDescription,
+          theFontSize: 015,
+          // theFontWeight: FontWeight.w400,
+          theLetterSpacing: 0.4,
+          theColor: Colors.black54,
+          theFontFamily: "MavenPro",
+          // theMaxLines: 1,
+        ),
         const SizedBox(
           height: 15,
         )
