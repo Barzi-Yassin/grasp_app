@@ -149,23 +149,51 @@ class _EndDrawerState extends State<EndDrawer> {
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         border: Border.all(
-                                            color:
-                                                _enddrawerHeaderStuffLineColor,
-                                            width: 2.0),
+                                          color: _enddrawerHeaderStuffLineColor,
+                                          width: 2.0,
+                                        ),
                                       ),
                                       alignment: Alignment.center,
-                                      child: CircleAvatar(
-                                        backgroundColor: Colors.transparent,
-                                        radius: 26,
-                                        backgroundImage:
-                                            snapshotProfileImgUrl.length > 20
-                                                ? CachedNetworkImageProvider(
-                                                    snapshotProfileImgUrl,
-                                                  ) as ImageProvider
-                                                : const AssetImage(
-                                                    'assets/images/default.jpg',
-                                                  ), // here
-                                      ),
+                                      child: snapshotProfileImgUrl.length > 20
+                                          ? Container(
+                                              width: 48,
+                                              child: ClipRRect(
+                                                borderRadius: BorderRadius.circular(5200),
+                                                child: CachedNetworkImage(
+                                                  imageUrl: snapshotProfileImgUrl.toString(),
+                                                  imageBuilder:
+                                                      (context, imageProvider) =>
+                                                          Container(
+                                                    decoration: BoxDecoration(
+                                                      image: DecorationImage(
+                                                        image: imageProvider,
+                                                        fit: BoxFit.cover,
+                                                        colorFilter:
+                                                            ColorFilter.mode(
+                                                          Colors.transparent,
+                                                          BlendMode.colorBurn,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  placeholder: (context, url) =>
+                                                      loadingIndicator(),
+                                                  errorWidget:
+                                                      (context, url, error) =>
+                                                          Icon(
+                                                    Icons.error,
+                                                  ),
+                                                ),
+                                              ),
+                                            )
+                                          : CircleAvatar(
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              radius: 26,
+                                              backgroundImage: const AssetImage(
+                                                'assets/images/default.jpg',
+                                              ), // here
+                                            ),
                                     ),
                                   ),
                                 ),
