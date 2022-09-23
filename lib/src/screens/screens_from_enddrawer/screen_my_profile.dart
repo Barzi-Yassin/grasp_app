@@ -237,7 +237,7 @@ class _ScreenMyProfileState extends State<ScreenMyProfile> {
                             );
                           } else {
                             customeSnackbar(
-                              theTitle: 'Username caution',
+                              theTitle: 'Profile username caution',
                               theMessage: 'Try not to input spaces only!',
                             );
                             return;
@@ -248,8 +248,8 @@ class _ScreenMyProfileState extends State<ScreenMyProfile> {
                           }
                           debugPrint('Username updated.');
                           customeSnackbar(
-                            theTitle: 'Image Caution',
-                            theMessage: 'Username updated',
+                            theTitle: 'Profile username Caution',
+                            theMessage: 'Username updated successfully.',
                           );
                         } else {
                           debugPrint('Nothing updated!');
@@ -338,7 +338,7 @@ class _ScreenMyProfileState extends State<ScreenMyProfile> {
                 } else {
                   debugPrint('Image updated successfully.');
                   customeSnackbar(
-                    theTitle: 'Profile Caution',
+                    theTitle: 'Profile image Caution',
                     theMessage: 'Image updated successfully.',
                   );
                 }
