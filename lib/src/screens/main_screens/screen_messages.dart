@@ -227,7 +227,8 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                 shape: BoxShape.rectangle,
                 border: Border.all(color: Colors.grey.shade300, width: 2.5),
                 borderRadius: BorderRadius.vertical(
-                    bottom: Radius.circular(isReadingMode ? 5 : 34),
+                    bottom: Radius.circular(
+                        isReadingMode || screenHeight < screenWidth ? 5 : 34),
                     top: const Radius.circular(5)),
               ),
               child: Column(
@@ -432,8 +433,8 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                               );
                                             }
                                           },
-                                          title: 
-                                          customeText(theData: theRecordItemMessage),
+                                          title: customeText(
+                                              theData: theRecordItemMessage),
                                           // SelectableText(theRecordItemMessage),
                                           subtitle: Row(
                                             mainAxisAlignment:
