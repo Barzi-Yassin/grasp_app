@@ -97,13 +97,16 @@ class _EndDrawerState extends State<EndDrawer> {
                           padding: const EdgeInsets.all(0.0),
                           margin: const EdgeInsets.all(0.0),
                           child: InkWell(
-                            onTap: () => Get.to(
+                            onTap: () {
+                              Get.back();
+                              Get.to(
                               () => ScreenMyProfile(
                                 theUser: widget.theUser,
                                 theImgUrl: snapshotProfileImgUrl,
                                 theUsername: snapshotProfileUsername,
                               ),
-                            ),
+                            );
+                            },
                             child: Row(
                               children: [
                                 // end-drawer (text)
@@ -143,58 +146,56 @@ class _EndDrawerState extends State<EndDrawer> {
                                 // end-drawer (image)
                                 Expanded(
                                   flex: 2,
-                                  child: InkWell(
-                                    child: Container(
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                          color: _enddrawerHeaderStuffLineColor,
-                                          width: 2.0,
-                                        ),
+                                  child: Container(
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color: _enddrawerHeaderStuffLineColor,
+                                        width: 2.0,
                                       ),
-                                      alignment: Alignment.center,
-                                      child: snapshotProfileImgUrl.length > 20
-                                          ? Container(
-                                              width: 48,
-                                              child: ClipRRect(
-                                                borderRadius: BorderRadius.circular(5200),
-                                                child: CachedNetworkImage(
-                                                  imageUrl: snapshotProfileImgUrl.toString(),
-                                                  imageBuilder:
-                                                      (context, imageProvider) =>
-                                                          Container(
-                                                    decoration: BoxDecoration(
-                                                      image: DecorationImage(
-                                                        image: imageProvider,
-                                                        fit: BoxFit.cover,
-                                                        colorFilter:
-                                                            ColorFilter.mode(
-                                                          Colors.transparent,
-                                                          BlendMode.colorBurn,
-                                                        ),
+                                    ),
+                                    alignment: Alignment.center,
+                                    child: snapshotProfileImgUrl.length > 20
+                                        ? Container(
+                                            width: 48,
+                                            child: ClipRRect(
+                                              borderRadius: BorderRadius.circular(5200),
+                                              child: CachedNetworkImage(
+                                                imageUrl: snapshotProfileImgUrl.toString(),
+                                                imageBuilder:
+                                                    (context, imageProvider) =>
+                                                        Container(
+                                                  decoration: BoxDecoration(
+                                                    image: DecorationImage(
+                                                      image: imageProvider,
+                                                      fit: BoxFit.cover,
+                                                      colorFilter:
+                                                          ColorFilter.mode(
+                                                        Colors.transparent,
+                                                        BlendMode.colorBurn,
                                                       ),
                                                     ),
                                                   ),
-                                                  placeholder: (context, url) =>
-                                                      loadingIndicator(),
-                                                  errorWidget:
-                                                      (context, url, error) =>
-                                                          Icon(
-                                                    Icons.error,
-                                                  ),
+                                                ),
+                                                placeholder: (context, url) =>
+                                                    loadingIndicator(),
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        Icon(
+                                                  Icons.error,
                                                 ),
                                               ),
-                                            )
-                                          : CircleAvatar(
-                                              backgroundColor:
-                                                  Colors.transparent,
-                                              radius: 26,
-                                              backgroundImage: const AssetImage(
-                                                'assets/images/default.jpg',
-                                              ), // here
                                             ),
-                                    ),
+                                          )
+                                        : CircleAvatar(
+                                            backgroundColor:
+                                                Colors.transparent,
+                                            radius: 26,
+                                            backgroundImage: const AssetImage(
+                                              'assets/images/default.jpg',
+                                            ), // here
+                                          ),
                                   ),
                                 ),
                               ],
@@ -245,13 +246,16 @@ class _EndDrawerState extends State<EndDrawer> {
                                 enddrawerRecordRoutePath:
                                     RouteScreens.routeMyProfile,
                                 isSignOut: false,
-                                theOnTap: () => Get.to(
+                                theOnTap: () {
+                                  Get.back();
+                                  return Get.to(
                                   () => ScreenMyProfile(
                                     theUser: widget.theUser,
                                     theImgUrl: snapshotProfileImgUrl,
                                     theUsername: snapshotProfileUsername,
                                   ),
-                                ),
+                                );
+                                },
                               ),
                               const SizedBox(height: 18),
                               WidgetEndDrawerRecords(
@@ -305,11 +309,14 @@ class _EndDrawerState extends State<EndDrawer> {
                                 enddrawerRecordRoutePath:
                                     RouteScreens.routeGraspGuidance,
                                 isSignOut: false,
-                                theOnTap: () => Get.to(
+                                theOnTap: () {
+                                  Get.back();
+                                  return Get.to(
                                   () => ScreenGraspGuidance(
                                     theUser: widget.theUser,
                                   ),
-                                ),
+                                );
+                                },
                               ),
                               WidgetEndDrawerRecords(
                                 enddrawerRecordId: 7,
