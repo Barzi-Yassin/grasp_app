@@ -389,7 +389,7 @@ SnackbarController customeSnackbar(
     '',
     '',
     backgroundColor: Colors.grey.shade200,
-    duration: const Duration(seconds: 5),
+    duration: const Duration(seconds: 4),
     borderColor: Colors.cyan.shade300,
     borderWidth: 2,
   );
