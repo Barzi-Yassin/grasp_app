@@ -43,15 +43,6 @@ class _ScreenMessagesState extends State<ScreenMessages> {
   bool isDateVisibile = false;
   bool isReadingMode = false;
 
-  // @override
-  // void initState() {
-  //   // focusNode.addListener(() {
-  //   //   debugPrint(focusNode.hasFocus.toString());
-  //   // });
-  //   controllerMessage.addListener(() => setState(() {}));
-  //   super.initState();
-  // }
-
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -70,7 +61,6 @@ class _ScreenMessagesState extends State<ScreenMessages> {
         appBar: AppBar(
           backgroundColor: Colors.cyan.shade700,
           // centerTitle: true,
-          // title: Text('${widget.theFileSubjectName} > ${widget.theFileName}'),
           title: appbarTitleFolderIconAndName(
               theFolderaName: isReadingMode
                   ? isReadingModeAppbarTitle
@@ -97,7 +87,6 @@ class _ScreenMessagesState extends State<ScreenMessages> {
           ],
         ),
         body: Container(
-          // padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           height: double.infinity,
           width: double.infinity,
           decoration: backgroundGradientCyan(),
@@ -106,25 +95,13 @@ class _ScreenMessagesState extends State<ScreenMessages> {
             // toAnimate: false,
             animationType: BadgeAnimationType.scale,
             animationDuration: const Duration(milliseconds: 700),
-            // padding: const EdgeInsets.all(10),
-            // gradient: LinearGradient(
-            //   begin: Alignment.topLeft,
-            //   end: Alignment.bottomRight,
-            //   colors: [
-            //     Colors.grey.shade400,
-            //     Colors.cyan.shade200,
-            //   ],
-            // ),
             elevation: 0,
             position: BadgePosition.topStart(start: 5, top: 10),
-            // borderSide: const BorderSide(color: Colors.white60, width: 1),
             badgeColor: Colors.transparent,
             badgeContent: Container(
               height: 50,
               width: screenWidth - 20,
-              // child: customeText(theData: 'fffffff'),
               decoration: BoxDecoration(
-                  // color: Colors.cyan,
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.circular(50),
                   gradient: LinearGradient(
@@ -134,8 +111,6 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                       Colors.grey.shade300,
                       Colors.grey.shade100,
                       Colors.white,
-                      // Colors.grey.shade100,
-                      // Colors.grey.shade300,
                     ],
                   )),
               child: Row(
@@ -257,7 +232,6 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                 'snapshotMessages is empty(StreamBuilder)');
                           }
 
-                          // snapshotMessages.data!.docs.first;
                           debugPrint('44444messages');
                           debugPrint(
                               snapshotMessages.data!.docs.length.toString());
@@ -319,16 +293,9 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                           minuteNumber:
                                               theRecordFileCreatedAtConverted
                                                   .minute),
-                                  // '${theRecordFileCreatedAtConverted.hour}:${theRecordFileCreatedAtConverted.minute}',
                                   'date':
                                       '${dateTimeOptimizer.dateTimeNumberToMonthName(monthNumber: theRecordFileCreatedAtConverted.month)}.${theRecordFileCreatedAtConverted.day}, ${theRecordFileCreatedAtConverted.year}',
-                                  // 'date': theRecordFileCreatedAtConverted.month.toString(),
                                 };
-                                // debugPrint(
-                                //     'test:: ${theRecordMessageCreatedAtVarListBoilerPlate['time']}');
-                                // debugPrint(
-                                //     'test:: ${theRecordMessageCreatedAtVarListBoilerPlate['date']}');
-
                                 return Badge(
                                   animationType: BadgeAnimationType.fade,
                                   position:
@@ -519,15 +486,6 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                           theSize: 28,
                                         ),
                                       ),
-                                      // suffixIcon: customePaddingOnly(
-                                      //   thePaddingRight: 10,
-                                      //   theChild: customeIconButton(
-                                      //     theOnPressed: () => controllerMessage.clear(),
-                                      //     theIcon: Icons.close,
-                                      //     theSize: 22,
-                                      //     theColor: Colors.grey.shade400,
-                                      //   ),
-                                      // ),
                                       border: const OutlineInputBorder(
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(40)),
@@ -539,9 +497,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                   height: 50,
                                   width: 44,
                                   margin: const EdgeInsets.only(left: 3),
-                                  // padding: EdgeInsets.symmetric(horizontal: 5),
                                   decoration: BoxDecoration(
-                                    // color: Colors.cyan,
                                     borderRadius: const BorderRadius.horizontal(
                                       left: Radius.circular(10),
                                       right: Radius.circular(24),
@@ -593,28 +549,4 @@ class _ScreenMessagesState extends State<ScreenMessages> {
       ),
     );
   }
-
-  // Widget messageInput() {
-  //   return TextField(
-  //     focusNode: focusNodeMessage,
-  //     controller: controllerMessage,
-  //     keyboardType: TextInputType.multiline,
-  //     textInputAction: TextInputAction.newline,
-  //     decoration: InputDecoration(
-  //       hintText: 'hint...',
-  //       // border: OutlineInputBorder(),
-  //       suffixIcon: controllerMessage.text.isEmpty
-  //           ? const SizedBox(
-  //               width: 0,
-  //               height: 0,
-  //             )
-  //           : customeIconButton(
-  //               theOnPressed: () => controllerMessage.clear(),
-  //               theIcon: Icons.close,
-  //               theSize: 22,
-  //               theColor: Colors.grey.shade400,
-  //             ),
-  //     ),
-  //   );
-  // }
 }
