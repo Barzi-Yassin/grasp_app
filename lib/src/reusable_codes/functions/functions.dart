@@ -249,7 +249,7 @@ Text customeTextAuthHeader({
 }) {
   return Text(
     theData.toUpperCase(),
-    maxLines:theMaxLines ?? 1,
+    maxLines: theMaxLines ?? 1,
     style: TextStyle(
       color: Colors.white.withOpacity(0.9),
       fontWeight: FontWeight.w800,
@@ -338,12 +338,27 @@ Column noItemFound(
   return Column(
     children: [
       SizedBox(height: (theScreenHeight / 3)),
-      customeText(
-        theData: '4🧐4',
-        theFontFamily: 'MavenPro',
-        theFontWeight: FontWeight.bold,
-        theTextAlign: TextAlign.center,
-        theFontSize: 40,
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          customeText(
+            theData: '4',
+            theFontFamily: 'MavenPro',
+            theFontWeight: FontWeight.bold,
+            theTextAlign: TextAlign.center,
+            theFontSize: 40,
+          ),
+          SizedBox(width: 2),
+          Image.asset('assets/images/noitememoji.png', width: 32),
+          SizedBox(width: 5),
+          customeText(
+            theData: '4',
+            theFontFamily: 'MavenPro',
+            theFontWeight: FontWeight.bold,
+            theTextAlign: TextAlign.center,
+            theFontSize: 40,
+          ),
+        ],
       ),
       const SizedBox(height: 5),
       customeText(
@@ -377,15 +392,9 @@ SnackbarController customeSnackbar(
     {required String theTitle, required String theMessage}) {
   return Get.snackbar(
     titleText: customeText(
-      theData: theTitle,
-      theFontSize: 18,
-      theFontWeight: FontWeight.w700
-    ),
+        theData: theTitle, theFontSize: 18, theFontWeight: FontWeight.w700),
     messageText: customeText(
-      theData: theMessage,
-      theFontSize: 15,
-      theLetterSpacing: 0.6
-    ),
+        theData: theMessage, theFontSize: 15, theLetterSpacing: 0.6),
     '',
     '',
     backgroundColor: Colors.grey.shade200,
