@@ -185,6 +185,27 @@ class ServiceFirestore {
     return graspFavStarModel;
   }
 
+// delete file from fav or star list
+  Future unfavUnstarGraspFile({
+    required User user,
+    required String theFileName,
+    required bool isFileUnfavedTrueUnstaredFalse,
+  }) async {
+    final String generateFavOrStar =
+        isFileUnfavedTrueUnstaredFalse ? "favfiles" : "starfiles";
+
+    await firestoreInstance
+        .collection("users")
+        .doc(user.uid)
+        .collection("favAndStars")
+        .doc(generateFavOrStar)
+        .collection("files")
+        .doc(theFileName)
+        .delete();
+
+    return;
+  }
+
 // delete file ::::::  // TODO: clean the message deletion process !!!
   Future deleteFile({
     required User user,
