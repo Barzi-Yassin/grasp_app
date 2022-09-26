@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:get/get.dart';
 import 'package:grasp_app/src/reusable_codes/functions/custome_string_functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/date_time_functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/loadings/loading_indicator.dart';
+import 'package:grasp_app/src/reusable_codes/widgets/dialogs/dialog_unfav_unstar_grasp_files.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/end_drawer/widget_end_drawer.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/subject_files/widget_subject_file_records.dart';
 import 'package:grasp_app/src/services/firebase/service_firestore.dart';
@@ -94,8 +96,9 @@ class ScreenFilterStars extends StatelessWidget {
                     // ignore: unused_local_variable
                     final String theRecordStarItemFileNameAbbreviated =
                         customeStringFunctions.customeSubString(
-                            theString: theRecordStarItemFileName,
-                            theResultLengthLimit: 5);
+                      theString: theRecordStarItemFileName,
+                      theResultLengthLimit: 8,
+                    );
 
                     // if (!listOfCurrentFilesName
                     //     .contains(theRecordStarItemFileName)) {
@@ -182,50 +185,41 @@ class ScreenFilterStars extends StatelessWidget {
                             //   ),
                             // );
                           },
-                          theOnLongPress: () {},
-                          // () async {
-                          //   showAnimatedDialog(
-                          //     barrierColor: Colors.black38,
-                          //     barrierDismissible: true,
-                          //     context: context,
-                          //     animationType: DialogTransitionType.sizeFade,
-                          //     curve: Curves.easeOut,
-                          //     alignment: Alignment.bottomCenter,
-                          //     duration: const Duration(milliseconds: 800),
-                          //     builder: (_) => DialogDelete(
-                          //       theTitle: "Grasp",
-                          //       theName: theRecordStarItemFileName,
-                          //       theOnPressed: () async {
-                          //         await serviceFirestore
-                          //             .deleteFile(
-                          //           user: widget.theUser,
-                          //           theFileSubjectName:
-                          //               widget.theFileSubjectName,
-                          //           theFileName: theRecordStarItemFileName,
-                          //         )
-                          //             .then(
-                          //           (value) {
-                          //             Get.back();
-                          //             listOfCurrentFilesNameFunction()
-                          //                 .remove(theRecordStarItemFileName);
-                          //             serviceFirestore.updateSubject(
-                          //                 user: widget.theUser,
-                          //                 theSubjectName:
-                          //                     widget.theFileSubjectName,
-                          //                 theSubjectItemsNumber:
-                          //                     listOfCurrentFilesName.length
-                          //                         .toString());
+                          theOnLongPress: () async {
+                            showAnimatedDialog(
+                              barrierColor: Colors.black38,
+                              barrierDismissible: true,
+                              context: context,
+                              animationType: DialogTransitionType.sizeFade,
+                              curve: Curves.easeOut,
+                              alignment: Alignment.bottomCenter,
+                              duration: const Duration(milliseconds: 800),
+                              builder: (_) => DialogUnfavUnstarGraspFiles(
+                                theIsUnfavTrueUnstarFalse: false,
+                                theName: theRecordStarItemFileNameAbbreviated,
+                                theOnPressed: () async {
+                                  await serviceFirestore
+                                      .unfavUnstarGraspFile(
+                                        user: theUser!,
+                                        theFileName: theRecordStarItemFileName,
+                                        isFileUnfavedTrueUnstaredFalse: false,
+                                      )
+                                      .then(
+                                        (_) {
+                                          Get.back();
+                                          return customeSnackbar(
+                                          theTitle: 'Grasp caution',
+                                          theMessage:
+                                              'The grasp "$theRecordStarItemFileNameAbbreviated" has unstared succesfully.',
+                                        );
+                                        },
 
-                          //             Get.snackbar('Grasp caution',
-                          //                 'The Grasp "$theRecordStarItemFileNameAbbreviated" has been deleted successfully.');
-                          //             // debugPrint(
-                          //             //     'jjjjjjjj delete :: ${listOfCurrentFilesName.length}'); // fix here dynamic
-                          //           },
-                          //         );
-                          //       },
-                          //     ),
-                          //   );
-                          // },
+                                      );
+                                },
+                              ),
+                            );
+                          },
+                        
                         ),
                       ],
                     );
