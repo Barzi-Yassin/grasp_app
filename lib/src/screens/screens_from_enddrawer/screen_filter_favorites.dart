@@ -58,10 +58,10 @@ class ScreenFilterFavorites extends StatelessWidget {
                 return const Text('snapshotFiles is empty(StreamBuilder)');
               }
 
-              // snapshotFiles.data!.docs.first;
-              debugPrint('44444files');
-              debugPrint(snapshotFiles.data!.docs.length.toString());
-              debugPrint(snapshotFiles.data.toString());
+              // // snapshotFiles.data!.docs.first;
+              // debugPrint('44444files');
+              // debugPrint(snapshotFiles.data!.docs.length.toString());
+              // debugPrint(snapshotFiles.data.toString());
 
               snapshotFiles.data?.docs;
 

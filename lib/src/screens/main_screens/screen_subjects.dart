@@ -47,8 +47,8 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
 
   List<String> listOfCurrentSubjectsNameFunction() {
     int len = listOfCurrentSubjectsName.length;
-    debugPrint(
-        'There are ${len + 1} subjects(s) in the listOfCurrentSubjectsName');
+    // debugPrint(
+    //     'There are ${len + 1} subjects(s) in the listOfCurrentSubjectsName');
     return listOfCurrentSubjectsName;
   }
   // end listOfCurrentSubjectsName of the current subject names
@@ -76,8 +76,8 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
         leading: GestureDetector(
           onTap: () {
             setState(() => sortingSubjetsNumber++);
-            debugPrint(
-                'sorts :: $sortingSubjetsNumber, $sortedSubjectsFieldName, \$ ');
+            // debugPrint(
+            //     'sorts :: $sortingSubjetsNumber, $sortedSubjectsFieldName, \$ ');
           },
           onLongPress: () =>
               setState(() => isSortDescending = !isSortDescending),
@@ -120,10 +120,10 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                           'snapshotSubject is empty(StreamBuilder)');
                     }
 
-                    // snapshotSubject.data!.docs.first;
-                    debugPrint('22222subjects');
-                    debugPrint(snapshotSubject.data!.docs.length.toString());
-                    debugPrint(snapshotSubject.data.toString());
+                    // // snapshotSubject.data!.docs.first;
+                    // debugPrint('22222subjects');
+                    // debugPrint(snapshotSubject.data!.docs.length.toString());
+                    // debugPrint(snapshotSubject.data.toString());
 
                     snapshotSubject.data?.docs;
 
@@ -189,10 +189,10 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                                       'snapshotFiles is empty(StreamBuilder)');
                                 }
 
-                                debugPrint('44444files');
-                                debugPrint(
-                                    snapshotFiles.data!.docs.length.toString());
-                                debugPrint(snapshotFiles.data.toString());
+                                // debugPrint('44444files');
+                                // debugPrint(
+                                //     snapshotFiles.data!.docs.length.toString());
+                                // debugPrint(snapshotFiles.data.toString());
 
                                 snapshotFiles.data?.docs;
 
@@ -299,7 +299,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                                             theMessage:
                                                 'Delete all the grasps inside "$theRecordItemSubjectNameAbbreviated" subject, then it could be deleted.',
                                           );
-                                          debugPrint('eeeeeeee :: $theRecordItemSubjectNameAbbreviated');
+                                          // debugPrint('eeeeeeee :: $theRecordItemSubjectNameAbbreviated');
                                         }
                                       },
                                     ),
@@ -323,9 +323,9 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
             controller: controllerAddGraspSubject,
             title: 'Subject',
             theOnPressed: () async {
-              debugPrint(listOfCurrentSubjectsName
-                  .contains(controllerAddGraspSubject.text)
-                  .toString());
+              // debugPrint(listOfCurrentSubjectsName
+              //     .contains(controllerAddGraspSubject.text)
+              //     .toString());
 
               if (controllerAddGraspSubject.text.isNotEmpty) {
                 if (!listOfCurrentSubjectsName
@@ -340,7 +340,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                         (_) => Get.back(),
                       );
                 } else {
-                  debugPrint('the subject name is already exist !!!');
+                  // debugPrint('the subject name is already exist !!!');
                   customeSnackbar(
                     theTitle: 'Subject caution',
                     theMessage: 'The subject name is already exist!',

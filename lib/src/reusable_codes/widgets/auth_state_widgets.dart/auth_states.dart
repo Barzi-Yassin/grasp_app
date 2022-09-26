@@ -134,7 +134,7 @@ class _InputPasswordState extends State<InputPassword> {
                 theChild: customeIconButton(
                   theOnPressed: () => setState(() {
                     hidePassword = !hidePassword;
-                    debugPrint(hidePassword.toString());
+                    // debugPrint(hidePassword.toString());
                     if (hidePassword) {
                       passwordHideShowIconHandler = Icons.visibility_off;
                     } else {

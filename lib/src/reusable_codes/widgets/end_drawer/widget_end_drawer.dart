@@ -74,9 +74,9 @@ class _EndDrawerState extends State<EndDrawer> {
               final snapshotProfileImgUrl =
                   snapshotProfile.data!.get("imageUrl");
 
-              debugPrint('00000 :: ${snapshotProfile.data}');
-              debugPrint('00000 :: $snapshotProfileUsername');
-              debugPrint('00000 :: $snapshotProfileImgUrl');
+              // debugPrint('00000 :: ${snapshotProfile.data}');
+              // debugPrint('00000 :: $snapshotProfileUsername');
+              // debugPrint('00000 :: $snapshotProfileImgUrl');
               return Column(
                 children: [
                   // end-drawer headerl

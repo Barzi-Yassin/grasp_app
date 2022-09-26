@@ -90,8 +90,8 @@ class _ScreenSigninState extends State<ScreenSignin> {
                                 setState(() => isLoading = true);
                                 debugPrint(
                                     'controllerSigninEmail= <${controllerSigninEmail.text}>');
-                                debugPrint(
-                                    'controllerSigninPassword= <${controllerSigninPassword.text}>');
+                                // debugPrint(
+                                //     'controllerSigninPassword= <${controllerSigninPassword.text}>');
                                 await serviceAuth
                                     .signInUserWithEmailAndPassword(
                                   signInemail:
@@ -101,9 +101,8 @@ class _ScreenSigninState extends State<ScreenSignin> {
                                     .then(
                                   (credential) {
                                     if (credential != null) {
-                                      debugPrint(
-                                        'controllerSigninEmail= <${controllerSigninEmail.text}>',
-                                      );
+                                      // debugPrint(
+                                      //     'controllerSigninEmail= <${controllerSigninEmail.text}>');
                                       setState(() {
                                         isLoading = false;
                                         controllerSigninEmail.clear();

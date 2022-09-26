@@ -46,7 +46,7 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
 
   List<String> listOfCurrentFilesNameFunction() {
     int len = listOfCurrentFilesName.length;
-    debugPrint('There are ${len + 1} file(s) in the listOfCurrentFilesName');
+    // debugPrint('There are ${len + 1} file(s) in the listOfCurrentFilesName');
     return listOfCurrentFilesName;
   }
   // end listOfCurrentFilesName of the current subject names
@@ -105,10 +105,10 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                 return const Text('snapshotFiles is empty(StreamBuilder)');
               }
 
-              // snapshotFiles.data!.docs.first;
-              debugPrint('44444files');
-              debugPrint(snapshotFiles.data!.docs.length.toString());
-              debugPrint(snapshotFiles.data.toString());
+              // // snapshotFiles.data!.docs.first;
+              // debugPrint('44444files');
+              // debugPrint(snapshotFiles.data!.docs.length.toString());
+              // debugPrint(snapshotFiles.data.toString());
 
               snapshotFiles.data?.docs;
 
@@ -256,7 +256,7 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                                             'The Grasp "$theRecordItemFileNameAbbreviated" has been deleted successfully.',
                                       );
                                       debugPrint(
-                                          'jjjjjjjj delete :: ${listOfCurrentFilesName.length}');
+                                          'deleted :: ${listOfCurrentFilesName.length}');
                                     },
                                   );
                                 },
@@ -280,9 +280,9 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
             controller: controllerAddGraspFile,
             title: 'Grasp',
             theOnPressed: () async {
-              debugPrint(listOfCurrentFilesName
-                  .contains(controllerAddGraspFile.text)
-                  .toString());
+              // debugPrint(listOfCurrentFilesName
+              //     .contains(controllerAddGraspFile.text)
+              //     .toString());
 
               if (controllerAddGraspFile.text.isNotEmpty) {
                 if (!listOfCurrentFilesName
@@ -303,8 +303,8 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                           theSubjectName: widget.theFileSubjectName,
                           theSubjectItemsNumber:
                               listOfCurrentFilesName.length.toString());
-                      debugPrint(
-                          'jjjjjjjj :: ${listOfCurrentFilesName.length}');
+                      // debugPrint(
+                      //     'jjjjjjjj :: ${listOfCurrentFilesName.length}');
                       Get.back();
                     },
                   );

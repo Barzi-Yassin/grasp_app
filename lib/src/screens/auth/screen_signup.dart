@@ -96,8 +96,8 @@ class _ScreenSignupState extends State<ScreenSignup> {
                                   controllerSignupPassword.text.isNotEmpty) {
                                 debugPrint(
                                     'controllerSignupEmail= <${controllerSignupEmail.text}>'); //  TODO: temporary
-                                debugPrint(
-                                    'controllerSignupPassword= <${controllerSignupPassword.text}>'); //  TODO: temporary
+                                // debugPrint(
+                                //     'controllerSignupPassword= <${controllerSignupPassword.text}>'); //  TODO: temporary
 
                                 setState(() => isLoading = true);
                                 await serviceAuth

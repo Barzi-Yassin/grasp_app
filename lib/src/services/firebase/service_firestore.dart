@@ -226,11 +226,11 @@ class ServiceFirestore {
             .snapshots();
 
     theStream.forEach((snapshotMessage) {
-      debugPrint('hellllllo :: ${snapshotMessage.docs.length}');
-      debugPrint('hellllllo :: $snapshotMessage');
+      // debugPrint('hellllllo :: ${snapshotMessage.docs.length}');
+      // debugPrint('hellllllo :: $snapshotMessage');
       snapshotMessage.docs.forEach((snapshotMessage) async {
         final messageDocid = snapshotMessage.data()["messageDocId"];
-        debugPrint('hellllllo messageDocid ==== $messageDocid');
+        // debugPrint('hellllllo messageDocid ==== $messageDocid');
         docMessageDeleteFunction(theDocMessageId: messageDocid);
       });
     });

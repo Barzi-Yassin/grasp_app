@@ -136,7 +136,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                   // ),
                   InkWell(
                     onLongPress: () async {
-                      debugPrint('kkkkkkkkkkkkkkk1111 star');
+                      debugPrint('added to star');
                       await serviceFirestore
                           .favStarFile(
                             user: widget.theUser,
@@ -147,7 +147,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                             isFileStared: true,
                           )
                           .then((value) =>
-                              debugPrint('kkkkkkkkkkkkkkk1111 added to star'));
+                              debugPrint('added to added to star'));
                       customeSnackbar(
                         theTitle: 'Message caution',
                         theMessage:
@@ -155,7 +155,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                       );
                     },
                     onTap: () async {
-                      debugPrint('kkkkkkkkkkkkkkk1111 fav');
+                      debugPrint('added to fav');
 
                       await serviceFirestore
                           .favStarFile(
@@ -167,7 +167,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                             isFileStared: false,
                           )
                           .then((value) =>
-                              debugPrint('kkkkkkkkkkkkkkk1111 added to fav'));
+                              debugPrint('added to added to fav'));
                       customeSnackbar(
                         theTitle: 'Message caution',
                         theMessage:
@@ -232,10 +232,10 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                 'snapshotMessages is empty(StreamBuilder)');
                           }
 
-                          debugPrint('44444messages');
-                          debugPrint(
-                              snapshotMessages.data!.docs.length.toString());
-                          debugPrint(snapshotMessages.data.toString());
+                          // debugPrint('44444messages');
+                          // debugPrint(
+                          //     snapshotMessages.data!.docs.length.toString());
+                          // debugPrint(snapshotMessages.data.toString());
 
                           snapshotMessages.data?.docs;
 
@@ -276,8 +276,8 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                   theResultLengthLimit: 5,
                                 );
 
-                                debugPrint(
-                                    'ttttttt :: $theRecordItemMessageAbbreviated');
+                                // debugPrint(
+                                //     'ttttttt :: $theRecordItemMessageAbbreviated');
 
                                 final theRecordFileCreatedAtConverted =
                                     DateTime.fromMillisecondsSinceEpoch(
