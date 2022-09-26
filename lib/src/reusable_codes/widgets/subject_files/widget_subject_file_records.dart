@@ -85,7 +85,7 @@ class WidgetSubjectFileRecords extends StatelessWidget {
           // ),
           title: SizedBox(
             // color: Colors.amber.shade500,
-            height: 50,
+            height: 48,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -93,7 +93,6 @@ class WidgetSubjectFileRecords extends StatelessWidget {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  // mainAxisSize: MainAxisSize.,
                   children: [
                     const SizedBox(height: 0.5),
                     customeText(
