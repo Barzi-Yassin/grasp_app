@@ -184,6 +184,7 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                               )
                             : const SizedBox(height: 0, width: 0),
                         WidgetSubjectFileRecords(
+                          isSubtitleDate: false,
                           theUser: widget.theUser,
                           theFileName: theRecordItemFileName,
                           theFileSubjectName: widget.theFileSubjectName,

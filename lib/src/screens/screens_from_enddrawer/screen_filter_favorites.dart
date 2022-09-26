@@ -147,6 +147,7 @@ class ScreenFilterFavorites extends StatelessWidget {
                               )
                             : const SizedBox(height: 0, width: 0),
                         WidgetSubjectFileRecords(
+                          isSubtitleDate: true,
                           theUser: theUser!,
                           theFileName: theRecordFavItemFileName,
                           theFileSubjectName: theRecordFavItemFileSubjectName,

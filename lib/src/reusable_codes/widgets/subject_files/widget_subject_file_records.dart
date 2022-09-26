@@ -17,6 +17,7 @@ class WidgetSubjectFileRecords extends StatelessWidget {
     required this.subjectFileRecordDate,
     required this.theTrailingOnPressed,
     required this.theOnLongPress,
+    required this.isSubtitleDate,
   }) : super(key: key);
 
   final User theUser;
@@ -24,6 +25,7 @@ class WidgetSubjectFileRecords extends StatelessWidget {
   final String theFileSubjectName;
   final theTrailingOnPressed;
   final theOnLongPress;
+  final bool isSubtitleDate;
 
   final String subjectFileRecordId;
   final String subjectFileRecordName;
@@ -71,10 +73,9 @@ class WidgetSubjectFileRecords extends StatelessWidget {
           enabled: true,
           visualDensity: const VisualDensity(vertical: 0),
           leading: customeText(
-            theData: subjectFileRecordId,
-            theColor: Colors.black54,
-            theFontSize: 16
-          ),
+              theData: subjectFileRecordId,
+              theColor: Colors.black54,
+              theFontSize: 16),
           subtitle: const SizedBox(height: 0),
           // Text(
           //   subjectFileRecordName,
@@ -112,8 +113,9 @@ class WidgetSubjectFileRecords extends StatelessWidget {
                     ),
                     // const SizedBox(height: 6),
                     customeText(
-                      theData:
-                          '$subjectFileRecordTime • $subjectFileRecordDate',
+                      theData: isSubtitleDate
+                          ? subjectFileRecordDate
+                          : '$subjectFileRecordTime • $subjectFileRecordDate', // here maintenance
                       theColor: Colors.grey.shade600,
                       // theFontFamily: "MavenPro"
                     ),
