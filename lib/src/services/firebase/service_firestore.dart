@@ -235,6 +235,24 @@ class ServiceFirestore {
       });
     });
 
+    await firestoreInstance
+        .collection("users")
+        .doc(user.uid)
+        .collection("favAndStars")
+        .doc('starfiles')
+        .collection("files")
+        .doc(theFileName)
+        .delete();
+
+    await firestoreInstance
+        .collection("users")
+        .doc(user.uid)
+        .collection("favAndStars")
+        .doc('favfiles')
+        .collection("files")
+        .doc(theFileName)
+        .delete();
+
     await docFile.delete();
     return;
   }
