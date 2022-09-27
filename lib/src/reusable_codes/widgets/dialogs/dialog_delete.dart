@@ -22,18 +22,14 @@ class _DialogDeleteState extends State<DialogDelete> {
   @override
   Widget build(BuildContext context) {
     return DialogMainBoilerplate(
-      title: 'Delete ${widget.theTitle}',
+      theTitle: 'Delete ${widget.theTitle}',
       theWidgetContent: customeText(
           theData:
               'Delete ${widget.theTitle.toLowerCase()} "${widget.theName}" permanently !'),
-      theWidgetButton: ElevatedButton.icon(
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(Colors.cyan),
-        ),
-        onPressed: widget.theOnPressed,
-        icon: customeIcon(theIcon: Icons.delete_forever_outlined),
-        label: customeText(theData: 'Delete'),
-      ),
+      theIsButtonElevatedWithIcon: true,
+      theButtonLabel: 'Delete',
+      theButtonIcon: Icons.delete_forever_outlined,
+      theOnPressed: widget.theOnPressed,
     );
   }
 }

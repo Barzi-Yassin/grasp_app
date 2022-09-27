@@ -22,7 +22,7 @@ class _DialogAddState extends State<DialogAdd> {
   @override
   Widget build(BuildContext context) {
     return DialogMainBoilerplate(
-      title: 'New ${widget.title}',
+      theTitle: 'New ${widget.title}',
       theWidgetContent: TextFormField(
         controller: widget.controller,
         textAlign: TextAlign.center,
@@ -40,12 +40,9 @@ class _DialogAddState extends State<DialogAdd> {
             hintText: '${widget.title} name',
             alignLabelWithHint: true),
       ),
-      theWidgetButton: ElevatedButton(
-        style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.cyan)),
-        onPressed: widget.theOnPressed,
-        child: customeText(theData: 'Create'),
-      ),
+      theIsButtonElevatedWithIcon: false,
+      theButtonLabel: 'Create',
+      theOnPressed: widget.theOnPressed,
     );
   }
 }

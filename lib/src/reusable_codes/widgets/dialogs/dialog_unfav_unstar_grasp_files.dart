@@ -26,22 +26,14 @@ class _DialogUnfavUnstarGraspFilesState
     String generateTitle =
         widget.theIsUnfavTrueUnstarFalse ? "Unfav" : "Unstar";
     return DialogMainBoilerplate(
-      title: '$generateTitle Grasp',
+      theTitle: '$generateTitle Grasp',
       theWidgetContent: customeText(
         theData: '$generateTitle grasp "${widget.theName}" !',
         theTextAlign: TextAlign.center,
       ),
-      theWidgetButton: ElevatedButton(
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(Colors.cyan),
-        ),
-        onPressed: widget.theOnPressed,
-        child: customeText(
-          theData: generateTitle,
-          theColor: Colors.white,
-          theLetterSpacing: 0.5,
-        ),
-      ),
+      theIsButtonElevatedWithIcon: false,
+      theButtonLabel: generateTitle,
+      theOnPressed: widget.theOnPressed,
     );
   }
 }

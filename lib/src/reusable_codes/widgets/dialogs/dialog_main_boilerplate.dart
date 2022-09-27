@@ -2,16 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 
 class DialogMainBoilerplate extends StatefulWidget {
-  const DialogMainBoilerplate({
+  DialogMainBoilerplate({
     super.key,
-    required this.title,
+    required this.theTitle,
     required this.theWidgetContent,
-    required this.theWidgetButton,
+    required this.theIsButtonElevatedWithIcon,
+    required this.theOnPressed,
+    required this.theButtonLabel,
+    this.theButtonIcon,
   });
 
-  final String title;
+  final String theTitle;
   final Widget theWidgetContent;
-  final Widget theWidgetButton;
+  final bool theIsButtonElevatedWithIcon;
+  final String theButtonLabel;
+  final IconData? theButtonIcon;
+  final theOnPressed; // TODO: fix it's error
 
   @override
   State<DialogMainBoilerplate> createState() => _DialogMainBoilerplateState();
@@ -55,7 +61,7 @@ class _DialogMainBoilerplateState extends State<DialogMainBoilerplate> {
               ),
             ),
             customeText(
-              theData: widget.title,
+              theData: widget.theTitle,
               theColor: Color.fromARGB(255, 126, 50, 50),
             ),
             const Expanded(
@@ -80,7 +86,21 @@ class _DialogMainBoilerplateState extends State<DialogMainBoilerplate> {
             theColor: Colors.cyan,
           ),
         ),
-        widget.theWidgetButton,
+        widget.theIsButtonElevatedWithIcon
+            ? ElevatedButton.icon(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.cyan),
+                ),
+                onPressed: widget.theOnPressed,
+                icon: customeIcon(theIcon: Icons.delete_forever_outlined),
+                label: customeText(theData: widget.theButtonLabel),
+              )
+            : ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.cyan)),
+                onPressed: widget.theOnPressed,
+                child: customeText(theData: widget.theButtonLabel),
+              )
       ],
     );
   }

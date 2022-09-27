@@ -124,7 +124,7 @@ class _DialogEditState extends State<DialogEdit> {
     //   ],
     // );
     return DialogMainBoilerplate(
-      title: 'Edit ${widget.title} Name',
+      theTitle: 'Edit ${widget.title} Name',
       theWidgetContent: SizedBox(
         height: 85,
         child: Column(
@@ -152,13 +152,10 @@ class _DialogEditState extends State<DialogEdit> {
           ],
         ),
       ),
-      theWidgetButton: ElevatedButton.icon(
-        style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.cyan)),
-        onPressed: widget.theOnPressed,
-        icon: customeIcon(theIcon: Icons.update),
-        label: customeText(theData: 'Update'),
-      ),
+      theIsButtonElevatedWithIcon: true,
+      theButtonLabel: 'Update',
+      theButtonIcon: Icons.update,
+      theOnPressed: widget.theOnPressed,
     );
   }
 }
