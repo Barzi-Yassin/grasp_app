@@ -227,7 +227,7 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                               duration: const Duration(milliseconds: 800),
                               builder: (_) => DialogDelete(
                                 theTitle: "Grasp",
-                                theName: theRecordItemFileName,
+                                theName: theRecordItemFileNameAbbreviated,
                                 theOnPressed: () async {
                                   await serviceFirestore
                                       .deleteFile(
