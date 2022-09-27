@@ -55,9 +55,9 @@ class _DialogDeleteState extends State<DialogDelete> {
                 endIndent: 10,
               ),
             ),
-            Text(
-              'Delete ${widget.theTitle}',
-              style: const TextStyle(color: Color.fromARGB(255, 126, 50, 50)),
+            customeText(
+              theData: 'Delete ${widget.theTitle}',
+              theColor: Color.fromARGB(255, 126, 50, 50),
             ),
             const Expanded(
               child: Divider(
@@ -81,9 +81,9 @@ class _DialogDeleteState extends State<DialogDelete> {
               side: MaterialStateProperty.all(
                   const BorderSide(color: Colors.cyan))),
           onPressed: () => Navigator.pop(context, 'Cancel'),
-          child: const Text(
-            'Cancle',
-            style: TextStyle(color: Colors.cyan),
+          child: customeText(
+            theData: "Cancle",
+            theColor: Colors.cyan,
           ),
         ),
         ElevatedButton.icon(

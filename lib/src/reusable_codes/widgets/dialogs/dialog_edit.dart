@@ -56,9 +56,9 @@ class _DialogEditState extends State<DialogEdit> {
                 endIndent: 10,
               ),
             ),
-            Text(
-              'Edit ${widget.title} Name',
-              style: const TextStyle(color: Color.fromARGB(255, 126, 50, 50)),
+            customeText(
+              theData: 'Edit ${widget.title} Name',
+              theColor: Color.fromARGB(255, 126, 50, 50),
             ),
             const Expanded(
               child: Divider(
@@ -108,9 +108,9 @@ class _DialogEditState extends State<DialogEdit> {
               side: MaterialStateProperty.all(
                   const BorderSide(color: Colors.cyan))),
           onPressed: () => Navigator.pop(context, 'Cancel'),
-          child: const Text(
-            'Cancle',
-            style: TextStyle(color: Colors.cyan),
+          child: customeText(
+            theData: "Cancle",
+            theColor: Colors.cyan,
           ),
         ),
         ElevatedButton.icon(

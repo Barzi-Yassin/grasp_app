@@ -167,11 +167,9 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                                         endIndent: 10,
                                       ),
                                     ),
-                                    Text(
-                                      widget.theFileSubjectCreatedAt,
-                                      style: const TextStyle(
-                                        color: Colors.black26,
-                                      ),
+                                    customeText(
+                                      theData: widget.theFileSubjectCreatedAt,
+                                      theColor: Colors.black26,
                                     ),
                                     const Expanded(
                                       child: Divider(

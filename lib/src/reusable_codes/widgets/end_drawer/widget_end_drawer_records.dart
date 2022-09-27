@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 
 class WidgetEndDrawerRecords extends StatelessWidget {
   WidgetEndDrawerRecords({
@@ -61,10 +62,10 @@ class WidgetEndDrawerRecords extends StatelessWidget {
             // },
             // minVerticalPadding: 20,
             iconColor: Colors.cyan.shade600,
-            title: Text(
-              enddrawerRecordTitle,
-              style: const TextStyle(fontSize: 15),
-              maxLines: 1,
+            title: customeText(
+              theData: enddrawerRecordTitle,
+              theFontSize: 15,
+              theMaxLines: 1,
             ),
             trailing: _enddrawerRecordsWidgetDetector(
               _currentEnddrawerRecordIconDetector(),

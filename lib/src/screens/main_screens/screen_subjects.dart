@@ -213,13 +213,12 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                                                     endIndent: 10,
                                                   ),
                                                 ),
-                                                Text(
-                                                  sortSubjectsFunctions.getSortName(
-                                                      theSortedSubjectsFieldName:
-                                                          sortedSubjectsFieldName),
-                                                  style: const TextStyle(
-                                                    color: Colors.black26,
-                                                  ),
+                                                customeText(
+                                                  theData: sortSubjectsFunctions
+                                                      .getSortName(
+                                                          theSortedSubjectsFieldName:
+                                                              sortedSubjectsFieldName),
+                                                  theColor: Colors.black26,
                                                 ),
                                                 const Expanded(
                                                   child: Divider(
@@ -228,14 +227,12 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                                                     endIndent: 10,
                                                   ),
                                                 ),
-                                                Text(
-                                                  sortSubjectsFunctions
+                                                customeText(
+                                                  theData: sortSubjectsFunctions
                                                       .getSortAscOrDesc(
                                                           isSortDescending:
                                                               isSortDescending),
-                                                  style: const TextStyle(
-                                                    color: Colors.black26,
-                                                  ),
+                                                  theColor: Colors.black26,
                                                 ),
                                                 const Expanded(
                                                   child: Divider(
@@ -271,7 +268,8 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                                                 milliseconds: 800),
                                             builder: (_) => DialogDelete(
                                               theTitle: "Subject",
-                                              theName: theRecordItemSubjectNameAbbreviated,
+                                              theName:
+                                                  theRecordItemSubjectNameAbbreviated,
                                               theOnPressed: () async {
                                                 await serviceFirestore
                                                     .deleteSubject(

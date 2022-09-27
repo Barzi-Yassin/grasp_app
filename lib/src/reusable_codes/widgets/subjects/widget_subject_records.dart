@@ -78,10 +78,10 @@ class WidgetSubjectRecords extends StatelessWidget {
               size: 20,
             ),
           ),
-          title: Text(
-            theFileSubjectName,
-            style: const TextStyle(fontSize: 15),
-            maxLines: 1,
+          title: customeText(
+            theData: theFileSubjectName,
+            theFontSize: 15,
+            theMaxLines: 1,
           ),
           trailing: Row(
             crossAxisAlignment: CrossAxisAlignment.end,

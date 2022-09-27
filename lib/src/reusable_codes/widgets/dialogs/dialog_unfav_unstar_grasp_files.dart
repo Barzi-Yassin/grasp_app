@@ -58,9 +58,9 @@ class _DialogUnfavUnstarGraspFilesState
                 endIndent: 10,
               ),
             ),
-            Text(
-              '$generateTitle Grasp',
-              style: const TextStyle(color: Color.fromARGB(255, 126, 50, 50)),
+            customeText(
+              theData: '$generateTitle Grasp',
+              theColor: Color.fromARGB(255, 126, 50, 50),
             ),
             const Expanded(
               child: Divider(
@@ -85,9 +85,9 @@ class _DialogUnfavUnstarGraspFilesState
               side: MaterialStateProperty.all(
                   const BorderSide(color: Colors.cyan))),
           onPressed: () => Navigator.pop(context, 'Cancel'),
-          child: const Text(
-            'Cancle',
-            style: TextStyle(color: Colors.cyan),
+          child: customeText(
+            theData: "Cancle",
+            theColor: Colors.cyan,
           ),
         ),
         ElevatedButton(

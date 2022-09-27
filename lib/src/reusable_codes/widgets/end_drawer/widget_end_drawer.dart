@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/loadings/loading_indicator.dart';
 import 'package:grasp_app/src/routes/route_screens.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/end_drawer/widget_end_drawer_records.dart';
@@ -100,12 +101,12 @@ class _EndDrawerState extends State<EndDrawer> {
                             onTap: () {
                               Get.back();
                               Get.to(
-                              () => ScreenMyProfile(
-                                theUser: widget.theUser,
-                                theImgUrl: snapshotProfileImgUrl,
-                                theUsername: snapshotProfileUsername,
-                              ),
-                            );
+                                () => ScreenMyProfile(
+                                  theUser: widget.theUser,
+                                  theImgUrl: snapshotProfileImgUrl,
+                                  theUsername: snapshotProfileUsername,
+                                ),
+                              );
                             },
                             child: Row(
                               children: [
@@ -122,17 +123,16 @@ class _EndDrawerState extends State<EndDrawer> {
                                           alignment: Alignment.topLeft,
                                           padding: const EdgeInsets.only(
                                               left: 10, bottom: 18),
-                                          child: Text(
-                                            snapshotProfileUsername, // here
-                                            textAlign: TextAlign.left,
-                                            maxLines: 1,
-                                            style: TextStyle(
-                                              fontSize: 20,
-                                              color:
-                                                  _enddrawerHeaderStuffLineColor,
-                                              fontWeight: FontWeight.w500,
-                                              letterSpacing: 0.5,
-                                            ),
+                                          child: customeText(
+                                            theData:
+                                                snapshotProfileUsername, // here
+                                            theTextAlign: TextAlign.left,
+                                            theMaxLines: 1,
+                                            theFontSize: 20,
+                                            theColor:
+                                                _enddrawerHeaderStuffLineColor,
+                                            theFontWeight: FontWeight.w500,
+                                            theLetterSpacing: 0.5,
                                           ),
                                         ),
                                         // Divider(
@@ -160,9 +160,11 @@ class _EndDrawerState extends State<EndDrawer> {
                                         ? Container(
                                             width: 48,
                                             child: ClipRRect(
-                                              borderRadius: BorderRadius.circular(5200),
+                                              borderRadius:
+                                                  BorderRadius.circular(5200),
                                               child: CachedNetworkImage(
-                                                imageUrl: snapshotProfileImgUrl.toString(),
+                                                imageUrl: snapshotProfileImgUrl
+                                                    .toString(),
                                                 imageBuilder:
                                                     (context, imageProvider) =>
                                                         Container(
@@ -189,8 +191,7 @@ class _EndDrawerState extends State<EndDrawer> {
                                             ),
                                           )
                                         : CircleAvatar(
-                                            backgroundColor:
-                                                Colors.transparent,
+                                            backgroundColor: Colors.transparent,
                                             radius: 26,
                                             backgroundImage: const AssetImage(
                                               'assets/images/default.jpg',
@@ -249,12 +250,12 @@ class _EndDrawerState extends State<EndDrawer> {
                                 theOnTap: () {
                                   Get.back();
                                   return Get.to(
-                                  () => ScreenMyProfile(
-                                    theUser: widget.theUser,
-                                    theImgUrl: snapshotProfileImgUrl,
-                                    theUsername: snapshotProfileUsername,
-                                  ),
-                                );
+                                    () => ScreenMyProfile(
+                                      theUser: widget.theUser,
+                                      theImgUrl: snapshotProfileImgUrl,
+                                      theUsername: snapshotProfileUsername,
+                                    ),
+                                  );
                                 },
                               ),
                               const SizedBox(height: 18),
@@ -312,10 +313,10 @@ class _EndDrawerState extends State<EndDrawer> {
                                 theOnTap: () {
                                   Get.back();
                                   return Get.to(
-                                  () => ScreenGraspGuidance(
-                                    theUser: widget.theUser,
-                                  ),
-                                );
+                                    () => ScreenGraspGuidance(
+                                      theUser: widget.theUser,
+                                    ),
+                                  );
                                 },
                               ),
                               WidgetEndDrawerRecords(
