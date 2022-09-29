@@ -7,7 +7,7 @@ class DialogAdd extends StatefulWidget {
     super.key,
     required this.title,
     required this.controller,
-    this.theOnPressed,
+    required this.theOnPressed,
   });
 
   final String title;

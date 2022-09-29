@@ -7,7 +7,7 @@ class DialogUnfavUnstarGraspFiles extends StatefulWidget {
     super.key,
     required this.theIsUnfavTrueUnstarFalse,
     required this.theName,
-    this.theOnPressed,
+    required this.theOnPressed,
   });
 
   final bool theIsUnfavTrueUnstarFalse;

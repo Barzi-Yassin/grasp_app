@@ -8,7 +8,7 @@ class DialogEdit extends StatefulWidget {
     required this.title,
     required this.controller,
     required this.fileNameOld,
-    this.theOnPressed,
+    required this.theOnPressed,
   });
 
   final String title;

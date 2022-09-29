@@ -7,7 +7,7 @@ class DialogDelete extends StatefulWidget {
     super.key,
     required this.theTitle,
     required this.theName,
-    this.theOnPressed,
+    required this.theOnPressed,
   });
 
   final String theTitle;
