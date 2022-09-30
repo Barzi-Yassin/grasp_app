@@ -48,7 +48,7 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: Colors.grey.shade400,
+      // backgroundColor: Colors.grey.shade400,
       body: Container(
         width: double.infinity,
         height: double.infinity,

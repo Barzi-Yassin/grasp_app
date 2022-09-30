@@ -27,15 +27,15 @@ class ScreenFilterFavorites extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: Colors.grey.shade400,
+      // backgroundColor: Colors.grey.shade400,
       endDrawer: SafeArea(
         child: EndDrawer(theUser: theUser),
       ),
       appBar: AppBar(
-        backgroundColor: Colors.cyan.shade700,
+        // backgroundColor: Colors.cyan.shade700,
         centerTitle: true,
         leading: functionArrowbackIconButton(context),
-        title: const Text('Favorites'),
+        title: const Text('Favorites'),// change to custome widgets
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 9.0),

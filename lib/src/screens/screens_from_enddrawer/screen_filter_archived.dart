@@ -9,7 +9,7 @@ class ScreenFilterArchived extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: functionArrowbackIconButton(context),
-        title: const Text('Archived Grasps'),
+        title: const Text('Archived Grasps'), // change to custome widgets
       ),
     );
   }

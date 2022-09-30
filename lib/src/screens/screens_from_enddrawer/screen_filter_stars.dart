@@ -27,12 +27,12 @@ class ScreenFilterStars extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: Colors.grey.shade400,
+      // backgroundColor: Colors.grey.shade400,
       endDrawer: SafeArea(
         child: EndDrawer(theUser: theUser),
       ),
       appBar: AppBar(
-        backgroundColor: Colors.cyan.shade700,
+        // backgroundColor: Colors.cyan.shade700,
         centerTitle: true,
         leading: functionArrowbackIconButton(context),
         title: customeText(theData: "Stars"),

@@ -11,15 +11,15 @@ class ScreenGraspGuidance extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade400,
+      // backgroundColor: Colors.grey.shade400,
       endDrawer: SafeArea(
         child: EndDrawer(theUser: theUser),
       ),
       appBar: AppBar(
-        backgroundColor: Colors.cyan.shade700,
+        // backgroundColor: Colors.cyan.shade700,
         centerTitle: true,
         leading: functionArrowbackIconButton(context),
-        title: const Text('Grasp Guidance'),
+        title: const Text('Grasp Guidance'),// change to custome widgets
       ),
       body: Container(
         decoration: backgroundGradientCyan(),

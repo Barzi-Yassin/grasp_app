@@ -34,7 +34,7 @@ class _ScreenSignupState extends State<ScreenSignup> {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: Colors.grey.shade400,
+      // backgroundColor: Colors.grey.shade400,
       body: Container(
         decoration: backgroundGradientCyan(),
         padding: const EdgeInsets.symmetric(horizontal: 20.0),

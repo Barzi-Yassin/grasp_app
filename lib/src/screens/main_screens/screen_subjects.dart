@@ -66,12 +66,12 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
     final String sortedSubjectsFieldName = sortSubjectsFunctions
         .sortSubjectsByFieldName(theSortingSubjectNumber: sortingSubjetsNumber);
     return Scaffold(
-      backgroundColor: Colors.grey.shade400,
+      // backgroundColor: Colors.grey.shade400,
       endDrawer: SafeArea(
         child: EndDrawer(theUser: widget.theUser),
       ),
       appBar: AppBar(
-        backgroundColor: Colors.cyan.shade700,
+        // backgroundColor: Colors.cyan.shade700,
         centerTitle: true,
         leading: GestureDetector(
           onTap: () {
@@ -83,7 +83,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
               setState(() => isSortDescending = !isSortDescending),
           child: customeIcon(theIcon: Icons.sort),
         ),
-        title: const Text('Subjects'),
+        title: const Text('Subjects'), // change to custome widgets
 
         // actions: [
         //   Icon(Icons.add),

@@ -23,11 +23,16 @@ class RootApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // change to GetMaterialApp to use the get package
-    return const GetMaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: true,
-      // theme: ThemeData(
-      //   primaryColor: Colors.cyan,
-      // ),
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.grey.shade400,
+        appBarTheme: AppBarTheme(
+            backgroundColor: Colors.cyan.shade700,
+            iconTheme: IconThemeData(
+              color: Colors.white,
+            )),
+      ),
       title: 'Grasp',
       home: ScreenSignin(),
 
@@ -48,21 +53,21 @@ class RootApp extends StatelessWidget {
       // ],
 
       // routes: {
-        // RouteScreens.routeInit: (context) => ScreenSubjects(),
-        // RouteScreens.routeSubjects: (context) => ScreenSubjects(),
-        // RouteScreens.routeSubjectFiles: (context) =>  const ScreenSubjectFiles(),
+      // RouteScreens.routeInit: (context) => ScreenSubjects(),
+      // RouteScreens.routeSubjects: (context) => ScreenSubjects(),
+      // RouteScreens.routeSubjectFiles: (context) =>  const ScreenSubjectFiles(),
 
-        // RouteScreens.routeMyProfile: (context) => const ScreenMyProfile(),
-        // RouteScreens.routeGraspGuidance: (context) =>
-        //     const ScreenGraspGuidance(),
+      // RouteScreens.routeMyProfile: (context) => const ScreenMyProfile(),
+      // RouteScreens.routeGraspGuidance: (context) =>
+      //     const ScreenGraspGuidance(),
 
-        // RouteScreens.routeFilterStars: (context) => const ScreenFilterStars(),
-        // RouteScreens.routeFilterFavorites: (context) =>
-        //     const ScreenFilterFavorites(),
-        // RouteScreens.routeFilterImportants: (context) =>
-        //     const ScreenFilterImportants(),
-        // RouteScreens.routeFilterArchived: (context) =>
-        //     const ScreenFilterArchived(),
+      // RouteScreens.routeFilterStars: (context) => const ScreenFilterStars(),
+      // RouteScreens.routeFilterFavorites: (context) =>
+      //     const ScreenFilterFavorites(),
+      // RouteScreens.routeFilterImportants: (context) =>
+      //     const ScreenFilterImportants(),
+      // RouteScreens.routeFilterArchived: (context) =>
+      //     const ScreenFilterArchived(),
       // },
     );
   }

@@ -25,7 +25,7 @@ class _ScreenSetUserProfileNameState extends State<ScreenSetUserProfileName> {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: Colors.grey.shade400,
+      // backgroundColor: Colors.grey.shade400,
       body: Container(
         height: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 20),

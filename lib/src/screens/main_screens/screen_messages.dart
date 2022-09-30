@@ -57,9 +57,9 @@ class _ScreenMessagesState extends State<ScreenMessages> {
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.grey.shade400,
+        // backgroundColor: Colors.grey.shade400,
         appBar: AppBar(
-          backgroundColor: Colors.cyan.shade700,
+          // backgroundColor: Colors.cyan.shade700,
           // centerTitle: true,
           title: appbarTitleFolderIconAndName(
               theFolderaName: isReadingMode
