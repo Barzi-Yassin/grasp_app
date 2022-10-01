@@ -25,7 +25,7 @@ class Widget_GraspGuidanceExpansionTileState
   Widget build(BuildContext context) {
     return Container(
       // height: 55.0,
-      margin: const EdgeInsets.only(bottom: 10.0, left: 6.0, right: 6.0),
+      margin: const EdgeInsets.only(bottom: 10.0, left: 12.0, right: 12.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(13.0),
         color: Colors.white,
@@ -62,10 +62,14 @@ class Widget_GraspGuidanceExpansionTileState
                 theTextAlign: TextAlign.center,
               ),
             ),
+            SizedBox(
+              width: 10,
+              child: customeText(theData:  _customTileExpanded  ? "" : "-"),
+            ),
             customeText(
-              theData:_customTileExpanded ? '- ${widget.graspGuidanceTitle}' : '  ${widget.graspGuidanceTitle}',
+              theData:'${widget.graspGuidanceTitle}',
               theFontFamily: "MavenPro",
-              theFontWeight: FontWeight.w600,
+              theFontWeight: FontWeight.w500,
               theFontSize: 17,
               theLetterSpacing: 0.5,
               // theTextAlign: TextAlign.center,
