@@ -306,6 +306,21 @@ class _EndDrawerState extends State<EndDrawer> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               WidgetEndDrawerRecords(
+                                enddrawerRecordId: 8,
+                                enddrawerRecordTitle: "Settings",
+                                enddrawerRecordRoutePath:
+                                    RouteScreens.routeGraspGuidance,
+                                isSignOut: false,
+                                theOnTap: () {
+                                  Get.back();
+                                  // return Get.to(
+                                  //   () => ScreenGraspGuidance(
+                                  //     theUser: widget.theUser,
+                                  //   ),
+                                  // );
+                                },
+                              ),
+                              WidgetEndDrawerRecords(
                                 enddrawerRecordId: 6,
                                 enddrawerRecordTitle: "Grasp guidance",
                                 enddrawerRecordRoutePath:
@@ -342,3 +357,4 @@ class _EndDrawerState extends State<EndDrawer> {
     );
   }
 }
+ 
