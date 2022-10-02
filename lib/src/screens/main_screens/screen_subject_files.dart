@@ -100,9 +100,10 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
               if (snapshotFiles.connectionState == ConnectionState.waiting) {
                 return loadingIndicator();
               } else if (snapshotFiles.hasError) {
-                return Text("err ${snapshotFiles.error}");
+                return customeText(theData: "err ${snapshotFiles.error}");
               } else if (snapshotFiles.data == null || !snapshotFiles.hasData) {
-                return const Text('snapshotFiles is empty(StreamBuilder)');
+                return customeText(
+                    theData: 'snapshotFiles is empty(StreamBuilder)');
               }
 
               // // snapshotFiles.data!.docs.first;

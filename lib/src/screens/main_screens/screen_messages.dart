@@ -146,8 +146,8 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                             isFileFaved: false,
                             isFileStared: true,
                           )
-                          .then((value) =>
-                              debugPrint('added to added to star'));
+                          .then(
+                              (value) => debugPrint('added to added to star'));
                       customeSnackbar(
                         theTitle: 'Message caution',
                         theMessage:
@@ -166,8 +166,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                             isFileFaved: true,
                             isFileStared: false,
                           )
-                          .then((value) =>
-                              debugPrint('added to added to fav'));
+                          .then((value) => debugPrint('added to added to fav'));
                       customeSnackbar(
                         theTitle: 'Message caution',
                         theMessage:
@@ -225,11 +224,13 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                               ConnectionState.waiting) {
                             return loadingIndicator();
                           } else if (snapshotMessages.hasError) {
-                            return Text("err ${snapshotMessages.error}");
+                            return customeText(
+                                theData: "err ${snapshotMessages.error}");
                           } else if (snapshotMessages.data == null ||
                               !snapshotMessages.hasData) {
-                            return const Text(
-                                'snapshotMessages is empty(StreamBuilder)');
+                            return customeText(
+                                theData:
+                                    'snapshotMessages is empty(StreamBuilder)');
                           }
 
                           // debugPrint('44444messages');

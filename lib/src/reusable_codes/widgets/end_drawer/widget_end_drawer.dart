@@ -65,10 +65,11 @@ class _EndDrawerState extends State<EndDrawer> {
               if (snapshotProfile.connectionState == ConnectionState.waiting) {
                 return loadingIndicator();
               } else if (snapshotProfile.hasError) {
-                return Text("err ${snapshotProfile.error}");
+                return customeText(theData: "err ${snapshotProfile.error}");
               } else if (snapshotProfile.data == null ||
                   !snapshotProfile.hasData) {
-                return const Text('snapshotFiles is empty(StreamBuilder)');
+                return customeText(
+                    theData: 'snapshotFiles is empty(StreamBuilder)');
               }
 
               final snapshotProfileUsername = snapshotProfile.data!.get("name");

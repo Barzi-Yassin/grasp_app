@@ -83,7 +83,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
               setState(() => isSortDescending = !isSortDescending),
           child: customeIcon(theIcon: Icons.sort),
         ),
-        title: const Text('Subjects'), // change to custome widgets
+        title: customeText(theData: 'Subjects'), // change to custome widgets
 
         // actions: [
         //   Icon(Icons.add),
@@ -113,11 +113,12 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                         ConnectionState.waiting) {
                       return loadingIndicator();
                     } else if (snapshotSubject.hasError) {
-                      return Text("err ${snapshotSubject.error}");
+                      return customeText(
+                          theData: "err ${snapshotSubject.error}");
                     } else if (snapshotSubject.data == null ||
                         !snapshotSubject.hasData) {
-                      return const Text(
-                          'snapshotSubject is empty(StreamBuilder)');
+                      return customeText(
+                          theData: 'snapshotSubject is empty(StreamBuilder)');
                     }
 
                     // // snapshotSubject.data!.docs.first;
@@ -182,11 +183,13 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                                   return loadingIndicator(
                                       theColor: Colors.transparent);
                                 } else if (snapshotFiles.hasError) {
-                                  return Text("err ${snapshotFiles.error}");
+                                  return customeText(
+                                      theData: "err ${snapshotFiles.error}");
                                 } else if (snapshotFiles.data == null ||
                                     !snapshotFiles.hasData) {
-                                  return const Text(
-                                      'snapshotFiles is empty(StreamBuilder)');
+                                  return customeText(
+                                      theData:
+                                          'snapshotFiles is empty(StreamBuilder)');
                                 }
 
                                 // debugPrint('44444files');

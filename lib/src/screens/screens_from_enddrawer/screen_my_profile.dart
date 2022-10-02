@@ -55,7 +55,7 @@ class _ScreenMyProfileState extends State<ScreenMyProfile> {
         // backgroundColor: Colors.cyan.shade700,
         centerTitle: true,
         leading: functionArrowbackIconButton(context),
-        title: const Text('My Profile'),// change to custome widgets
+        title: customeText(theData: 'My Profile'), // change to custome widgets
       ),
       body: Container(
         width: double.infinity,
@@ -372,5 +372,4 @@ class _ScreenMyProfileState extends State<ScreenMyProfile> {
     });
   }
   // end Upload image to firebase storage
-
 }

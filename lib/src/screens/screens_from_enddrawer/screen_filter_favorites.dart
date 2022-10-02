@@ -35,7 +35,7 @@ class ScreenFilterFavorites extends StatelessWidget {
         // backgroundColor: Colors.cyan.shade700,
         centerTitle: true,
         leading: functionArrowbackIconButton(context),
-        title: const Text('Favorites'),// change to custome widgets
+        title: customeText(theData: 'Favorites'), // change to custome widgets
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 9.0),
@@ -55,9 +55,10 @@ class ScreenFilterFavorites extends StatelessWidget {
               if (snapshotFiles.connectionState == ConnectionState.waiting) {
                 return loadingIndicator();
               } else if (snapshotFiles.hasError) {
-                return Text("err ${snapshotFiles.error}");
+                return customeText(theData: "err ${snapshotFiles.error}");
               } else if (snapshotFiles.data == null || !snapshotFiles.hasData) {
-                return const Text('snapshotFiles is empty(StreamBuilder)');
+                return customeText(
+                    theData: 'snapshotFiles is empty(StreamBuilder)');
               }
 
               // // snapshotFiles.data!.docs.first;
@@ -132,7 +133,7 @@ class ScreenFilterFavorites extends StatelessWidget {
                                 //         endIndent: 10,
                                 //       ),
                                 //     ),
-                                //     Text(
+                                //     customeText( theData:
                                 //       // widget.theFileSubjectCreatedAt,
                                 //       'ffff',
                                 //       style: TextStyle(

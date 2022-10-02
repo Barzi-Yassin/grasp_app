@@ -55,9 +55,10 @@ class ScreenFilterStars extends StatelessWidget {
               if (snapshotFiles.connectionState == ConnectionState.waiting) {
                 return loadingIndicator();
               } else if (snapshotFiles.hasError) {
-                return Text("err ${snapshotFiles.error}");
+                return customeText(theData: "err ${snapshotFiles.error}");
               } else if (snapshotFiles.data == null || !snapshotFiles.hasData) {
-                return const Text('snapshotFiles is empty(StreamBuilder)');
+                return customeText(
+                    theData: 'snapshotFiles is empty(StreamBuilder)');
               }
 
               // // snapshotFiles.data!.docs.first;
@@ -132,7 +133,7 @@ class ScreenFilterStars extends StatelessWidget {
                                 //         endIndent: 10,
                                 //       ),
                                 //     ),
-                                //     Text(
+                                //     customeText( theData:
                                 //       // widget.theFileSubjectCreatedAt,
                                 //       'ffff',
                                 //       style: TextStyle(
@@ -200,26 +201,24 @@ class ScreenFilterStars extends StatelessWidget {
                                 theOnPressed: () async {
                                   await serviceFirestore
                                       .unfavUnstarGraspFile(
-                                        user: theUser!,
-                                        theFileName: theRecordStarItemFileName,
-                                        isFileUnfavedTrueUnstaredFalse: false,
-                                      )
+                                    user: theUser!,
+                                    theFileName: theRecordStarItemFileName,
+                                    isFileUnfavedTrueUnstaredFalse: false,
+                                  )
                                       .then(
-                                        (_) {
-                                          Get.back();
-                                          return customeSnackbar(
-                                          theTitle: 'Grasp caution',
-                                          theMessage:
-                                              'The grasp "$theRecordStarItemFileNameAbbreviated" has unstared succesfully.',
-                                        );
-                                        },
-
+                                    (_) {
+                                      Get.back();
+                                      return customeSnackbar(
+                                        theTitle: 'Grasp caution',
+                                        theMessage:
+                                            'The grasp "$theRecordStarItemFileNameAbbreviated" has unstared succesfully.',
                                       );
+                                    },
+                                  );
                                 },
                               ),
                             );
                           },
-                        
                         ),
                       ],
                     );

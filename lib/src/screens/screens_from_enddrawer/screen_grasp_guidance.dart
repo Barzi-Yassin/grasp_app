@@ -19,7 +19,8 @@ class ScreenGraspGuidance extends StatelessWidget {
         // backgroundColor: Colors.cyan.shade700,
         centerTitle: true,
         leading: functionArrowbackIconButton(context),
-        title: const Text('Grasp Guidance'),// change to custome widgets
+        title:
+            customeText(theData: 'Grasp Guidance'), // change to custome widgets
       ),
       body: Container(
         decoration: backgroundGradientCyan(),

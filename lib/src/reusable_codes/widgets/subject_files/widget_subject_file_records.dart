@@ -76,8 +76,8 @@ class WidgetSubjectFileRecords extends StatelessWidget {
               theData: subjectFileRecordId,
               theColor: Colors.black54,
               theFontSize: 16),
-          subtitle: const SizedBox(height: 0),
-          // Text(
+          subtitle: SizedBox(height: 0),
+          // customeText( theData:
           //   subjectFileRecordName,
           //   style: const TextStyle(fontSize: 15, letterSpacing: 0.5),
           //   maxLines: 1,

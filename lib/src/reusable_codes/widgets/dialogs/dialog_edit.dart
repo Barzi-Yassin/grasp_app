@@ -118,7 +118,7 @@ class _DialogEditState extends State<DialogEdit> {
     //       style: ButtonStyle(
     //           backgroundColor: MaterialStateProperty.all(Colors.cyan)),
     //       onPressed: widget.theOnPressed,
-    //       label: const Text('Update'),
+    //       label: customeText( theData: 'Update'),
     //       icon: customeIcon(theIcon: Icons.update),
     //     ),
     //   ],

@@ -13,7 +13,7 @@
 //       ),
 //       appBar: AppBar(
 //         leading: functionArrowbackIconButton(context),
-//         title: const Text('Importants'), // change to custome widgets
+//         title: customeText( theData: 'Importants'), // change to custome widgets
 //       ),
 //     );
 //   }
