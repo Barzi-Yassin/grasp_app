@@ -13,6 +13,7 @@ import 'package:grasp_app/src/screens/screens_from_enddrawer/screen_filter_stars
 import 'package:grasp_app/src/screens/screens_from_enddrawer/screen_grasp_guidance.dart';
 import 'package:grasp_app/src/screens/screens_from_enddrawer/screen_my_profile.dart';
 import 'package:grasp_app/src/services/firebase/service_firestore.dart';
+import 'package:grasp_app/src/themes/theme_generator.dart';
 
 class EndDrawer extends StatefulWidget {
   const EndDrawer({Key? key, this.theUser}) : super(key: key);
@@ -27,6 +28,8 @@ class _EndDrawerState extends State<EndDrawer> {
   final ServiceFirestore serviceFirestore = ServiceFirestore();
 
   final Color _enddrawerHeaderStuffLineColor = Colors.white;
+
+  bool themeGenerator = false;
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +89,10 @@ class _EndDrawerState extends State<EndDrawer> {
                     padding: const EdgeInsets.only(left: 20, top: 8, bottom: 0),
                     decoration: BoxDecoration(
                       // color: Colors.grey.shade300,
-                      color: Colors.cyan.shade600,
+                      color: ThemeGenerator
+                              .getthemeCurrentDarkTrueLightFalse // TODO: temporary theme
+                          ? Colors.grey.shade600
+                          : Colors.cyan.shade600,
                       borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(20),
                         topLeft: Radius.circular(20),
@@ -307,12 +313,22 @@ class _EndDrawerState extends State<EndDrawer> {
                             children: [
                               WidgetEndDrawerRecords(
                                 enddrawerRecordId: 8,
-                                enddrawerRecordTitle: "Settings",
+                                enddrawerRecordTitle: ThemeGenerator
+                                        .getthemeCurrentDarkTrueLightFalse
+                                    ? "Light theme"
+                                    : "Dark theme",
                                 enddrawerRecordRoutePath:
                                     RouteScreens.routeGraspGuidance,
                                 isSignOut: false,
                                 theOnTap: () {
-                                  Get.back();
+                                  // Get.back();3
+                                  setState(() {
+                                    themeGenerator = !themeGenerator;
+                                  });
+                                  // final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+                                  // themeProvider.toggleTheme();
+                                  themeCurrent.toggleTheme();
+
                                   // return Get.to(
                                   //   () => ScreenGraspGuidance(
                                   //     theUser: widget.theUser,
@@ -357,4 +373,3 @@ class _EndDrawerState extends State<EndDrawer> {
     );
   }
 }
- 

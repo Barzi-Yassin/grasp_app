@@ -16,23 +16,38 @@ import 'package:grasp_app/src/screens/screens_from_enddrawer/screen_filter_impor
 import 'package:grasp_app/src/screens/screens_from_enddrawer/screen_filter_stars.dart';
 import 'package:grasp_app/src/screens/screens_from_enddrawer/screen_grasp_guidance.dart';
 import 'package:grasp_app/src/screens/screens_from_enddrawer/screen_my_profile.dart';
+import 'package:grasp_app/src/themes/theme_generator.dart';
 
-class RootApp extends StatelessWidget {
+class RootApp extends StatefulWidget {
   const RootApp({Key? key}) : super(key: key);
+
+  @override
+  State<RootApp> createState() => _RootAppState();
+}
+
+class _RootAppState extends State<RootApp> {
+  @override
+  void initState() {
+    super.initState();
+    themeCurrent.addListener(() => setState(() {}));
+  }
 
   @override
   Widget build(BuildContext context) {
     // change to GetMaterialApp to use the get package
     return GetMaterialApp(
       debugShowCheckedModeBanner: true,
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.grey.shade400,
-        appBarTheme: AppBarTheme(
-            backgroundColor: Colors.cyan.shade700,
-            iconTheme: IconThemeData(
-              color: Colors.white,
-            )),
-      ),
+      themeMode: themeCurrent.themeCurrent,
+      theme: ThemeGenerator.lightTheme,
+      darkTheme: ThemeGenerator.darkTheme,
+      //  ThemeData(
+      //   scaffoldBackgroundColor: Colors.grey.shade400,
+      //   appBarTheme: AppBarTheme(
+      //       backgroundColor: Colors.cyan.shade700,
+      //       iconTheme: IconThemeData(
+      //         color: Colors.white,
+      //       )),
+      // ),
       title: 'Grasp',
       home: ScreenSignin(),
 
