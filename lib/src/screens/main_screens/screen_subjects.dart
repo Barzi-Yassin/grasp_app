@@ -46,7 +46,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
   }
 
   List<String> listOfCurrentSubjectsNameFunction() {
-    int len = listOfCurrentSubjectsName.length;
+    // int len = listOfCurrentSubjectsName.length;
     // debugPrint(
     //     'There are ${len + 1} subjects(s) in the listOfCurrentSubjectsName');
     return listOfCurrentSubjectsName;
@@ -60,7 +60,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
+    // double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
     final String sortedSubjectsFieldName = sortSubjectsFunctions
