@@ -94,17 +94,17 @@ Prerequests: Git and Flutter installed
 
 After opening terminal on your own projects location, run the following commands:
 
-  Clone repository ``git clone https://github.com/Barzy-Yasin/grasp_app.git``
+1. Clone repository ``git clone https://github.com/Barzy-Yasin/grasp_app.git``
 
-  open the project directory ``cd grasp_app``
+2. open the project directory ``cd grasp_app``
 
-  open the project on VSCode ``code .``
+3. open the project on VSCode ``code .``
 
-  open ``pubspec.yaml`` 
+4. open ``pubspec.yaml`` 
 
-  run ``flutter pub get`` or just  ``ctrl+s`` 
+5. run ``flutter pub get`` or just  ``ctrl+s`` 
 
-  run the project on an emulator ``flutter run``
+6. run the project on an emulator ``flutter run``
 
 
 
