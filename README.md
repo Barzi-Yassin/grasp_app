@@ -92,19 +92,19 @@ It contains the minimal implementation required to save user daily information a
 # How to run 
 Prerequests: Git and Flutter installed
 
-Then, on your desired project location on terminal, after that do the following:
+After opening terminal on your own projects location, run the following commands:
 
-Clone repository ``git clone https://github.com/Barzy-Yasin/grasp_app.git``
+  Clone repository ``git clone https://github.com/Barzy-Yasin/grasp_app.git``
 
-open the project directory ``cd grasp_app``
+  open the project directory ``cd grasp_app``
 
-open the project on VSCode ``code .``
+  open the project on VSCode ``code .``
 
-open ``pubspec.yaml`` 
+  open ``pubspec.yaml`` 
 
-run ``flutter pub get`` or just  ``ctrl+s`` 
+  run ``flutter pub get`` or just  ``ctrl+s`` 
 
-run app on an emulator ``flutter run``
+  run the project on an emulator ``flutter run``
 
 
 
