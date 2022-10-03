@@ -90,8 +90,15 @@ It contains the minimal implementation required to save user daily information a
 
 
 # How to run 
+Prerequests: Git and Flutter installed
+
+Then, on your desired project location on terminal, after that do the following:
 
 Clone repository ``git clone https://github.com/Barzy-Yasin/grasp_app.git``
+
+open the project directory ``cd grasp_app``
+
+open the project on VSCode ``code .``
 
 open ``pubspec.yaml`` 
 
