@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/dialogs/dialog_main_boilerplate.dart';
 
 class DialogAdd extends StatefulWidget {
