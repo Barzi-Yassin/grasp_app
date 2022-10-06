@@ -94,7 +94,7 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
         padding: const EdgeInsets.symmetric(horizontal: 9.0),
         height: double.infinity,
         width: double.infinity,
-        decoration: backgroundGradientCyan(),
+        // decoration: backgroundGradientCyan(),
         child: Column(
           children: [
             Expanded(
@@ -114,7 +114,8 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                       return loadingIndicator();
                     } else if (snapshotSubject.hasError) {
                       return customeText(
-                          theData: "err ${snapshotSubject.error}");
+                          theData: "err ${snapshotSubject.error}"); // to fix to a formal output on ui. and others as well, to get the error make the firestore rule to false.
+                      // [cloud_firestore/permission-denied] The caller does not have permission to execute the specified operation.
                     } else if (snapshotSubject.data == null ||
                         !snapshotSubject.hasData) {
                       return customeText(
