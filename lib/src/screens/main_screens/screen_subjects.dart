@@ -1,13 +1,9 @@
-// ignore_for_file: unused_import
 
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:grasp_app/src/data/datalist_subject.dart';
-import 'package:grasp_app/src/models/grasp_user_model.dart';
 import 'package:grasp_app/src/reusable_codes/functions/custome_string_functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/date_time_functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
@@ -17,7 +13,6 @@ import 'package:grasp_app/src/reusable_codes/widgets/dialogs/dialog_add.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/dialogs/dialog_delete.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/end_drawer/widget_end_drawer.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/subjects/widget_subject_records.dart';
-import 'package:grasp_app/src/screens/main_screens/screen_subject_files.dart';
 import 'package:grasp_app/src/services/firebase/service_firestore.dart';
 
 class ScreenSubjects extends StatefulWidget {
