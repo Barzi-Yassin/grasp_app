@@ -1,5 +1,3 @@
-// ignore_for_file: unused_local_variable
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
