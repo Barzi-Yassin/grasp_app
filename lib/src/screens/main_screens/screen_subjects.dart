@@ -1,4 +1,3 @@
-
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -86,10 +85,9 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
         // ],
       ),
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 9.0),
         height: double.infinity,
         width: double.infinity,
-        // decoration: backgroundGradientCyan(),
+        decoration: backgroundGradientCyan(),
         child: Column(
           children: [
             Expanded(
@@ -109,7 +107,8 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                       return loadingIndicator();
                     } else if (snapshotSubject.hasError) {
                       return customeText(
-                          theData: "err ${snapshotSubject.error}"); // to fix to a formal output on ui. and others as well, to get the error make the firestore rule to false.
+                          theData:
+                              "err ${snapshotSubject.error}"); // to fix to a formal output on ui. and others as well, to get the error make the firestore rule to false.
                       // [cloud_firestore/permission-denied] The caller does not have permission to execute the specified operation.
                     } else if (snapshotSubject.data == null ||
                         !snapshotSubject.hasData) {
@@ -134,7 +133,8 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                     } else {
                       return ListView.builder(
                         // clipBehavior: Clip.hardEdge,
-                        padding: const EdgeInsets.only(top: 5.0, bottom: 70),
+                        padding: const EdgeInsets.only(
+                            top: 5.0, bottom: 70, left: 9, right: 9),
                         scrollDirection: Axis.vertical,
                         itemCount: snapshotSubject.data!.docs.length,
                         itemBuilder: (context, theRecord) {

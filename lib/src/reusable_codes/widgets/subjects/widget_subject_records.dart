@@ -1,13 +1,8 @@
-// ignore_for_file: unused_import
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:grasp_app/src/data/datalist_subject.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
-import 'package:grasp_app/src/routes/route_screens.dart';
-import 'package:grasp_app/src/screens/main_screens/screen_subjects.dart';
 import 'package:grasp_app/src/screens/main_screens/screen_subject_files.dart';
 
 class WidgetSubjectRecords extends StatelessWidget {

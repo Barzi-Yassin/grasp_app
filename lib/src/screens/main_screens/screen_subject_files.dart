@@ -83,7 +83,6 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
         // }, icon: Icon(Icons.help_outline))],
       ),
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 9.0),
         height: double.infinity,
         width: double.infinity,
         decoration: backgroundGradientCyan(),
@@ -122,7 +121,8 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                 );
               } else {
                 return ListView.builder(
-                  padding: const EdgeInsets.only(top: 5.0, bottom: 80),
+                  padding: const EdgeInsets.only(
+                      top: 5.0, bottom: 80, left: 9, right: 9),
                   scrollDirection: Axis.vertical,
                   itemCount: snapshotFiles.data!.docs.length,
                   itemBuilder: (context, theRecord) {
