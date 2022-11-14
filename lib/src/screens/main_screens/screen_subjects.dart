@@ -8,6 +8,7 @@ import 'package:grasp_app/src/reusable_codes/functions/date_time_functions.dart'
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/loadings/loading_indicator.dart';
 import 'package:grasp_app/src/reusable_codes/functions/loadings/sort_subjects_function.dart';
+import 'package:grasp_app/src/reusable_codes/widgets/buttons/widget_switch_button_change_theme.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/dialogs/dialog_add.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/dialogs/dialog_delete.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/end_drawer/widget_end_drawer.dart';
@@ -78,7 +79,9 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
           child: customeIcon(theIcon: Icons.sort),
         ),
         title: customeText(theData: 'Subjects'), // change to custome widgets
-
+        actions: [
+          widgetSwitchButtonChangeTheme(),
+        ],
         // actions: [
         //   Icon(Icons.add),
         //   Icon(Icons.add),
