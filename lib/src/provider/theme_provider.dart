@@ -14,8 +14,13 @@ class ThemeProvider extends ChangeNotifier {
     }
   }
 
-  void toggleTheme(bool isOn) {
-    themeMode = isOn ? ThemeMode.dark : ThemeMode.light;
+  // void toggleTheme(bool isOn) {
+  //   themeMode = isOn ? ThemeMode.dark : ThemeMode.light;
+  //   notifyListeners();
+  // }
+
+  void toggleTheme(bool isDark) {
+    themeMode = isDark ? ThemeMode.light : ThemeMode.dark;
     notifyListeners();
   }
 }

@@ -12,7 +12,7 @@ class widgetSwitchButtonChangeTheme extends StatelessWidget {
       value: themeProvider.isDarkMode,
       onChanged: (value) {
         final provider = Provider.of<ThemeProvider>(context, listen: false);
-        provider.toggleTheme(value);
+        provider.toggleTheme(!value);
       },
     );
   }
