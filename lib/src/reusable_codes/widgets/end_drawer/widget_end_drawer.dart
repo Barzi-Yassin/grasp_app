@@ -89,10 +89,11 @@ class _EndDrawerState extends State<EndDrawer> {
                     padding: const EdgeInsets.only(left: 20, top: 8, bottom: 0),
                     decoration: BoxDecoration(
                       // color: Colors.grey.shade300,
-                      color: ThemeGenerator
-                              .getthemeCurrentDarkTrueLightFalse // TODO: temporary theme
-                          ? Colors.grey.shade600
-                          : Colors.cyan.shade600,
+                      // color: ThemeGenerator
+                      //         .getthemeCurrentDarkTrueLightFalse // TODO: temporary theme
+                      //     ? Colors.grey.shade600
+                      //     : Colors.cyan.shade600,
+                      color: Colors.cyan.shade600,
                       borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(20),
                         topLeft: Radius.circular(20),
@@ -313,8 +314,10 @@ class _EndDrawerState extends State<EndDrawer> {
                             children: [
                               WidgetEndDrawerRecords(
                                 enddrawerRecordId: 8,
-                                enddrawerRecordTitle: ThemeGenerator
-                                        .getthemeCurrentDarkTrueLightFalse
+                                enddrawerRecordTitle: 
+                                // ThemeGenerator
+                                //         .getthemeCurrentDarkTrueLightFalse
+                                true
                                     ? "Light theme"
                                     : "Dark theme",
                                 enddrawerRecordRoutePath:
@@ -327,7 +330,8 @@ class _EndDrawerState extends State<EndDrawer> {
                                   });
                                   // final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
                                   // themeProvider.toggleTheme();
-                                  themeCurrent.toggleTheme();
+                                  
+                                  // // themeCurrent.toggleTheme();
 
                                   // return Get.to(
                                   //   () => ScreenGraspGuidance(
