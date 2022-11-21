@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:grasp_app/src/provider/theme_provider.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
+import 'package:provider/provider.dart';
 
 class WidgetEndDrawerRecords extends StatelessWidget {
   WidgetEndDrawerRecords({
@@ -40,7 +42,9 @@ class WidgetEndDrawerRecords extends StatelessWidget {
           margin: const EdgeInsets.only(bottom: 10.0, left: 6.0, right: 6.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(13.0),
-            color: Colors.white,
+            color: Provider.of<ThemeProvider>(context).isDarkMode
+                ? Colors.grey
+                : Colors.white,
             boxShadow: const [
               BoxShadow(
                 color: Colors.black54,
@@ -62,7 +66,9 @@ class WidgetEndDrawerRecords extends StatelessWidget {
             //   }
             // },
             // minVerticalPadding: 20,
-            iconColor: Colors.cyan.shade600,
+            iconColor: Provider.of<ThemeProvider>(context).isDarkMode
+                ? Colors.white70
+                : Colors.cyan.shade600,
             title: customeText(
               theData: enddrawerRecordTitle,
               theFontSize: 15,

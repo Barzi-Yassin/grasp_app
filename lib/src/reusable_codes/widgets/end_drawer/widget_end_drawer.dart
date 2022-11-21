@@ -45,7 +45,10 @@ class _EndDrawerState extends State<EndDrawer> {
             bottomLeft: Radius.circular(20),
             topLeft: Radius.circular(20),
           ),
-          border: Border.all(color: Colors.cyan),
+          border: Border.all(
+              color: Provider.of<ThemeProvider>(context).isDarkMode
+                  ? Colors.black
+                  : Colors.cyan),
           // border: const Border(
           //   top: BorderSide.none,
           //   bottom: BorderSide.none,
@@ -56,10 +59,15 @@ class _EndDrawerState extends State<EndDrawer> {
           gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.centerLeft,
-            colors: [
-              Colors.cyan.shade300,
-              Colors.grey.shade400,
-            ],
+            colors: Provider.of<ThemeProvider>(context).isDarkMode
+                ? [
+                    Colors.grey.shade700,
+                    Colors.grey.shade700,
+                  ]
+                : [
+                    Colors.cyan.shade300,
+                    Colors.grey.shade400,
+                  ],
           ),
         ),
         child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
@@ -96,7 +104,9 @@ class _EndDrawerState extends State<EndDrawer> {
                       //         .getthemeCurrentDarkTrueLightFalse // TODO: temporary theme
                       //     ? Colors.grey.shade600
                       //     : Colors.cyan.shade600,
-                      color: Colors.cyan.shade600,
+                      color: Provider.of<ThemeProvider>(context).isDarkMode
+                          ? Colors.black38
+                          : Colors.cyan.shade600,
                       borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(20),
                         topLeft: Radius.circular(20),
@@ -325,7 +335,7 @@ class _EndDrawerState extends State<EndDrawer> {
                                 isSignOut: false,
                                 theOnTap: () {
                                   provider.toggleTheme(provider.isDarkMode);
-                                  Get.back();
+                                  // Get.back();  //  uncomment here 
                                 },
                               ),
                               WidgetEndDrawerRecords(
