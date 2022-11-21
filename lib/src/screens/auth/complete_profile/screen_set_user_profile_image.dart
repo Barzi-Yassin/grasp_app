@@ -52,7 +52,7 @@ class _ScreenSetUserprofileImageState extends State<ScreenSetUserprofileImage> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: backgroundGradientCyan(),
+        decoration: backgroundGradientCyan(context),
         child: isLoading == true
             ? loadingIndicator()
             : SingleChildScrollView(

@@ -41,7 +41,7 @@ class ScreenFilterFavorites extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 9.0),
         height: double.infinity,
         width: double.infinity,
-        decoration: backgroundGradientCyan(),
+        decoration: backgroundGradientCyan(context),
         child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
             stream: serviceFirestore.firestoreInstance
                 .collection("users")

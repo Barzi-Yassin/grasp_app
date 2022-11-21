@@ -32,6 +32,9 @@ class _InputEmailState extends State<InputEmail> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      style: TextStyle(
+        color: Colors.black,
+      ),
       controller: widget.theControllerEmail,
       textAlign: TextAlign.center,
       keyboardType: TextInputType.emailAddress,
@@ -43,6 +46,8 @@ class _InputEmailState extends State<InputEmail> {
         filled: true,
         fillColor: Colors.white70,
         hintText: "Your email",
+        hintStyle: TextStyle(
+            color: Theme.of(context).textTheme.displaySmall!.backgroundColor),
         prefixIcon: customePaddingOnly(
           thePaddingLeft: 10,
           theChild: customeIconShaderMask(
@@ -88,7 +93,7 @@ class _InputPasswordState extends State<InputPassword> {
       super.setState(fn);
     }
   }
- 
+
   @override
   void initState() {
     super.initState();
@@ -105,6 +110,9 @@ class _InputPasswordState extends State<InputPassword> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      style: TextStyle(
+        color: Colors.black,
+      ),
       controller: widget.theControllerPassword,
       obscureText: hidePassword,
       textAlign: TextAlign.center,
@@ -117,6 +125,8 @@ class _InputPasswordState extends State<InputPassword> {
         filled: true,
         fillColor: Colors.white70,
         hintText: "Password",
+        hintStyle: TextStyle(
+            color: Theme.of(context).textTheme.displaySmall!.backgroundColor),
         prefixIcon: customePaddingOnly(
           thePaddingLeft: 10,
           theChild: customeIconShaderMask(

@@ -23,7 +23,7 @@ class ScreenGraspGuidance extends StatelessWidget {
             customeText(theData: 'Grasp Guidance'), // change to custome widgets
       ),
       body: Container(
-        decoration: backgroundGradientCyan(),
+        decoration: backgroundGradientCyan(context),
         height: double.infinity,
         width: double.infinity,
         child: ListView.builder(

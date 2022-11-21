@@ -89,7 +89,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
         body: Container(
           height: double.infinity,
           width: double.infinity,
-          decoration: backgroundGradientCyan(),
+          decoration: backgroundGradientCyan(context),
           child: Badge(
             showBadge: isReadingMode ? false : true,
             // toAnimate: false,

@@ -2,8 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:grasp_app/src/provider/theme_provider.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/screens/main_screens/screen_subject_files.dart';
+import 'package:provider/provider.dart';
 
 class WidgetSubjectRecords extends StatelessWidget {
   const WidgetSubjectRecords({
@@ -44,12 +46,15 @@ class WidgetSubjectRecords extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 10.0, left: 6.0, right: 6.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(13.0),
-          color: Colors.white,
-          boxShadow: const [
+          color: Provider.of<ThemeProvider>(context).isDarkMode
+              ? Colors.black54
+              : Colors.white,
+          boxShadow: [
             BoxShadow(
               color: Colors.grey,
               offset: Offset(0.0, 1.0), //(x,y)
-              blurRadius: 06.0,
+              blurRadius:
+                  Provider.of<ThemeProvider>(context).isDarkMode ? 2.0 : 6.0,
             ),
           ],
         ),

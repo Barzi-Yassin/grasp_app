@@ -85,7 +85,7 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        decoration: backgroundGradientCyan(),
+        decoration: backgroundGradientCyan(context),
         child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
             stream: serviceFirestore.firestoreInstance
                 .collection("users")
@@ -170,7 +170,7 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                                     ),
                                     customeText(
                                       theData: widget.theFileSubjectCreatedAt,
-                                      theColor: Colors.black26,
+                                      // theColor: Colors.black26,
                                     ),
                                     const Expanded(
                                       child: Divider(
@@ -272,6 +272,7 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
             }),
       ),
       floatingActionButton: FloatingActionButton(
+        // TODO: CLEAN IT, BY SEPARATING IN A CLASS
         onPressed: () => showAnimatedDialog(
           barrierColor: Colors.black38,
           barrierDismissible: true,
@@ -329,8 +330,8 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
           alignment: Alignment.bottomCenter,
           duration: const Duration(milliseconds: 800),
         ),
-        backgroundColor: Colors.cyan.shade400,
-        elevation: 10,
+        // backgroundColor: Colors.cyan.shade400,
+        // elevation: 10,
         child: const FaIcon(
           FontAwesomeIcons.fileCirclePlus,
           color: Colors.white,

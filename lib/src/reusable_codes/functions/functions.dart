@@ -1,17 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:grasp_app/src/provider/theme_provider.dart';
+import 'package:provider/provider.dart';
 
 // screen body gradient
-BoxDecoration backgroundGradientCyan() {
+BoxDecoration backgroundGradientCyan(BuildContext theContext) {
   return BoxDecoration(
     gradient: LinearGradient(
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
-      colors: [
-        Colors.cyan.shade300,
-        Colors.grey.shade400,
-      ],
+      colors: Provider.of<ThemeProvider>(theContext).isDarkMode
+          ? [
+              Colors.black12,
+              Colors.black12,
+            ]
+          : [
+              Colors.cyan.shade300,
+              Colors.grey.shade400,
+            ],
+    ),
+  );
+}
+
+// screen body gradient
+BoxDecoration backgroundGradientGrey(BuildContext theContext) {
+  return BoxDecoration(
+    gradient: LinearGradient(
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      colors: Provider.of<ThemeProvider>(theContext).isDarkMode
+          ? [
+              Theme.of(theContext).scaffoldBackgroundColor,
+              Theme.of(theContext).scaffoldBackgroundColor,
+              // Colors.black12,
+              // Colors.black12,
+            ]
+          : [
+              Colors.grey.shade400,
+              Colors.grey,
+              // Colors.blueGrey.shade400,
+              // Colors.blueGrey.shade400,
+            ],
     ),
   );
 }

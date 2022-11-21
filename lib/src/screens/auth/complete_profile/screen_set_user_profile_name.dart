@@ -29,7 +29,7 @@ class _ScreenSetUserProfileNameState extends State<ScreenSetUserProfileName> {
       body: Container(
         height: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        decoration: backgroundGradientCyan(),
+        decoration: backgroundGradientCyan(context),
         child: SingleChildScrollView(
           clipBehavior: Clip.hardEdge,
           scrollDirection: Axis.vertical,
