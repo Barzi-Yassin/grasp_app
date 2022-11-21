@@ -5,12 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:grasp_app/src/provider/theme_provider.dart';
 import 'package:grasp_app/src/reusable_codes/functions/date_time_functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/loadings/loading_indicator.dart';
 import 'package:grasp_app/src/reusable_codes/functions/custome_string_functions.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/dialogs/dialog_delete.dart';
 import 'package:grasp_app/src/services/firebase/service_firestore.dart';
+import 'package:provider/provider.dart';
 
 class ScreenMessages extends StatefulWidget {
   const ScreenMessages({
@@ -107,11 +109,16 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: [
-                      Colors.grey.shade300,
-                      Colors.grey.shade100,
-                      Colors.white,
-                    ],
+                    colors: Provider.of<ThemeProvider>(context).isDarkMode
+                        ? [
+                            Colors.grey.shade900,
+                            Colors.grey.shade900,
+                          ]
+                        : [
+                            Colors.grey.shade300,
+                            Colors.grey.shade100,
+                            Colors.white,
+                          ],
                   )),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -199,7 +206,15 @@ class _ScreenMessagesState extends State<ScreenMessages> {
               // alignment: Alignment.topCenter,
               decoration: BoxDecoration(
                 shape: BoxShape.rectangle,
-                border: Border.all(color: Colors.grey.shade300, width: 2.5),
+                border: Border.all(
+                  width: 1.0,
+                  color: Provider.of<ThemeProvider>(context).isDarkMode
+                      ? Colors.transparent
+                      // ? Colors.grey.withAlpha(100)
+                      // ? Colors.black.withAlpha(100)
+                      // : Colors.grey.shade300,
+                      : Colors.white,
+                ),
                 borderRadius: BorderRadius.vertical(
                     bottom: Radius.circular(
                         isReadingMode || screenHeight < screenWidth ? 5 : 34),
@@ -301,9 +316,16 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                   animationType: BadgeAnimationType.fade,
                                   position:
                                       BadgePosition.topEnd(top: 17, end: 17),
-                                  badgeColor: Colors.grey.shade100,
-                                  borderSide:
-                                      const BorderSide(color: Colors.white),
+                                  badgeColor:
+                                      Provider.of<ThemeProvider>(context)
+                                              .isDarkMode
+                                          ? Colors.grey.shade500
+                                          : Colors.grey.shade100,
+                                  borderSide: BorderSide(
+                                      color: Provider.of<ThemeProvider>(context)
+                                              .isDarkMode
+                                          ? Colors.black45
+                                          : Colors.white),
                                   elevation: 0,
                                   badgeContent: SizedBox(
                                     height: 15,
@@ -323,7 +345,11 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                             ? Icons.favorite
                                             : Icons.favorite_border,
                                         theSize: 15,
-                                        theColor: Colors.cyan,
+                                        theColor:
+                                            Provider.of<ThemeProvider>(context)
+                                                    .isDarkMode
+                                                ? Colors.black87
+                                                : Colors.cyan,
                                       ),
                                     ),
                                   ),
@@ -334,10 +360,19 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                         width: screenWidth - 50,
                                         alignment: Alignment.centerLeft,
                                         decoration: BoxDecoration(
-                                          color: Colors.white.withOpacity(0.9),
+                                          color: Provider.of<ThemeProvider>(
+                                                      context)
+                                                  .isDarkMode
+                                              ? Colors.black38
+                                              : Colors.white.withOpacity(0.9),
                                           // border: Border.all(
                                           //     color: Colors.cyan, width: 0.5),
-                                          borderRadius: const BorderRadius.only(
+                                          borderRadius: BorderRadius.only(
+                                            topLeft: Provider.of<ThemeProvider>(
+                                                        context)
+                                                    .isDarkMode
+                                                ? Radius.circular(8)
+                                                : Radius.circular(0),
                                             topRight: Radius.circular(8),
                                             bottomLeft: Radius.circular(8),
                                             bottomRight: Radius.circular(8),
@@ -459,11 +494,20 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                     gradient: LinearGradient(
                                       begin: Alignment.bottomCenter,
                                       end: Alignment.topCenter,
-                                      colors: [
-                                        Colors.grey.shade300,
-                                        Colors.grey.shade200,
-                                        Colors.white,
-                                      ],
+                                      colors:
+                                          Provider.of<ThemeProvider>(context)
+                                                  .isDarkMode
+                                              ? [
+                                                  Colors.black.withAlpha(100),
+                                                  Colors.black.withAlpha(100),
+                                                  // Colors.black.withGreen(100),
+                                                  // Colors.black.withGreen(0),
+                                                ]
+                                              : [
+                                                  Colors.grey.shade300,
+                                                  Colors.grey.shade200,
+                                                  Colors.white,
+                                                ],
                                     ),
                                   ),
                                   child: TextField(
@@ -506,11 +550,18 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                     gradient: LinearGradient(
                                       begin: Alignment.bottomCenter,
                                       end: Alignment.topCenter,
-                                      colors: [
-                                        Colors.grey.shade300,
-                                        Colors.grey.shade200,
-                                        Colors.white,
-                                      ],
+                                      colors:
+                                          Provider.of<ThemeProvider>(context)
+                                                  .isDarkMode
+                                              ? [
+                                                  Colors.black.withAlpha(100),
+                                                  Colors.black.withAlpha(100),
+                                                ]
+                                              : [
+                                                  Colors.grey.shade300,
+                                                  Colors.grey.shade200,
+                                                  Colors.white,
+                                                ],
                                     ),
                                   ),
                                   child: customeIconButton(
@@ -536,7 +587,11 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                       }
                                     },
                                     theIcon: Icons.send, // mic
-                                    theColor: Colors.cyan.shade600,
+                                    theColor:
+                                        Provider.of<ThemeProvider>(context)
+                                                .isDarkMode
+                                            ? Colors.white70
+                                            : Colors.cyan.shade600,
                                     theSize: 27,
                                   ),
                                 )
