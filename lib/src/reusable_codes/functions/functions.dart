@@ -76,15 +76,20 @@ BoxDecoration backgroundGradientGrey(BuildContext theContext) {
 // }
 
 // dialog header gradient
-LinearGradient dialogHeaderGradient() {
+LinearGradient dialogHeaderGradient(BuildContext theContext) {
   return LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
-    colors: [
-      Colors.cyan.shade700,
-      Colors.cyan.shade100,
-      // Colors.white,
-    ],
+    colors: Provider.of<ThemeProvider>(theContext).isDarkMode
+        ? [
+            Colors.grey.shade900,
+            Colors.grey.shade900,
+          ]
+        : [
+            Colors.cyan.shade700,
+            Colors.cyan.shade100,
+            // Colors.white,
+          ],
   );
 }
 

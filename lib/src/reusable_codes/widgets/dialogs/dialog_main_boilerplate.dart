@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:grasp_app/src/provider/theme_provider.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
+import 'package:provider/provider.dart';
 
 class DialogMainBoilerplate extends StatefulWidget {
   DialogMainBoilerplate({
@@ -35,19 +37,25 @@ class _DialogMainBoilerplateState extends State<DialogMainBoilerplate> {
       actionsPadding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
       elevation: 5,
       actionsOverflowButtonSpacing: 0,
-      shape: const RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(
         side: BorderSide(
-          color: Colors.cyan,
+          // border color
+          color: Provider.of<ThemeProvider>(context).isDarkMode
+              ? Colors.black
+              : Colors.cyan,
           width: 1.5,
         ),
         borderRadius: BorderRadius.all(Radius.circular(15.0)),
       ),
-      backgroundColor: Colors.white,
+      // background color
+      backgroundColor: Provider.of<ThemeProvider>(context).isDarkMode
+          ? Colors.grey.shade800
+          : Colors.white,
       actionsAlignment: MainAxisAlignment.spaceEvenly,
       title: Container(
         padding: const EdgeInsets.fromLTRB(12.0, 20.0, 12.0, 15.0),
         decoration: BoxDecoration(
-          gradient: dialogHeaderGradient(),
+          gradient: dialogHeaderGradient(context),
           borderRadius: BorderRadius.circular(15),
         ), //
 
@@ -62,7 +70,9 @@ class _DialogMainBoilerplateState extends State<DialogMainBoilerplate> {
             ),
             customeText(
               theData: widget.theTitle,
-              theColor: Color.fromARGB(255, 126, 50, 50),
+              theColor: Provider.of<ThemeProvider>(context).isDarkMode
+                  ? Colors.white54
+                  : Color.fromARGB(255, 126, 50, 50),
             ),
             const Expanded(
               child: Divider(
@@ -77,29 +87,59 @@ class _DialogMainBoilerplateState extends State<DialogMainBoilerplate> {
       actions: <Widget>[
         ElevatedButton(
           style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.white),
-              side: MaterialStateProperty.all(
-                  const BorderSide(color: Colors.cyan))),
+              // buttons color
+              backgroundColor: MaterialStateProperty.all(
+                Provider.of<ThemeProvider>(context).isDarkMode
+                    ? Colors.white24
+                    : Colors.white,
+              ),
+              side: MaterialStateProperty.all(BorderSide(
+                  color: Provider.of<ThemeProvider>(context).isDarkMode
+                      ? Colors.black
+                      : Colors.cyan))),
           onPressed: () => Navigator.pop(context, 'Cancel'),
           child: customeText(
             theData: "Cancle",
-            theColor: Colors.cyan,
+            theColor: Provider.of<ThemeProvider>(context).isDarkMode
+                ? Colors.black
+                : Colors.cyan,
           ),
         ),
         widget.theIsButtonElevatedWithIcon
             ? ElevatedButton.icon(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.cyan),
+                  backgroundColor: MaterialStateProperty.all(
+                      Provider.of<ThemeProvider>(context).isDarkMode
+                          ? Colors.black26
+                          : Colors.cyan),
                 ),
                 onPressed: widget.theOnPressed,
-                icon: customeIcon(theIcon: Icons.delete_forever_outlined),
-                label: customeText(theData: widget.theButtonLabel),
+                icon: customeIcon(
+                    theIcon: Icons.delete_forever_outlined,
+                    theColor: Provider.of<ThemeProvider>(context).isDarkMode
+                        ? Colors.white54
+                        : Colors.white),
+                label: customeText(
+                  theData: widget.theButtonLabel,
+                  theColor: Provider.of<ThemeProvider>(context).isDarkMode
+                      ? Colors.white54
+                      : Colors.white,
+                ),
               )
             : ElevatedButton(
                 style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.cyan)),
+                    backgroundColor: MaterialStateProperty.all(
+                  Provider.of<ThemeProvider>(context).isDarkMode
+                      ? Colors.black26
+                      : Colors.cyan,
+                )),
                 onPressed: widget.theOnPressed,
-                child: customeText(theData: widget.theButtonLabel),
+                child: customeText(
+                  theData: widget.theButtonLabel,
+                  theColor: Provider.of<ThemeProvider>(context).isDarkMode
+                      ? Colors.white54
+                      : Colors.white,
+                ),
               )
       ],
     );

@@ -32,7 +32,7 @@ class _DialogAddState extends State<DialogAdd> {
               onPressed: () => widget.controller.clear(),
               icon: const Icon(
                 Icons.close,
-                color: Color.fromARGB(255, 126, 50, 50),
+                // color: Color.fromARGB(255, 126, 50, 50),
               ),
             ),
             border: const UnderlineInputBorder(),
