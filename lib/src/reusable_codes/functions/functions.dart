@@ -417,8 +417,11 @@ ButtonStyle customeButtonStyle() {
   );
 }
 
-SnackbarController customeSnackbar(
-    {required String theTitle, required String theMessage}) {
+SnackbarController customeSnackbar({
+  required String theTitle,
+  required String theMessage,
+  int? theDurationSeconds,
+}) {
   return Get.snackbar(
     titleText: customeText(
         theData: theTitle, theFontSize: 18, theFontWeight: FontWeight.w700),
@@ -426,8 +429,8 @@ SnackbarController customeSnackbar(
         theData: theMessage, theFontSize: 15, theLetterSpacing: 0.6),
     '',
     '',
-    backgroundColor: Colors.grey.shade200,
-    duration: const Duration(seconds: 4),
+    // backgroundColor: Colors.grey.shade200,
+    duration: Duration(seconds: theDurationSeconds ?? 4),
     borderColor: Colors.cyan.shade300,
     borderWidth: 2,
   );

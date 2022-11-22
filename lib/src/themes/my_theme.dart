@@ -19,6 +19,7 @@ class MyTheme {
         backgroundColor: Colors.grey.shade800,
       ),
     ),
+    snackBarTheme: SnackBarThemeData(backgroundColor: Colors.grey.shade800),
     // textButtonTheme: TextButtonThemeData(
     //   style: ButtonStyle(
 
@@ -43,5 +44,9 @@ class MyTheme {
         backgroundColor: Colors.black54,
       ),
     ),
+    snackBarTheme: SnackBarThemeData(
+      backgroundColor: Colors.grey.shade200,
+    ),
+    
   );
 }

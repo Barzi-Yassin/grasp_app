@@ -316,16 +316,19 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                   animationType: BadgeAnimationType.fade,
                                   position:
                                       BadgePosition.topEnd(top: 17, end: 17),
+                                  // reaction color
                                   badgeColor:
                                       Provider.of<ThemeProvider>(context)
                                               .isDarkMode
-                                          ? Colors.grey.shade500
+                                          ? Colors.black87
                                           : Colors.grey.shade100,
+                                  // reaction color
                                   borderSide: BorderSide(
                                       color: Provider.of<ThemeProvider>(context)
                                               .isDarkMode
-                                          ? Colors.black45
-                                          : Colors.white),
+                                          ? Colors.grey.shade600
+                                          : Colors.white,
+                                      width: 0.5),
                                   elevation: 0,
                                   badgeContent: SizedBox(
                                     height: 15,
@@ -345,10 +348,12 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                             ? Icons.favorite
                                             : Icons.favorite_border,
                                         theSize: 15,
+                                        // reaction color
                                         theColor:
                                             Provider.of<ThemeProvider>(context)
                                                     .isDarkMode
-                                                ? Colors.black87
+                                                ? Colors.grey.shade600
+                                                // ? Colors.black87
                                                 : Colors.cyan,
                                       ),
                                     ),
