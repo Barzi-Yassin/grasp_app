@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:grasp_app/src/provider/theme_provider.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
 import 'package:grasp_app/src/screens/auth/complete_profile/screen_set_user_profile_image.dart';
+import 'package:provider/provider.dart';
 
 class ScreenSetUserProfileName extends StatefulWidget {
   const ScreenSetUserProfileName({
@@ -59,7 +61,7 @@ class _ScreenSetUserProfileNameState extends State<ScreenSetUserProfileName> {
                         maxLength: 15,
                         decoration: InputDecoration(
                           filled: true,
-                          fillColor: Colors.white70,
+                          fillColor: Provider.of<ThemeProvider>(context).isDarkMode ? Colors.black54 : Colors.white70,
                           hintText: 'Username',
                           prefixIcon: customePaddingOnly(
                             thePaddingLeft: 10,
