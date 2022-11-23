@@ -272,7 +272,6 @@ class _EndDrawerState extends State<EndDrawer> {
                                 enddrawerRecordTitle: "My profile",
                                 enddrawerRecordRoutePath:
                                     RouteScreens.routeMyProfile,
-                                isSignOut: false,
                                 theOnTap: () {
                                   Get.back();
                                   return Get.to(
@@ -290,7 +289,6 @@ class _EndDrawerState extends State<EndDrawer> {
                                 enddrawerRecordTitle: "Stars",
                                 enddrawerRecordRoutePath:
                                     RouteScreens.routeFilterStars,
-                                isSignOut: false,
                                 theOnTap: () {
                                   Get.back();
                                   return Get.to(
@@ -305,7 +303,6 @@ class _EndDrawerState extends State<EndDrawer> {
                                 enddrawerRecordTitle: "Favorites",
                                 enddrawerRecordRoutePath:
                                     RouteScreens.routeFilterFavorites,
-                                isSignOut: false,
                                 theOnTap: () {
                                   Get.back();
                                   return Get.to(
@@ -319,12 +316,10 @@ class _EndDrawerState extends State<EndDrawer> {
                               //     enddrawerRecordTitle: "Importants",
                               // WidgetEndDrawerRecords(
                               //     enddrawerRecordRoutePath:
-                              //         RouteScreens.routeFilterImportants, isSignOut: false,),
                               // WidgetEndDrawerRecords(
                               //     enddrawerRecordId: 5,
                               //     enddrawerRecordTitle: "Archived Grasps",
                               //     enddrawerRecordRoutePath:
-                              //         RouteScreens.routeFilterArchived, isSignOut: false,),
                             ],
                           ),
                           Column(
@@ -337,7 +332,6 @@ class _EndDrawerState extends State<EndDrawer> {
                                     : "Dark Mode",
                                 enddrawerRecordRoutePath:
                                     RouteScreens.routeGraspGuidance,
-                                isSignOut: false,
                                 theOnTap: () {
                                   provider.toggleTheme(provider.isDarkMode);
                                   // Get.back();  //  uncomment here
@@ -348,7 +342,6 @@ class _EndDrawerState extends State<EndDrawer> {
                                 enddrawerRecordTitle: "Grasp Guidance",
                                 enddrawerRecordRoutePath:
                                     RouteScreens.routeGraspGuidance,
-                                isSignOut: false,
                                 theOnTap: () {
                                   Get.back();
                                   return Get.to(
@@ -363,7 +356,6 @@ class _EndDrawerState extends State<EndDrawer> {
                                 enddrawerRecordTitle: "Logout",
                                 enddrawerRecordRoutePath:
                                     RouteScreens.routeInit,
-                                isSignOut: true,
                                 theOnTap: () =>
                                     Get.offAll(() => const ScreenSignin()),
                               ),
