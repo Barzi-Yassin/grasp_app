@@ -56,13 +56,15 @@ class _EndDrawerState extends State<EndDrawer> {
           //   left: BorderSide(
           //       color: Colors.cyan, width: 1.5, style: BorderStyle.solid),
           // ),
+
+          // body gradient color
           gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.centerLeft,
             colors: Provider.of<ThemeProvider>(context).isDarkMode
                 ? [
-                    Colors.grey.shade700,
-                    Colors.grey.shade700,
+                    Colors.grey.shade800,
+                    Colors.grey.shade800,
                   ]
                 : [
                     Colors.cyan.shade300,
@@ -104,8 +106,11 @@ class _EndDrawerState extends State<EndDrawer> {
                       //         .getthemeCurrentDarkTrueLightFalse // TODO: temporary theme
                       //     ? Colors.grey.shade600
                       //     : Colors.cyan.shade600,
+
+                      // header color decoration (appbarr)
                       color: Provider.of<ThemeProvider>(context).isDarkMode
-                          ? Colors.black38
+                          ? Colors.black54
+                          // ? Colors.black38
                           : Colors.cyan.shade600,
                       borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(20),
@@ -335,7 +340,7 @@ class _EndDrawerState extends State<EndDrawer> {
                                 isSignOut: false,
                                 theOnTap: () {
                                   provider.toggleTheme(provider.isDarkMode);
-                                  // Get.back();  //  uncomment here 
+                                  // Get.back();  //  uncomment here
                                 },
                               ),
                               WidgetEndDrawerRecords(

@@ -43,13 +43,13 @@ class WidgetEndDrawerRecords extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(13.0),
             color: Provider.of<ThemeProvider>(context).isDarkMode
-                ? Colors.grey
+                ? Colors.grey.shade700.withOpacity(0.7)
                 : Colors.white,
             boxShadow: const [
               BoxShadow(
-                color: Colors.black54,
-                offset: Offset(0.0, 1.0), //(x,y)
-                blurRadius: 06.0,
+                color: Colors.black45,
+                offset: Offset(0.0, 1.2), //(x,y)
+                blurRadius: 02.0,
               ),
             ],
           ),
