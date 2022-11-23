@@ -20,16 +20,6 @@ class WidgetEndDrawerRecords extends StatelessWidget {
   final bool isSignOut;
   final theOnTap;
 
-  // final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-
-  final IconData iconProfile = FontAwesomeIcons.userLarge;
-  final IconData iconStars = FontAwesomeIcons.solidStar;
-  final IconData iconFavorites = FontAwesomeIcons.solidHeart;
-  final IconData iconImportants = Icons.label_important;
-  final IconData iconArchivedGrasps = Icons.archive;
-  final IconData iconGraspGuidance = FontAwesomeIcons.circleInfo;
-  final IconData iconLogout = Icons.logout;
-  final IconData iconSettings = Icons.settings;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -54,61 +44,52 @@ class WidgetEndDrawerRecords extends StatelessWidget {
             ],
           ),
           child: ListTile(
-            onTap: theOnTap,
-            // () {
-            //   debugPrint(isSignOut.toString());
-            //   if (!isSignOut) {
-            //     Get.toNamed(enddrawerRecordRoutePath);
-            //   } else {
-            //     firebaseAuth
-            //         .signOut()
-            //         .then((_) => Get.offAll(const ScreenSignin()));
-            //   }
-            // },
-            // minVerticalPadding: 20,
-            iconColor: Provider.of<ThemeProvider>(context).isDarkMode
-                ? Colors.white70
-                : Colors.cyan.shade600,
-            title: customeText(
-              theData: enddrawerRecordTitle,
-              theFontSize: 15,
-              theMaxLines: 1,
-            ),
-            trailing: _enddrawerRecordsWidgetDetector(
-              _currentEnddrawerRecordIconDetector(),
-            ),
-          ),
+              onTap: theOnTap,
+              // () {
+              //   debugPrint(isSignOut.toString());
+              //   if (!isSignOut) {
+              //     Get.toNamed(enddrawerRecordRoutePath);
+              //   } else {
+              //     firebaseAuth
+              //         .signOut()
+              //         .then((_) => Get.offAll(const ScreenSignin()));
+              //   }
+              // },
+              // minVerticalPadding: 20,
+              iconColor: Provider.of<ThemeProvider>(context).isDarkMode
+                  ? Colors.white70
+                  : Colors.cyan.shade600,
+              title: customeText(
+                theData: enddrawerRecordTitle,
+                theFontSize: 15,
+                theMaxLines: 1,
+              ),
+              trailing: enddrawerRecordId == 1
+                  ? Icon(FontAwesomeIcons.userLarge)
+                  : enddrawerRecordId == 2
+                      ? Icon(FontAwesomeIcons.solidStar)
+                      : enddrawerRecordId == 3
+                          ? Icon(FontAwesomeIcons.solidHeart)
+                          : enddrawerRecordId == 4
+                              ? Icon(Icons.label_important)
+                              : enddrawerRecordId == 5
+                                  ? Icon(Icons.archive)
+                                  : enddrawerRecordId == 6
+                                      ? Icon(FontAwesomeIcons.circleInfo)
+                                      : enddrawerRecordId == 7
+                                          ? Icon(Icons.logout)
+                                          : Icon(Provider.of<ThemeProvider>(
+                                                      context)
+                                                  .isDarkMode
+                                              ? Icons.light_mode
+                                              : Icons
+                                                  .dark_mode_sharp) // when id >= 8
+              //  _enddrawerRecordsWidgetDetector(
+              //   _currentEnddrawerRecordIconDetector(),
+              // ),
+              ),
         ),
       ),
     );
-  }
-
-// this function returns a widgets "Icon() or FaIcon()"
-  Widget _enddrawerRecordsWidgetDetector(IconData iconName) {
-    if (enddrawerRecordId <= 3 || enddrawerRecordId >= 6) {
-      return Icon(iconName);
-    } else {
-      return FaIcon(iconName);
-    }
-  }
-
-  IconData _currentEnddrawerRecordIconDetector() {
-    if (enddrawerRecordId == 1) {
-      return iconProfile;
-    } else if (enddrawerRecordId == 2) {
-      return iconStars;
-    } else if (enddrawerRecordId == 3) {
-      return iconFavorites;
-    } else if (enddrawerRecordId == 4) {
-      return iconImportants;
-    } else if (enddrawerRecordId == 5) {
-      return iconArchivedGrasps;
-    } else if (enddrawerRecordId == 6) {
-      return iconGraspGuidance;
-    } else if (enddrawerRecordId == 7) {
-      return iconLogout;
-    } else {
-      return iconSettings;
-    }
   }
 }

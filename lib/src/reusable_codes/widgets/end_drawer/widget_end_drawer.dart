@@ -333,8 +333,8 @@ class _EndDrawerState extends State<EndDrawer> {
                               WidgetEndDrawerRecords(
                                 enddrawerRecordId: 8,
                                 enddrawerRecordTitle: provider.isDarkMode
-                                    ? "Light theme"
-                                    : "Dark theme",
+                                    ? "Light Mode"
+                                    : "Dark Mode",
                                 enddrawerRecordRoutePath:
                                     RouteScreens.routeGraspGuidance,
                                 isSignOut: false,
@@ -345,7 +345,7 @@ class _EndDrawerState extends State<EndDrawer> {
                               ),
                               WidgetEndDrawerRecords(
                                 enddrawerRecordId: 6,
-                                enddrawerRecordTitle: "Grasp guidance",
+                                enddrawerRecordTitle: "Grasp Guidance",
                                 enddrawerRecordRoutePath:
                                     RouteScreens.routeGraspGuidance,
                                 isSignOut: false,
