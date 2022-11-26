@@ -39,6 +39,8 @@ class _ScreenMessagesState extends State<ScreenMessages> {
       CustomeStringFunctions();
 
   final TextEditingController controllerMessage = TextEditingController();
+  ScrollController scrollController =
+      ScrollController(initialScrollOffset: 1000000);
 
   final FocusNode focusNodeMessage = FocusNode();
 
@@ -263,6 +265,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                 theData: '\n\nNo messages found!');
                           } else {
                             return ListView.separated(
+                              controller: scrollController,
                               padding: EdgeInsets.only(
                                   top: isReadingMode ? 10 : 40,
                                   bottom: 10.0), // here
