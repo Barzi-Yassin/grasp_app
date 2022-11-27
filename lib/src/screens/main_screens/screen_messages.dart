@@ -93,6 +93,7 @@ class _ScreenMessagesState extends State<ScreenMessages> {
         body: Container(
           height: double.infinity,
           width: double.infinity,
+          padding: EdgeInsets.only(bottom: 5),
           decoration: backgroundGradientCyan(context),
           child: Badge(
             showBadge: isReadingMode ? false : true,
@@ -222,9 +223,12 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                         isReadingMode || screenHeight < screenWidth ? 5 : 34),
                     top: const Radius.circular(5)),
               ),
-              child: Column(
+              child: Stack(
                 children: [
-                  Expanded(
+                  Container(
+                    margin: EdgeInsets.only(bottom: isReadingMode ? 0 : 18),
+                    height: double.infinity,
+                    width: double.infinity,
                     child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                         stream: serviceFirestore.firestoreInstance
                             .collection("users")
@@ -264,216 +268,258 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                             return customeText(
                                 theData: '\n\nNo messages found!');
                           } else {
-                            return ListView.separated(
-                              controller: scrollController,
-                              padding: EdgeInsets.only(
-                                  top: isReadingMode ? 10 : 40,
-                                  bottom: 10.0), // here
-                              separatorBuilder:
-                                  (BuildContext context, int index) =>
-                                      const Divider(
-                                color: Colors.transparent,
-                              ),
-                              scrollDirection: Axis.vertical,
-                              itemCount: snapshotMessages.data!.docs.length,
-                              itemBuilder: (context, theRecord) {
-                                final QueryDocumentSnapshot<
-                                        Map<String, dynamic>> theRecordItem =
-                                    snapshotMessages.data!.docs[theRecord];
-                                final theRecordItemMessage =
-                                    theRecordItem.data()["message"];
-                                final theMessageCreatedAt =
-                                    theRecordItem.data()["createdAt"];
-                                final theRecordItemReact =
-                                    theRecordItem.data()["isReacted"];
-                                final theRecordItemDocId =
-                                    theRecordItem.data()["messageDocId"];
+                            return Theme(
+                              data: Theme.of(context).copyWith(
+                                  colorScheme: ColorScheme.fromSwatch()
+                                      .copyWith(
+                                          secondary: Provider.of<ThemeProvider>(
+                                                      context)
+                                                  .isDarkMode
+                                              ? Colors.black12.withOpacity(0.9)
+                                              : Theme.of(context)
+                                                  .secondaryHeaderColor)),
+                              child: ListView.separated(
+                                controller: scrollController,
+                                padding: EdgeInsets.only(
+                                    top: isReadingMode ? 10 : 40,
+                                    bottom: 10.0), // here
+                                separatorBuilder:
+                                    (BuildContext context, int index) =>
+                                        const Divider(
+                                  color: Colors.transparent,
+                                ),
+                                scrollDirection: Axis.vertical,
+                                itemCount: snapshotMessages.data!.docs.length,
+                                itemBuilder: (context, theRecord) {
+                                  final QueryDocumentSnapshot<
+                                          Map<String, dynamic>> theRecordItem =
+                                      snapshotMessages.data!.docs[theRecord];
+                                  final theRecordItemMessage =
+                                      theRecordItem.data()["message"];
+                                  final theMessageCreatedAt =
+                                      theRecordItem.data()["createdAt"];
+                                  final theRecordItemReact =
+                                      theRecordItem.data()["isReacted"];
+                                  final theRecordItemDocId =
+                                      theRecordItem.data()["messageDocId"];
 
-                                final String theRecordItemMessageAbbreviated =
-                                    customeStringFunctions.customeSubString(
-                                  theString: theRecordItemMessage,
-                                  theResultLengthLimit: 5,
-                                );
+                                  final String theRecordItemMessageAbbreviated =
+                                      customeStringFunctions.customeSubString(
+                                    theString: theRecordItemMessage,
+                                    theResultLengthLimit: 5,
+                                  );
 
-                                // debugPrint(
-                                //     'ttttttt :: $theRecordItemMessageAbbreviated');
+                                  // debugPrint(
+                                  //     'ttttttt :: $theRecordItemMessageAbbreviated');
 
-                                final theRecordFileCreatedAtConverted =
-                                    DateTime.fromMillisecondsSinceEpoch(
-                                        theMessageCreatedAt);
+                                  final theRecordFileCreatedAtConverted =
+                                      DateTime.fromMillisecondsSinceEpoch(
+                                          theMessageCreatedAt);
 
-                                var theRecordMessageCreatedAtVarListBoilerPlate =
-                                    {
-                                  'time': dateTimeOptimizer
-                                      .dateTimeTwelveHourFormater(
-                                          hourNumber:
-                                              theRecordFileCreatedAtConverted
-                                                  .hour,
-                                          minuteNumber:
-                                              theRecordFileCreatedAtConverted
-                                                  .minute),
-                                  'date':
-                                      '${dateTimeOptimizer.dateTimeNumberToMonthName(monthNumber: theRecordFileCreatedAtConverted.month)}.${theRecordFileCreatedAtConverted.day}, ${theRecordFileCreatedAtConverted.year}',
-                                };
-                                return Badge(
-                                  animationType: BadgeAnimationType.fade,
-                                  position:
-                                      BadgePosition.topEnd(top: 17, end: 17),
-                                  // reaction color
-                                  badgeColor:
-                                      Provider.of<ThemeProvider>(context)
-                                              .isDarkMode
-                                          ? Colors.black87
-                                          : Colors.grey.shade100,
-                                  // reaction color
-                                  borderSide: BorderSide(
-                                      color: Provider.of<ThemeProvider>(context)
-                                              .isDarkMode
-                                          ? Colors.grey.shade600
-                                          : Colors.white,
-                                      width: 0.5),
-                                  elevation: 0,
-                                  badgeContent: SizedBox(
-                                    height: 15,
-                                    child: InkWell(
-                                      onTap: () async =>
-                                          await serviceFirestore.reactMessage(
-                                        theMessageDocId: theRecordItemDocId,
-                                        user: widget.theUser,
-                                        theFileSubjectName:
-                                            widget.theFileSubjectName,
-                                        theMessageFileName: widget.theFileName,
-                                        theIsReacted: !theRecordItemReact,
-                                      ),
-                                      highlightColor: Colors.transparent,
-                                      child: customeIcon(
-                                        theIcon: theRecordItemReact
-                                            ? Icons.favorite
-                                            : Icons.favorite_border,
-                                        theSize: 15,
-                                        // reaction color
-                                        theColor:
+                                  var theRecordMessageCreatedAtVarListBoilerPlate =
+                                      {
+                                    'time': dateTimeOptimizer
+                                        .dateTimeTwelveHourFormater(
+                                            hourNumber:
+                                                theRecordFileCreatedAtConverted
+                                                    .hour,
+                                            minuteNumber:
+                                                theRecordFileCreatedAtConverted
+                                                    .minute),
+                                    'date':
+                                        '${dateTimeOptimizer.dateTimeNumberToMonthName(monthNumber: theRecordFileCreatedAtConverted.month)}.${theRecordFileCreatedAtConverted.day}, ${theRecordFileCreatedAtConverted.year}',
+                                  };
+                                  return Badge(
+                                    animationType: BadgeAnimationType.fade,
+                                    position:
+                                        BadgePosition.topEnd(top: 17, end: 17),
+                                    // reaction color
+                                    badgeColor:
+                                        Provider.of<ThemeProvider>(context)
+                                                .isDarkMode
+                                            ? Colors.black87
+                                            : Colors.grey.shade100,
+                                    // reaction color
+                                    borderSide: BorderSide(
+                                        color:
                                             Provider.of<ThemeProvider>(context)
                                                     .isDarkMode
                                                 ? Colors.grey.shade600
-                                                // ? Colors.black87
-                                                : Colors.cyan,
-                                      ),
-                                    ),
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        margin: const EdgeInsets.only(left: 6),
-                                        width: screenWidth - 50,
-                                        alignment: Alignment.centerLeft,
-                                        decoration: BoxDecoration(
-                                          color: Provider.of<ThemeProvider>(
+                                                : Colors.white,
+                                        width: 0.5),
+                                    elevation: 0,
+                                    badgeContent: SizedBox(
+                                      height: 15,
+                                      child: InkWell(
+                                        onTap: () async =>
+                                            await serviceFirestore.reactMessage(
+                                          theMessageDocId: theRecordItemDocId,
+                                          user: widget.theUser,
+                                          theFileSubjectName:
+                                              widget.theFileSubjectName,
+                                          theMessageFileName:
+                                              widget.theFileName,
+                                          theIsReacted: !theRecordItemReact,
+                                        ),
+                                        highlightColor: Colors.transparent,
+                                        child: customeIcon(
+                                          theIcon: theRecordItemReact
+                                              ? Icons.favorite
+                                              : Icons.favorite_border,
+                                          theSize: 15,
+                                          // reaction color
+                                          theColor: Provider.of<ThemeProvider>(
                                                       context)
                                                   .isDarkMode
-                                              ? Colors.black38
-                                              : Colors.white.withOpacity(0.9),
-                                          // border: Border.all(
-                                          //     color: Colors.cyan, width: 0.5),
-                                          borderRadius: BorderRadius.only(
-                                            topLeft: Provider.of<ThemeProvider>(
-                                                        context)
-                                                    .isDarkMode
-                                                ? Radius.circular(8)
-                                                : Radius.circular(0),
-                                            topRight: Radius.circular(8),
-                                            bottomLeft: Radius.circular(8),
-                                            bottomRight: Radius.circular(8),
-                                          ),
-                                        ),
-                                        child: ListTile(
-                                          dense: true,
-                                          contentPadding: const EdgeInsets.only(
-                                              left: 10,
-                                              right: 16,
-                                              top: 10,
-                                              bottom: 0),
-                                          onLongPress: () {
-                                            if (!isReadingMode) {
-                                              showAnimatedDialog(
-                                                barrierColor: Colors.black38,
-                                                barrierDismissible: true,
-                                                context: context,
-                                                animationType:
-                                                    DialogTransitionType
-                                                        .sizeFade,
-                                                curve: Curves.easeOut,
-                                                alignment:
-                                                    Alignment.bottomCenter,
-                                                duration: const Duration(
-                                                    milliseconds: 800),
-                                                builder: (_) {
-                                                  return DialogDelete(
-                                                    theTitle: "Message",
-                                                    theName:
-                                                        theRecordItemMessageAbbreviated,
-                                                    theOnPressed: () async {
-                                                      await serviceFirestore
-                                                          .deleteMessage(
-                                                        user: widget.theUser,
-                                                        theFileSubjectName: widget
-                                                            .theFileSubjectName,
-                                                        theMessageFileName:
-                                                            widget.theFileName,
-                                                        theMessageDocId:
-                                                            theRecordItemDocId,
-                                                      )
-                                                          .then((value) {
-                                                        Get.back();
-                                                        return customeSnackbar(
-                                                          theTitle:
-                                                              'Message caution',
-                                                          theMessage:
-                                                              'The messsage "$theRecordItemMessageAbbreviated" has been deleted successfully.',
-                                                        );
-                                                      });
-                                                    },
-                                                  );
-                                                },
-                                              );
-                                            } else {
-                                              customeSnackbar(
-                                                theTitle: 'Message caution',
-                                                theMessage:
-                                                    'Messages may not be deleted, while you\'re in reading mode.',
-                                              );
-                                            }
-                                          },
-                                          title: customeText(
-                                              theData: theRecordItemMessage),
-                                          // SelectableText(theRecordItemMessage),
-                                          subtitle: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            children: [
-                                              customeText(
-                                                theData: isDateVisibile
-                                                    ? "\n${theRecordMessageCreatedAtVarListBoilerPlate['date']}"
-                                                    : '',
-                                                theTextAlign: TextAlign.end,
-                                                theFontSize: 11,
-                                              ),
-                                              customeText(
-                                                theData:
-                                                    "\n${theRecordMessageCreatedAtVarListBoilerPlate['time']}",
-                                                theTextAlign: TextAlign.start,
-                                                theFontSize: 11,
-                                              ),
-                                            ],
-                                          ),
+                                              ? Colors.grey.shade600
+                                              // ? Colors.black87
+                                              : Colors.cyan,
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                );
-                              },
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Container(
+                                              margin: const EdgeInsets.only(
+                                                  left: 6),
+                                              width: screenWidth - 50,
+                                              alignment: Alignment.centerLeft,
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    Provider.of<ThemeProvider>(
+                                                                context)
+                                                            .isDarkMode
+                                                        ? Colors.black38
+                                                        : Colors.white
+                                                            .withOpacity(0.9),
+                                                // border: Border.all(
+                                                //     color: Colors.cyan, width: 0.5),
+                                                borderRadius: BorderRadius.only(
+                                                  topLeft:
+                                                      Provider.of<ThemeProvider>(
+                                                                  context)
+                                                              .isDarkMode
+                                                          ? Radius.circular(8)
+                                                          : Radius.circular(0),
+                                                  topRight: Radius.circular(8),
+                                                  bottomLeft:
+                                                      Radius.circular(8),
+                                                  bottomRight:
+                                                      Radius.circular(8),
+                                                ),
+                                              ),
+                                              child: ListTile(
+                                                dense: true,
+                                                contentPadding:
+                                                    const EdgeInsets.only(
+                                                        left: 10,
+                                                        right: 16,
+                                                        top: 10,
+                                                        bottom: 0),
+                                                onLongPress: () {
+                                                  if (!isReadingMode) {
+                                                    showAnimatedDialog(
+                                                      barrierColor:
+                                                          Colors.black38,
+                                                      barrierDismissible: true,
+                                                      context: context,
+                                                      animationType:
+                                                          DialogTransitionType
+                                                              .sizeFade,
+                                                      curve: Curves.easeOut,
+                                                      alignment: Alignment
+                                                          .bottomCenter,
+                                                      duration: const Duration(
+                                                          milliseconds: 800),
+                                                      builder: (_) {
+                                                        return DialogDelete(
+                                                          theTitle: "Message",
+                                                          theName:
+                                                              theRecordItemMessageAbbreviated,
+                                                          theOnPressed:
+                                                              () async {
+                                                            await serviceFirestore
+                                                                .deleteMessage(
+                                                              user: widget
+                                                                  .theUser,
+                                                              theFileSubjectName:
+                                                                  widget
+                                                                      .theFileSubjectName,
+                                                              theMessageFileName:
+                                                                  widget
+                                                                      .theFileName,
+                                                              theMessageDocId:
+                                                                  theRecordItemDocId,
+                                                            )
+                                                                .then((value) {
+                                                              Get.back();
+                                                              return customeSnackbar(
+                                                                theTitle:
+                                                                    'Message caution',
+                                                                theMessage:
+                                                                    'The messsage "$theRecordItemMessageAbbreviated" has been deleted successfully.',
+                                                              );
+                                                            });
+                                                          },
+                                                        );
+                                                      },
+                                                    );
+                                                  } else {
+                                                    customeSnackbar(
+                                                      theTitle:
+                                                          'Message caution',
+                                                      theMessage:
+                                                          'Messages may not be deleted, while you\'re in reading mode.',
+                                                    );
+                                                  }
+                                                },
+                                                title: customeText(
+                                                    theData:
+                                                        theRecordItemMessage),
+                                                // SelectableText(theRecordItemMessage),
+                                                subtitle: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.end,
+                                                  children: [
+                                                    customeText(
+                                                      theData: isDateVisibile
+                                                          ? "\n${theRecordMessageCreatedAtVarListBoilerPlate['date']}"
+                                                          : '',
+                                                      theTextAlign:
+                                                          TextAlign.end,
+                                                      theFontSize: 11,
+                                                    ),
+                                                    customeText(
+                                                      theData:
+                                                          "\n${theRecordMessageCreatedAtVarListBoilerPlate['time']}",
+                                                      theTextAlign:
+                                                          TextAlign.start,
+                                                      theFontSize: 11,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: theRecord ==
+                                                  (snapshotMessages
+                                                          .data!.docs.length -
+                                                      1)
+                                              ? 60
+                                              : 0,
+                                        )
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
                             );
                           }
                         }),
@@ -488,26 +534,41 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                               width: 0,
                               height: 0,
                             )
-                          : Row(
-                              children: [
-                                Container(
-                                  margin: const EdgeInsets.only(left: 2),
-                                  height: 50,
-                                  width: screenWidth - 65,
-                                  decoration: BoxDecoration(
-                                    borderRadius: const BorderRadius.horizontal(
-                                      left: Radius.circular(22),
-                                      right: Radius.circular(10),
-                                    ),
-                                    gradient: LinearGradient(
-                                      begin: Alignment.bottomCenter,
-                                      end: Alignment.topCenter,
-                                      colors:
-                                          Provider.of<ThemeProvider>(context)
+                          : Positioned(
+                              bottom: 1,
+                              child: Container(
+                                margin: const EdgeInsets.only(right: 2),
+                                // padding: EdgeInsets.only(right: 1),
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.shade800,
+                                  borderRadius: const BorderRadius.horizontal(
+                                    left: Radius.circular(22),
+                                    right: Radius.circular(24),
+                                  ),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      margin: const EdgeInsets.only(left: 2),
+                                      height: 50,
+                                      width: screenWidth - 62,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            const BorderRadius.horizontal(
+                                          left: Radius.circular(22),
+                                          right: Radius.circular(10),
+                                        ),
+                                        gradient: LinearGradient(
+                                          begin: Alignment.bottomCenter,
+                                          end: Alignment.topCenter,
+                                          colors: Provider.of<ThemeProvider>(
+                                                      context)
                                                   .isDarkMode
                                               ? [
                                                   Colors.black.withAlpha(100),
                                                   Colors.black.withAlpha(100),
+                                                  // Colors.black87,
+                                                  // Colors.black87,
                                                   // Colors.black.withGreen(100),
                                                   // Colors.black.withGreen(0),
                                                 ]
@@ -516,50 +577,52 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                                   Colors.grey.shade200,
                                                   Colors.white,
                                                 ],
-                                    ),
-                                  ),
-                                  child: TextField(
-                                    // focusNode: focusNode,
-                                    controller: controllerMessage,
-                                    textAlign: TextAlign.center,
-                                    keyboardType: TextInputType.multiline,
-                                    textInputAction: TextInputAction.newline,
-                                    cursorColor: Colors.cyan,
-                                    // onSaved: (message) {},
-                                    // maxLines: 1,
-                                    decoration: InputDecoration(
-                                      // filled: true,
-                                      // fillColor: Colors.white70,
-                                      hintText: "Message...",
-                                      prefixIcon: customePaddingOnly(
-                                        thePaddingLeft: 10,
-                                        theChild: customeIconShaderMask(
-                                          theIcon:
-                                              Icons.emoji_emotions_outlined,
-                                          theSize: 28,
                                         ),
                                       ),
-                                      border: const OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(40)),
-                                          borderSide: BorderSide.none),
+                                      child: TextField(
+                                        // focusNode: focusNode,
+                                        controller: controllerMessage,
+                                        textAlign: TextAlign.center,
+                                        keyboardType: TextInputType.multiline,
+                                        textInputAction:
+                                            TextInputAction.newline,
+                                        cursorColor: Colors.white,
+                                        // onSaved: (message) {},
+                                        // maxLines: 1,
+                                        decoration: InputDecoration(
+                                          // filled: true,
+                                          // fillColor: Colors.white70,
+                                          hintText: "Aa",
+                                          prefixIcon: customePaddingOnly(
+                                            thePaddingLeft: 10,
+                                            theChild: customeIconShaderMask(
+                                              theIcon:
+                                                  Icons.emoji_emotions_outlined,
+                                              theSize: 28,
+                                            ),
+                                          ),
+                                          border: const OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(40)),
+                                              borderSide: BorderSide.none),
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                ),
-                                Container(
-                                  height: 50,
-                                  width: 44,
-                                  margin: const EdgeInsets.only(left: 3),
-                                  decoration: BoxDecoration(
-                                    borderRadius: const BorderRadius.horizontal(
-                                      left: Radius.circular(10),
-                                      right: Radius.circular(24),
-                                    ),
-                                    gradient: LinearGradient(
-                                      begin: Alignment.bottomCenter,
-                                      end: Alignment.topCenter,
-                                      colors:
-                                          Provider.of<ThemeProvider>(context)
+                                    Container(
+                                      height: 50,
+                                      width: 46,
+                                      margin: const EdgeInsets.only(left: 3),
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            const BorderRadius.horizontal(
+                                          left: Radius.circular(10),
+                                          right: Radius.circular(24),
+                                        ),
+                                        gradient: LinearGradient(
+                                          begin: Alignment.bottomCenter,
+                                          end: Alignment.topCenter,
+                                          colors: Provider.of<ThemeProvider>(
+                                                      context)
                                                   .isDarkMode
                                               ? [
                                                   Colors.black.withAlpha(100),
@@ -570,40 +633,44 @@ class _ScreenMessagesState extends State<ScreenMessages> {
                                                   Colors.grey.shade200,
                                                   Colors.white,
                                                 ],
-                                    ),
-                                  ),
-                                  child: customeIconButton(
-                                    theOnPressed: () async {
-                                      if (controllerMessage.text.isNotEmpty) {
-                                        await serviceFirestore
-                                            .createMessage(
-                                              user: widget.theUser,
-                                              theFileSubjectName:
-                                                  widget.theFileSubjectName,
-                                              theMessageFileName:
-                                                  widget.theFileName,
+                                        ),
+                                      ),
+                                      child: customeIconButton(
+                                        theOnPressed: () async {
+                                          if (controllerMessage
+                                              .text.isNotEmpty) {
+                                            await serviceFirestore
+                                                .createMessage(
+                                                  user: widget.theUser,
+                                                  theFileSubjectName:
+                                                      widget.theFileSubjectName,
+                                                  theMessageFileName:
+                                                      widget.theFileName,
+                                                  theMessage:
+                                                      controllerMessage.text,
+                                                )
+                                                .then((value) =>
+                                                    controllerMessage.clear());
+                                          } else {
+                                            customeSnackbar(
+                                              theTitle: 'Message caution',
                                               theMessage:
-                                                  controllerMessage.text,
-                                            )
-                                            .then((value) =>
-                                                controllerMessage.clear());
-                                      } else {
-                                        customeSnackbar(
-                                          theTitle: 'Message caution',
-                                          theMessage: 'Please enter a message.',
-                                        );
-                                      }
-                                    },
-                                    theIcon: Icons.send, // mic
-                                    theColor:
-                                        Provider.of<ThemeProvider>(context)
-                                                .isDarkMode
-                                            ? Colors.white70
-                                            : Colors.cyan.shade600,
-                                    theSize: 27,
-                                  ),
-                                )
-                              ],
+                                                  'Please enter a message.',
+                                            );
+                                          }
+                                        },
+                                        theIcon: Icons.send, // mic
+                                        theColor:
+                                            Provider.of<ThemeProvider>(context)
+                                                    .isDarkMode
+                                                ? Colors.white70
+                                                : Colors.cyan.shade600,
+                                        theSize: 27,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
                             ),
                 ],
               ),
