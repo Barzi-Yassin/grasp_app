@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:grasp_app/src/provider/theme_provider.dart';
 import 'package:grasp_app/src/reusable_codes/functions/custome_string_functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/date_time_functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
@@ -13,6 +14,7 @@ import 'package:grasp_app/src/reusable_codes/widgets/dialogs/dialog_delete.dart'
 import 'package:grasp_app/src/reusable_codes/widgets/end_drawer/widget_end_drawer.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/subjects/widget_subject_records.dart';
 import 'package:grasp_app/src/services/firebase/service_firestore.dart';
+import 'package:provider/provider.dart';
 
 class ScreenSubjects extends StatefulWidget {
   const ScreenSubjects({Key? key, required this.theUser}) : super(key: key);
@@ -129,179 +131,191 @@ class _ScreenSubjectsState extends State<ScreenSubjects> {
                         theScreenHeight: screenHeight,
                       );
                     } else {
-                      return ListView.builder(
-                        // clipBehavior: Clip.hardEdge,
-                        padding: const EdgeInsets.only(
-                            top: 5.0, bottom: 70, left: 9, right: 9),
-                        scrollDirection: Axis.vertical,
-                        itemCount: snapshotSubject.data!.docs.length,
-                        itemBuilder: (context, theRecord) {
-                          final theRecordItem =
-                              snapshotSubject.data!.docs[theRecord];
-                          final theRecordItemSubjectName =
-                              theRecordItem.data()["subjectName"];
-                          final int theRecordItemSubjectUpdatedAt =
-                              theRecordItem.data()["subjectUpdateAt"];
-                          final int theRecordItemSubjectCreatedAt =
-                              theRecordItem.data()["subjectCreatedAt"];
+                      return Theme(
+                        data: Theme.of(context).copyWith(
+                          colorScheme: ColorScheme.fromSwatch().copyWith(
+                              secondary:
+                                  Provider.of<ThemeProvider>(context).isDarkMode
+                                      ? Colors.black12.withOpacity(0.9)
+                                      : Theme.of(context).secondaryHeaderColor),
+                        ),
+                        child: ListView.builder(
+                          // clipBehavior: Clip.hardEdge,
+                          padding: const EdgeInsets.only(
+                              top: 5.0, bottom: 70, left: 9, right: 9),
+                          scrollDirection: Axis.vertical,
+                          itemCount: snapshotSubject.data!.docs.length,
+                          itemBuilder: (context, theRecord) {
+                            final theRecordItem =
+                                snapshotSubject.data!.docs[theRecord];
+                            final theRecordItemSubjectName =
+                                theRecordItem.data()["subjectName"];
+                            final int theRecordItemSubjectUpdatedAt =
+                                theRecordItem.data()["subjectUpdateAt"];
+                            final int theRecordItemSubjectCreatedAt =
+                                theRecordItem.data()["subjectCreatedAt"];
 
-                          final String theRecordItemSubjectCreatedAtReady =
-                              dateTimeOptimizer.dateTimeGenerator(
-                                  theTimeStamp: theRecordItemSubjectCreatedAt);
-                          final String theRecordItemSubjectUpdatedAtReady =
-                              dateTimeOptimizer.dateTimeGenerator(
-                                  theTimeStamp: theRecordItemSubjectUpdatedAt);
+                            final String theRecordItemSubjectCreatedAtReady =
+                                dateTimeOptimizer.dateTimeGenerator(
+                                    theTimeStamp:
+                                        theRecordItemSubjectCreatedAt);
+                            final String theRecordItemSubjectUpdatedAtReady =
+                                dateTimeOptimizer.dateTimeGenerator(
+                                    theTimeStamp:
+                                        theRecordItemSubjectUpdatedAt);
 
-                          final String theRecordItemSubjectNameAbbreviated =
-                              customeStringFunctions.customeSubString(
-                                  theString: theRecordItemSubjectName,
-                                  theResultLengthLimit: 5);
-                          if (!listOfCurrentSubjectsName
-                              .contains(theRecordItemSubjectName)) {
-                            listOfCurrentSubjectsNameFunction()
-                                .add(theRecordItemSubjectName);
-                          }
+                            final String theRecordItemSubjectNameAbbreviated =
+                                customeStringFunctions.customeSubString(
+                                    theString: theRecordItemSubjectName,
+                                    theResultLengthLimit: 5);
+                            if (!listOfCurrentSubjectsName
+                                .contains(theRecordItemSubjectName)) {
+                              listOfCurrentSubjectsNameFunction()
+                                  .add(theRecordItemSubjectName);
+                            }
 
-                          return StreamBuilder<
-                                  QuerySnapshot<Map<String, dynamic>>>(
-                              stream: serviceFirestore.firestoreInstance
-                                  .collection("users")
-                                  .doc(widget.theUser.uid)
-                                  .collection("subjects")
-                                  .doc(theRecordItemSubjectName)
-                                  .collection("files")
-                                  .snapshots(),
-                              builder: (context, snapshotFiles) {
-                                if (snapshotFiles.connectionState ==
-                                    ConnectionState.waiting) {
-                                  return loadingIndicator(
-                                      theColor: Colors.transparent);
-                                } else if (snapshotFiles.hasError) {
-                                  return customeText(
-                                      theData: "err ${snapshotFiles.error}");
-                                } else if (snapshotFiles.data == null ||
-                                    !snapshotFiles.hasData) {
-                                  return customeText(
-                                      theData:
-                                          'snapshotFiles is empty(StreamBuilder)');
-                                }
+                            return StreamBuilder<
+                                    QuerySnapshot<Map<String, dynamic>>>(
+                                stream: serviceFirestore.firestoreInstance
+                                    .collection("users")
+                                    .doc(widget.theUser.uid)
+                                    .collection("subjects")
+                                    .doc(theRecordItemSubjectName)
+                                    .collection("files")
+                                    .snapshots(),
+                                builder: (context, snapshotFiles) {
+                                  if (snapshotFiles.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return loadingIndicator(
+                                        theColor: Colors.transparent);
+                                  } else if (snapshotFiles.hasError) {
+                                    return customeText(
+                                        theData: "err ${snapshotFiles.error}");
+                                  } else if (snapshotFiles.data == null ||
+                                      !snapshotFiles.hasData) {
+                                    return customeText(
+                                        theData:
+                                            'snapshotFiles is empty(StreamBuilder)');
+                                  }
 
-                                // debugPrint('44444files');
-                                // debugPrint(
-                                //     snapshotFiles.data!.docs.length.toString());
-                                // debugPrint(snapshotFiles.data.toString());
+                                  // debugPrint('44444files');
+                                  // debugPrint(
+                                  //     snapshotFiles.data!.docs.length.toString());
+                                  // debugPrint(snapshotFiles.data.toString());
 
-                                snapshotFiles.data?.docs;
+                                  snapshotFiles.data?.docs;
 
-                                final int filesLength =
-                                    snapshotFiles.data!.docs.length;
+                                  final int filesLength =
+                                      snapshotFiles.data!.docs.length;
 
-                                return Column(
-                                  children: [
-                                    theRecord == 0
-                                        ? Container(
-                                            height: 50,
-                                            alignment: Alignment.center,
-                                            child: Row(
-                                              children: [
-                                                const Expanded(
-                                                  child: Divider(
-                                                    thickness: 1,
-                                                    endIndent: 10,
+                                  return Column(
+                                    children: [
+                                      theRecord == 0
+                                          ? Container(
+                                              height: 50,
+                                              alignment: Alignment.center,
+                                              child: Row(
+                                                children: [
+                                                  const Expanded(
+                                                    child: Divider(
+                                                      thickness: 1,
+                                                      endIndent: 10,
+                                                    ),
                                                   ),
-                                                ),
-                                                customeText(
-                                                  theData: sortSubjectsFunctions
-                                                      .getSortName(
-                                                          theSortedSubjectsFieldName:
-                                                              sortedSubjectsFieldName),
-                                                  // theColor: Colors.black26,
-                                                ),
-                                                const Expanded(
-                                                  child: Divider(
-                                                    thickness: 1,
-                                                    indent: 10,
-                                                    endIndent: 10,
+                                                  customeText(
+                                                    theData: sortSubjectsFunctions
+                                                        .getSortName(
+                                                            theSortedSubjectsFieldName:
+                                                                sortedSubjectsFieldName),
+                                                    // theColor: Colors.black26,
                                                   ),
-                                                ),
-                                                customeText(
-                                                  theData: sortSubjectsFunctions
-                                                      .getSortAscOrDesc(
-                                                          isSortDescending:
-                                                              isSortDescending),
-                                                  // theColor: Colors.black26,
-                                                ),
-                                                const Expanded(
-                                                  child: Divider(
-                                                    thickness: 1,
-                                                    indent: 10,
+                                                  const Expanded(
+                                                    child: Divider(
+                                                      thickness: 1,
+                                                      indent: 10,
+                                                      endIndent: 10,
+                                                    ),
                                                   ),
-                                                ),
-                                              ],
-                                            ),
-                                          )
-                                        : const SizedBox(height: 0, width: 0),
-                                    WidgetSubjectRecords(
-                                      theUser: widget.theUser,
-                                      theFileSubjectName:
-                                          theRecordItemSubjectName,
-                                      theSubjectItemsLength:
-                                          filesLength.toString(),
-                                      theFileSubjectCreatedAt:
-                                          theRecordItemSubjectCreatedAtReady,
-                                      theFileSubjectUpdatedAt:
-                                          theRecordItemSubjectUpdatedAtReady,
-                                      theLongPressed: () async {
-                                        if (filesLength == 0) {
-                                          showAnimatedDialog(
-                                            barrierColor: Colors.black38,
-                                            barrierDismissible: true,
-                                            context: context,
-                                            animationType:
-                                                DialogTransitionType.sizeFade,
-                                            curve: Curves.easeOut,
-                                            alignment: Alignment.bottomCenter,
-                                            duration: const Duration(
-                                                milliseconds: 800),
-                                            builder: (_) => DialogDelete(
-                                              theTitle: "Subject",
-                                              theName:
-                                                  theRecordItemSubjectNameAbbreviated,
-                                              theOnPressed: () async {
-                                                await serviceFirestore
-                                                    .deleteSubject(
-                                                  user: widget.theUser,
-                                                  theSubjectName:
-                                                      theRecordItemSubjectName,
-                                                )
-                                                    .then((value) {
-                                                  Get.back();
-                                                  listOfCurrentSubjectsNameFunction()
-                                                      .remove(
-                                                          theRecordItemSubjectName);
-                                                  customeSnackbar(
-                                                    theTitle: 'Subject caution',
-                                                    theMessage:
-                                                        'The subject "$theRecordItemSubjectNameAbbreviated" has been deleted successfully.',
-                                                  );
-                                                });
-                                              },
-                                            ),
-                                          );
-                                        } else {
-                                          customeSnackbar(
-                                            theTitle: 'Subject caution',
-                                            theMessage:
-                                                'Delete all the grasps inside "$theRecordItemSubjectNameAbbreviated" subject, then it could be deleted.',
-                                          );
-                                          // debugPrint('eeeeeeee :: $theRecordItemSubjectNameAbbreviated');
-                                        }
-                                      },
-                                    ),
-                                  ],
-                                );
-                              });
-                        },
+                                                  customeText(
+                                                    theData: sortSubjectsFunctions
+                                                        .getSortAscOrDesc(
+                                                            isSortDescending:
+                                                                isSortDescending),
+                                                    // theColor: Colors.black26,
+                                                  ),
+                                                  const Expanded(
+                                                    child: Divider(
+                                                      thickness: 1,
+                                                      indent: 10,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            )
+                                          : const SizedBox(height: 0, width: 0),
+                                      WidgetSubjectRecords(
+                                        theUser: widget.theUser,
+                                        theFileSubjectName:
+                                            theRecordItemSubjectName,
+                                        theSubjectItemsLength:
+                                            filesLength.toString(),
+                                        theFileSubjectCreatedAt:
+                                            theRecordItemSubjectCreatedAtReady,
+                                        theFileSubjectUpdatedAt:
+                                            theRecordItemSubjectUpdatedAtReady,
+                                        theLongPressed: () async {
+                                          if (filesLength == 0) {
+                                            showAnimatedDialog(
+                                              barrierColor: Colors.black38,
+                                              barrierDismissible: true,
+                                              context: context,
+                                              animationType:
+                                                  DialogTransitionType.sizeFade,
+                                              curve: Curves.easeOut,
+                                              alignment: Alignment.bottomCenter,
+                                              duration: const Duration(
+                                                  milliseconds: 800),
+                                              builder: (_) => DialogDelete(
+                                                theTitle: "Subject",
+                                                theName:
+                                                    theRecordItemSubjectNameAbbreviated,
+                                                theOnPressed: () async {
+                                                  await serviceFirestore
+                                                      .deleteSubject(
+                                                    user: widget.theUser,
+                                                    theSubjectName:
+                                                        theRecordItemSubjectName,
+                                                  )
+                                                      .then((value) {
+                                                    Get.back();
+                                                    listOfCurrentSubjectsNameFunction()
+                                                        .remove(
+                                                            theRecordItemSubjectName);
+                                                    customeSnackbar(
+                                                      theTitle:
+                                                          'Subject caution',
+                                                      theMessage:
+                                                          'The subject "$theRecordItemSubjectNameAbbreviated" has been deleted successfully.',
+                                                    );
+                                                  });
+                                                },
+                                              ),
+                                            );
+                                          } else {
+                                            customeSnackbar(
+                                              theTitle: 'Subject caution',
+                                              theMessage:
+                                                  'Delete all the grasps inside "$theRecordItemSubjectNameAbbreviated" subject, then it could be deleted.',
+                                            );
+                                            // debugPrint('eeeeeeee :: $theRecordItemSubjectNameAbbreviated');
+                                          }
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                });
+                          },
+                        ),
                       );
                     }
                   }),

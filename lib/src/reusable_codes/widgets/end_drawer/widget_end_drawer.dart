@@ -334,7 +334,7 @@ class _EndDrawerState extends State<EndDrawer> {
                                     RouteScreens.routeGraspGuidance,
                                 theOnTap: () {
                                   provider.toggleTheme(provider.isDarkMode);
-                                  // Get.back();  //  uncomment here
+                                  Get.back();  //  uncomment here
                                 },
                               ),
                               WidgetEndDrawerRecords(

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:grasp_app/src/provider/theme_provider.dart';
 import 'package:grasp_app/src/reusable_codes/functions/custome_string_functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/date_time_functions.dart';
 import 'package:grasp_app/src/reusable_codes/functions/functions.dart';
@@ -15,6 +16,7 @@ import 'package:grasp_app/src/reusable_codes/widgets/dialogs/dialog_edit.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/end_drawer/widget_end_drawer.dart';
 import 'package:grasp_app/src/reusable_codes/widgets/subject_files/widget_subject_file_records.dart';
 import 'package:grasp_app/src/services/firebase/service_firestore.dart';
+import 'package:provider/provider.dart';
 
 class ScreenSubjectFiles extends StatefulWidget {
   const ScreenSubjectFiles({
@@ -120,153 +122,163 @@ class _ScreenSubjectFilesState extends State<ScreenSubjectFiles> {
                   theScreenHeight: screenHeight,
                 );
               } else {
-                return ListView.builder(
-                  padding: const EdgeInsets.only(
-                      top: 5.0, bottom: 80, left: 9, right: 9),
-                  scrollDirection: Axis.vertical,
-                  itemCount: snapshotFiles.data!.docs.length,
-                  itemBuilder: (context, theRecord) {
-                    final QueryDocumentSnapshot<Map<String, dynamic>>
-                        theRecordItem = snapshotFiles.data!.docs[theRecord];
-                    final theRecordItemFileName =
-                        theRecordItem.data()["fileName"];
-                    final theRecordFileCreatedAt =
-                        theRecordItem.data()["fileCreatedAt"];
+                return Theme(
+                  data: Theme.of(context).copyWith(
+                    colorScheme: ColorScheme.fromSwatch().copyWith(
+                        secondary:
+                            Provider.of<ThemeProvider>(context).isDarkMode
+                                ? Colors.black12.withOpacity(0.9)
+                                : Theme.of(context).secondaryHeaderColor),
+                  ),
+                  child: ListView.builder(
+                    padding: const EdgeInsets.only(
+                        top: 5.0, bottom: 80, left: 9, right: 9),
+                    scrollDirection: Axis.vertical,
+                    itemCount: snapshotFiles.data!.docs.length,
+                    itemBuilder: (context, theRecord) {
+                      final QueryDocumentSnapshot<Map<String, dynamic>>
+                          theRecordItem = snapshotFiles.data!.docs[theRecord];
+                      final theRecordItemFileName =
+                          theRecordItem.data()["fileName"];
+                      final theRecordFileCreatedAt =
+                          theRecordItem.data()["fileCreatedAt"];
 
-                    final String theRecordItemFileNameAbbreviated =
-                        customeStringFunctions.customeSubString(
-                            theString: theRecordItemFileName,
-                            theResultLengthLimit: 5);
+                      final String theRecordItemFileNameAbbreviated =
+                          customeStringFunctions.customeSubString(
+                              theString: theRecordItemFileName,
+                              theResultLengthLimit: 5);
 
-                    if (!listOfCurrentFilesName
-                        .contains(theRecordItemFileName)) {
-                      listOfCurrentFilesNameFunction()
-                          .add(theRecordItemFileName);
-                    }
-                    final theRecordFileCreatedAtConverted =
-                        DateTime.fromMillisecondsSinceEpoch(
-                            theRecordFileCreatedAt);
+                      if (!listOfCurrentFilesName
+                          .contains(theRecordItemFileName)) {
+                        listOfCurrentFilesNameFunction()
+                            .add(theRecordItemFileName);
+                      }
+                      final theRecordFileCreatedAtConverted =
+                          DateTime.fromMillisecondsSinceEpoch(
+                              theRecordFileCreatedAt);
 
-                    var theRecordFileCreatedAtVarListBoilerPlate = {
-                      'time': dateTimeOptimizer.dateTimeTwelveHourFormater(
-                          hourNumber: theRecordFileCreatedAtConverted.hour,
-                          minuteNumber: theRecordFileCreatedAtConverted.minute),
-                      'date':
-                          '${dateTimeOptimizer.dateTimeNumberToMonthName(monthNumber: theRecordFileCreatedAtConverted.month)}.${theRecordFileCreatedAtConverted.day}, ${theRecordFileCreatedAtConverted.year}',
-                    };
-                    return Column(
-                      children: [
-                        theRecord == 0
-                            ? Container(
-                                height: 50,
-                                alignment: Alignment.center,
-                                child: Row(
-                                  children: [
-                                    const Expanded(
-                                      child: Divider(
-                                        thickness: 1,
-                                        endIndent: 10,
+                      var theRecordFileCreatedAtVarListBoilerPlate = {
+                        'time': dateTimeOptimizer.dateTimeTwelveHourFormater(
+                            hourNumber: theRecordFileCreatedAtConverted.hour,
+                            minuteNumber:
+                                theRecordFileCreatedAtConverted.minute),
+                        'date':
+                            '${dateTimeOptimizer.dateTimeNumberToMonthName(monthNumber: theRecordFileCreatedAtConverted.month)}.${theRecordFileCreatedAtConverted.day}, ${theRecordFileCreatedAtConverted.year}',
+                      };
+                      return Column(
+                        children: [
+                          theRecord == 0
+                              ? Container(
+                                  height: 50,
+                                  alignment: Alignment.center,
+                                  child: Row(
+                                    children: [
+                                      const Expanded(
+                                        child: Divider(
+                                          thickness: 1,
+                                          endIndent: 10,
+                                        ),
                                       ),
-                                    ),
-                                    customeText(
-                                      theData: widget.theFileSubjectCreatedAt,
-                                      // theColor: Colors.black26,
-                                    ),
-                                    const Expanded(
-                                      child: Divider(
-                                        thickness: 1,
-                                        indent: 10,
+                                      customeText(
+                                        theData: widget.theFileSubjectCreatedAt,
+                                        // theColor: Colors.black26,
                                       ),
-                                    ),
-                                  ],
+                                      const Expanded(
+                                        child: Divider(
+                                          thickness: 1,
+                                          indent: 10,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              : const SizedBox(height: 0, width: 0),
+                          WidgetSubjectFileRecords(
+                            isSubtitleDate: false,
+                            theUser: widget.theUser,
+                            theFileName: theRecordItemFileName,
+                            theFileSubjectName: widget.theFileSubjectName,
+                            subjectFileRecordId: "${theRecord + 1}",
+                            subjectFileRecordName: theRecordItemFileName,
+                            subjectFileRecordTime:
+                                theRecordFileCreatedAtVarListBoilerPlate['time']
+                                    .toString(),
+                            subjectFileRecordDate:
+                                theRecordFileCreatedAtVarListBoilerPlate['date']
+                                    .toString(),
+                            theTrailingOnPressed: () {
+                              customeSnackbar(
+                                theTitle: 'Grasp caution',
+                                theMessage:
+                                    'Sorry for that, editing grasp name doesn\'t implemented yet!',
+                              );
+                              // showAnimatedDialog(
+                              //   barrierColor: Colors.black38,
+                              //   barrierDismissible: true,
+                              //   context: context,
+                              //   animationType: DialogTransitionType.sizeFade,
+                              //   curve: Curves.easeOut,
+                              //   alignment: Alignment.bottomCenter,
+                              //   duration: const Duration(milliseconds: 800),
+                              //   builder: (_) => DialogEdit(
+                              //     title: "Grasp",
+                              //     fileNameOld: theRecordItemFileNameAbbreviated,
+                              //     controller: controllerEditGraspFileName,
+                              //     theOnPressed: () {},
+                              //   ),
+                              // );
+                            },
+                            theOnLongPress: () async {
+                              showAnimatedDialog(
+                                barrierColor: Colors.black38,
+                                barrierDismissible: true,
+                                context: context,
+                                animationType: DialogTransitionType.sizeFade,
+                                curve: Curves.easeOut,
+                                alignment: Alignment.bottomCenter,
+                                duration: const Duration(milliseconds: 800),
+                                builder: (_) => DialogDelete(
+                                  theTitle: "Grasp",
+                                  theName: theRecordItemFileNameAbbreviated,
+                                  theOnPressed: () async {
+                                    await serviceFirestore
+                                        .deleteFile(
+                                      user: widget.theUser,
+                                      theFileSubjectName:
+                                          widget.theFileSubjectName,
+                                      theFileName: theRecordItemFileName,
+                                    )
+                                        .then(
+                                      (value) {
+                                        Get.back();
+                                        listOfCurrentFilesNameFunction()
+                                            .remove(theRecordItemFileName);
+                                        serviceFirestore.updateSubject(
+                                            user: widget.theUser,
+                                            theSubjectName:
+                                                widget.theFileSubjectName,
+                                            theSubjectItemsNumber:
+                                                listOfCurrentFilesName.length
+                                                    .toString());
+
+                                        customeSnackbar(
+                                          theTitle: 'Grasp caution',
+                                          theMessage:
+                                              'The Grasp "$theRecordItemFileNameAbbreviated" has been deleted successfully.',
+                                        );
+                                        debugPrint(
+                                            'deleted :: ${listOfCurrentFilesName.length}');
+                                      },
+                                    );
+                                  },
                                 ),
-                              )
-                            : const SizedBox(height: 0, width: 0),
-                        WidgetSubjectFileRecords(
-                          isSubtitleDate: false,
-                          theUser: widget.theUser,
-                          theFileName: theRecordItemFileName,
-                          theFileSubjectName: widget.theFileSubjectName,
-                          subjectFileRecordId: "${theRecord + 1}",
-                          subjectFileRecordName: theRecordItemFileName,
-                          subjectFileRecordTime:
-                              theRecordFileCreatedAtVarListBoilerPlate['time']
-                                  .toString(),
-                          subjectFileRecordDate:
-                              theRecordFileCreatedAtVarListBoilerPlate['date']
-                                  .toString(),
-                          theTrailingOnPressed: () {
-                            customeSnackbar(
-                              theTitle: 'Grasp caution',
-                              theMessage:
-                                  'Sorry for that, editing grasp name doesn\'t implemented yet!',
-                            );
-                            // showAnimatedDialog(
-                            //   barrierColor: Colors.black38,
-                            //   barrierDismissible: true,
-                            //   context: context,
-                            //   animationType: DialogTransitionType.sizeFade,
-                            //   curve: Curves.easeOut,
-                            //   alignment: Alignment.bottomCenter,
-                            //   duration: const Duration(milliseconds: 800),
-                            //   builder: (_) => DialogEdit(
-                            //     title: "Grasp",
-                            //     fileNameOld: theRecordItemFileNameAbbreviated,
-                            //     controller: controllerEditGraspFileName,
-                            //     theOnPressed: () {},
-                            //   ),
-                            // );
-                          },
-                          theOnLongPress: () async {
-                            showAnimatedDialog(
-                              barrierColor: Colors.black38,
-                              barrierDismissible: true,
-                              context: context,
-                              animationType: DialogTransitionType.sizeFade,
-                              curve: Curves.easeOut,
-                              alignment: Alignment.bottomCenter,
-                              duration: const Duration(milliseconds: 800),
-                              builder: (_) => DialogDelete(
-                                theTitle: "Grasp",
-                                theName: theRecordItemFileNameAbbreviated,
-                                theOnPressed: () async {
-                                  await serviceFirestore
-                                      .deleteFile(
-                                    user: widget.theUser,
-                                    theFileSubjectName:
-                                        widget.theFileSubjectName,
-                                    theFileName: theRecordItemFileName,
-                                  )
-                                      .then(
-                                    (value) {
-                                      Get.back();
-                                      listOfCurrentFilesNameFunction()
-                                          .remove(theRecordItemFileName);
-                                      serviceFirestore.updateSubject(
-                                          user: widget.theUser,
-                                          theSubjectName:
-                                              widget.theFileSubjectName,
-                                          theSubjectItemsNumber:
-                                              listOfCurrentFilesName.length
-                                                  .toString());
-
-                                      customeSnackbar(
-                                        theTitle: 'Grasp caution',
-                                        theMessage:
-                                            'The Grasp "$theRecordItemFileNameAbbreviated" has been deleted successfully.',
-                                      );
-                                      debugPrint(
-                                          'deleted :: ${listOfCurrentFilesName.length}');
-                                    },
-                                  );
-                                },
-                              ),
-                            );
-                          },
-                        ),
-                      ],
-                    );
-                  },
+                              );
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  ),
                 );
               }
             }),

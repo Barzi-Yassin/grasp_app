@@ -126,11 +126,15 @@ class WidgetSubjectFileRecords extends StatelessWidget {
                   ],
                 ),
                 customeIconButton(
-                    // thePaddingBottom: ,
-                    theOnPressed: theTrailingOnPressed,
-                    theIcon: Icons.edit_note,
-                    theSize: 30,
-                    theAlignment: Alignment.center),
+                  // thePaddingBottom: ,
+                  theOnPressed: theTrailingOnPressed,
+                  theIcon: Icons.edit_note,
+                  theSize: 30,
+                  theAlignment: Alignment.center,
+                  theColor: Provider.of<ThemeProvider>(context).isDarkMode
+                      ? Colors.grey.shade300
+                      : Colors.cyan.shade300,
+                ),
               ],
             ),
           ),

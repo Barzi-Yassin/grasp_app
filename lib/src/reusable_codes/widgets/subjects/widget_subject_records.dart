@@ -70,12 +70,15 @@ class WidgetSubjectRecords extends StatelessWidget {
           ),
           minVerticalPadding: 20,
           iconColor: const Color.fromARGB(255, 0, 171, 193),
-          leading: const Padding(
+          leading: Padding(
             padding: EdgeInsets.only(left: 8.0),
             child: FaIcon(
               // FontAwesomeIcons.solidFolderOpen,
               FontAwesomeIcons.solidFolderClosed,
               size: 20,
+              color: Provider.of<ThemeProvider>(context).isDarkMode
+                  ? Colors.grey.shade300
+                  : Colors.cyan.shade300,
             ),
           ),
           title: customeText(
