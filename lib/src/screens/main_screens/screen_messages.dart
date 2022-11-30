@@ -162,7 +162,10 @@ class _ScreenMessagesState extends State<ScreenMessages> {
 
                             if (messagesLength == 0) {
                               return customeText(
-                                  theData: '\n\nNo messages found!');
+                                theData: '\n\nNo messages found!',
+                                theTextAlign: TextAlign.center,
+                                theLetterSpacing: 1
+                              );
                             } else {
                               return Theme(
                                 data: Theme.of(context).copyWith(
