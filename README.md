@@ -27,7 +27,7 @@ It contains the minimal implementation required to save user daily information a
 # Features & TODOs
 - [ ] Offline readability <br>
 - [ ] Kurdish language locale <br> 
-- [ ] Dark mode  <br><br>
+- [x] Dark mode  <br><br>
 - [x] Authentication (signin + signup) <br>
 - [ ] Authentication email link verification <br>
 - [ ] Authentication forget password <br>
