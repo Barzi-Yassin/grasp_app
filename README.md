@@ -52,7 +52,7 @@ It contains the minimal implementation required to save user daily information a
 - [x] React messages  <br>
 - [ ] Add image message  <br>
 - [ ] Add video message  <br>
-- [ ] Add voice message  <br>
+- [x] Add voice message  <br>  (not included in this repo!)
 - [x] Messages reading mode  <br><br>
 - [ ] Grasp guidance screen  <br>
 - [ ] Grasp splash screen  <br>
