@@ -26,7 +26,7 @@ It contains the minimal implementation required to save user daily information a
 
 # Features & TODOs
 - [ ] Offline readability <br>
-- [ ] Kurdish language locale <br> 
+- [x] Kurdish language locale    (not included in this repo!) <br> 
 - [x] Dark mode  <br><br>
 - [x] Authentication (signin + signup) <br>
 - [ ] Authentication email link verification <br>
@@ -50,15 +50,16 @@ It contains the minimal implementation required to save user daily information a
 - [x] Update messages  <br>
 - [x] Delete messages  <br>
 - [x] React messages  <br>
-- [ ] Add image message  <br>
-- [ ] Add video message  <br>
+- [x] Add image message    (not included in this repo!)  <br>
+- [x] Add video message    (not included in this repo!)  <br>
 - [x] Add voice message    (not included in this repo!)<br>
 - [x] Messages reading mode  <br><br>
 - [ ] Grasp guidance screen  <br>
 - [ ] Grasp splash screen  <br>
 - [ ] Search functionalities  <br>
 - [ ] Sort files  <br>
-- [ ] Sort messages  <br>
+- [x] Sort reacted messages   (not included in this repo!)  <br>
+- [x] Sort message types    (not included in this repo!)  <br>
 - [ ] Adding shimmer loading  <br>
 - [ ] Adding three recent grasps  <br>
 
