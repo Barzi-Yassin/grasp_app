@@ -47,13 +47,13 @@ It contains the minimal implementation required to save user daily information a
 - [x] Add Grasp file to Stars list <br><br>
 - [x] Adding messages inside Grasp files  <br>
 - [x] Read messages  <br>
-- [x] Update messages  <br>
+- [ ] Update messages  <br>
 - [x] Delete messages  <br>
 - [x] React messages  <br>
 - [x] Add image message    (not included in this repo!)  <br>
 - [x] Add video message    (not included in this repo!)  <br>
 - [x] Add voice message    (not included in this repo!)<br>
-- [x] lapping the voice messages    (not included in this repo!)<br>
+- [x] Lapping the voice messages    (not included in this repo!)<br>
 - [x] Messages reading mode  <br><br>
 - [x] Grasp guidance screen  <br>
 - [ ] Grasp splash screen  <br>
