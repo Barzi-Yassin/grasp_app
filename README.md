@@ -16,7 +16,7 @@ It contains the minimal implementation required to save user daily information a
 <br/> 
 
 <a href="https://youtu.be/fOyOB3ZbfPs?si=Dwh0gyWEXL4dlMu5" target="_blank" style="background-color: grey">
-<img src="assets\images\readme\youtube.png" style="width: 200px">
+<img src="assets\images\readme\youtube.png" style="width: 200px" alt="Showcasing Video">
 </a>
 
 <br>
