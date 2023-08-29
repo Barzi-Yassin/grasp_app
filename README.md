@@ -15,11 +15,11 @@ It contains the minimal implementation required to save user daily information a
 <br/>
 <br/>
 
-<center>
+<div style="display: flex; justify-content: center; align-items: center;">
 <a href="https://youtu.be/fOyOB3ZbfPs?si=Dwh0gyWEXL4dlMu5">
 <img src="assets\images\readme\youtube.png" style="width: 200px">
 </a>
-</center>
+</div>
 <br>
 <br>
 <br>
