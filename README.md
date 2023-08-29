@@ -13,18 +13,17 @@ Grasp is useful to save our daily important notes with an a amazing perfomance a
 It contains the minimal implementation required to save user daily information as a grasp point.
 <br/>
 <br/>
-<br/>
+<!-- <br/> -->
 
-<div style="display: flex; justify-content: center; align-items: center;">
-<a href="https://youtu.be/fOyOB3ZbfPs?si=Dwh0gyWEXL4dlMu5">
+<!-- <a href="https://youtu.be/fOyOB3ZbfPs?si=Dwh0gyWEXL4dlMu5" style="background-color: grey">
 <img src="assets\images\readme\youtube.png" style="width: 200px">
 </a>
-</div>
-<br>
-<br>
-<br>
 
-<!-- <center>
+<br>
+<br>
+<br> -->
+
+<center>
 <a href="https://youtu.be/fOyOB3ZbfPs?si=Dwh0gyWEXL4dlMu5" style="text-decoration: none"> 
 <div style="width: 200px; height: 120px; border: 2px solid #c4303b; border-radius: 15px;">
 <br><span style="color: white;">Showcasing the app</span>
@@ -34,7 +33,8 @@ It contains the minimal implementation required to save user daily information a
 </div> </a>
 </center>
 <br/>
-<br/> -->
+<br/>
+<br/>
 
 
 # Services & Softwares
