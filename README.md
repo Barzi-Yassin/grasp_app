@@ -1,15 +1,32 @@
 <h1 align="center">
-  <img alt="Grasp" src="https://github.com/Barzy-Yasin/grasp_app/blob/master/assets/images/logo.png?raw=true" width=100px"/><br/>
+  <img alt="Grasp" src="https://github.com/Barzy-Yasin/grasp_app/blob/master/assets/images/logo.png?raw=true" width=100px style="border-radius: 15px;">
+  <br/>
+<div style="height: 15px;"></div>
   Grasp 
+<div style="height: 15px;"></div>
 </h1>
 
 <center><code>Note Taking mobile application project.</code></center> <br> 
+
 Grasp is useful to save our daily important notes with an a amazing perfomance and functionalities.
 <br/>
 It contains the minimal implementation required to save user daily information as a grasp point.
 <br/>
 <br/>
+
+
+<center>
+<a href="https://youtu.be/fOyOB3ZbfPs?si=Dwh0gyWEXL4dlMu5" style="text-decoration: none"> 
+<div style="width: 200px; height: 120px; border: 2px solid #c4303b; border-radius: 15px;">
+<br><span style="color: white;">Showcasing the app</span>
+<br>
+<div style="height: 10px"> &nbsp; </div>
+<img src="https://www.vectorlogo.zone/logos/youtube/youtube-icon.svg" alt="" width="50">
+</div> </a>
+</center>
 <br/>
+<br/>
+
 
 # Services & Softwares
 
