@@ -154,7 +154,7 @@ I will be happy to answer any questions that you may have on this approach.
 # Developer
  
 Linkedin [Barzi](https://www.linkedin.com/in/barzi-yassin-karim/),
-Email  ``barziyassin@gmail.com``
+Email  <a href="mailto:barziyassin@gmail.com">``barziyassin@gmail.com``</a>
 
 <br>
 <br>
