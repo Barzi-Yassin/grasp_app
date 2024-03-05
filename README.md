@@ -124,7 +124,7 @@ Prerequests: Git and Flutter installed
 
 After opening terminal on your own projects location, run the following commands:
 
-1. Clone repository ``git clone https://github.com/Barzy-Yasin/grasp_app.git``
+1. Clone repository ``git clone https://github.com/Barzi-Yassin/grasp_app.git``
 
 2. open the project directory ``cd grasp_app``
 
@@ -154,7 +154,7 @@ I will be happy to answer any questions that you may have on this approach.
 # Developer
  
 Linkedin [Barzi](https://www.linkedin.com/in/barzi-yassin-karim/),
-Email  ``barzy.dev@gmail.com``
+Email  ``barziyassin@gmail.com``
 
 <br>
 <br>
